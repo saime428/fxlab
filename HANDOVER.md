@@ -17,7 +17,7 @@
 - 26 个 pattern,全部零依赖、过了 node --check 和链接检查(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
 - 已推 GitHub 并开通 Pages
 - 2026-07-16 口径调整:可复现性放宽为"保住核心机制的简化版即可",新增分类覆盖度排序项(见 docs/criteria.md)
-- 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)
+- 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ TASTE.md(口味档案/甲方画像:用户未明说的决策以它为准;口味判词回写它,技术坑回写 pattern README)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)
 - 画廊首页 index.html **四切片全部完成 ✅**:1 fetch INDEX 渲染 21 卡+只读缩放 iframe 预览+点卡全屏+fetch 兜底+.nojekyll+修复根 404;2 筛选 chips+URL 状态(`?cat=`/`?level=`/`?set=` 互斥、再点取消、刷新回放);3 自动演示引擎(iframe load capture 探测 scrollHeight+scroll-snap 双查,余弦往复 scrollTo,只滚可见卡);4 狗粮化(canvas 氛围背景 opacity .55、hero 纯 CSS 自动播放行遮罩入场、卡片 scroll-reveal 仅 opacity 避 hover 冲突)。**注意**:内嵌浏览器 pane 冻结所有时间轴动画(rAF/CSS 动画/transition 全停,IO 报不相交),时间型效果只能靠垫片或读线上验证——真机/Pages 正常。
 - 样板间 `showcase/index.html` ✅:作品集套餐 5 个 pattern(entry-preloader/split-text/menu-stagger/scroll-marquee/image-displacement)拼装的完整 landing page,铁律 7 实装(token 阶梯 + KNOB 常量块 + 单 rAF 调度 + 一次 reduced-motion 判断);Enter 手势是全页动效的 t=0
 
