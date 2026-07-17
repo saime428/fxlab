@@ -1,13 +1,24 @@
 ---
 name: web-fx-lab
-description: 网页动效/炫酷效果选型库。当要给网站、landing page、作品集、官网做动效,或用户提到"要炫/有质感/有动效/高级感/获奖站风格"时使用;也在用户直接提到 web-fx-lab 时使用。提供 21+ 个零依赖 pattern(README 规格 + 单文件 demo)和按场景的组合套餐。
+description: 网页动效/炫酷效果选型库。当要给网站、landing page、作品集、官网做动效,给**现成的网站/页面加动效改造**(贴合原设计),或用户提到"要炫/有质感/有动效/高级感/获奖站风格"时使用;也在用户直接提到 web-fx-lab 时使用。提供 21+ 个零依赖 pattern(README 规格 + 单文件 demo)、按场景的组合套餐、存量站改造流程。
 ---
 
 # web-fx-lab 效果选型
 
 本地效果沉淀库,仓库在 `F:\claude code\web-fx-lab`(在线版 https://github.com/saime428/web-fx-lab ,demo 均可在 https://saime428.github.io/web-fx-lab/ 直接打开)。
 
-## 流程
+## 模式 B:给现有网站加动效(设计已定,只加动效)
+
+用户拿着做好的站来要动效时走这里,**贴合原设计压倒一切**:
+
+1. **先读站,提取设计体系**:配色(computed style / CSS 变量抽色板)、字体、圆角间距、整体气质。读不到就要用户给源码或截图,不许凭想象开工。
+2. **动效 token 从原站推导,不从库里带**:所有颜色(遮罩、高亮、描边、粒子)只用原站已有色;节奏按气质定档——内容/文艺站 = 慢而柔(dur-m ≥ .7s),产品/营销站 = 中档,品牌炫技站 = 快而利落。demo 的占位配色一个都不许进项目。
+3. **结构盘点 → 动效映射表**:把页面拆成元素类型,每类配一个 pattern,输出清单再动手。默认映射:大标题→split-text-reveal;区块入场→scroll-reveal;章节换色→theme-shift;数字→count-up;图片→image-swap / image-displacement;装饰元素→parallax-cards / floating-stickers;长页分节→scroll-snap-sections;导航→menu-stagger-reveal;页脚/分隔→scroll-marquee。
+4. **"加很多"的正确姿势 = 覆盖面广,不是单点堆炫**:每个区块都有入场动效(同一 token 同频),强注意力效果(displacement/粒子/marquee)全站仍然只挑 1-2 处记忆点。
+5. **三不改**:不改布局、不改配色、不改字体。动效只做入场、反馈、氛围三类;改到设计本体就是越权。
+6. 铁律七条照旧;优先级:用户当次要求 > **原站设计体系** > TASTE.md > 通用套餐。
+
+## 模式 A:从零做页面(默认流程)
 
 1. **读选型索引 + 口味档案**:`F:\claude code\web-fx-lab\INDEX.md` 和同目录 `TASTE.md`(本地不存在时用 https://raw.githubusercontent.com/saime428/web-fx-lab/main/INDEX.md 与 .../main/TASTE.md )。INDEX 管"选什么效果";TASTE 是甲方画像——配色、节奏、密度、黑名单等**用户没明说的决策一律以 TASTE 为准**,冲突时用户当次要求最大。
 2. **按场景选,不按炫度选**:先判断项目气质(B 端克制 / 作品集仪式感 / 营销叙事 / 图片型 / 3D 体验),用 INDEX 里的"气质套餐"作起点,再增删。宁少勿多:2-4 个效果 + 1 个记忆点,好过 8 个效果打架。
