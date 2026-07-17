@@ -1,0 +1,123 @@
+<!-- ============================================================
+     web-fx-lab 动效补丁 · 生活传说生成器(living-life-lore)
+     用法:整段复制,贴到站点 HTML 的 </body> 之前。
+     追加式:不改任何已有代码;颜色全部引用站内已有 CSS 变量。
+     二期候选(动数据,需真机验证后再加):计数滚动、抽屉开合缓动。
+     ============================================================ -->
+<style id="fx-style">
+  :root {
+    --fx-dur-m: .8s; --fx-dur-l: 1.2s;                /* 慢而柔:档案馆节奏 */
+    --fx-ease: cubic-bezier(.25, .8, .3, 1);
+  }
+  /* ① H1 逐字落笔 */
+  .fx-char { display: inline-block; opacity: 0; transform: translateY(.35em); }
+  .fx-hero-in .fx-char { opacity: 1; transform: none;
+    transition: opacity var(--fx-dur-m) var(--fx-ease), transform var(--fx-dur-m) var(--fx-ease); }
+  /* ② 情绪标签错峰入场(动画完成后类会被移除,不影响原按钮交互) */
+  .fx-pending { opacity: 0; translate: 0 12px; }
+  .fx-in { opacity: 1; translate: 0 0;
+    transition: opacity var(--fx-dur-m) var(--fx-ease), translate var(--fx-dur-m) var(--fx-ease); }
+  /* ③ 盖章反馈:全站唯一强效果,用站内印章红 */
+  .fx-stamp { position: fixed; border: 3px solid var(--red, #8f3f30); border-radius: 50%;
+    pointer-events: none; z-index: 999;
+    animation: fx-stamp var(--fx-dur-m) var(--fx-ease) forwards; }
+  @keyframes fx-stamp { from { transform: scale(.25); opacity: .95; } to { transform: scale(1.6); opacity: 0; } }
+  /* ④ 尘埃氛围层(纸库空气感) */
+  #fx-dust { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .fx-char, .fx-pending { opacity: 1 !important; transform: none !important; translate: none !important; transition: none !important; }
+    .fx-stamp, #fx-dust { display: none !important; }
+    .reveal-pending { opacity: 1 !important; translate: none !important; transition: none !important; }
+  }
+</style>
+<script id="fx-script">
+(() => {
+  // ===== 旋钮(铁律7:全部在此) =====
+  const FX = {
+    CHAR_MS: 45,      // H1 逐字错峰 30~70
+    MOOD_MS: 55,      // 情绪标签错峰 40~90
+    DUST_N: 18,       // 尘埃数量 10~30
+    DUST_SPEED: .12,  // 尘埃下落速度 .05~.3
+    DUST_ALPHA: .16   // 尘埃透明度 .08~.25
+  };
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;   // 全页仅此一次
+
+  // ① H1 逐字落笔(原文进 aria-label,读屏无感)
+  const h1 = document.querySelector('h1');
+  if (h1 && !REDUCED) {
+    const text = h1.textContent;
+    h1.setAttribute('aria-label', text);
+    h1.innerHTML = [...text].map((ch, i) =>
+      `<span class="fx-char" aria-hidden="true" style="transition-delay:${i * FX.CHAR_MS}ms">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
+    requestAnimationFrame(() => requestAnimationFrame(() => h1.classList.add('fx-hero-in')));
+  }
+
+  // ② 情绪标签错峰入场,动画完毕清理干净(不给原按钮留 transition-delay 后遗症)
+  if (!REDUCED) {
+    const moods = document.querySelectorAll('.mood-row button');
+    moods.forEach((b, i) => {
+      b.classList.add('fx-pending');
+      b.style.transitionDelay = `${200 + i * FX.MOOD_MS}ms`;
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => moods.forEach(b => b.classList.add('fx-in'))));
+    setTimeout(() => moods.forEach(b => {
+      b.classList.remove('fx-pending', 'fx-in'); b.style.transitionDelay = '';
+    }), 2600);
+  }
+
+  // ③ 接管 .reveal-pending:站内已备好隐藏态和 transition,进视口摘掉类即入场
+  const pend = document.querySelectorAll('.reveal-pending');
+  if (REDUCED) pend.forEach(el => el.classList.remove('reveal-pending'));
+  else {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.remove('reveal-pending');
+      io.unobserve(e.target);
+    }), { threshold: .25 });
+    pend.forEach(el => io.observe(el));
+  }
+
+  // ④ 「写入今日正史」盖章反馈
+  const wb = document.querySelector('.write-button');
+  if (wb && !REDUCED) wb.addEventListener('click', () => {
+    const r = wb.getBoundingClientRect(), size = Math.max(r.width * .6, 90);
+    const s = document.createElement('div');
+    s.className = 'fx-stamp';
+    s.style.cssText += `left:${r.left + r.width / 2 - size / 2}px;top:${r.top + r.height / 2 - size / 2}px;width:${size}px;height:${size}px;`;
+    document.body.appendChild(s);
+    s.addEventListener('animationend', () => s.remove());
+  });
+
+  // ⑤ 尘埃氛围层:木色微粒缓缓沉降
+  if (!REDUCED) {
+    const c = document.createElement('canvas'); c.id = 'fx-dust';
+    document.body.appendChild(c);
+    const x = c.getContext('2d');
+    let W, H;
+    const size = () => { W = c.width = innerWidth; H = c.height = innerHeight; };
+    size(); addEventListener('resize', size);
+    const dots = Array.from({ length: FX.DUST_N }, () => ({
+      x: Math.random(), y: Math.random(), r: .8 + Math.random() * 1.6,
+      s: .3 + Math.random() * .7, ph: Math.random() * 6.28
+    }));
+    let running = true;
+    const tick = t => {
+      x.clearRect(0, 0, W, H);
+      x.fillStyle = `rgba(138, 90, 48, ${FX.DUST_ALPHA})`;   /* --wood-edge */
+      for (const d of dots) {
+        let py = (d.y * H + t * FX.DUST_SPEED * d.s / 16) % H;
+        if (py < 0) py += H;
+        const px = d.x * W + Math.sin(t * .0004 + d.ph) * 24;
+        x.beginPath(); x.arc(px, py, d.r, 0, 7); x.fill();
+      }
+      if (running) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange', () => {   // 后台不空转
+      const next = !document.hidden;
+      if (next && !running) requestAnimationFrame(tick);
+      running = next;
+    });
+  }
+})();
+</script>
