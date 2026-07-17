@@ -18,7 +18,8 @@
 - 已推 GitHub 并开通 Pages
 - 2026-07-16 口径调整:可复现性放宽为"保住核心机制的简化版即可",新增分类覆盖度排序项(见 docs/criteria.md)
 - 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)
-- 画廊首页 index.html **四切片全部完成 ✅**:1 fetch INDEX 渲染 21 卡+只读缩放 iframe 预览+点卡全屏+fetch 兜底+.nojekyll+修复根 404;2 筛选 chips+URL 状态(`?cat=`/`?level=`/`?set=` 互斥、再点取消、刷新回放);3 自动演示引擎(iframe load capture 探测 scrollHeight+scroll-snap 双查,余弦往复 scrollTo,只滚可见卡);4 狗粮化(canvas 氛围背景 opacity .55、hero 纯 CSS 自动播放行遮罩入场、卡片 scroll-reveal 仅 opacity 避 hover 冲突)。**注意**:内嵌浏览器 pane 冻结所有时间轴动画(rAF/CSS 动画/transition 全停,IO 报不相交),时间型效果只能靠垫片或读线上验证——真机/Pages 正常。规划中:纯 pattern 拼的样板间 landing page
+- 画廊首页 index.html **四切片全部完成 ✅**:1 fetch INDEX 渲染 21 卡+只读缩放 iframe 预览+点卡全屏+fetch 兜底+.nojekyll+修复根 404;2 筛选 chips+URL 状态(`?cat=`/`?level=`/`?set=` 互斥、再点取消、刷新回放);3 自动演示引擎(iframe load capture 探测 scrollHeight+scroll-snap 双查,余弦往复 scrollTo,只滚可见卡);4 狗粮化(canvas 氛围背景 opacity .55、hero 纯 CSS 自动播放行遮罩入场、卡片 scroll-reveal 仅 opacity 避 hover 冲突)。**注意**:内嵌浏览器 pane 冻结所有时间轴动画(rAF/CSS 动画/transition 全停,IO 报不相交),时间型效果只能靠垫片或读线上验证——真机/Pages 正常。
+- 样板间 `showcase/index.html` ✅:作品集套餐 5 个 pattern(entry-preloader/split-text/menu-stagger/scroll-marquee/image-displacement)拼装的完整 landing page,铁律 7 实装(token 阶梯 + KNOB 常量块 + 单 rAF 调度 + 一次 reduced-motion 判断);Enter 手势是全页动效的 t=0
 
 ### 未完成(按优先级)
 
@@ -26,7 +27,7 @@
 2. 翻案候选(实测支持,还没做):可拖拽弹簧回弹(anime.js)、滚动分节锁定 scroll-snap 版(Lando)、漂浮贴纸物理 hover(Shopify)
 3. Messenger 还没做运行时深挖(方法见下)
 4. cursor/ 分类仍是空的——现有 10 个 case 都没有自定义光标,需要收新 case(建议找 Awwwards 上 cursor 出彩的站)
-5. cases/_example 占位可删;根目录 testfile 是空文件可删
+5. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)
 

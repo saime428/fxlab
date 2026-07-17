@@ -3,6 +3,7 @@
 > 炫酷网页效果沉淀库:把看到的好网站拆解成可复用的设计方法 + 可运行 Demo。
 >
 > 🔗 **在线 Demo**: https://saime428.github.io/web-fx-lab/ (所有 demo 链接均可直接点开试玩)
+> 🏠 **样板间**: https://saime428.github.io/web-fx-lab/showcase/ (作品集套餐 5 个 pattern 拼装的完整 landing page,铁律 7 token 收口的实装参考)
 
 ## 这个仓库怎么用
 

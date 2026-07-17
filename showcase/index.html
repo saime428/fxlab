@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>样板间 — web-fx-lab 作品集套餐</title>
+<style>
+  /* ===== 动效 token(铁律7):全站唯一的时长阶梯 + 缓动族 ===== */
+  :root {
+    --dur-s: .3s; --dur-m: .6s; --dur-l: 1s;
+    --ease-out: cubic-bezier(.22, 1, .36, 1);
+    --ease-inout: cubic-bezier(.65, 0, .35, 1);
+    --bg: #0e0e13; --fg: #ecebf2; --muted: #77778a; --accent: #c5f542; --line: #26262e;
+  }
+  * { margin: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: var(--bg); color: var(--fg); }
+  body.locked { overflow: hidden; }
+  section { padding: 18vh 6vw; max-width: 1100px; margin: 0 auto; }
+  .kicker { font-family: ui-monospace, monospace; color: var(--accent); letter-spacing: .2em; margin-bottom: 1.2rem; }
+  .muted { color: var(--muted); }
+
+  /* ===== ① entry-preloader:幕布 + 进度 + Enter 门 ===== */
+  .curtain { position: fixed; inset: 0; background: #08080b; display: grid; place-content: center; text-align: center; z-index: 30; transition: clip-path var(--dur-l) var(--ease-inout); clip-path: inset(0); }
+  .curtain.open { clip-path: inset(0 0 100% 0); }
+  .pct { font-size: clamp(4rem, 16vw, 10rem); font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .bar { width: min(50vw, 320px); height: 2px; background: var(--line); margin: 2rem auto 0; }
+  .bar i { display: block; height: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+  .enter { margin-top: 2.5rem; opacity: 0; pointer-events: none; transition: opacity var(--dur-m); background: none; border: 1px solid var(--accent); color: var(--accent); padding: .8em 2.6em; border-radius: 99px; font: inherit; letter-spacing: .25em; cursor: pointer; }
+  .enter.ready { opacity: 1; pointer-events: auto; }
+  .enter:hover, .enter:focus-visible { background: var(--accent); color: #08080b; outline: none; }
+
+  /* ===== 顶栏 + ② menu-stagger-reveal ===== */
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; mix-blend-mode: difference; }
+  .logo { font-family: ui-monospace, monospace; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
+  .burger { background: none; border: 1px solid var(--muted); color: var(--fg); padding: .5em 1.4em; border-radius: 2em; font: inherit; cursor: pointer; }
+  .burger:hover, .burger:focus-visible { border-color: var(--accent); outline: none; }
+  .menu { position: fixed; inset: 0; z-index: 20; background: var(--accent); color: #14170a; display: grid; place-content: center; gap: .3em; clip-path: inset(0 0 100% 0); transition: clip-path var(--dur-m) var(--ease-out); }
+  .menu.open { clip-path: inset(0); }
+  .menu a { display: block; font-size: clamp(2.2rem, 8vw, 4.2rem); font-weight: 800; color: inherit; text-decoration: none; opacity: 0; transform: translateY(40px); }
+  .menu.open a { opacity: 1; transform: none; transition: opacity var(--dur-m), transform var(--dur-m) var(--ease-out); }
+  .menu a:hover, .menu a:focus-visible { text-decoration: underline; text-underline-offset: .15em; outline: none; }
+
+  /* ===== ③ split-text-reveal:行遮罩,.show 触发 ===== */
+  .lines { font-size: clamp(2.4rem, 7.5vw, 5.2rem); font-weight: 800; line-height: 1.18; letter-spacing: -.01em; }
+  .line { display: block; overflow: hidden; }
+  .line > span { display: block; transform: translateY(115%) rotate(2deg); }
+  .show .line > span { transform: none; transition: transform calc(var(--dur-l) * .9) var(--ease-out); }
+  .hero { min-height: 100vh; display: grid; place-content: center; }
+  .hero .muted { margin-top: 1.6rem; max-width: 34em; }
+  .hero .scrollhint { margin-top: 4rem; font-family: ui-monospace, monospace; letter-spacing: .2em; color: var(--muted); }
+
+  /* ===== ④ scroll-marquee(铁律5:一页一条) ===== */
+  .marquee { overflow: hidden; white-space: nowrap; padding: 1.4rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .track { display: inline-block; will-change: transform; }
+  .track b { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: .04em; padding-right: 1em; color: var(--fg); }
+  .track b:nth-child(even) { -webkit-text-stroke: 1.5px var(--fg); color: transparent; }
+
+  /* ===== ⑤ image-displacement:作品画布 ===== */
+  .work { display: grid; gap: 2rem; }
+  canvas { width: 100%; max-width: 720px; aspect-ratio: 16/10; border-radius: 14px; cursor: pointer; }
+  canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  footer { padding: 12vh 6vw; text-align: center; border-top: 1px solid var(--line); }
+  footer a { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .curtain { transition: opacity var(--dur-s); }
+    .curtain.open { opacity: 0; clip-path: none; pointer-events: none; }
+    .menu, .menu.open a { transition: none; }
+    .menu a { transition-delay: 0ms !important; }
+    .line > span { transform: none !important; transition: none !important; }
+    .marquee { overflow-x: auto; }
+  }
+</style>
+</head>
+<body class="locked">
+
+  <!-- ① 加载序章 -->
+  <div class="curtain" id="curtain">
+    <div>
+      <div class="pct" id="pct">0</div>
+      <div class="bar"><i id="barfill"></i></div>
+      <button class="enter" id="enter">ENTER</button>
+    </div>
+  </div>
+
+  <header>
+    <a class="logo" href="https://github.com/saime428/web-fx-lab">WEB-FX-LAB / 样板间</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+  </header>
+
+  <!-- ② 全屏菜单 -->
+  <nav class="menu" id="menu" inert>
+    <a href="#hero">首页</a>
+    <a href="#works">作品</a>
+    <a href="#about">关于</a>
+    <a href="https://saime428.github.io/web-fx-lab/">效果画廊</a>
+  </nav>
+
+  <!-- ③ hero:split-text,Enter 之后才入场 -->
+  <section class="hero" id="hero">
+    <p class="kicker">// SHOWROOM</p>
+    <h1 class="lines" id="heroLines" aria-label="效果不是装饰,是语言。">
+      <span class="line"><span>效果不是装饰,</span></span>
+      <span class="line"><span>是语言。</span></span>
+    </h1>
+    <p class="muted">这一页由 web-fx-lab 的 5 个 pattern 拼装:加载序章、全屏菜单、拆行入场、滚动字幕、displacement 图片过渡。零依赖,单文件,所有节奏出自同一套动效 token。</p>
+    <p class="scrollhint">SCROLL ↓</p>
+  </section>
+
+  <!-- ④ 滚动字幕 -->
+  <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+  <!-- ⑤ 作品:displacement -->
+  <section id="works">
+    <p class="kicker">// 01 WORKS</p>
+    <h2 class="lines reveal" aria-label="悬停,让像素流动。"><span class="line"><span>悬停,让像素流动。</span></span></h2>
+    <div class="work">
+      <p class="muted">悬停/点击/Enter 切换两张"作品封面"——程序化噪声决定每个像素何时被推过去。</p>
+      <canvas id="gl" tabindex="0" role="button" aria-label="切换作品图"></canvas>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="about">
+    <p class="kicker">// 02 ABOUT</p>
+    <h2 class="lines reveal" aria-label="像一个人做的。"><span class="line"><span>像一个人做的。</span></span></h2>
+    <p class="muted" style="margin-top:1.4rem; max-width:38em">五个效果,一套时长阶梯(--dur-s/m/l)、一个缓动族、一处 reduced-motion 判断、一个 rAF 调度。调"全站快一点"只改一行 token——这就是铁律 7(旋钮收口)的样子。</p>
+  </section>
+
+  <footer>
+    <p class="muted">样板间 = 库的验收现场 · <a href="https://github.com/saime428/web-fx-lab">仓库</a> · <a href="https://saime428.github.io/web-fx-lab/">全部 23 个效果</a></p>
+  </footer>
+
+<script>
+  // ===== 旋钮收口(铁律7):本页全部可调参数,只住在这里 =====
+  const KNOB = {
+    LOAD_ASSETS: 6,       // 模拟资源数(真实项目换成贴图/字体加载)
+    STAGGER_LINE: 110,    // ms/行,60~150:行入场错峰
+    STAGGER_MENU: 70,     // ms/项:菜单项错落
+    MARQUEE_BASE: .7,     // px/帧:字幕基础爬行速度
+    MARQUEE_GAIN: .22,    // 0~.3:滚动速度增益
+    DISP_INTENSITY: .5,   // .2~.5:位移强度
+    DISP_BAND: .25,       // .1~.4:液态边界,窄=利落,宽=互溶
+    DISP_LERP: .09        // 过渡进度的追赶系数
+  };
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;  // 全页仅此一次
+  const cssMs = n => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n)) * 1000;
+
+  // ===== ① entry-preloader:进度 lerp → 停一拍 → Enter =====
+  const pct = document.getElementById('pct'), barfill = document.getElementById('barfill'),
+        enter = document.getElementById('enter'), curtain = document.getElementById('curtain');
+  let real = 0, shown = 0;
+  for (let i = 0; i < KNOB.LOAD_ASSETS; i++) setTimeout(() => real++, 200 + Math.random() * 1400);
+  (function load() {
+    shown += (real / KNOB.LOAD_ASSETS * 100 - shown) * .06;
+    if (REDUCED || shown > 99.5) shown = 100;
+    pct.textContent = Math.round(shown);
+    barfill.style.transform = `scaleX(${shown / 100})`;
+    if (shown === 100) setTimeout(() => enter.classList.add('ready'), 300);
+    else requestAnimationFrame(load);
+  })();
+
+  // ===== ③ split-text:行延迟按索引;hero 挂在 Enter 手势上(组合的 t=0) =====
+  document.querySelectorAll('.lines').forEach(h =>
+    h.querySelectorAll('.line > span').forEach((el, i) => el.style.transitionDelay = `${i * KNOB.STAGGER_LINE}ms`));
+  enter.addEventListener('click', () => {
+    curtain.classList.add('open');
+    document.body.classList.remove('locked');
+    document.getElementById('hero').classList.add('show');           // Enter = 全页动效的 t=0
+    setTimeout(() => curtain.remove(), cssMs('--dur-l'));
+    startLoop();
+  });
+  // 滚动到场的标题:进视口才播
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.closest('section').classList.add('show'); io.unobserve(e.target); }
+  }), { threshold: .4 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ===== ② menu-stagger-reveal:打开有 stagger,关闭 0 延迟;inert + 焦点管理 =====
+  const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  const links = [...menu.querySelectorAll('a')];
+  function toggleMenu(open) {
+    links.forEach((a, i) => a.style.transitionDelay = open ? `${150 + i * KNOB.STAGGER_MENU}ms` : '0ms');
+    menu.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    burger.textContent = open ? 'Close' : 'Menu';
+    open ? menu.removeAttribute('inert') : menu.setAttribute('inert', '');
+    document.body.style.overflow = open ? 'hidden' : '';
+    (open ? links[0] : burger).focus();
+  }
+  burger.addEventListener('click', () => toggleMenu(!menu.classList.contains('open')));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) toggleMenu(false); });
+  links.forEach(a => a.addEventListener('click', () => a.hash && toggleMenu(false)));
+
+  // ===== ④ scroll-marquee:内容两份接龙取模 =====
+  const track = document.getElementById('track');
+  track.innerHTML = ('<b>' + 'WEB FX LAB · SHOWROOM · '.repeat(3) + '</b>').repeat(2);
+  let half = 0, mx = 0, vel = 0, target = 0, lastY = scrollY;
+  const measure = () => half = track.scrollWidth / 2;
+  measure(); addEventListener('resize', measure);
+  addEventListener('scroll', () => { target += scrollY - lastY; lastY = scrollY; });
+
+  // ===== ⑤ image-displacement:程序化噪声逐像素阈值(修正版机制) =====
+  function makeCover(bg1, bg2, fg, label) {
+    const c = document.createElement('canvas'); c.width = 640; c.height = 400;
+    const x = c.getContext('2d');
+    const g = x.createLinearGradient(0, 0, 640, 400); g.addColorStop(0, bg1); g.addColorStop(1, bg2);
+    x.fillStyle = g; x.fillRect(0, 0, 640, 400);
+    x.fillStyle = fg;
+    for (let i = 0; i < 5; i++) { x.beginPath(); x.arc(80 + i * 120, 200 + Math.sin(i * 2.1) * 90, 34, 0, 7); x.fill(); }
+    x.fillStyle = '#fff'; x.font = '800 56px sans-serif'; x.textAlign = 'center'; x.fillText(label, 320, 216);
+    return c;
+  }
+  const cv = document.getElementById('gl');
+  cv.width = 640; cv.height = 400;
+  const gl = cv.getContext('webgl');
+  let drawDisp = () => {};
+  let p = 0, pTarget = 0, pActive = false;
+  if (gl) {
+    const VS = 'attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos*.5+.5; vUv.y = 1.-vUv.y; gl_Position = vec4(aPos,0.,1.); }';
+    const FS = `precision mediump float; varying vec2 vUv;
+      uniform sampler2D uTexA, uTexB; uniform float uP, uI, uBand;
+      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+      float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f);
+        return mix(mix(hash(i), hash(i+vec2(1.,0.)), f.x), mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), f.x), f.y); }
+      void main(){
+        float d = noise(vUv*4.)*.65 + noise(vUv*9.)*.35;
+        float m = smoothstep(0., uBand, uP * (1. + uBand) - d);
+        vec2 uvA = vUv + vec2(d * uI * uP, 0.);
+        vec2 uvB = vUv - vec2(d * uI * (1. - uP), 0.);
+        gl_FragColor = mix(texture2D(uTexA, uvA), texture2D(uTexB, uvB), m);
+      }`;
+    const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o);
+      if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog); gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const tex = (unit, src) => {
+      gl.activeTexture(gl.TEXTURE0 + unit);
+      gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src);
+      ['WRAP_S','WRAP_T'].forEach(w => gl.texParameteri(gl.TEXTURE_2D, gl['TEXTURE_'+w], gl.CLAMP_TO_EDGE));
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    };
+    tex(0, makeCover('#1c2410','#c5f542','#8b7cf6','WIPE'));
+    tex(1, makeCover('#14101f','#8b7cf6','#c5f542','FLOW'));
+    ['uTexA','uTexB'].forEach((n, i) => gl.uniform1i(gl.getUniformLocation(prog, n), i));
+    gl.uniform1f(gl.getUniformLocation(prog, 'uI'), KNOB.DISP_INTENSITY);
+    gl.uniform1f(gl.getUniformLocation(prog, 'uBand'), KNOB.DISP_BAND);
+    const uP = gl.getUniformLocation(prog, 'uP');
+    drawDisp = v => { gl.uniform1f(uP, v); gl.drawArrays(gl.TRIANGLES, 0, 3); };
+    drawDisp(0);
+  }
+  const goDisp = t => {
+    pTarget = t;
+    if (REDUCED || !gl) { p = t; drawDisp(t); return; }   // 降级 = 普通切换
+    pActive = true;
+  };
+  cv.addEventListener('pointerenter', () => goDisp(1));
+  cv.addEventListener('pointerleave', () => goDisp(0));
+  cv.addEventListener('click', () => goDisp(pTarget ? 0 : 1));
+  cv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goDisp(pTarget ? 0 : 1); } });
+
+  // ===== 共享 rAF 调度(铁律7):marquee + displacement 同一个循环 =====
+  let running = false, started = false;
+  function tick() {
+    vel += (target - vel) * .08; target *= .9;
+    mx = (mx + KNOB.MARQUEE_BASE + vel * KNOB.MARQUEE_GAIN) % half;
+    if (mx < 0) mx += half;
+    track.style.transform = `translate3d(${-mx}px,0,0)`;
+    if (pActive) {
+      p += (pTarget - p) * KNOB.DISP_LERP;
+      if (Math.abs(pTarget - p) < .001) { p = pTarget; pActive = false; }
+      drawDisp(p);
+    }
+    if (running) requestAnimationFrame(tick);
+  }
+  function startLoop() {
+    if (REDUCED || running) return;                       // reduced:无常驻动画
+    started = running = true; requestAnimationFrame(tick);
+  }
+  document.addEventListener('visibilitychange', () => {
+    const next = started && !document.hidden && !REDUCED; // 后台不空转,Enter 前不抢跑
+    if (next && !running) requestAnimationFrame(tick);
+    running = next;
+  });
+</script>
+</body>
+</html>
