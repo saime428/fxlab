@@ -16,11 +16,11 @@
 <body>
   <div>
     <h1>Displacement 图片过渡</h1>
-    <p>悬停/点击/Enter 切换——噪声图把像素"推"过去</p>
+    <p>悬停/点击/Enter 切换——噪声决定每个像素何时被"推"过去</p>
     <canvas id="gl" tabindex="0" role="button" aria-label="切换图片"></canvas>
   </div>
 <script>
-  // —— 三张纹理全部程序化生成(零外部资源,也躲开 file:// CORS) ——
+  // —— 两张纹理程序化生成(零外部资源,也躲开 file:// CORS) ——
   function makeScene(bg1, bg2, fg, label) {
     const c = document.createElement('canvas'); c.width = 640; c.height = 400;
     const x = c.getContext('2d');
@@ -31,31 +31,25 @@
     x.fillStyle = '#fff'; x.font = '800 64px sans-serif'; x.textAlign = 'center'; x.fillText(label, 320, 220);
     return c;
   }
-  function makeDisp() {                       // 软圆斑叠加 ≈ 平滑噪声(液态气质)
-    const c = document.createElement('canvas'); c.width = 256; c.height = 256;
-    const x = c.getContext('2d'); x.fillStyle = '#808080'; x.fillRect(0, 0, 256, 256);
-    for (let i = 0; i < 40; i++) {
-      const r = 20 + Math.random() * 60, px = Math.random() * 256, py = Math.random() * 256;
-      const v = Math.floor(Math.random() * 255);
-      const g = x.createRadialGradient(px, py, 0, px, py, r);
-      g.addColorStop(0, `rgba(${v},${v},${v},.5)`); g.addColorStop(1, 'rgba(0,0,0,0)');
-      x.fillStyle = g; x.beginPath(); x.arc(px, py, r, 0, 7); x.fill();
-    }
-    return c;
-  }
-
-  // —— 裸 WebGL:一个 quad,一个 program ——
+  // —— 裸 WebGL:一个 quad,一个 program(噪声在 shader 里程序化,无需贴图) ——
   const cv = document.getElementById('gl');
   cv.width = 640; cv.height = 400;
   const gl = cv.getContext('webgl', { preserveDrawingBuffer: true });
   const VS = 'attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos*.5+.5; vUv.y = 1.-vUv.y; gl_Position = vec4(aPos,0.,1.); }';
   const FS = `precision mediump float; varying vec2 vUv;
-    uniform sampler2D uTexA, uTexB, uDisp; uniform float uP;
+    uniform sampler2D uTexA, uTexB; uniform float uP;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p){
+      vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f);
+      return mix(mix(hash(i), hash(i+vec2(1.,0.)), f.x),
+                 mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), f.x), f.y);
+    }
     void main(){
-      float d = texture2D(uDisp, vUv).r;
-      vec2 uvA = vUv + vec2(d * .35 * uP, 0.);
-      vec2 uvB = vUv - vec2(d * .35 * (1. - uP), 0.);
-      gl_FragColor = mix(texture2D(uTexA, uvA), texture2D(uTexB, uvB), uP);
+      float d = noise(vUv*4.)*.65 + noise(vUv*9.)*.35;   // fBm:大尺度流动 + 细节
+      float m = smoothstep(0., .25, uP * 1.25 - d);      // 逐像素切换时机:液态边界,不是全屏叠影
+      vec2 uvA = vUv + vec2(d * .5 * uP, 0.);            // 出场的图:越走越歪
+      vec2 uvB = vUv - vec2(d * .5 * (1. - uP), 0.);     // 进场的图:越来越正
+      gl_FragColor = mix(texture2D(uTexA, uvA), texture2D(uTexB, uvB), m);
     }`;
   function shader(type, src) {
     const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
@@ -79,8 +73,7 @@
   }
   texture(0, makeScene('#2b1e63','#8b7cf6','#47d8ff','ONE'));
   texture(1, makeScene('#5c1a08','#ff7c5c','#e8ff47','TWO'));
-  texture(2, makeDisp());
-  ['uTexA','uTexB','uDisp'].forEach((n, i) => gl.uniform1i(gl.getUniformLocation(prog, n), i));
+  ['uTexA','uTexB'].forEach((n, i) => gl.uniform1i(gl.getUniformLocation(prog, n), i));
   const uP = gl.getUniformLocation(prog, 'uP');
 
   // —— 进度:lerp 逼近目标,收敛即停 rAF ——
