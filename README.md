@@ -56,6 +56,9 @@
 | [Displacement 图片过渡](patterns/transitions/image-displacement/) | 页面切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/image-displacement/demo.html) |
 | [Shader 遮罩擦除过渡](patterns/transitions/shader-wipe/) | 页面切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/shader-wipe/demo.html) |
 | [GPU 粒子过渡](patterns/transitions/particle-transition/) | 页面切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/particle-transition/demo.html) |
+| [可拖拽 + 弹簧回弹](patterns/hover/drag-spring/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html) |
+| [滚动分节锁定](patterns/scroll/scroll-snap-sections/) | 滚动动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-snap-sections/demo.html) |
+| [漂浮贴纸物理 Hover](patterns/hover/floating-stickers/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html) |
 
 ## Case 索引
 

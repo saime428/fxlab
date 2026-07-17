@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scroll Snap Sections — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; overflow: hidden; }
+  /* —— 核心:容器 mandatory + 每节 snap-stop always = "每节必停"的锁定感,零 JS —— */
+  .viewport {
+    height: 100dvh; overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  section {
+    height: 100dvh; display: grid; place-content: center; text-align: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;          /* 快速滚也一节节停,不许跳站 */
+  }
+  .kicker { font-family: ui-monospace, monospace; color: var(--a); letter-spacing: .2em; margin-bottom: 1rem; }
+  h2 { font-size: clamp(2.4rem, 8vw, 5rem); }
+  section p { color: #77778a; margin-top: 1rem; }
+  section:nth-child(1) { --a: #8b7cf6; }
+  section:nth-child(2) { --a: #c5f542; background: #0c0f0a; }
+  section:nth-child(3) { --a: #ff7c5c; background: #120c0a; }
+  section:nth-child(4) { --a: #47d8ff; background: #0a0f12; }
+  /* 右侧圆点导航 */
+  .dots { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); display: grid; gap: 14px; }
+  .dots button {
+    width: 12px; height: 12px; border-radius: 50%; border: 1px solid #77778a;
+    background: none; cursor: pointer; padding: 0;
+  }
+  .dots button[aria-current="true"] { background: #ecebf2; border-color: #ecebf2; }
+  .dots button:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .viewport { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+  <div class="viewport" id="vp">
+    <section><div><p class="kicker">// 01</p><h2>每一屏是一站</h2><p>随便怎么滚,松手必然停在整节上</p></div></section>
+    <section><div><p class="kicker">// 02</p><h2>锁定感</h2><p>scroll-snap-stop: always——快速滚也不许跳站</p></div></section>
+    <section><div><p class="kicker">// 03</p><h2>零 JS 内核</h2><p>吸附是 CSS 干的;JS 只负责右边的小圆点</p></div></section>
+    <section><div><p class="kicker">// 04</p><h2>到站</h2><p>PageDown / 空格 / 滚轮 / 触摸,全部原生支持</p></div></section>
+  </div>
+  <nav class="dots" id="dots" aria-label="章节导航"></nav>
+<script>
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const vp = document.getElementById('vp'), dots = document.getElementById('dots');
+  const sections = [...vp.querySelectorAll('section')];
+  const btns = sections.map((sec, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', `第 ${i + 1} 节`);
+    b.addEventListener('click', () => sec.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' }));
+    dots.appendChild(b);
+    return b;
+  });
+  // 当前节高亮:一个 IO 观察所有节,过半即当前
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const i = sections.indexOf(e.target);
+    btns.forEach((b, j) => j === i ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current'));
+  }), { root: vp, threshold: .6 });
+  sections.forEach(s => io.observe(s));
+
+  function demoCheck() {                                   // 冒烟:结构齐 + 吸附声明在
+    console.assert(btns.length === sections.length, 'dots/sections mismatch');
+    console.assert(getComputedStyle(vp).scrollSnapType.includes('mandatory'), 'snap not applied');
+  }
+  demoCheck();
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@
 |---|---|---|---|---|
 | 1 | 横向滚动照片画廊(带年份标注) | scroll/layout | GSAP ScrollTrigger pin + 水平位移 | ✅ |
 | 2 | 头盔画廊 hover 双图切换(base/hover 图对) | hover | 双 webp 预载 + opacity 切换 | ✅ |
-| 3 | "tap to lock" 滚动劫持交互 | scroll | 自定义滚动状态机 | ☐ |
+| 3 | "tap to lock" 滚动劫持交互 | scroll | 自定义滚动状态机 | ✅(CSS scroll-snap 简化版) |
 | 4 | Rive 矢量动画(合作伙伴/页脚) | loading/text | Rive runtime | ☐(工具依赖→tech-radar) |
 | 5 | 菜单展开多图错位入场 | transitions | GSAP stagger | ✅ |
 | 6 | 逐行/逐字遮罩入场(全站标题) | text | SplitType + clip 遮罩 | ✅ |

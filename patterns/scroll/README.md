@@ -9,3 +9,4 @@
 | [滚动驱动 Shader](scroll-driven-shader/) | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-driven-shader/demo.html) |
 | [视差漂浮卡片](parallax-cards/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/parallax-cards/demo.html) |
 | [CSS 滚动擦洗](css-scroll-scrub/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/css-scroll-scrub/demo.html) |
+| [滚动分节锁定](scroll-snap-sections/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-snap-sections/demo.html) |

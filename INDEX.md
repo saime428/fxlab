@@ -24,6 +24,9 @@
 | [transitions/image-displacement](patterns/transitions/image-displacement/) | Displacement 图片过渡 | ★★★ | 程序化噪声定每像素切换时机 + 推 UV 变形 | 图片画廊的高级切换,液态质感 |
 | [transitions/shader-wipe](patterns/transitions/shader-wipe/) | Shader 遮罩擦除过渡 | ★★★ | 全屏 quad 噪声阈值擦除,盖满换 DOM 再揭开 | 章节/路由切换的"物质感"转场,内容层无关 |
 | [transitions/particle-transition](patterns/transitions/particle-transition/) | GPU 粒子过渡 | ★★★ | 顶点着色器无状态粒子:格点+错峰爆发包络 | 图像/logo 的"技术力宣言"切换,记忆点效果 |
+| [hover/drag-spring](patterns/hover/drag-spring/) | 可拖拽 + 弹簧回弹 | ★★ | 半隐式欧拉弹簧:v += -kx - cv,松手带初速 | 贴纸/卡片/浮动装饰,把装饰变玩具 |
+| [hover/floating-stickers](patterns/hover/floating-stickers/) | 漂浮贴纸物理 Hover | ★★ | 闲时正弦漂移 + 指针斥力 + 回家弹簧 | 装饰元素群的"空气感",营销页点睛 |
+| [scroll/scroll-snap-sections](patterns/scroll/scroll-snap-sections/) | 滚动分节锁定 | ★ | CSS scroll-snap mandatory + snap-stop always | 全屏叙事骨架,零 JS 的一站一停 |
 | [layout/section-narrative](patterns/layout/section-narrative/) | 章节式滚动叙事 | ★ | 全屏分节 + 编号 + 进退导航 | 宣言页、发布页、故事型官网 |
 | [layout/sticky-stack](patterns/layout/sticky-stack/) | 粘性堆叠 | ★ | 每卡 sticky top:0,后者压前者 | 功能列表、服务介绍、案例翻牌 |
 | [layout/comment-heading](patterns/layout/comment-heading/) | 注释风标题 | ★ | CSS counter + ::before 注释前缀 | 开发者/极客气质的章节标题 |

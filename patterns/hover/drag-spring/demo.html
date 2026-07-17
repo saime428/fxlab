@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drag Spring — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  body > div > p { color: #77778a; margin-bottom: 3rem; }
+  .row { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; }
+  .sticker {
+    width: 110px; height: 110px; border-radius: 24px; display: grid; place-content: center;
+    font-weight: 800; letter-spacing: .08em; cursor: grab; user-select: none;
+    touch-action: none;                      /* 关键:把手势让给 pointer events */
+    will-change: transform;
+  }
+  .sticker:active { cursor: grabbing; }
+  .sticker:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 4px; }
+  .sticker small { font-weight: 400; color: rgba(0,0,0,.55); }
+  .s1 { background: #8b7cf6; color: #14101f; }
+  .s2 { background: #c5f542; color: #1c2410; }
+  .s3 { background: #ff7c5c; color: #2b0f06; }
+</style>
+</head>
+<body>
+  <div>
+    <h1>可拖拽 + 弹簧回弹</h1>
+    <p>拖起来甩出去——松手后弹簧把它拉回家(键盘:聚焦后方向键轻推)</p>
+    <div class="row">
+      <div class="sticker s1" tabindex="0" aria-label="可拖拽贴纸:软弹簧" data-k=".05" data-c=".14">SOFT<small>k=.05</small></div>
+      <div class="sticker s2" tabindex="0" aria-label="可拖拽贴纸:弹弹簧" data-k=".12" data-c=".05">BOUNCY<small>c=.05</small></div>
+      <div class="sticker s3" tabindex="0" aria-label="可拖拽贴纸:硬弹簧" data-k=".22" data-c=".32">STIFF<small>k=.22</small></div>
+    </div>
+  </div>
+<script>
+  // ===== 旋钮:k=刚度(回家多快) c=阻尼(晃几下停) 每个贴纸的 data-* 就是性格 =====
+  const NUDGE = 14;                                        // 键盘轻推的冲量 px/帧
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const stickers = [...document.querySelectorAll('.sticker')].map(el => ({
+    el, k: +el.dataset.k, c: +el.dataset.c, x: 0, y: 0, vx: 0, vy: 0, drag: null
+  }));
+
+  // —— 半隐式欧拉弹簧:v += -k·x - c·v;收敛即停 rAF ——
+  let raf = 0;
+  const busy = () => stickers.some(s => s.drag || Math.hypot(s.x, s.y) > .3 || Math.hypot(s.vx, s.vy) > .3);
+  function tick() {
+    for (const s of stickers) {
+      if (!s.drag) {
+        s.vx += -s.k * s.x - s.c * s.vx;
+        s.vy += -s.k * s.y - s.c * s.vy;
+        s.x += s.vx; s.y += s.vy;
+      }
+      s.el.style.transform = `translate(${s.x}px, ${s.y}px)`;
+    }
+    if (busy()) { raf = requestAnimationFrame(tick); return; }
+    stickers.forEach(s => { s.x = s.y = s.vx = s.vy = 0; s.el.style.transform = ''; });
+    raf = 0;
+  }
+  const wake = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  stickers.forEach(s => {
+    s.el.addEventListener('pointerdown', e => {
+      s.el.setPointerCapture(e.pointerId);
+      s.drag = { px: e.clientX - s.x, py: e.clientY - s.y };
+      wake();
+    });
+    s.el.addEventListener('pointermove', e => {
+      if (!s.drag) return;
+      const nx = e.clientX - s.drag.px, ny = e.clientY - s.drag.py;
+      s.vx = nx - s.x; s.vy = ny - s.y;                    // 指尖速度 = 松手初速,免费的"甩"
+      s.x = nx; s.y = ny;
+    });
+    const drop = () => {
+      if (!s.drag) return;
+      s.drag = null;
+      if (REDUCED) { s.x = s.y = s.vx = s.vy = 0; }        // 降级:松手直接回家
+    };
+    s.el.addEventListener('pointerup', drop);
+    s.el.addEventListener('pointercancel', drop);
+    s.el.addEventListener('keydown', e => {
+      const d = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+      if (!d) return;
+      e.preventDefault();
+      if (REDUCED) return;
+      s.vx += d[0] * NUDGE; s.vy += d[1] * NUDGE;          // 冲量轻推,弹簧自己拉回
+      wake();
+    });
+  });
+
+  function demoCheck() {                                    // 冒烟:三组参数都必须收敛回家
+    for (const { k, c } of stickers.map(s => ({ k: s.k, c: s.c }))) {
+      let x = 100, v = 0;
+      for (let i = 0; i < 900; i++) { v += -k * x - c * v; x += v; }
+      console.assert(Math.abs(x) < 1 && Math.abs(v) < 1, `spring(k=${k},c=${c}) never settles`);
+    }
+  }
+  demoCheck();
+</script>
+</body>
+</html>

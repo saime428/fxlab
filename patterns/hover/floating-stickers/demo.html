@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floating Stickers — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  body > div > p { color: #77778a; margin-bottom: 2rem; }
+  .area {
+    position: relative; width: min(84vw, 640px); height: 400px;
+    border: 1px solid #26262e; border-radius: 16px;
+    touch-action: none;                     /* 触屏:手指划过 = 鼠标扫过 */
+    overflow: hidden;
+  }
+  .area span {
+    position: absolute; font-size: 44px; will-change: transform;
+    user-select: none; pointer-events: none;
+  }
+  .area .hint { position: absolute; inset: auto 0 14px 0; font-size: .85rem; color: #3a3a46; pointer-events: none; }
+</style>
+</head>
+<body>
+  <div>
+    <h1>漂浮贴纸物理 hover</h1>
+    <p>鼠标/手指扫过去——贴纸被推开,又慢悠悠飘回来</p>
+    <div class="area" id="area" aria-hidden="true">
+      <div class="hint">move your pointer</div>
+    </div>
+  </div>
+<script>
+  // ===== 旋钮:斥力场 + 回家弹簧 + 闲时漂移,全部在这 =====
+  const KNOB = {
+    REPEL_R: 150,     // px:斥力半径
+    REPEL_F: 2.6,     // 推力峰值,1~4
+    K: .03,           // 弹簧刚度:回家多快
+    C: .10,           // 阻尼:晃几下停
+    DRIFT: 12,        // px:闲时漂移振幅(0=完全静止)
+    SPEED: .0007      // 漂移速度
+  };
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const area = document.getElementById('area');
+  const EMOJI = ['🫧', '⭐', '🍀', '🎈', '🌸', '💎', '🔥', '🌀'];
+  const HOMES = [[18,22],[42,14],[70,20],[85,45],[66,62],[38,70],[14,58],[55,40]]; // %
+  const stickers = EMOJI.map((ch, i) => {
+    const el = document.createElement('span');
+    el.textContent = ch;
+    el.style.transform = 'translate(-50%,-50%)';
+    area.appendChild(el);
+    return { el, hx: HOMES[i][0] / 100, hy: HOMES[i][1] / 100, x: 0, y: 0, vx: 0, vy: 0, ph: i * 1.7 };
+  });
+  const place = () => {                                    // home 按容器实际尺寸换算
+    stickers.forEach(s => { s.px = s.hx * area.clientWidth; s.py = s.hy * area.clientHeight; });
+  };
+  place();
+  addEventListener('resize', place);
+  stickers.forEach(s => s.el.style.left = s.el.style.top = '0');
+
+  let pointer = null;
+  // 子元素全是 pointer-events:none,offsetX/Y 必然相对容器,免算 rect
+  area.addEventListener('pointermove', e => pointer = { x: e.offsetX, y: e.offsetY });
+  area.addEventListener('pointerleave', () => pointer = null);
+
+  function frame(t) {
+    for (const s of stickers) {
+      // 闲时漂移目标(sin/cos 错相位 = 各飘各的)
+      const tx = Math.sin(t * KNOB.SPEED + s.ph) * KNOB.DRIFT;
+      const ty = Math.cos(t * KNOB.SPEED * 1.3 + s.ph) * KNOB.DRIFT * .8;
+      // 鼠标斥力:半径内线性衰减
+      if (pointer) {
+        const dx = s.px + s.x - pointer.x, dy = s.py + s.y - pointer.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < KNOB.REPEL_R && dist > 1) {
+          const f = (1 - dist / KNOB.REPEL_R) * KNOB.REPEL_F;
+          s.vx += dx / dist * f; s.vy += dy / dist * f;
+        }
+      }
+      // 弹簧追漂移目标
+      s.vx += -(s.x - tx) * KNOB.K - s.vx * KNOB.C;
+      s.vy += -(s.y - ty) * KNOB.K - s.vy * KNOB.C;
+      s.x += s.vx; s.y += s.vy;
+      s.el.style.transform = `translate(-50%,-50%) translate(${s.px + s.x}px, ${s.py + s.y}px)`;
+    }
+  }
+  // 静态摆放一帧;reduced-motion 就停在这(布局仍在,只是不动)
+  frame(0);
+  if (!REDUCED) {
+    let running = true;
+    const loop = t => { frame(t); if (running) requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+    document.addEventListener('visibilitychange', () => {   // 后台不空转
+      const next = !document.hidden;
+      if (next && !running) requestAnimationFrame(loop);
+      running = next;
+    });
+  }
+
+  function demoCheck() {                                   // 冒烟:斥力衰减两端 + 弹簧收敛
+    const f = d => (1 - d / KNOB.REPEL_R) * KNOB.REPEL_F;
+    console.assert(f(0) === KNOB.REPEL_F && Math.abs(f(KNOB.REPEL_R)) < 1e-9, 'repel falloff broken');
+    let x = 80, v = 0;
+    for (let i = 0; i < 1200; i++) { v += -x * KNOB.K - v * KNOB.C; x += v; }
+    console.assert(Math.abs(x) < 1, 'spring never settles');
+  }
+  demoCheck();
+</script>
+</body>
+</html>

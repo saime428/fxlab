@@ -16,7 +16,7 @@
 |---|---|---|---|---|
 | 1 | 13×13 网格 stagger 波纹(from center) | text/scroll | anime.js `stagger(grid)` | ✅ |
 | 2 | SVG 线条绘制 + 路径跟随(赛车沿赛道) | text | `createDrawable` + `createMotionPath` | ✅ |
-| 3 | 可拖拽 + 弹簧回弹元素 | hover | `createDraggable` + spring | ☐ |
+| 3 | 可拖拽 + 弹簧回弹元素 | hover | `createDraggable` + spring | ✅ |
 | 4 | 滚动同步动画(sync 模式) | scroll | `onScroll({ sync: true })` | ✅ |
 | 5 | 时钟表盘 timeline 编排 | text | `createTimeline` 负延迟定位 | ☐ |
 
