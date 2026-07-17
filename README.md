@@ -54,6 +54,7 @@
 | [全屏菜单 Stagger 展开](patterns/transitions/menu-stagger-reveal/) | 页面切换 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/menu-stagger-reveal/demo.html) |
 | [Displacement 图片过渡](patterns/transitions/image-displacement/) | 页面切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/image-displacement/demo.html) |
 | [Shader 遮罩擦除过渡](patterns/transitions/shader-wipe/) | 页面切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/shader-wipe/demo.html) |
+| [GPU 粒子过渡](patterns/transitions/particle-transition/) | 页面切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/particle-transition/demo.html) |
 
 ## Case 索引
 

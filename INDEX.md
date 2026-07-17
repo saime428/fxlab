@@ -23,6 +23,7 @@
 | [transitions/menu-stagger-reveal](patterns/transitions/menu-stagger-reveal/) | 全屏菜单 Stagger 展开 | ★ | clip-path 遮罩 + 菜单项索引延迟 | 任何站的导航,泛用性最高 |
 | [transitions/image-displacement](patterns/transitions/image-displacement/) | Displacement 图片过渡 | ★★★ | 噪声图推 UV 采样坐标再 mix | 图片画廊的高级切换,液态质感 |
 | [transitions/shader-wipe](patterns/transitions/shader-wipe/) | Shader 遮罩擦除过渡 | ★★★ | 全屏 quad 噪声阈值擦除,盖满换 DOM 再揭开 | 章节/路由切换的"物质感"转场,内容层无关 |
+| [transitions/particle-transition](patterns/transitions/particle-transition/) | GPU 粒子过渡 | ★★★ | 顶点着色器无状态粒子:格点+错峰爆发包络 | 图像/logo 的"技术力宣言"切换,记忆点效果 |
 | [layout/section-narrative](patterns/layout/section-narrative/) | 章节式滚动叙事 | ★ | 全屏分节 + 编号 + 进退导航 | 宣言页、发布页、故事型官网 |
 | [layout/sticky-stack](patterns/layout/sticky-stack/) | 粘性堆叠 | ★ | 每卡 sticky top:0,后者压前者 | 功能列表、服务介绍、案例翻牌 |
 | [layout/comment-heading](patterns/layout/comment-heading/) | 注释风标题 | ★ | CSS counter + ::before 注释前缀 | 开发者/极客气质的章节标题 |

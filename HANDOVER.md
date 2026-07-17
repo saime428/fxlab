@@ -14,7 +14,7 @@
 ## 二、当前状态(2026-07-16)
 
 - 10 个 case(见 README 索引),其中 Igloo、Active Theory、Lando、Shopify、Hashgraph、Robin 做过运行时实测(结论在各自 analysis.md 的"运行时实测"一节)
-- 22 个 pattern,全部零依赖、过了 node --check 和链接检查(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
+- 23 个 pattern,全部零依赖、过了 node --check 和链接检查(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
 - 已推 GitHub 并开通 Pages
 - 2026-07-16 口径调整:可复现性放宽为"保住核心机制的简化版即可",新增分类覆盖度排序项(见 docs/criteria.md)
 - 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)
@@ -22,7 +22,7 @@
 
 ### 未完成(按优先级)
 
-1. 高门槛 ✅ 欠账:GPU 粒子过渡(Active Theory,简化版)、cel-shading 卡通描边(Messenger,复用性存疑,建议降级为方法论笔记);~~shader 驱动 UI 过渡(Igloo)~~ ✅ 已做(transitions/shader-wipe)
+1. 高门槛 ✅ 欠账:cel-shading 卡通描边(Messenger,复用性存疑,建议降级为方法论笔记);~~shader 驱动 UI 过渡(Igloo)~~ ✅ 已做(transitions/shader-wipe);~~GPU 粒子过渡(Active Theory)~~ ✅ 已做(transitions/particle-transition,无状态简化版)
 2. 翻案候选(实测支持,还没做):可拖拽弹簧回弹(anime.js)、滚动分节锁定 scroll-snap 版(Lando)、漂浮贴纸物理 hover(Shopify)
 3. Messenger 还没做运行时深挖(方法见下)
 4. cursor/ 分类仍是空的——现有 10 个 case 都没有自定义光标,需要收新 case(建议找 Awwwards 上 cursor 出彩的站)

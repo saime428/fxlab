@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPU 粒子过渡 — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #0c0c11; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  p { color: #77778a; margin-bottom: 2rem; }
+  canvas { width: min(84vw, 560px); aspect-ratio: 16/10; border-radius: 16px; cursor: pointer; background: #0c0c11; }
+  canvas:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 4px; }
+</style>
+</head>
+<body>
+  <div>
+    <h1>GPU 粒子过渡</h1>
+    <p>点击/Enter 切换——图像炸成粒子风暴,再落回下一张</p>
+    <canvas id="gl" tabindex="0" role="button" aria-label="切换图像"></canvas>
+  </div>
+<script>
+  // —— 源图程序化生成(同 image-displacement 惯例,零外部资源) ——
+  function makeScene(bg1, bg2, fg, label) {
+    const c = document.createElement('canvas'); c.width = 640; c.height = 400;
+    const x = c.getContext('2d');
+    const g = x.createLinearGradient(0, 0, 640, 400); g.addColorStop(0, bg1); g.addColorStop(1, bg2);
+    x.fillStyle = g; x.fillRect(0, 0, 640, 400);
+    x.fillStyle = fg;
+    for (let i = 0; i < 5; i++) { x.beginPath(); x.arc(80 + i * 120, 200 + Math.sin(i * 2.1) * 90, 34, 0, 7); x.fill(); }
+    x.fillStyle = '#fff'; x.font = '800 64px sans-serif'; x.textAlign = 'center'; x.fillText(label, 320, 220);
+    return x.getImageData(0, 0, 640, 400);
+  }
+
+  // —— 粒子属性:每格一个粒子,带两张图的颜色 + 随机种子(CPU 只建一次) ——
+  const GW = 128, GH = 80, N = GW * GH;
+  const imgA = makeScene('#2b1e63', '#8b7cf6', '#47d8ff', 'ONE');
+  const imgB = makeScene('#5c1a08', '#ff7c5c', '#e8ff47', 'TWO');
+  const aUv = new Float32Array(N * 2), aColA = new Float32Array(N * 3), aColB = new Float32Array(N * 3), aSeed = new Float32Array(N);
+  const pick = (img, px, py, out, i) => {
+    const o = (py * 640 + px) * 4;
+    out[i * 3] = img.data[o] / 255; out[i * 3 + 1] = img.data[o + 1] / 255; out[i * 3 + 2] = img.data[o + 2] / 255;
+  };
+  for (let y = 0, i = 0; y < GH; y++) for (let x = 0; x < GW; x++, i++) {
+    const px = Math.floor((x + .5) / GW * 640), py = Math.floor((y + .5) / GH * 400);
+    aUv[i * 2] = (x + .5) / GW; aUv[i * 2 + 1] = 1 - (y + .5) / GH;   // 翻 y:图像行序 → GL 坐标
+    pick(imgA, px, py, aColA, i); pick(imgB, px, py, aColB, i);
+    aSeed[i] = Math.random();
+  }
+
+  // —— 裸 WebGL:全部运动在顶点着色器里解析求值,无 FBO 无状态 ——
+  const cv = document.getElementById('gl');
+  cv.width = 640; cv.height = 400;
+  const gl = cv.getContext('webgl');
+  const VS = `attribute vec2 aUv; attribute vec3 aColA, aColB; attribute float aSeed;
+    uniform float uP, uSize; varying vec3 vColA, vColB; varying float vP;
+    float hash(float n){ return fract(sin(n) * 43758.5453); }
+    void main(){
+      float lp = clamp((uP - aSeed * .35) / .65, 0., 1.);   // 每粒子错峰出发
+      float env = sin(3.14159 * lp);                        // 两端归零的爆发包络
+      vec2 dir = vec2(hash(aSeed * 7.) - .5, hash(aSeed * 13.) - .5) * 2.;
+      float amp = hash(aSeed * 29.) * .6 + .15;
+      vec2 pos = aUv * 2. - 1. + dir * amp * env;           // 静止在格点,中途炸开
+      gl_Position = vec4(pos, 0., 1.);
+      gl_PointSize = uSize * (1. + env * 1.6);              // 飞行中变大,增强"风暴"感
+      vColA = aColA; vColB = aColB; vP = lp;
+    }`;
+  const FS = `precision mediump float; varying vec3 vColA, vColB; varying float vP;
+    void main(){
+      if (distance(gl_PointCoord, vec2(.5)) > .5) discard;  // 方点裁圆
+      gl_FragColor = vec4(mix(vColA, vColB, smoothstep(.35, .65, vP)), 1.);
+    }`;
+  const shader = (type, src) => {
+    const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    return s;
+  };
+  const prog = gl.createProgram();
+  gl.attachShader(prog, shader(gl.VERTEX_SHADER, VS));
+  gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, FS));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  const attr = (name, data, size) => {
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+    const l = gl.getAttribLocation(prog, name);
+    gl.enableVertexAttribArray(l); gl.vertexAttribPointer(l, size, gl.FLOAT, false, 0, 0);
+  };
+  attr('aUv', aUv, 2); attr('aColA', aColA, 3); attr('aColB', aColB, 3); attr('aSeed', aSeed, 1);
+  gl.uniform1f(gl.getUniformLocation(prog, 'uSize'), 640 / GW * 1.5);   // ×1.5:圆点盖住格子对角缝,静止态读作完整图像
+  const uP = gl.getUniformLocation(prog, 'uP');
+  gl.clearColor(.047, .047, .066, 1);                       // = 页面底色 #0c0c11
+  const draw = p => { gl.uniform1f(uP, p); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.POINTS, 0, N); };
+
+  // —— 编排:tween 全程走完(风暴在中段),busy 防连点,reduced-motion 跳终态 ——
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cur = 0, busy = false;
+  function tween(from, to, dur, done) {
+    const t0 = performance.now();
+    (function step(now) {
+      const k = Math.min((now - t0) / dur, 1);
+      const e = k < .5 ? 4 * k ** 3 : 1 - (-2 * k + 2) ** 3 / 2;   // easeInOutCubic
+      draw(from + (to - from) * e);
+      k < 1 ? requestAnimationFrame(step) : done();
+    })(t0);
+  }
+  cv.addEventListener('click', () => {
+    if (busy) return;
+    const to = cur ? 0 : 1;
+    if (reduced) { cur = to; draw(to); return; }            // 降级 = 普通图片切换
+    busy = true;
+    tween(cur, to, 1100, () => { cur = to; busy = false; });
+  });
+  cv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cv.click(); } });
+  draw(0);
+
+  function demoCheck() {                                    // 冒烟:错峰映射两端必须闭合
+    const lp = (p, s) => Math.min(Math.max((p - s * .35) / .65, 0), 1);
+    console.assert(lp(0, 0) === 0 && lp(0, 1) === 0 && lp(1, 0) === 1 && lp(1, 1) === 1, 'stagger map broken');
+  }
+  demoCheck();
+</script>
+</body>
+</html>
