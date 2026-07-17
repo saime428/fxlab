@@ -1,7 +1,7 @@
 # Pattern 选型索引(机器友好)
 
 > 给 AI/自动化用的单文件决策索引。人类请看 [README.md](README.md)。
-> 每行:效果 | 难度 | 一句话机制 | 适用场景。选中后读该 pattern 的 README(规格)+ demo.html(参考实现)。
+> 每行:路径 | 名称 | 难度 | 一句话机制 | 适用场景。选中后读该 pattern 的 README(规格)+ demo.html(参考实现)。
 
 ## 全部 pattern
 
@@ -21,7 +21,7 @@
 | [transitions/theme-shift](patterns/transitions/theme-shift/) | 章节主题突变 | ★ | 滚动触发 data 属性换 CSS 变量 | 长页分章换肤,低成本高感知 |
 | [transitions/view-transitions](patterns/transitions/view-transitions/) | View Transitions 过渡 | ★★ | startViewTransition + 同名共享元素 | 列表↔详情、SPA 路由转场 |
 | [transitions/menu-stagger-reveal](patterns/transitions/menu-stagger-reveal/) | 全屏菜单 Stagger 展开 | ★ | clip-path 遮罩 + 菜单项索引延迟 | 任何站的导航,泛用性最高 |
-| [transitions/image-displacement](patterns/transitions/image-displacement/) | Displacement 图片过渡 | ★★★ | 噪声图推 UV 采样坐标再 mix | 图片画廊的高级切换,液态质感 |
+| [transitions/image-displacement](patterns/transitions/image-displacement/) | Displacement 图片过渡 | ★★★ | 程序化噪声定每像素切换时机 + 推 UV 变形 | 图片画廊的高级切换,液态质感 |
 | [transitions/shader-wipe](patterns/transitions/shader-wipe/) | Shader 遮罩擦除过渡 | ★★★ | 全屏 quad 噪声阈值擦除,盖满换 DOM 再揭开 | 章节/路由切换的"物质感"转场,内容层无关 |
 | [transitions/particle-transition](patterns/transitions/particle-transition/) | GPU 粒子过渡 | ★★★ | 顶点着色器无状态粒子:格点+错峰爆发包络 | 图像/logo 的"技术力宣言"切换,记忆点效果 |
 | [layout/section-narrative](patterns/layout/section-narrative/) | 章节式滚动叙事 | ★ | 全屏分节 + 编号 + 进退导航 | 宣言页、发布页、故事型官网 |
@@ -49,6 +49,7 @@
 4. 声音必须用户手势解锁
 5. 强注意力效果(波纹/marquee/displacement)一页一次,别当壁纸
 6. 抄机制不抄样式:demo 的配色排版是占位,进项目要跟项目的设计体系走
+7. 旋钮收口(组合 ≥2 个效果时):时长/缓动一律走全站 CSS 变量(一套时长阶梯 `--dur-s/m/l` + 一个缓动族 `--ease-*`;项目已有动效 token 体系则并入它,不另起一套),禁止每个效果自带节奏;强度类参数(位移强度、噪声频率、stagger 相位等)提升到该效果文件顶部常量块并注释可调范围,不许埋在函数体里;全页一次 `prefers-reduced-motion` 判断,rAF 尽量共用一个调度
 
 ## 灵感源(cases)
 
