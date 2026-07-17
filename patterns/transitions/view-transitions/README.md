@@ -41,3 +41,8 @@ document.startViewTransition(() => {
 - 主题切换时用它做全屏 clip-path 扩散揭示(墨滴换肤)
 - 配合 Navigation API / 框架路由 = SPA 路由转场的原生方案,替代 Barba.js
 - FLIP 原理仍值得懂:不支持的浏览器上想要同款效果,手写 FLIP 是唯一路径
+
+## 实战笔记
+
+- root 冻结(`::view-transition-old/new(root) { animation: none }`)+ 只命名内容元素时,**状态容器的外观变化会硬切**(用户判词:"咔咔")——`background-image`/`box-shadow` 不可插值,给容器写 `transition: background` 是空转。修法:容器本身也 `view-transition-name` 入组,被推移的兄弟区块同样入组,VT 才能接管整体形变与让位(living-life-lore 抽屉,2026-07-17)
+- 命名的后代不会进入祖先的快照(spec 行为),所以"壳一个组、内容一个组"可以安全嵌套,内容组自然叠在壳组之上
