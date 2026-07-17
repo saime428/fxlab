@@ -38,3 +38,7 @@ assets.forEach(a => load(a).then(() => {
 
 - 进度数字超大字号铺满屏(奢侈品牌常用)
 - 加载时预热:序章期间偷偷 warm up shader、解码图片
+
+## 实战笔记
+
+- 组合多个入场效果时(样板间实测):Enter 点击就是**全页动效的 t=0**——hero 的 split-text、rAF 常驻循环都挂在这个回调里启动,别让各效果在 DOMContentLoaded 各自抢跑,否则幕布还没揭内容已经演完了
