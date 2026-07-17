@@ -22,6 +22,7 @@
 | [transitions/view-transitions](patterns/transitions/view-transitions/) | View Transitions 过渡 | ★★ | startViewTransition + 同名共享元素 | 列表↔详情、SPA 路由转场 |
 | [transitions/menu-stagger-reveal](patterns/transitions/menu-stagger-reveal/) | 全屏菜单 Stagger 展开 | ★ | clip-path 遮罩 + 菜单项索引延迟 | 任何站的导航,泛用性最高 |
 | [transitions/image-displacement](patterns/transitions/image-displacement/) | Displacement 图片过渡 | ★★★ | 噪声图推 UV 采样坐标再 mix | 图片画廊的高级切换,液态质感 |
+| [transitions/shader-wipe](patterns/transitions/shader-wipe/) | Shader 遮罩擦除过渡 | ★★★ | 全屏 quad 噪声阈值擦除,盖满换 DOM 再揭开 | 章节/路由切换的"物质感"转场,内容层无关 |
 | [layout/section-narrative](patterns/layout/section-narrative/) | 章节式滚动叙事 | ★ | 全屏分节 + 编号 + 进退导航 | 宣言页、发布页、故事型官网 |
 | [layout/sticky-stack](patterns/layout/sticky-stack/) | 粘性堆叠 | ★ | 每卡 sticky top:0,后者压前者 | 功能列表、服务介绍、案例翻牌 |
 | [layout/comment-heading](patterns/layout/comment-heading/) | 注释风标题 | ★ | CSS counter + ::before 注释前缀 | 开发者/极客气质的章节标题 |
@@ -37,7 +38,7 @@
 | 作品集 / 个人站 | entry-preloader + split-text-reveal + menu-stagger-reveal + image-displacement + scroll-marquee | 仪式感;开场和菜单是两大记忆点 |
 | 产品发布 / 营销长页 | section-narrative + theme-shift + sticky-stack + parallax-cards + count-up | 滚动叙事;Shopify Editions 是参照 |
 | 电商 / 图片画廊 | image-swap + image-displacement + horizontal-gallery + parallax-cards | 图片即内容,动效只加在图上 |
-| 3D / 体验型 | scroll-driven-shader + entry-preloader + ambient-sound-toggle + canvas-ambient-bg | 重开场重氛围;Robin/Igloo 是参照 |
+| 3D / 体验型 | scroll-driven-shader + entry-preloader + ambient-sound-toggle + canvas-ambient-bg + shader-wipe | 重开场重氛围;Robin/Igloo 是参照 |
 
 ## 使用铁律(从库规范继承,不可省)
 

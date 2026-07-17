@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shader 遮罩擦除过渡 — web-fx-lab</title>
+<style>
+  :root { --mask: #0b1d2e; --glow: #6fe3ff; }
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; min-height: 100vh; color: var(--fg); background: var(--bg); transition: background .2s; }
+  body[data-view="0"] { --bg: #0e1420; --fg: #dfeaf5; --accent: #6fe3ff; }
+  body[data-view="1"] { --bg: #061014; --fg: #d8f3ec; --accent: #3ee6a8; }
+  body[data-view="2"] { --bg: #150e20; --fg: #eadff5; --accent: #b98cff; }
+  main { min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 8vh 6vw; }
+  .kicker { font-family: ui-monospace, monospace; color: var(--accent); letter-spacing: .2em; margin-bottom: 1rem; }
+  h1 { font-size: clamp(2.4rem, 8vw, 5rem); letter-spacing: .04em; }
+  main p { color: color-mix(in srgb, var(--fg) 60%, transparent); max-width: 34em; margin: 1.2rem auto 0; }
+  nav { position: fixed; bottom: 6vh; left: 0; right: 0; display: flex; gap: .8rem; justify-content: center; }
+  nav button { font: inherit; font-family: ui-monospace, monospace; color: var(--fg); background: none; border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent); border-radius: 99px; padding: .5em 1.2em; cursor: pointer; }
+  nav button[aria-current="true"] { border-color: var(--accent); color: var(--accent); }
+  nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #wipe { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+</style>
+</head>
+<body data-view="0">
+  <main>
+    <article><p class="kicker">// 01 GLACIER</p><h1>冰原</h1><p>过渡不是淡入淡出,是一层"物质"漫过屏幕——盖住的瞬间换内容,再退去。</p></article>
+    <article hidden><p class="kicker">// 02 ABYSS</p><h1>深海</h1><p>遮罩层是一个全屏 shader:阈值 + 噪声决定每个像素何时被吞没。</p></article>
+    <article hidden><p class="kicker">// 03 AURORA</p><h1>极光</h1><p>换一条噪声、换一个方向、换一组颜色,就是另一个站的转场签名。</p></article>
+  </main>
+  <nav aria-label="切换章节">
+    <button aria-current="true">01</button><button>02</button><button>03</button>
+  </nav>
+  <canvas id="wipe" aria-hidden="true"></canvas>
+<script>
+  // —— 裸 WebGL:一个超屏三角 + 程序化 value noise,零纹理零资源 ——
+  const cv = document.getElementById('wipe');
+  const gl = cv.getContext('webgl', { premultipliedAlpha: false });
+  const VS = 'attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos*.5+.5; gl_Position = vec4(aPos,0.,1.); }';
+  const FS = `precision mediump float; varying vec2 vUv;
+    uniform float uP, uAspect; uniform vec3 uMask, uGlow;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p){
+      vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f);
+      return mix(mix(hash(i), hash(i+vec2(1.,0.)), f.x),
+                 mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), f.x), f.y);
+    }
+    void main(){
+      vec2 q = vUv * vec2(uAspect, 1.);
+      float n = noise(q*5.)*.5 + noise(q*11.)*.25;      // 两个八度,边缘更"碎"
+      float dir = (vUv.x + vUv.y) * .5;                 // 对角推进;改这行换方向
+      float t = uP * 2.2 - dir - n * .55;               // p=1 时必然全盖
+      float m = smoothstep(0., .08, t);                 // 遮罩本体
+      float edge = m - smoothstep(.08, .38, t);         // 前沿亮带
+      gl_FragColor = vec4(mix(uMask, uGlow, edge), m);
+    }`;
+  let uP, uAspect, draw = () => {};
+  if (gl) {
+    const shader = (type, src) => {
+      const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, shader(gl.VERTEX_SHADER, VS));
+    gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog); gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    uP = gl.getUniformLocation(prog, 'uP'); uAspect = gl.getUniformLocation(prog, 'uAspect');
+    const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);   // #rrggbb → [0..1]
+    gl.uniform3fv(gl.getUniformLocation(prog, 'uMask'), rgb(css('--mask')));
+    gl.uniform3fv(gl.getUniformLocation(prog, 'uGlow'), rgb(css('--glow')));
+    let p = 0;
+    draw = v => { p = v; gl.uniform1f(uP, p); gl.drawArrays(gl.TRIANGLES, 0, 3); };
+    const size = () => {
+      const d = Math.min(devicePixelRatio || 1, 2);
+      cv.width = innerWidth * d; cv.height = innerHeight * d;
+      gl.viewport(0, 0, cv.width, cv.height);
+      gl.uniform1f(uAspect, innerWidth / innerHeight); draw(p);
+    };
+    addEventListener('resize', size); size();
+  }
+
+  // —— 编排:盖上(easeIn)→ 换 DOM → 揭开(easeOut);无 WebGL / reduced-motion 直接换 ——
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const views = document.querySelectorAll('article');
+  const btns = document.querySelectorAll('nav button');
+  let cur = 0, busy = false;
+  function show(i) {
+    views[cur].hidden = true; views[i].hidden = false;
+    btns[cur].removeAttribute('aria-current'); btns[i].setAttribute('aria-current', 'true');
+    document.body.dataset.view = cur = i;
+  }
+  function tween(from, to, dur, ease, done) {
+    const t0 = performance.now();
+    (function step(now) {
+      const k = Math.min((now - t0) / dur, 1);
+      draw(from + (to - from) * ease(k));
+      k < 1 ? requestAnimationFrame(step) : done && done();
+    })(t0);
+  }
+  btns.forEach((b, i) => b.addEventListener('click', () => {
+    if (i === cur || busy) return;
+    if (reduced || !gl) return show(i);                  // 降级 = 普通切换
+    busy = true;
+    tween(0, 1, 420, k => k * k, () => {                 // 盖上,加速冲进来
+      show(i);                                           // 盖满的这一帧换内容
+      tween(1, 0, 560, k => 1 - (1 - k) ** 3, () => busy = false);
+    });
+  }));
+  function demoCheck() {                                  // 冒烟:阈值公式两端必须"全透明/全覆盖"
+    const t = (p, dir, n) => p * 2.2 - dir - n * .55;
+    console.assert(t(0, 0, 0) <= 0 && t(1, 1, .75) > .38, 'wipe threshold broken');
+  }
+  demoCheck();
+</script>
+</body>
+</html>
