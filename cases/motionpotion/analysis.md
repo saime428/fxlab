@@ -21,6 +21,11 @@
 | 5 | 计数卡 + 拖尾装饰 | text | data-count-target,同款 count-up | ✓ 已有(频率+1) |
 | 6 | reveal/split 入场、页脚 marquee | scroll/text | IO + 拆分,同库内 | ✓ 已有(频率+1) |
 | 7 | 漂浮/闪烁装饰(floatY/twinkle)、印章旋转 | hover | 正弦漂浮,floating-stickers 思路 | ☐ |
+| 8 | 【词汇表】形状擦除过渡(圆/条纹/点阵一族) | transitions | clip-path / 条纹错峰,视频转场→网页 wipe | ✅ |
+| 9 | 【词汇表】弹性文字(elastic/pop text) | text | 弹簧曲线缓动,CSS `linear()` 可零 JS | ✅ |
+| 10 | 【词汇表】纸屑爆发 Confetti Explosion | 3d-webgl | canvas 粒子:重力+阻力,burst 自停 | ✅ |
+
+> 8-10 来自它货架陈列的模板(动效词汇表):只取**效果概念**零依赖重实现,不碰其模板文件/Lottie 资产(商业产品)。其余模板多为具体图形表演,离开视频语境不成立(复用性否决)。
 
 ## 技术栈侦察
 

@@ -14,7 +14,7 @@
 ## 二、当前状态(2026-07-16)
 
 - 10 个 case(见 README 索引),其中 Igloo、Active Theory、Lando、Shopify、Hashgraph、Robin 做过运行时实测(结论在各自 analysis.md 的"运行时实测"一节)
-- 26 个 pattern,全部零依赖、过了 node --check 和链接检查(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
+- 29 个 pattern,全部零依赖、过了 node --check 和链接检查(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
 - 已推 GitHub 并开通 Pages
 - 2026-07-16 口径调整:可复现性放宽为"保住核心机制的简化版即可",新增分类覆盖度排序项(见 docs/criteria.md)
 - 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ TASTE.md(口味档案/甲方画像:用户未明说的决策以它为准;口味判词回写它,技术坑回写 pattern README)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)

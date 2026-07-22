@@ -59,6 +59,9 @@
 | [可拖拽 + 弹簧回弹](patterns/hover/drag-spring/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html) |
 | [滚动分节锁定](patterns/scroll/scroll-snap-sections/) | 滚动动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-snap-sections/demo.html) |
 | [漂浮贴纸物理 Hover](patterns/hover/floating-stickers/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html) |
+| [形状擦除过渡 Clip Shape Wipe](patterns/transitions/clip-shape-wipe/) | 页面切换 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-shape-wipe/demo.html) |
+| [弹性文字入场 Elastic Text](patterns/text/elastic-text/) | 文字动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/elastic-text/demo.html) |
+| [纸屑爆发 Confetti Burst](patterns/3d-webgl/confetti-burst/) | 3D/WebGL | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/3d-webgl/confetti-burst/demo.html) |
 
 ## Case 索引
 

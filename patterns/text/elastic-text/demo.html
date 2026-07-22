@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elastic Text — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  :root { --dur-l: .9s; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  .hint { color: #77778a; margin: 1.6rem 0 2.4rem; }
+  h1 { font-size: clamp(2rem, 7vw, 4rem); font-weight: 800; color: #8b7cf6; }
+  .char { display: inline-block; animation: pop var(--dur-l) var(--spring, cubic-bezier(.34,1.56,.64,1)) backwards; }
+  @keyframes pop { from { translate: 0 .6em; scale: .6; opacity: 0; } }
+  button { background: none; border: 1px solid #3a3a46; color: #ecebf2; padding: .6em 1.6em; border-radius: 2em; font: inherit; cursor: pointer; }
+  button:hover, button:focus-visible { border-color: #8b7cf6; outline: none; }
+  .note { color: #55555f; font-size: .8rem; margin-top: 2rem; }
+  @media (prefers-reduced-motion: reduce) { .char { animation: none; } }
+</style>
+</head>
+<body>
+  <div>
+    <h1 id="title" aria-label="蹦上台,弹回来,坐稳。"></h1>
+    <p class="hint">过冲量在缓动曲线里,不在 keyframes 里</p>
+    <button id="replay">重播</button>
+    <p class="note" id="note"></p>
+  </div>
+<script>
+  // ===== 旋钮 =====
+  const FX = {
+    STIFFNESS: 9,    // 弹得多快,6~14(对应欠阻尼频率)
+    DAMPING: 4.5,    // 晃多久,3(晃很久)~8(几乎不晃)
+    CHAR_MS: 40,     // 逐字错峰,30~50
+    SAMPLES: 24,     // linear() 采样点,16~32 够平滑
+  };
+
+  // 欠阻尼弹簧解析解 x(t): 1 - e^(-d·t)·cos(w·t),t∈[0,1] 归一化
+  function springAt(t) {
+    return 1 - Math.exp(-FX.DAMPING * t) * Math.cos(FX.STIFFNESS * t);
+  }
+  const supportsLinear = CSS.supports('animation-timing-function', 'linear(0, 1)');
+  if (supportsLinear) {
+    const pts = Array.from({ length: FX.SAMPLES + 1 }, (_, i) => springAt(i / FX.SAMPLES).toFixed(3));
+    pts[FX.SAMPLES] = '1';                                   // 终点必须精确落 1
+    document.documentElement.style.setProperty('--spring', `linear(${pts.join(',')})`);
+  }
+  document.getElementById('note').textContent = supportsLinear
+    ? `linear() 弹簧曲线已生成(stiffness ${FX.STIFFNESS} / damping ${FX.DAMPING})`
+    : '当前浏览器不支持 linear(),已降级 backOut 单次过冲';
+
+  // 逐字拆分:原文在 aria-label,拆分层对读屏隐藏
+  const title = document.getElementById('title');
+  function build() {
+    title.innerHTML = '';
+    [...title.getAttribute('aria-label')].forEach((ch, i) => {
+      const s = document.createElement('span');
+      s.className = 'char';
+      s.textContent = ch;
+      s.setAttribute('aria-hidden', 'true');
+      s.style.animationDelay = `${i * FX.CHAR_MS}ms`;
+      title.appendChild(s);
+    });
+  }
+  build();
+  document.getElementById('replay').addEventListener('click', build);
+</script>
+</body>
+</html>

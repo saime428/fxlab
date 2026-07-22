@@ -33,6 +33,9 @@
 | [loading/entry-preloader](patterns/loading/entry-preloader/) | 加载序章 | ★★ | 资源预载 + 进度 + Enter 门 | 重资产站开场,兼做声音手势解锁 |
 | [loading/ambient-sound-toggle](patterns/loading/ambient-sound-toggle/) | 氛围音开关 | ★★ | 手势解锁 AudioContext + 全局开关 | 体验型站的氛围音 |
 | [3d-webgl/canvas-ambient-bg](patterns/3d-webgl/canvas-ambient-bg/) | Canvas 氛围背景 | ★★ | 渐变圆斑 + lighter 叠加 + 正弦漂移 | 任何站的氛围背景层,高级感地板价 |
+| [transitions/clip-shape-wipe](patterns/transitions/clip-shape-wipe/) | 形状擦除过渡 | ★ | clip-path/条纹错峰:盖住→换内容→揭开 | 章节/视图切换的零门槛擦除,shader-wipe 的 CSS 平替 |
+| [text/elastic-text](patterns/text/elastic-text/) | 弹性文字入场 | ★ | JS 采样弹簧曲线喂给 CSS linear() 缓动 | 活泼/年轻向标题入场,ease-out 之外的性格档 |
+| [3d-webgl/confetti-burst](patterns/3d-webgl/confetti-burst/) | 纸屑爆发 | ★★ | canvas 粒子:重力+阻力+自旋,burst 后自停 | 成功/完成时刻的庆祝反馈,SaaS 标配 |
 
 ## 气质套餐(场景 → 组合)
 
