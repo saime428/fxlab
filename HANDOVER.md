@@ -36,6 +36,7 @@
    - 全局变量试探:`window.THREE / gsap / Hydra / anime`
    - `performance.getEntriesByType('resource')` 看资源清单(chunk 名、纹理格式、体积)
    - fetch 主 bundle 后正则数特征:`WebGLRenderer`、`void main(` 计数、`Lenis` 等
+   - **样式表全量普查(必做,别只做上面三条)**:枚举全部 `@keyframes`(名字+动的属性)、`CSSPropertyRule`(@property 注册)、`:hover` 规则数——手写站的动效大头是**交互触发**的,静止时"谁在动"的 census 和类名 grep 都探不到(教训:MotionPotion 28 个 keyframes 静止时只有 4 个元素在动,第一轮误判为"没料",2026-07-22)
 3. 搜 Awwwards/FWA/Codrops 拿制作方、官方 case study、开源仓库地址
 4. 按 `docs/templates/case-analysis.md` 写入 `cases/`,效果清单逐条按 `docs/criteria.md` 四条标准标 ✅/☐
 5. ✅ 项按 `docs/templates/pattern.md` 做成 pattern(README + demo)
