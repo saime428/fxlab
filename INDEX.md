@@ -36,6 +36,9 @@
 | [transitions/clip-shape-wipe](patterns/transitions/clip-shape-wipe/) | 形状擦除过渡 | ★ | clip-path/条纹错峰:盖住→换内容→揭开 | 章节/视图切换的零门槛擦除,shader-wipe 的 CSS 平替 |
 | [text/elastic-text](patterns/text/elastic-text/) | 弹性文字入场 | ★ | JS 采样弹簧曲线喂给 CSS linear() 缓动 | 活泼/年轻向标题入场,ease-out 之外的性格档 |
 | [3d-webgl/confetti-burst](patterns/3d-webgl/confetti-burst/) | 纸屑爆发 | ★★ | canvas 粒子:重力+阻力+自旋,burst 后自停 | 成功/完成时刻的庆祝反馈,SaaS 标配 |
+| [hover/conic-border-spin](patterns/hover/conic-border-spin/) | 旋转渐变描边 | ★ | @property 注册 <angle> + conic 起始角动画 | 主 CTA/卡片的"通电"描边,AI 产品站标配 |
+| [hover/sprite-preview](patterns/hover/sprite-preview/) | 精灵图 Hover 预览 | ★ | steps(N-1, jump-none) 步进 background-position | 画廊卡片的零 video 动图预览,4~12 帧甜区 |
+| [layout/fake-ui-demo](patterns/layout/fake-ui-demo/) | 假 UI 自演示 | ★★ | JS 状态机切累加类,编排全在 CSS | 产品落地页让界面自己演,替代录屏,体积≈0 |
 
 ## 气质套餐(场景 → 组合)
 

@@ -62,6 +62,9 @@
 | [形状擦除过渡 Clip Shape Wipe](patterns/transitions/clip-shape-wipe/) | 页面切换 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-shape-wipe/demo.html) |
 | [弹性文字入场 Elastic Text](patterns/text/elastic-text/) | 文字动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/elastic-text/demo.html) |
 | [纸屑爆发 Confetti Burst](patterns/3d-webgl/confetti-burst/) | 3D/WebGL | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/3d-webgl/confetti-burst/demo.html) |
+| [旋转渐变描边 Conic Border](patterns/hover/conic-border-spin/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/conic-border-spin/demo.html) |
+| [精灵图 Hover 预览 Sprite](patterns/hover/sprite-preview/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/sprite-preview/demo.html) |
+| [假 UI 自演示 Fake UI Demo](patterns/layout/fake-ui-demo/) | 布局手法 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/fake-ui-demo/demo.html) |
 
 ## Case 索引
 
