@@ -65,6 +65,8 @@
 | [旋转渐变描边 Conic Border](patterns/hover/conic-border-spin/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/conic-border-spin/demo.html) |
 | [精灵图 Hover 预览 Sprite](patterns/hover/sprite-preview/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/sprite-preview/demo.html) |
 | [假 UI 自演示 Fake UI Demo](patterns/layout/fake-ui-demo/) | 布局手法 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/fake-ui-demo/demo.html) |
+| [自定义光标 Custom Cursor](patterns/cursor/custom-cursor/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/custom-cursor/demo.html) |
+| [磁性按钮 Magnetic Button](patterns/hover/magnetic-button/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/magnetic-button/demo.html) |
 
 ## Case 索引
 
@@ -81,6 +83,8 @@
 | [Hashgraph Ventures](https://hashgraphvc.com/) | 章节宣言叙事+氛围音 | — | [拆解](cases/hashgraph-ventures/analysis.md) |
 | [infinite imaginations](https://oninross.github.io/infinite-imaginations/) | TweenMax 时代考古 | ✅ [源码](https://github.com/oninross/infinite-imaginations) | [拆解](cases/infinite-imaginations/analysis.md) |
 | [MotionPotion](https://motionpotion.co/) | 纯 CSS 交互动效密度天花板,假 UI 自演示 | — | [拆解](cases/motionpotion/analysis.md) |
+| [Cuberto](https://cuberto.com/) | 光标状态机的行业原型 | — | [拆解](cases/cuberto/analysis.md) |
+| [Dennis Snellenberg](https://dennissnellenberg.com/) | 磁性按钮标杆,SOTD"手感"标本 | — | [拆解](cases/dennis-snellenberg/analysis.md) |
 
 ## 怎么在项目里用
 

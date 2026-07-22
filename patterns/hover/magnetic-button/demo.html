@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnetic Button — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  .hint { color: #77778a; margin-bottom: 2.6rem; }
+  .row { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; }
+  /* 磁场 = 比按钮大一圈的 wrapper:指针进场按钮就开始迎 */
+  .field { padding: 34px; }
+  .magnetic {
+    position: relative;
+    width: 128px; height: 128px; border-radius: 50%;
+    background: #8b7cf6; border: 0; color: #14101f; font: inherit; font-weight: 700;
+    cursor: pointer; will-change: transform;
+    translate: var(--x, 0) var(--y, 0);
+  }
+  .magnetic > span { display: inline-block; translate: var(--tx, 0) var(--ty, 0); }  /* 内层二级强度=按钮内视差 */
+  .magnetic:focus-visible { outline: 2px solid #ecebf2; outline-offset: 5px; scale: 1.06; }
+  .magnetic.alt { background: #1b1b22; color: #ecebf2; border: 1px solid #3a3a46; }
+  .touch-note { display: none; color: #77778a; font-size: .85rem; margin-top: 2rem; }
+  @media (pointer: coarse) { .touch-note { display: block; } }
+</style>
+</head>
+<body>
+  <div>
+    <h1>磁性按钮</h1>
+    <p class="hint">指针靠近,按钮迎上来;离开,弹簧弹回去——文字比外壳多拉半拍</p>
+    <div class="row">
+      <div class="field"><button class="magnetic"><span>PLAY</span></button></div>
+      <div class="field"><button class="magnetic alt"><span>关于我</span></button></div>
+    </div>
+    <p class="touch-note">触屏设备:磁吸不启用(正确行为)</p>
+  </div>
+<script>
+  // ===== 旋钮 =====
+  const FX = {
+    PULL: .4,        // 外壳吸附强度,.3~.5
+    TEXT_PULL: .5,   // 内层相对外壳的二级强度,.4~.6(视差来源)
+    K: .12,          // 回位弹簧刚度,.08~.2
+    DAMP: .82,       // 阻尼,.75(多晃)~.9(利落)
+  };
+  if (matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const mags = [...document.querySelectorAll('.field')].map(field => ({
+      field, btn: field.querySelector('.magnetic'),
+      x: 0, y: 0, tx: 0, ty: 0, vx: 0, vy: 0, mode: 'idle',
+    }));
+    let raf = 0;
+    const wake = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    mags.forEach(m => {
+      m.field.addEventListener('mousemove', e => {        // 吸附:直接写目标(跟手要快)
+        const r = m.field.getBoundingClientRect();
+        m.tx = (e.clientX - r.left - r.width / 2) * FX.PULL;
+        m.ty = (e.clientY - r.top - r.height / 2) * FX.PULL;
+        m.mode = 'pull'; wake();
+      });
+      m.field.addEventListener('mouseleave', () => {      // 回位:弹簧带初速弹回
+        m.mode = 'spring'; wake();
+      });
+    });
+    function tick() {
+      let alive = false;
+      mags.forEach(m => {
+        if (m.mode === 'pull') {
+          const sx = (m.tx - m.x) * .35, sy = (m.ty - m.y) * .35;  // 轻 lerp 去抖
+          m.x += sx; m.y += sy;
+          m.vx = sx; m.vy = sy;                                    // 初速=真实步长,松手继承(别用全额差值,会窜)
+          alive = true;
+        } else if (m.mode === 'spring') {
+          m.vx += -FX.K * m.x; m.vy += -FX.K * m.y;                // 半隐式欧拉(同 drag-spring)
+          m.vx *= FX.DAMP; m.vy *= FX.DAMP;
+          m.x += m.vx; m.y += m.vy;
+          if (Math.hypot(m.x, m.y) < .3 && Math.hypot(m.vx, m.vy) < .3) {
+            m.x = m.y = m.vx = m.vy = 0; m.mode = 'idle';          // 收敛归零
+          } else alive = true;
+        }
+        m.btn.style.setProperty('--x', m.x.toFixed(1) + 'px');
+        m.btn.style.setProperty('--y', m.y.toFixed(1) + 'px');
+        m.btn.style.setProperty('--tx', (m.x * FX.TEXT_PULL).toFixed(1) + 'px');
+        m.btn.style.setProperty('--ty', (m.y * FX.TEXT_PULL).toFixed(1) + 'px');
+      });
+      raf = alive ? requestAnimationFrame(tick) : 0;               // 全部静止即停轮
+    }
+  }
+</script>
+</body>
+</html>

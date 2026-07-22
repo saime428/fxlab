@@ -4,3 +4,4 @@
 
 | 效果 | 难度 | Demo |
 |---|---|---|
+| [自定义光标](custom-cursor/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/custom-cursor/demo.html) |

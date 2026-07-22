@@ -14,7 +14,7 @@
 ## 二、当前状态(2026-07-16)
 
 - 10 个 case(见 README 索引),其中 Igloo、Active Theory、Lando、Shopify、Hashgraph、Robin 做过运行时实测(结论在各自 analysis.md 的"运行时实测"一节)
-- 32 个 pattern,全部零依赖、过了 node --check 和链接检查;motionpotion case 的 6 个 ✅ 已全部提炼完毕(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
+- 34 个 pattern,全部零依赖、过了 node --check 和链接检查;八分类全部开张(cursor/ 由 custom-cursor 补上,2026-07-22);motionpotion 6 个 ✅ 已全部提炼(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
 - 已推 GitHub 并开通 Pages
 - 2026-07-16 口径调整:可复现性放宽为"保住核心机制的简化版即可",新增分类覆盖度排序项(见 docs/criteria.md)
 - 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ TASTE.md(口味档案/甲方画像:用户未明说的决策以它为准;口味判词回写它,技术坑回写 pattern README)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)
@@ -26,7 +26,7 @@
 1. ~~高门槛 ✅ 欠账~~ **全部清零**:shader-wipe ✅、particle-transition ✅、cel-shading 已降级为 Messenger case 的方法论笔记(复用性否决:前提是已有 3D 场景)
 2. ~~翻案候选~~ ✅ 全部完成:hover/drag-spring、scroll/scroll-snap-sections、hover/floating-stickers
 3. Messenger 还没做运行时深挖(方法见下)
-4. cursor/ 分类仍是空的——现有 10 个 case 都没有自定义光标,需要收新 case(建议找 Awwwards 上 cursor 出彩的站)
+4. ~~cursor/ 分类空缺~~ ✅ 已补(cuberto/dennis-snellenberg 两 case + custom-cursor/magnetic-button);遗留 ✅:弧形章节边缘(dennis,rounded-div 随滚动绷平)
 5. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)

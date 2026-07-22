@@ -39,6 +39,8 @@
 | [hover/conic-border-spin](patterns/hover/conic-border-spin/) | 旋转渐变描边 | ★ | @property 注册 <angle> + conic 起始角动画 | 主 CTA/卡片的"通电"描边,AI 产品站标配 |
 | [hover/sprite-preview](patterns/hover/sprite-preview/) | 精灵图 Hover 预览 | ★ | steps(N-1, jump-none) 步进 background-position | 画廊卡片的零 video 动图预览,4~12 帧甜区 |
 | [layout/fake-ui-demo](patterns/layout/fake-ui-demo/) | 假 UI 自演示 | ★★ | JS 状态机切累加类,编排全在 CSS | 产品落地页让界面自己演,替代录屏,体积≈0 |
+| [cursor/custom-cursor](patterns/cursor/custom-cursor/) | 自定义光标 | ★★ | lerp 双层跟随 + data-cursor 委托状态机 | 品牌感光标,四态(点/放大/文字/媒体);触屏必须 no-op |
+| [hover/magnetic-button](patterns/hover/magnetic-button/) | 磁性按钮 | ★★ | 磁场偏移×强度 + 欧拉弹簧回位,文字二级视差 | "手感"类代表作,CTA/圆按钮;触屏 no-op |
 
 ## 气质套餐(场景 → 组合)
 
