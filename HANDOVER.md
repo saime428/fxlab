@@ -22,7 +22,8 @@
 - 样板间 `showcase/index.html` ✅:作品集套餐 5 个 pattern(entry-preloader/split-text/menu-stagger/scroll-marquee/image-displacement)拼装的完整 landing page,铁律 7 实装(token 阶梯 + KNOB 常量块 + 单 rAF 调度 + 一次 reduced-motion 判断);Enter 手势是全页动效的 t=0
 
 - 2026-07-26 新增 **`blends/` 层**(与 patterns 平行,不是替代):patterns 沉淀动效机制,blends 沉淀 pattern 铁律 6"抄机制不抄样式"扔掉的**设计本体**(色板/字号阶梯/间距/运动节奏)。取法是浏览器注入遍历 `document.styleSheets` 统计,产物写进 `cases/<站>/design-system.md`。**blend 不继承"零依赖单文件"铁律**——那条只管可移植的 pattern demo,blend 的产物是页面,页面本来就该带字体和材质。结论与方法见 [blends/README.md](blends/README.md)
-- 同日新增**批量扫描**:`scripts/scan-awwwards.mjs` 抓一批站的 HTML+CSS 做横截面统计(单站看不出来的行业口径,如缓动曲线分布)。首次结果 [blends/scans/2026-07-awwwards.md](blends/scans/2026-07-awwwards.md)(124 站/113 成功)。**node 直连 awwwards 被 Cloudflare 挡,名单必须靠浏览器注入取;目标站本身 node 能直连**
+- 同日新增**批量扫描**:`scripts/scan-awwwards.mjs` 抓一批站的 HTML+CSS 做横截面统计(单站看不出来的行业口径)。结果 [blends/scans/2026-07-awwwards.md](blends/scans/2026-07-awwwards.md),**773 站 / 629 成功**。管线是两段:`scripts/collect.mjs` 起一个本地 HTTP 接收端 → 浏览器在 awwwards 页面注入抓名单并 POST 过来落盘 → node 逐站抓 CSS。**node 直连 awwwards 被 Cloudflare 挡,名单只能在浏览器里取;目标站本身 node 能直连**。有了 collect.mjs 之后名单不用人肉抄,扫描规模不再受限
+- **扫描方法的三条教训**(都踩过,都已修,别再踩):① 样本量会抖(同批 124 站三轮拿到 113/116/87)→ 必须重试退避;② 声明 ≠ 使用(工具类框架把没用上的类打进 bundle)→ 查选择器类名是否出现在 HTML `class` 属性里;③ **一个机制别只查一种写法**——首轮查自定义光标只查 `cursor:none`,漏掉"只加跟随元素"和"`cursor:url()` 换图"两整类,得出 10 站的错误结论,真值 112 站
 
 ### 未完成(按优先级)
 
@@ -32,7 +33,10 @@
 4. ~~cursor/ 分类是空的~~ ✅ **已开张**:[cursor/hide-and-follow](patterns/cursor/hide-and-follow/)(区域内隐藏光标 + 跟随标签,样本是 sakazuki 的 Journey 段)。同批还提了 [layout/blend-invert](patterns/layout/blend-invert/)(覆盖层自动反色,三站实测坐实)。**cursor 分类只有 1 个,还欠拖尾/磁性吸附这类**
 5. ~~Lenis 没进 tech-radar~~ ✅ [docs/tech-radar.md](docs/tech-radar.md) 加了专节:逐条列了本库 7 个滚动相关 pattern 在 Lenis 项目里的接法,其中 **scroll-snap-sections 是硬冲突**(二选一),marquee / parallax-cards / section-narrative fixed 变体要并进 Lenis 的循环
 6. ~~扫描的"声明 ≠ 使用"盲区~~ ✅ 已修:脚本改成查选择器类名是否出现在 HTML `class` 属性里,输出"声明/疑似在用"两个数(`cursor:none` 30→10,`mix-blend` 33→24)。**残留偏差:JS 运行时加的类会被低估**(sakazuki 就是),要准数仍需开浏览器查计算样式
-7. cursor/ 只有 1 个 pattern。拖尾、磁性吸附还没有——**但别凭空造**:按 [docs/criteria.md](docs/criteria.md),pattern 要从 case 的效果清单里提,先扫到样本再动手
+7. cursor/ 只有 1 个 pattern,只覆盖了四条路子里的一条(藏光标+跟随,67 站)。**样本已经有了,直接开站就能做**:
+   - 「只加跟随元素不藏原生光标」35 站 —— Lemaire `.silhouette-cursor`、Salo Creative `.Cursor__name` `.HomeHero__ambientCursor`、Juan Mora `.cursor-jm-icon` `.text-jm-cursor`、Blit Studio `#cursor`
+   - 「`cursor:url()` 换图」16 站 —— Object & Archive(内联 data-URI)、Grain & Mortar(外链 SVG)。成本最低的一条,一行 CSS
+   - 拖尾、磁性吸附仍无样本,别凭空造(见 [docs/criteria.md](docs/criteria.md))
 6. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)

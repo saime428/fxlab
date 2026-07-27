@@ -4,7 +4,7 @@
 - **难度**: ★
 - **见于**: [sakazuki](https://sakazuki.io/)(fixed header + bottomBar + 飞行 logo)、[Lama Lama](https://lamalama.com/)(hero section + 压在视频上的图标按钮,用 exclusion)、[Sui](https://www.sui.io/)(标题里的强调词 `.custom-span.invert`)
 - **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/blend-invert/demo.html)
-- **来源**: [2026-07 Awwwards 横截面扫描](../../../blends/scans/2026-07-awwwards.md),32/113 站在用
+- **来源**: [2026-07 Awwwards 横截面扫描](../../../blends/scans/2026-07-awwwards.md),**130/629 站在用(21%)**
 
 ## 设计意图
 
@@ -12,7 +12,7 @@
 
 常规做法是 JS 监听滚动,进到深色区块就给 header 加 `.is-dark` 换色——要维护一张"区块→主题"的表,内容一改就漏。`mix-blend-mode: difference` 是**零 JS 的替代**:白色覆盖层在白底上自动变黑,在黑底上保持白,连视频和 canvas 都一起算。
 
-扫描里 28% 的获奖站在用,三个尺度都有:固定层(sakazuki 的 header)、整块 section(Lama Lama 的 hero)、行内强调词(Sui)。
+扫描里 **21% 的获奖站在用(130/629)**,三个尺度都有:固定层(sakazuki 的 header)、整块 section(Lama Lama 的 hero)、行内强调词(Sui)。
 
 ## 核心机制
 
