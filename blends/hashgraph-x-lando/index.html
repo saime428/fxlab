@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>糅合 pilot — Hashgraph 骨架 × Lando 色板</title>
+<script>document.documentElement.classList.add('js')</script>
+
+<!-- blend 层不继承 pattern demo 的"零依赖单文件"铁律:
+     那条是给可移植机制定的,blend 的产物是一个页面,页面本来就该带字体。
+     Archivo 顶 Brier 的位(heavy grotesque);中文 Noto Sans SC 900,
+     Google 对 CJK 按 unicode-range 切片,只下用到的那几片,体积可接受。 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Noto+Sans+SC:wght@400;900&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   设计体系(糅合)  [H]=Hashgraph Ventures  [L]=Lando Norris
+   快照:cases/hashgraph-ventures/design-system.md
+        cases/lando-norris/design-system.md
+   根 16px 采 [L] 基准;[H] 的 rem 值是 10px 流式根,搬来一律 ×1.6
+   ============================================================ */
+:root{
+  /* 色板 —— 整套 [L]。[H] 的单色冷蓝做不出"品牌温度" */
+  --c-bg:#282c20; --c-bg-1:#3b3c38; --c-bg-2:#535450;
+  --c-ink:#f4f4ed; --c-ink-2:#b4b8a5; --c-ink-3:#b9bbad;
+  --c-accent:#d2ff00; --c-accent-off:#b2c73a;
+  --c-line:rgba(244,244,237,.13);
+
+  /* 字号 —— [L] 的极端对比(127px : 9.25px ≈ 13.7×) */
+  --t-impact:7.9375rem; --t-h1:4rem; --t-h3:2rem;
+  --t-body:1.0625rem; --t-eyebrow:.578125rem;
+
+  /* 字距 —— 大字 [L] 负字距,小字 [H] -0.02em */
+  --tr-impact:-.055em; --tr-h1:-.035em; --tr-small:-.02em; --tr-eyebrow:.14em;
+
+  /* 间距 —— [L] padding 阶梯 */
+  --p-mini:1rem; --p-small:2rem; --p-med:3rem; --p-large:4rem; --p-xl:5rem;
+
+  /* 圆角 —— 采 [H] 近直角,否决 [L] 的 16/48/100px。
+     取舍:大圆角是消费品牌的"软",B 端要机构感 */
+  --radius:.5rem;
+
+  /* 运动 —— 整套 [H],本次糅合最值钱的一项 */
+  --dur-s:.3s; --dur-m:.6s; --dur-l:.8s;
+  --ease-out:cubic-bezier(.14,1,.34,1);    /* [H] 主曲线,原站 47 次 */
+  --ease-inout:cubic-bezier(.9,0,.1,1);    /* [H] 遮罩曲线 */
+  --stagger:90ms;
+
+  --scenes:4;
+  --shell:clamp(1rem, 2.5vw, 2.25rem);     /* 常驻壳的边距 */
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ background:var(--c-bg); }
+body{
+  margin:0; color:var(--c-ink);
+  font-family:Archivo,"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  font-size:var(--t-body); line-height:1.5; font-weight:800;   /* [H] 字重高位一统 */
+  letter-spacing:var(--tr-small);
+  -webkit-font-smoothing:antialiased;
+}
+::selection{ background:var(--c-accent); color:var(--c-bg); }
+h1,h2,h3{ margin:0; font-weight:900; }
+
+/* ---------- 材质层(patterns/3d-webgl/canvas-ambient-bg)----------
+   上一版没有材质,纯色块 = 简陋的主因之一。色斑只用 [L] 色板,
+   压到很低的不透明度:它是地板,不是主角 */
+#tex{ position:fixed; inset:0; z-index:0; opacity:.5; pointer-events:none; }
+/* 细网格:给纯色底一点"图纸"密度,机构感 */
+.grid-ov{
+  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.5;
+  background:
+    linear-gradient(var(--c-line) 1px, transparent 1px) 0 0/100% 25vh,
+    linear-gradient(90deg, var(--c-line) 1px, transparent 1px) 0 0/ calc(100%/6) 100%;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 100%);
+          mask-image:radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 100%);
+}
+
+/* ============================================================
+   骨架 —— [H] 的 fixed-section 叠放(不是 scroll-snap)
+   案例实测:home-hero / home-investors / home-portfolio 全是
+   fixed-section,滚动状态机控显隐。上一版只抄了 //01 编号前缀,
+   这一版把骨架本身抄了。
+   ============================================================ */
+.js body{ height:calc(var(--scenes) * 100svh); }
+.js .stage{ position:fixed; inset:0; z-index:2; }
+.js .scene{
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:center;
+  padding:calc(var(--shell) * 3.2) var(--shell) calc(var(--shell) * 4.4);
+  opacity:0; visibility:hidden; transform:translateY(3.5vh);
+  transition:opacity var(--dur-l) var(--ease-out),
+             transform var(--dur-l) var(--ease-out),
+             visibility 0s linear var(--dur-l);
+}
+.js .scene.is-on{
+  opacity:1; visibility:visible; transform:none;
+  transition-delay:0s, 0s, 0s;
+}
+.inner{ width:100%; max-width:78rem; margin:0 auto; }
+
+/* ---------- 常驻壳 —— [H] 的"固定层构成体验感"---------- */
+.shell{ position:fixed; z-index:6; pointer-events:none; }
+.shell a,.shell button{ pointer-events:auto; }
+.brand{ top:var(--shell); left:var(--shell); }
+.brand b{ display:block; font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; line-height:1.35; font-weight:900; }
+.brand span{ display:block; margin-top:.35rem; font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; color:var(--c-ink-3); font-weight:600; }
+
+.chapters{ top:var(--shell); right:var(--shell); display:flex; flex-direction:column; gap:.55rem; align-items:flex-end; }
+.chapters a{
+  display:flex; align-items:center; gap:.6rem;
+  font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase;
+  color:var(--c-ink-3); text-decoration:none; font-weight:600;
+  opacity:.5; transition:opacity var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out);
+}
+.chapters a::after{ content:""; width:1.6rem; height:1px; background:currentColor; transition:width var(--dur-m) var(--ease-out); }
+.chapters a:hover,.chapters a:focus-visible{ opacity:1; }
+.chapters a[aria-current="true"]{ opacity:1; color:var(--c-accent); }
+.chapters a[aria-current="true"]::after{ width:3.2rem; }
+
+.hint{ left:var(--shell); bottom:calc(var(--shell) + 3.4rem); font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; color:var(--c-ink-3); font-weight:600; }
+.hint i{ display:inline-block; font-style:normal; animation:nudge 2.4s var(--ease-inout) infinite; }
+@keyframes nudge{ 0%,60%,100%{ transform:none } 30%{ transform:translateY(.25rem) } }
+
+/* 进度条 */
+.prog{ left:0; right:0; bottom:0; height:2px; background:var(--c-line); }
+.prog b{ display:block; height:100%; width:0; background:var(--c-accent); transform-origin:0 50%; transition:width var(--dur-m) var(--ease-out); }
+
+/* ---------- 字幕带(patterns/text/scroll-marquee)—— 全页唯一强注意力效果,
+     [L] 的签名(原站 110 处),放常驻壳里当底边 ---------- */
+.mq-band{ left:0; right:0; bottom:2px; z-index:5; overflow:hidden; border-top:1px solid var(--c-line);
+  background:linear-gradient(0deg, rgba(40,44,32,.92), rgba(40,44,32,.62)); backdrop-filter:blur(6px); }
+.mq-row{ display:flex; width:max-content; will-change:transform; padding:.5rem 0; }
+.mq-row span{
+  font-size:1.05rem; line-height:1.15; letter-spacing:var(--tr-eyebrow); text-transform:uppercase;
+  padding-right:2.4rem; font-weight:800; color:var(--c-ink-3); white-space:nowrap;
+}
+.mq-row span:nth-child(even){ color:var(--c-accent); }
+
+/* ============================================================
+   排版
+   ============================================================ */
+.sec-no{ display:block; font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; color:var(--c-accent); font-weight:900; margin-bottom:var(--p-med); }
+.sec-no::before{ content:"// "; }                     /* [H] //01 Manifesto */
+.eyebrow{ font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; color:var(--c-ink-3); font-weight:600; margin:0 0 var(--p-small); }
+
+.impact{ font-size:clamp(2.75rem, 8.2vw, var(--t-impact)); line-height:.9; letter-spacing:var(--tr-impact); text-transform:uppercase; }
+.impact em{ font-style:normal; color:var(--c-accent); }
+.lede{ max-width:36rem; margin:var(--p-med) 0 0; font-weight:400; font-size:1.0625rem; color:var(--c-ink-2); letter-spacing:0; line-height:1.62; }
+
+.manifesto h2{ font-size:clamp(1.9rem, 5.4vw, var(--t-h1)); line-height:1.02; letter-spacing:var(--tr-h1); max-width:16ch; }
+.manifesto h2 em{ font-style:normal; color:var(--c-accent); }
+.manifesto .cols{ display:grid; grid-template-columns:repeat(auto-fit,minmax(19rem,1fr)); gap:var(--p-med); margin-top:var(--p-large); max-width:56rem; }
+.manifesto .cols p{ margin:0; font-weight:400; color:var(--c-ink-2); letter-spacing:0; line-height:1.62; }
+.manifesto .cols p b{ color:var(--c-ink); font-weight:800; }
+
+/* 数字(patterns/text/count-up) */
+.stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(12rem,1fr)); gap:var(--p-med) var(--p-small); }
+.stat{ border-top:1px solid var(--c-line); padding-top:var(--p-mini); }
+.stat b{ display:block; font-size:clamp(2.4rem,5.2vw,4.25rem); line-height:.95; letter-spacing:var(--tr-h1); font-variant-numeric:tabular-nums; }
+.stat span{ display:block; margin-top:.55rem; font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; color:var(--c-ink-3); font-weight:600; }
+.stat i{ font-style:normal; color:var(--c-accent); }
+
+/* 名录 */
+.roll{ display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1px; background:var(--c-line); border:1px solid var(--c-line); border-radius:var(--radius); overflow:hidden; }
+.roll article{ background:rgba(40,44,32,.72); padding:var(--p-med) var(--p-small) var(--p-small); transition:background var(--dur-m) var(--ease-out); }
+.roll article:hover,.roll article:focus-within{ background:var(--c-bg-1); }
+.roll .tag{ display:block; margin-bottom:var(--p-mini); font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); text-transform:uppercase; color:var(--c-accent-off); font-weight:600; }
+.roll h3{ font-size:var(--t-h3); letter-spacing:var(--tr-h1); margin-bottom:.45rem; }
+.roll p{ margin:0; font-weight:400; font-size:.9375rem; color:var(--c-ink-2); letter-spacing:0; line-height:1.55; }
+.roll .yr{ display:block; margin-top:var(--p-mini); font-size:var(--t-eyebrow); letter-spacing:var(--tr-eyebrow); color:var(--c-ink-3); font-weight:600; }
+
+/* ---------- 拆字入场(split-text-reveal 中文变体)----------
+   遮罩做在每个 token 上、延迟按行号给:观感等同行遮罩,
+   但对中文(无空格)和行内 <em> 都免疫 */
+.tk{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.14em; margin-bottom:-.14em; }
+.js .tk > span{ display:block; transform:translateY(110%); transition:transform var(--dur-l) var(--ease-out); transition-delay:calc(var(--i) * var(--stagger)); }
+.js .is-on .tk > span{ transform:none; }
+/* 逐字拆后每个字都成了可断点,中文词会被拦腰断行(实测 "风口" 断成两行,
+   强调色跟着断)。ponytail: 只护 <em>,够用;护任意词要引入分词,不值当 */
+em{ white-space:nowrap; }
+
+/* 区块入场(patterns/scroll/scroll-reveal)—— 跟着幕走,不用 IO */
+.js .rv{ opacity:0; transform:translateY(1.25rem); transition:opacity var(--dur-m) var(--ease-out), transform var(--dur-m) var(--ease-out); transition-delay:calc((var(--i,0) * var(--stagger)) + 120ms); }
+.js .is-on .rv{ opacity:1; transform:none; }
+
+/* ---------- 铁律 2:降级成普通文档流(最干净的降级)---------- */
+@media (prefers-reduced-motion: reduce){
+  .js body{ height:auto; }
+  .js .stage{ position:static; }
+  .js .scene{ position:static; opacity:1; visibility:visible; transform:none; padding:var(--p-xl) var(--shell); min-height:auto; }
+  .js .tk > span,.js .rv{ transform:none; opacity:1; }
+  .hint,.prog,.mq-band{ display:none; }
+  .chapters{ display:none; }
+  *,*::before,*::after{ transition-duration:.001ms !important; animation:none !important; }
+}
+@media (max-width:640px){
+  .chapters a::after{ display:none; }
+  .chapters a{ font-size:.5rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="tex" aria-hidden="true"></canvas>
+<div class="grid-ov" aria-hidden="true"></div>
+
+<!-- ===== 常驻壳 ===== -->
+<div class="shell brand"><b>Kestrel<br>Works</b><span>Est. 2017 · 虚构示例</span></div>
+
+<nav class="shell chapters" aria-label="章节">
+  <a href="#s0" data-go="0" aria-current="true">00 序</a>
+  <a href="#s1" data-go="1">01 立场</a>
+  <a href="#s2" data-go="2">02 数字</a>
+  <a href="#s3" data-go="3">03 名录</a>
+</nav>
+
+<div class="shell hint" aria-hidden="true">Scroll <i>↓</i></div>
+
+<div class="shell mq-band" aria-hidden="true">
+  <div class="mq-row js-mq">
+    <span>Patient Capital</span><span>耐心资本</span><span>Nine Year Average Hold</span><span>九年平均持有</span>
+    <span>Patient Capital</span><span>耐心资本</span><span>Nine Year Average Hold</span><span>九年平均持有</span>
+    <span>Patient Capital</span><span>耐心资本</span><span>Nine Year Average Hold</span><span>九年平均持有</span>
+  </div>
+</div>
+
+<div class="shell prog" aria-hidden="true"><b class="js-prog"></b></div>
+
+<!-- ===== 四幕 ===== -->
+<div class="stage">
+
+  <section class="scene is-on" id="s0">
+    <div class="inner">
+      <p class="eyebrow rv">早期基金 · 一年出手四次</p>
+      <h1 class="impact js-split">不投风口。<br>投把<em>风口</em>做出来的人。</h1>
+      <p class="lede rv" style="--i:1">我们只在两个时点出现:第一张 term sheet,和所有人离场的那一年。中间那些年没有新闻稿。</p>
+    </div>
+  </section>
+
+  <section class="scene manifesto" id="s1">
+    <div class="inner">
+      <span class="sec-no rv">01 &nbsp; 立场</span>
+      <h2 class="js-split">耐心不是美德。<br><em>是杠杆</em>。</h2>
+      <div class="cols">
+        <p class="rv" style="--i:1"><b>热钱用 18 个月证明自己。</b>我们用九年。中间那七年半只有月度电话、一次次把估值往下压的谈判,和没人愿意接的过桥。</p>
+        <p class="rv" style="--i:2"><b>我们不做赛道判断。</b>赛道是事后叙事。我们判断的是一个人在没有掌声的第四年还改不改代码。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="inner">
+      <span class="sec-no rv">02 &nbsp; 数字</span>
+      <div class="stats">
+        <div class="stat rv" style="--i:1"><b data-count="184">0</b><span>已投项目</span></div>
+        <div class="stat rv" style="--i:2"><b data-count="12" data-prefix="$" data-suffix="B">0</b><span>管理规模</span></div>
+        <div class="stat rv" style="--i:3"><b data-count="9" data-suffix="年">0</b><span>平均持有</span></div>
+        <div class="stat rv" style="--i:4"><b data-count="96" data-suffix="%">0</b><span>创始人复投</span></div>
+      </div>
+      <p class="lede rv" style="--i:5">数据为虚构占位。最后一项是我们唯一在意的指标——再创业时还回来找我们的比例。</p>
+    </div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="inner">
+      <span class="sec-no rv">03 &nbsp; 名录</span>
+      <div class="roll">
+        <article class="rv" style="--i:1"><span class="tag">基础设施</span><h3>Northfall</h3><p>边缘节点调度层。种子轮进,至今没换过 CTO。</p><span class="yr">2018 — 至今</span></article>
+        <article class="rv" style="--i:2"><span class="tag">开发工具</span><h3>Pellet</h3><p>给六人团队用的构建缓存。第四年才有第一个付费客户。</p><span class="yr">2019 — 至今</span></article>
+        <article class="rv" style="--i:3"><span class="tag">生命科学</span><h3>Sable Bio</h3><p>蛋白折叠的湿实验闭环。两次砍掉全部管线重来。</p><span class="yr">2020 — 至今</span></article>
+        <article class="rv" style="--i:4"><span class="tag">能源</span><h3>Tidewheel</h3><p>潮汐储能并网控制。等了七年才等到电价机制改革。</p><span class="yr">2017 — 至今</span></article>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ===== KNOB:强度旋钮(铁律 7)=========================================
+   TEX_ALPHA    材质层色斑基础不透明度。窄=只剩一点空气,宽=开始抢戏。.10–.30
+   MQ_SPEED     字幕带基础速度 px/s。20–80
+   MQ_SCROLL_K  滚动速度对字幕的反馈系数。0=不反馈,.35 明显但不失控
+   MQ_DAMP      反馈衰减(每帧趋近静息的比例)。越小回落越慢
+   ====================================================================== */
+const TEX_ALPHA = 0.18, MQ_SPEED = 34, MQ_SCROLL_K = 0.32, MQ_DAMP = 0.06;
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;   // 全页只判一次
+const scenes = [...document.querySelectorAll('.scene')];
+const links  = [...document.querySelectorAll('.chapters a')];
+
+/* ---- 拆 token(split-text-reveal 中文变体)----
+   只改文本节点,元素结构原样保留(<em>/<br> 都活着)。
+   拉丁词整词不断,其余逐字 —— 中文按词拆会把整句当一个词,拆不出行。 */
+const TOKEN = /[A-Za-z0-9][A-Za-z0-9'’.\-]*|\s+|[\s\S]/g;
+for (const el of document.querySelectorAll('.js-split')) {
+  const texts = [];
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  for (let n; (n = walker.nextNode());) texts.push(n);
+
+  for (const t of texts) {
+    const frag = document.createDocumentFragment();
+    for (const p of t.textContent.match(TOKEN) || []) {
+      if (/^\s+$/.test(p)) { frag.append(p); continue; }
+      const tk = document.createElement('span'); tk.className = 'tk';
+      const inner = document.createElement('span'); inner.textContent = p;
+      tk.append(inner); frag.append(tk);
+    }
+    t.replaceWith(frag);
+  }
+  // 按 offsetTop 归行,延迟给行号(不是 token 号)—— 观感是一行一行掀开
+  let top = null, li = -1;
+  for (const tk of el.querySelectorAll('.tk')) {
+    if (tk.offsetTop !== top) { top = tk.offsetTop; li++; }
+    tk.style.setProperty('--i', li);
+  }
+}
+
+/* ---- 幕状态机 —— [H] 的 fixed-section 叠放,不是 scroll-snap ---- */
+let cur = -1;
+function show(i) {
+  if (i === cur) return;
+  cur = i;
+  // inert 而不是只靠 visibility:后者带 .8s 过渡延迟,那段时间里看不见的幕
+  // 仍在无障碍树里、仍能被 Tab 进去。inert 一步到位,且不依赖过渡跑完
+  scenes.forEach((s, n) => {
+    const on = n === i;
+    s.classList.toggle('is-on', on);
+    s.toggleAttribute('inert', !on);
+  });
+  links.forEach((a, n) => a.setAttribute('aria-current', String(n === i)));
+  document.querySelector('.js-prog').style.width = ((i + 1) / scenes.length * 100) + '%';
+  scenes[i].querySelectorAll('[data-count]').forEach(countUp);
+}
+if (!RM) {
+  show(0);
+  links.forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    scrollTo({ top: +a.dataset.go * innerHeight, behavior: 'smooth' });
+  }));
+} else {
+  scenes.forEach(s => s.classList.add('is-on'));
+  document.querySelectorAll('[data-count]').forEach(el => {
+    el.textContent = (el.dataset.prefix || '') + el.dataset.count + (el.dataset.suffix || '');
+  });
+}
+
+/* ---- 数字滚动(count-up),一幕只跑一次 ---- */
+function countUp(el) {
+  if (el.dataset.done) return;
+  el.dataset.done = '1';
+  const to = +el.dataset.count, pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+  const fmt = new Intl.NumberFormat('zh-CN'), t0 = performance.now(), dur = 1400;
+  const render = v => el.innerHTML = pre + fmt.format(v) + (suf ? '<i>' + suf + '</i>' : '');
+  let landed = false;
+  const step = t => {
+    const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);   // easeOutCubic
+    render(Math.round(to * e));
+    if (p < 1) requestAnimationFrame(step); else landed = true;
+  };
+  requestAnimationFrame(step);
+  // rAF 会被冻结(后台标签、低电量、内嵌预览),那样数字永远停在 0 —— 而
+  // done 标记已置位,再进视口也不会重跑。setTimeout 是另一个时钟源(后台
+  // 只被节流不被停),用它兜底把终值写死
+  setTimeout(() => { if (!landed) render(to); }, dur + 500);
+}
+
+/* ---- 材质层(patterns/3d-webgl/canvas-ambient-bg)---- */
+const cv = document.getElementById('tex'), ctx = cv.getContext('2d');
+let w, h;
+function resize() {
+  const dpr = Math.min(devicePixelRatio || 1, 1.5);          // 移动端封顶,省电
+  w = cv.width = innerWidth * dpr; h = cv.height = innerHeight * dpr;
+  cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+}
+resize(); addEventListener('resize', () => { resize(); if (RM) drawTex(9); });
+
+// 互质的正弦频率 → 轨迹永不重复。颜色只取 [L] 色板
+const blobs = [
+  { fx:.26, fy:.30, r:.62, sx:.00021, sy:.00015, p:0,   ax:.16, ay:.11, c:'210,255,0',   a:1 },
+  { fx:.74, fy:.62, r:.55, sx:.00017, sy:.00027, p:2.1, ax:.14, ay:.15, c:'178,199,58',  a:.8 },
+  { fx:.50, fy:.88, r:.70, sx:.00012, sy:.00019, p:4.4, ax:.19, ay:.09, c:'244,244,237', a:.45 },
+];
+function drawTex(t) {
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = '#282c20'; ctx.fillRect(0, 0, w, h);
+  ctx.globalCompositeOperation = 'lighter';                  // 重叠处相加 → 发光
+  for (const b of blobs) {
+    const x = (b.fx + Math.sin(t * b.sx + b.p) * b.ax) * w;
+    const y = (b.fy + Math.cos(t * b.sy + b.p) * b.ay) * h;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, b.r * Math.max(w, h));
+    g.addColorStop(0, `rgba(${b.c},${TEX_ALPHA * b.a})`); g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  }
+}
+
+/* ---- 字幕带(scroll-marquee):滚动速度反馈 ---- */
+const mq = document.querySelector('.js-mq');
+let mqX = 0, boost = 0, lastY = scrollY, third = 0;
+
+/* ---- 单 rAF 调度(铁律 7):材质 + 字幕 + 幕状态机共用一个循环 ----
+   幕切换从 rAF 里读 scrollY,不挂 scroll 事件:scroll 事件会被节流甚至
+   整个不派发(内嵌预览实测 scrollY 变了但事件 0 次),而 fixed 骨架下
+   状态机不动 = 整页只剩一屏可达。反正每帧都在跑,顺手读一下最便宜 */
+if (RM) { drawTex(9); }
+else {
+  // 首帧同步画,不等 rAF:rAF 被冻结/节流(内嵌预览、后台标签、低电量)时
+  // 至少材质和字幕带是就位的,不会退化成一块纯色
+  drawTex(performance.now());
+  third = mq.scrollWidth / 3;
+  mq.style.transform = 'translate3d(0,0,0)';
+
+  let running = true, last = performance.now();
+  document.addEventListener('visibilitychange', () => {
+    running = !document.hidden;
+    last = performance.now();                                // 回前台不要补一大步
+    if (running) requestAnimationFrame(loop);
+  });
+  function loop(t) {
+    const dt = Math.min(64, t - last) / 1000; last = t;
+    drawTex(t);
+
+    const y = scrollY;
+    show(Math.max(0, Math.min(scenes.length - 1, Math.round(y / innerHeight))));
+
+    if (!third) third = mq.scrollWidth / 3;                  // 内容重复三轮,走满一轮即无缝
+    boost += (y - lastY) * MQ_SCROLL_K; lastY = y;           // 滚动速度 → 字幕速度
+    boost += (0 - boost) * MQ_DAMP;                          // 指数回落到静息
+    mqX -= (MQ_SPEED + boost) * dt;
+    if (mqX <= -third) mqX += third;
+    if (mqX > 0) mqX -= third;
+    mq.style.transform = `translate3d(${mqX}px,0,0)`;
+    if (running) requestAnimationFrame(loop);                // 后台不空转
+  }
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>
