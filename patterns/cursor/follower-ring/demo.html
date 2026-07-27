@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>跟随圆环 Follower Ring — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:52rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.02em; margin:0 0 .5rem; }
+p{ opacity:.75; max-width:38rem; }
+code{ background:#2a2a2f; padding:.1em .35em; border-radius:3px; font-size:.9em; }
+.row{ display:flex; flex-wrap:wrap; gap:1rem; margin:2.5rem 0; }
+a.btn,button.btn{
+  font:inherit; color:inherit; text-decoration:none; cursor:pointer;
+  border:1px solid rgba(244,244,237,.25); background:transparent;
+  padding:.85rem 1.5rem; border-radius:999px;
+  transition:border-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out);
+}
+a.btn:hover,button.btn:hover,a.btn:focus-visible,button.btn:focus-visible{
+  border-color:var(--accent); color:var(--accent);
+}
+:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+/* ============ 核心 ============ */
+.ring{
+  position:fixed; top:0; left:0; z-index:60;
+  width:32px; height:32px; margin:-16px 0 0 -16px;   /* 圆心对准指针,比每帧减 16 省 */
+  border:1px solid var(--ink); border-radius:50%;
+  pointer-events:none; opacity:0;
+  /* 只过渡尺寸和透明度;位置靠 transform 每帧写,不能有 transition */
+  transition:opacity var(--dur-s) var(--ease-out),
+             scale var(--dur-s) var(--ease-out),
+             border-color var(--dur-s) var(--ease-out);
+}
+.ring.on{ opacity:.9; }
+.ring.hot{ scale:1.9; opacity:.5; border-color:var(--accent); }  /* hover 可交互元素 */
+/* ============================== */
+
+@media (hover:hover) and (pointer:fine){ .hint-touch{ display:none; } }
+@media not all and (hover:hover){ .hint-fine{ display:none; } }
+/* 常驻跟随对前庭敏感人群不友好,必须能关 */
+@media (prefers-reduced-motion:reduce){ .ring{ display:none; } }
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>跟随圆环</h1>
+  <p class="hint-fine">原生光标<strong>没有被藏起来</strong>——它还在,该有的 text / pointer 语义提示一个不少。
+     圆环只是追不上它,追赶的过程就是质感。滑到按钮上圆环会放大。</p>
+  <p class="hint-touch">这是触屏设备,整个效果按 <code>@media (hover:hover)</code> 关掉了——触屏没有指针位置这回事。</p>
+
+  <div class="row">
+    <a class="btn" href="#">查看作品</a>
+    <button class="btn">联系我们</button>
+    <a class="btn" href="#">关于</a>
+  </div>
+
+  <p>滞后量是唯一的旋钮。<code>LERP</code> 越小越粘越"奢侈",到 1 就是硬跟随,
+     和直接用系统光标没区别,只剩廉价感。</p>
+
+  <p class="note">配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<script>
+/* ===== KNOB ==========================================================
+   LERP  滞后量。.08 很粘 / .15 常见 / 1 = 硬跟随(没有效果了)
+         别低于 .06,离原生光标太远会晕
+   ==================================================================== */
+const LERP = 0.15;
+
+const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+if (fine && !RM) {
+  const ring = document.getElementById('ring');
+  let tx = 0, ty = 0, x = 0, y = 0, primed = false, raf = 0, running = true;
+
+  addEventListener('pointermove', e => {
+    tx = e.clientX; ty = e.clientY;
+    if (!primed) {                       // 首帧瞬移,否则圆环从 (0,0) 飞过来
+      primed = true; x = tx; y = ty;
+      ring.style.transform = `translate3d(${x}px,${y}px,0)`;
+      ring.classList.add('on');
+    }
+  }, { passive: true });
+
+  const tick = () => {
+    x += (tx - x) * LERP; y += (ty - y) * LERP;
+    ring.style.transform = `translate3d(${x}px,${y}px,0)`;
+    if (running) raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+
+  // 后台不空转
+  document.addEventListener('visibilitychange', () => {
+    running = !document.hidden;
+    if (running) raf = requestAnimationFrame(tick); else cancelAnimationFrame(raf);
+  });
+
+  // 一次性委托,别给每个元素单独挂
+  for (const el of document.querySelectorAll('a,button')) {
+    el.addEventListener('pointerenter', () => ring.classList.add('hot'));
+    el.addEventListener('pointerleave', () => ring.classList.remove('hot'));
+  }
+  // 指针离开文档时收起
+  document.addEventListener('pointerleave', () => ring.classList.remove('on'));
+  document.addEventListener('pointerenter', () => primed && ring.classList.add('on'));
+}
+</script>
+</body>
+</html>

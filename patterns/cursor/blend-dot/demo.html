@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>反色光标点 Blend Dot — web-fx-lab</title>
+<style>
+:root{ --accent:#d2ff00; --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+section{ min-height:52vh; display:grid; place-content:center; padding:3rem 1.5rem; text-align:center; }
+section h2{ margin:0 0 .4rem; font-size:clamp(1.3rem,3.6vw,2rem); letter-spacing:-.02em; }
+section p{ margin:0; opacity:.72; max-width:34rem; }
+code{ background:rgba(128,128,128,.22); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+.s-paper{ background:#f4f4ed; color:#111112; }
+.s-dark { background:#111112; color:#f4f4ed; }
+.s-brand{ background:var(--accent); color:#111112; }
+.s-photo{ color:#fff;
+  background:radial-gradient(120% 90% at 25% 25%,#ffd9a0 0,transparent 55%),
+             radial-gradient(90% 80% at 75% 70%,#6ba7ff 0,transparent 60%),
+             linear-gradient(160deg,#2b2b34,#8d7f6a); }
+/* 失效区:中灰上 difference 输出还是中灰 */
+.s-gray { background:#808080; color:#fff; }
+/* 切断混合的对照:祖先带 transform 就把光标踢出层叠上下文 —— 但光标挂在 body 上,
+   所以这里演示的是"如果你把光标塞进这种容器会怎样" */
+.s-iso  { background:#111112; color:#f4f4ed; isolation:isolate; }
+.warn{ display:inline-block; margin-top:.9rem; font-size:.8rem; border:1px solid currentColor;
+       padding:.45rem .7rem; border-radius:4px; }
+
+/* ============ 核心 ============ */
+.dot{
+  position:fixed; top:0; left:0; z-index:9999;
+  width:18px; height:18px; margin:-9px 0 0 -9px;
+  border-radius:50%; background:#fff;        /* 必须纯白 */
+  mix-blend-mode:difference;                 /* 就是这一行 */
+  pointer-events:none; opacity:0;
+  transition:opacity var(--dur-s) var(--ease-out), scale var(--dur-s) var(--ease-out);
+}
+.dot.on{ opacity:1; }
+.dot.hot{ scale:2.6; }
+body[data-blend="off"] .dot{ mix-blend-mode:normal; }
+/* ============================== */
+
+.switch{ position:fixed; left:50%; bottom:1.2rem; transform:translateX(-50%); z-index:20;
+  display:flex; gap:.25rem; padding:.3rem; border-radius:999px; background:rgba(20,20,20,.85); }
+.switch button{ border:0; cursor:pointer; font:inherit; font-size:.72rem; letter-spacing:.1em;
+  text-transform:uppercase; padding:.5rem .9rem; border-radius:999px; background:transparent; color:#f4f4ed;
+  transition:background var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.switch button[aria-pressed="true"]{ background:var(--accent); color:#111; }
+.switch button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+@media (prefers-reduced-motion:reduce){ .dot{ display:none; } }
+@media not all and (hover:hover){ .dot,.switch{ display:none; } }
+</style>
+</head>
+<body data-blend="on">
+
+<section class="s-paper"><h2>纸白</h2><p>光标是<strong>同一个白色圆点</strong>,从头到尾没换过颜色。往下滚,看它自己反过来。</p></section>
+<section class="s-dark"><h2>深色</h2><p>白 × 黑底 = 保持白。常规做法要监听光标下方元素换色,这里零维护。</p></section>
+<section class="s-brand"><h2>高饱和品牌色</h2><p>反出来的是<strong>补色</strong>,不是黑——<code>difference</code> 的正常行为。</p></section>
+<section class="s-photo"><h2>图像 / 渐变</h2><p>混合对象是下方所有内容,视频和 canvas 一样算。</p></section>
+<section class="s-gray"><h2>失效区:中灰</h2><p><code>|128−255| = 127</code>,输出还是中灰。</p>
+  <span class="warn">光标在这一屏几乎看不见 —— 灰底为主的页面别用这条路</span></section>
+<section class="s-iso"><h2>层叠上下文</h2><p>混合只发生在同一层叠上下文内。光标必须挂在 <code>body</code> 直属子级,
+  中间任何祖先带 <code>transform</code> / <code>filter</code> / <code>opacity&lt;1</code> / <code>isolation</code> 都会切断,退化成纯白点。</p></section>
+
+<div class="switch" role="group" aria-label="混合开关">
+  <button data-b="on" aria-pressed="true">difference</button>
+  <button data-b="off" aria-pressed="false">关闭混合</button>
+</div>
+
+<div class="dot" id="dot" aria-hidden="true"></div>
+
+<script>
+/* ===== KNOB =====
+   LERP  滞后量。反色光标建议比普通跟随更跟手(.2~.3),太粘会让人找不到指针 */
+const LERP = 0.22;
+
+const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+if (fine && !RM) {
+  const dot = document.getElementById('dot');
+  let tx=0, ty=0, x=0, y=0, primed=false, running=true, raf=0;
+
+  addEventListener('pointermove', e => {
+    tx=e.clientX; ty=e.clientY;
+    if (!primed){ primed=true; x=tx; y=ty; dot.classList.add('on'); }
+  }, { passive:true });
+
+  const tick = () => {
+    x += (tx-x)*LERP; y += (ty-y)*LERP;
+    dot.style.transform = `translate3d(${x}px,${y}px,0)`;
+    if (running) raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  document.addEventListener('visibilitychange', () => {
+    running = !document.hidden;
+    if (running) raf = requestAnimationFrame(tick); else cancelAnimationFrame(raf);
+  });
+
+  for (const el of document.querySelectorAll('button,a')){
+    el.addEventListener('pointerenter', () => dot.classList.add('hot'));
+    el.addEventListener('pointerleave', () => dot.classList.remove('hot'));
+  }
+}
+
+const sw = document.querySelector('.switch');
+sw.addEventListener('click', e => {
+  const b = e.target.closest('button[data-b]'); if (!b) return;
+  document.body.dataset.blend = b.dataset.b;
+  for (const x of sw.querySelectorAll('button')) x.setAttribute('aria-pressed', String(x===b));
+});
+</script>
+</body>
+</html>

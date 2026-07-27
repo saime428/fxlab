@@ -61,6 +61,11 @@
 | [漂浮贴纸物理 Hover](patterns/hover/floating-stickers/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html) |
 | [覆盖层自动反色 Blend Invert](patterns/layout/blend-invert/) | 布局手法 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/blend-invert/demo.html) |
 | [区域内隐藏光标 + 跟随标签](patterns/cursor/hide-and-follow/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/hide-and-follow/demo.html) |
+| [图片光标 Image Cursor](patterns/cursor/image-cursor/) | 鼠标跟随 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/image-cursor/demo.html) |
+| [跟随圆环 Follower Ring](patterns/cursor/follower-ring/) | 鼠标跟随 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/follower-ring/demo.html) |
+| [反色光标点 Blend Dot](patterns/cursor/blend-dot/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/blend-dot/demo.html) |
+| [磁性吸附 Magnetic Pull](patterns/cursor/magnetic-pull/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/magnetic-pull/demo.html) |
+| [光标拖尾 Cursor Trail](patterns/cursor/cursor-trail/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/cursor-trail/demo.html) |
 
 ## Case 索引
 
