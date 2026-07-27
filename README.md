@@ -59,6 +59,8 @@
 | [可拖拽 + 弹簧回弹](patterns/hover/drag-spring/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html) |
 | [滚动分节锁定](patterns/scroll/scroll-snap-sections/) | 滚动动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-snap-sections/demo.html) |
 | [漂浮贴纸物理 Hover](patterns/hover/floating-stickers/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html) |
+| [覆盖层自动反色 Blend Invert](patterns/layout/blend-invert/) | 布局手法 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/blend-invert/demo.html) |
+| [区域内隐藏光标 + 跟随标签](patterns/cursor/hide-and-follow/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/hide-and-follow/demo.html) |
 
 ## Case 索引
 

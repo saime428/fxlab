@@ -33,6 +33,8 @@
 | [loading/entry-preloader](patterns/loading/entry-preloader/) | 加载序章 | ★★ | 资源预载 + 进度 + Enter 门 | 重资产站开场,兼做声音手势解锁 |
 | [loading/ambient-sound-toggle](patterns/loading/ambient-sound-toggle/) | 氛围音开关 | ★★ | 手势解锁 AudioContext + 全局开关 | 体验型站的氛围音 |
 | [3d-webgl/canvas-ambient-bg](patterns/3d-webgl/canvas-ambient-bg/) | Canvas 氛围背景 | ★★ | 渐变圆斑 + lighter 叠加 + 正弦漂移 | 任何站的氛围背景层,高级感地板价 |
+| [layout/blend-invert](patterns/layout/blend-invert/) | 覆盖层自动反色 | ★ | mix-blend-mode:difference,白色层自动反相 | 固定 header/logo 压在明暗不定的内容上,零 JS |
+| [cursor/hide-and-follow](patterns/cursor/hide-and-follow/) | 区域内隐藏光标 + 跟随标签 | ★★ | 区域 cursor:none + rAF lerp 跟随元素 | 作品网格/画廊,把光标变成说明 UI |
 
 ## 气质套餐(场景 → 组合)
 

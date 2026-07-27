@@ -29,8 +29,9 @@
 1. ~~高门槛 ✅ 欠账~~ **全部清零**:shader-wipe ✅、particle-transition ✅、cel-shading 已降级为 Messenger case 的方法论笔记(复用性否决:前提是已有 3D 场景)
 2. ~~翻案候选~~ ✅ 全部完成:hover/drag-spring、scroll/scroll-snap-sections、hover/floating-stickers
 3. Messenger 还没做运行时深挖(方法见下)
-4. **cursor/ 分类仍是空的,但矿已经找到了**:2026-07-26 扫了 124 个获奖站,30 个用 `cursor:none`(见 [blends/scans/2026-07-awwwards.md](blends/scans/2026-07-awwwards.md) 第六节)。首选 6 个站(`cursor:none` ∩ `mix-blend-mode:difference`):Lama Lama / Depo Luxe / Sui / Indigo Laboratory / sakazuki / Longbow。**光标长什么样 CSS 侧取不到,做 pattern 前必须真开站看**
-5. 同一次扫描撞出两个新 pattern 候选:`mix-blend-mode: difference` 反色层(28% 的获奖站在用,本库零覆盖,和 cursor 是同一块矿)、Lenis 平滑滚动(60% 普及,是基础设施不是效果,至少该进 tech-radar 说明"项目已有 Lenis 时滚动类 pattern 怎么接")
+4. ~~cursor/ 分类是空的~~ ✅ **已开张**:[cursor/hide-and-follow](patterns/cursor/hide-and-follow/)(区域内隐藏光标 + 跟随标签,样本是 sakazuki 的 Journey 段)。同批还提了 [layout/blend-invert](patterns/layout/blend-invert/)(覆盖层自动反色,三站实测坐实)。**cursor 分类只有 1 个,还欠拖尾/磁性吸附这类**
+5. **Lenis 还没进 tech-radar**:扫描显示 60% 普及率(比 GSAP 的 31% 还高),它是基础设施不是效果——接管滚动后所有滚动驱动 pattern 的时间基准都变了,该写一节"项目已有 Lenis 时滚动类 pattern 怎么接"
+6. 扫描方法的已知盲区(下次扫之前先修):**CSS 规则存在 ≠ 真在用**。Tailwind 之类会把没用上的工具类打进 bundle,`cursor:none` 那条统计因此虚高(声明 30 站,实测 3 站全是 0)。要判使用必须开浏览器查计算样式
 6. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)

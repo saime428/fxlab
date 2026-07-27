@@ -61,7 +61,7 @@
 | 事实 | 数字 | 意味着 |
 |---|---|---|
 | 有 CSS 变量体系(≥10 个 `--var`) | **102/113(90%)** | token 化是默认,不是加分项 |
-| 用 `cursor: none`(自定义光标强信号) | **30/113(27%)** | 四分之一的获奖站换掉了系统光标 |
+| CSS 里出现 `cursor: none` | 30/113(27%) | ⚠️ **不等于真在用**,见下方更正 |
 | 用 `mix-blend-mode: difference/exclusion` | **32/113(28%)** | **本库完全没有的手法** |
 | 引入 Lenis(平滑滚动) | **68/113(60%)** | 比 GSAP(35)还普及,已是事实标准 |
 | 引入 GSAP | 35/113 | |
@@ -83,24 +83,34 @@
 
 ## 六、可直接开工的三条线
 
-### 1. 填 `cursor/` 空分类 —— 矿找到了
+### ⚠️ 更正(2026-07-26 当天实测推翻)
 
-`cursor:none` ∩ `mix-blend-mode:difference`(**差值混合光标**是最出彩的那一类):
+上面 `cursor:none` 的 30 站是**声明数,不是使用数**。开站验了 3 个:
 
-| 站 | 奖项 | URL |
+| 站 | CSS 里声明在哪 | 实际生效元素数 |
 |---|---|---|
-| Lama Lama | DEV+SOTD | https://lamalama.com/ |
-| Depo Luxe | DEV+SOTD | https://depoluxe.xyz/ |
-| Sui | DEV+SOTD | https://www.sui.io/ |
-| Indigo Laboratory | DEV+SOTD | https://indigo-laboratory.it/ |
-| sakazuki | AH+SOTD | https://sakazuki.io/ |
-| Longbow | SOTD | https://db-longbow.webflow.io/ |
+| Lama Lama | `.cursor-none`(Tailwind 工具类) | **0** —— 打进 bundle 但没用上 |
+| sakazuki | `.Journey-module__stepHideCursor` | 0(段内作用域,进到 Journey 段才生效) |
+| Sui | `.hero-mask` | 0(同上) |
 
-仅 `cursor:none`(不混合)高奖项的:PP Neue Montreal(DEV+SOTD)、Dragonfly Redux(SOTD)、Units(SOTD)。
+两条教训:
 
-### 2. 新 pattern 候选:`mix-blend-mode: difference` 反色层
+1. **Tailwind / 工具类框架会把没用上的类打进 CSS**,`cursor:none` 这种统计必须查计算样式,不能查规则存在性
+2. 即使真在用,**`cursor:none` 永远是段内作用域的**——扫到的每个站都挂在一个段落级 class 上,没有一个全局。这本身就是个设计结论:全局藏光标在表单和链接上是可用性灾难
 
-28% 的获奖站在用,本库一个都没有。典型用法:光标/浮层压在图片和文字上时自动反色,永远可读——**零成本的"高级感"**,而且和 `cursor/` 那条线是同一块矿。
+所以 `cursor:none` 的真实普及率**远低于 27%**,这个数字不能引用。已按实测做成 [cursor/hide-and-follow](../../patterns/cursor/hide-and-follow/)(sakazuki 的 Journey 段是唯一拿到完整实现细节的样本:84×33 标签、`opacity .3s` + `visibility 0s linear .3s`)。
+
+### 1. 已提炼:`mix-blend-mode: difference` 覆盖层自动反色
+
+这条**实测全部坐实**,三站三个尺度用的是同一个机制:
+
+| 站 | 用在哪 | 尺度 |
+|---|---|---|
+| sakazuki | fixed `header` / `bottomBar` / 飞行 logo(全带 `pointer-events:none`) | 固定层 |
+| Lama Lama | hero `<section>` + 压在视频上的图标按钮(用 `exclusion`) | 区块 |
+| Sui | 标题里的强调词 `.custom-span.invert` | 行内 |
+
+已做成 [layout/blend-invert](../../patterns/layout/blend-invert/)。它是 [theme-shift](../../patterns/transitions/theme-shift/) 的零维护替代:后者要维护"区块→主题"表,前者零 JS,代价是**中灰背景上对比度归零**。
 
 ### 3. 新 pattern 候选 / tech-radar:Lenis
 
