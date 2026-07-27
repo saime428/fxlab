@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>液态融合 Goo Merge — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-m:.6s; --dur-l:.9s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:52rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+/* ============ 核心:滤镜加在父容器上 ============ */
+.goo{ filter:url(#goo); }
+/* 容器要留 padding,不然球的模糊边缘会被裁掉 */
+.stage{ position:relative; height:16rem; padding:3rem; margin:2.5rem 0; }
+.blob{
+  position:absolute; width:5.5rem; height:5.5rem; border-radius:50%;
+  background:var(--accent); will-change:transform;
+  transition:transform var(--dur-l) var(--ease-out);
+}
+.b1{ left:22%; top:50%; margin:-2.75rem 0 0 -2.75rem; }
+.b2{ left:50%; top:50%; margin:-2.75rem 0 0 -2.75rem; background:#7ee3ff; }
+.b3{ left:78%; top:50%; margin:-2.75rem 0 0 -2.75rem; background:#ff9d5c; }
+/* hover 时三球聚拢 —— 拉丝断裂的一瞬间最有戏 */
+.stage:hover .b1,.stage:focus-within .b1{ transform:translateX(84%); }
+.stage:hover .b3,.stage:focus-within .b3{ transform:translateX(-84%); }
+/* 文字必须在滤镜容器外面,否则被一起糊掉 */
+.stage-label{ position:absolute; inset:auto 0 .25rem 0; text-align:center;
+              font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.5; }
+/* ================================================ */
+
+.menu{ position:relative; height:13rem; margin:2.5rem 0; }
+.menu .fab,.menu .item{
+  position:absolute; left:50%; top:3.2rem; width:4rem; height:4rem; margin:-2rem 0 0 -2rem;
+  border-radius:50%; border:0; background:var(--accent);
+  transition:transform var(--dur-m) var(--ease-out);
+}
+.menu .item{ background:#7ee3ff; }
+.menu.open .item:nth-child(2){ transform:translate(-6.5rem,3.4rem); }
+.menu.open .item:nth-child(3){ transform:translate(0,4.6rem); }
+.menu.open .item:nth-child(4){ transform:translate(6.5rem,3.4rem); }
+/* 真正能点的按钮盖在上面,不带滤镜 —— 滤镜层只负责形状 */
+.trigger{ position:absolute; left:50%; top:3.2rem; width:4rem; height:4rem; margin:-2rem 0 0 -2rem;
+  border-radius:50%; border:0; background:transparent; color:#111; cursor:pointer;
+  font:inherit; font-weight:900; font-size:1.5rem; z-index:2; }
+.trigger:focus-visible{ outline:2px solid #fff; outline-offset:4px; }
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+
+/* 低端机上滤镜每帧重光栅化整块区域,4 个球就可能掉到 30fps。
+   退回无滤镜版:球还在,只是不融合 —— 观感损失远小于卡顿 */
+@media (max-width:640px){ .goo{ filter:none; } }
+/* 停位移,滤镜留着 —— 静态的融合形状本身没有运动问题 */
+@media (prefers-reduced-motion:reduce){
+  .blob,.menu .fab,.menu .item{ transition:none; }
+  .stage:hover .b1,.stage:hover .b3{ transform:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- 滤镜定义本身不渲染 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="goo">
+      <!-- 1. 先糊:两团靠近时模糊边缘重叠相加 -->
+      <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur"/>
+      <!-- 2. 再压:对 alpha 做 26α−12 的线性拉伸,把半透明边缘压回硬边。
+              重叠处 alpha 高 → 连成一体;不重叠处不够 → 被压没。
+              这两个数是唯一的手感旋钮,比值大致保持 2:1 -->
+      <feColorMatrix in="blur" mode="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 26 -12"/>
+    </filter>
+  </defs>
+</svg>
+
+<main>
+  <h1>液态融合</h1>
+  <p>两个球靠近时中间长出一道细颈,分开时断裂回弹。<strong>融合不是画出来的</strong>——
+     是"高斯模糊 + alpha 压回硬边"这两步的副产品。</p>
+
+  <div class="stage" tabindex="0">
+    <div class="goo" style="position:absolute;inset:0">
+      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+    </div>
+    <span class="stage-label">把指针移进这块区域(或 Tab 聚焦)</span>
+  </div>
+
+  <p>它的价值不在"好看",在于<strong>打破 DOM 的方块感</strong>。页面上所有东西都是矩形,
+     突然有两个东西以液体的方式互动,人会多看两秒。</p>
+
+  <div class="menu" id="menu">
+    <div class="goo" style="position:absolute;inset:0">
+      <div class="fab"></div><div class="item"></div><div class="item"></div><div class="item"></div>
+    </div>
+    <button class="trigger" id="trigger" aria-expanded="false" aria-label="展开菜单">+</button>
+  </div>
+
+  <p class="note">文字必须放在滤镜容器<strong>外面</strong>,否则被一起糊掉;能点的按钮也盖在上层不带滤镜,
+     滤镜层只负责形状。<br>
+     这是全库最贵的 CSS 效果之一——滤镜每帧重新光栅化整个容器区域,<strong>容器越大越贵</strong>,
+     绝不要套在全屏元素上。移动端已退回无滤镜版。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<script>
+const menu = document.getElementById('menu'), trigger = document.getElementById('trigger');
+trigger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  trigger.setAttribute('aria-expanded', String(open));
+  trigger.style.rotate = open ? '45deg' : '0deg';
+});
+</script>
+</body>
+</html>

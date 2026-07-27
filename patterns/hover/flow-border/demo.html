@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>流光边框 Flow Border — web-fx-lab</title>
+<style>
+/* ============ 核心:必须写在样式表顶层,不能嵌在 @media 或选择器里 ============ */
+@property --a{ syntax:'<angle>'; initial-value:120deg; inherits:false; }
+/* inherits:false 很重要 —— 否则每个子元素都继承并各自动画一遍,白白多算 */
+/* ========================================================================== */
+
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00; --accent2:#7ee3ff;
+       --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:54rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+.cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1.25rem; margin:2.5rem 0; }
+
+.card{
+  position:relative; padding:1.6rem; border-radius:12px;
+  background:#1c1c20; isolation:isolate;
+}
+.card h3{ margin:0 0 .4rem; font-size:1.05rem; letter-spacing:-.01em; }
+.card p{ margin:0; font-size:.9rem; opacity:.6; }
+
+/* 光带层 */
+.card::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1.5px; z-index:-1;
+  background:conic-gradient(from var(--a),
+             transparent 0 62%, var(--accent2) 74%, var(--accent) 84%, transparent 92% 100%);
+  /* 挖空中间只留 padding 那一圈,否则渐变会填满元素变成一块光斑 */
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;        /* Safari */
+          mask-composite:exclude;
+  animation:spin 4s linear infinite;
+  animation-play-state:paused;       /* 默认停,hover 才跑 */
+}
+/* 切 play-state 比切整个 animation 属性平滑 */
+.card:hover::before,.card:focus-within::before{ animation-play-state:running; }
+/* 常驻转的那一张:强注意力效果,一页一次,给主 CTA 或当前选中项 */
+.card.always::before{ animation-play-state:running; }
+
+@keyframes spin{ to{ --a:480deg } }   /* 从 120 转到 480 = 整整一圈 */
+
+.card:focus-within{ outline:2px solid var(--accent); outline-offset:3px; }
+.card a{ color:var(--accent); }
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+/* 停动画,保留静态渐变边框 —— 它本身就好看 */
+@media (prefers-reduced-motion:reduce){
+  .card::before{ animation:none; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>流光边框</h1>
+  <p>CSS 渐变的角度<strong>本来不能动画</strong>——浏览器不知道 <code>from 0deg</code> 到 <code>from 360deg</code>
+     中间该怎么插值,只会瞬间跳变。<code>@property</code> 给自定义属性声明了类型,浏览器才知道它是角度、可以插值。</p>
+  <p><strong>没有那一行声明,整个效果不存在</strong>——这就是它到 2024 年才开始流行的原因。
+     扫描里 133/691 站在用 <code>@property</code>,总出现 7523 次,是新特性里普及最快的一个。</p>
+
+  <div class="cards">
+    <div class="card always" tabindex="0">
+      <h3>常驻转</h3>
+      <p>强注意力效果,一页一次。给主 CTA 或当前选中项,别满屏都在转。</p>
+    </div>
+    <div class="card" tabindex="0">
+      <h3>hover 才转</h3>
+      <p>把指针移上来。切 <code>animation-play-state</code> 比切整个 animation 属性平滑。</p>
+    </div>
+    <div class="card" tabindex="0">
+      <h3>列表里的用法</h3>
+      <p>一个持续运行的动画就是一个持续的合成层,列表里每项都加会拖垮页面。</p>
+    </div>
+  </div>
+
+  <p>边框"只有一圈"靠遮罩挖空中间:两层 <code>linear-gradient</code> 一层限定在 content-box,
+     用 <code>mask-composite:exclude</code> 把内容区排除,只剩 padding 那一圈。少了这两行,
+     渐变会填满整个元素变成一块光斑。</p>
+
+  <p class="note"><strong>降级必须显式想过</strong>:不支持 <code>@property</code> 的浏览器里 <code>--a</code> 只是普通字符串,
+     动画不跑、渐变停在初始角度——所以初始角度要选一个静止也好看的位置(这里是 120°)。<br>
+     这个 pattern 真正的价值是那一行 <code>@property</code> 声明,不是边框本身:同样的手法能动画渐变位置、
+     <code>color-mix()</code> 比例、任意需要插值的自定义值。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+</body>
+</html>

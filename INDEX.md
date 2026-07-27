@@ -42,6 +42,11 @@
 | [cursor/cursor-trail](patterns/cursor/cursor-trail/) | 光标拖尾 | ★★ | 链式 lerp:第 n 点追第 n−1 点 | 体验型站/作品集的纯装饰,B 端别用 |
 | [cursor/spotlight-mask](patterns/cursor/spotlight-mask/) | 光标手电筒 | ★★ | mask-image 径向渐变跟着光标挖洞 | hero 记忆点,光标本身成为内容的一部分 |
 | [cursor/image-follow](patterns/cursor/image-follow/) | 光标跟随预览图 | ★★ | 共用一个图容器 lerp 跟随,倾斜角=滞后量 | 作品集/代理商的项目列表,文字排版保持克制 |
+| [layout/grain-overlay](patterns/layout/grain-overlay/) | 噪点颗粒层 | ★ | feTurbulence 生成噪声铺满,压到 .055 | 全站质感地板,"看起来贵"最短的一条路 |
+| [hover/goo-merge](patterns/hover/goo-merge/) | 液态融合 | ★★ | 高斯模糊 + alpha 压回硬边,重叠处连成一体 | 展开菜单/加载点,打破 DOM 的方块感 |
+| [hover/flow-border](patterns/hover/flow-border/) | 流光边框 | ★★ | @property 让 conic 角度可动画 | 主 CTA/当前选中项,一页一次 |
+| [transitions/clip-circle-reveal](patterns/transitions/clip-circle-reveal/) | 圆形揭开转场 | ★ | clip-path circle 从点击处扩张 | 换页/换肤,让转场和点击有因果关系 |
+| [text/text-mask-media](patterns/text/text-mask-media/) | 文字挖空露媒体 | ★★ | background-clip:text 或 mask 挖穿盖层 | 超大标题里流着视频/渐变,一屏立记忆点 |
 
 ## 气质套餐(场景 → 组合)
 

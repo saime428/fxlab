@@ -68,6 +68,11 @@
 | [光标拖尾 Cursor Trail](patterns/cursor/cursor-trail/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/cursor-trail/demo.html) |
 | [光标手电筒 Spotlight Mask](patterns/cursor/spotlight-mask/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/spotlight-mask/demo.html) |
 | [光标跟随预览图 Image Follow](patterns/cursor/image-follow/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/image-follow/demo.html) |
+| [噪点颗粒层 Grain Overlay](patterns/layout/grain-overlay/) | 布局手法 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/grain-overlay/demo.html) |
+| [液态融合 Goo Merge](patterns/hover/goo-merge/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/goo-merge/demo.html) |
+| [流光边框 Flow Border](patterns/hover/flow-border/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flow-border/demo.html) |
+| [圆形揭开转场 Clip Circle Reveal](patterns/transitions/clip-circle-reveal/) | 页面切换 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-circle-reveal/demo.html) |
+| [文字挖空露媒体 Text Mask Media](patterns/text/text-mask-media/) | 文字动效 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/text-mask-media/demo.html) |
 
 ## Case 索引
 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>噪点颗粒层 Grain Overlay — web-fx-lab</title>
+<style>
+:root{
+  --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+  --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1);
+  /* ===== KNOB =========================================================
+     --grain-op    颗粒不透明度。.03–.08 是"质感",>.1 就从质感掉进"脏"
+     --grain-freq  颗粒粗细。.6 粗(胶片) / .85 常用 / 1.2 细(雪花)
+     ==================================================================== */
+  --grain-op:.055;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; color:var(--ink); font:16px/1.6 "Helvetica Neue",system-ui,sans-serif;
+      background:
+        radial-gradient(120% 80% at 20% 10%, #2a2f22 0, transparent 55%),
+        radial-gradient(90% 70% at 85% 80%, #1d2733 0, transparent 60%),
+        var(--bg); }
+main{ max-width:52rem; margin:0 auto; padding:4rem 1.5rem 7rem; }
+h1{ font-size:clamp(1.8rem,6vw,3.4rem); letter-spacing:-.035em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.78; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+.swatch{ display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:1px;
+         background:rgba(244,244,237,.14); border:1px solid rgba(244,244,237,.14);
+         border-radius:6px; overflow:hidden; margin:2.5rem 0; }
+.swatch div{ padding:2.2rem 1rem; text-align:center; font-size:.72rem; letter-spacing:.14em;
+             text-transform:uppercase; }
+.s1{ background:var(--accent); color:#111; } .s2{ background:#f4f4ed; color:#111; }
+.s3{ background:#3a5bd9; } .s4{ background:#141416; }
+
+/* ============ 核心:一个伪元素,零请求,不到 300 字节 ============ */
+body::after{
+  content:""; position:fixed; inset:0; z-index:9999;
+  pointer-events:none;                     /* 不写整页点不动 */
+  opacity:var(--grain-op);
+  mix-blend-mode:overlay;                  /* 深色底上更自然;浅色底可去掉 */
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* 电影颗粒是逐帧跳变的,连续平移会看到噪声在"流" —— 必须 steps() */
+  animation:grain 8s steps(10) infinite;
+}
+@keyframes grain{
+  0%{ background-position:0 0 }      10%{ background-position:-5% -10% }
+  20%{ background-position:-15% 5% } 30%{ background-position:7% -25% }
+  40%{ background-position:-5% 25% } 50%{ background-position:-15% 10% }
+  60%{ background-position:15% 0 }   70%{ background-position:0 15% }
+  80%{ background-position:3% 35% }  90%{ background-position:-10% 10% }
+}
+body[data-grain="off"]::after{ display:none; }
+body[data-grain="loud"]{ --grain-op:.16; }   /* 故意做过头,给你看"脏"的边界 */
+/* 静态颗粒本身没有运动问题,只停动画,别整个去掉 */
+@media (prefers-reduced-motion:reduce){ body::after{ animation:none } }
+@media print{ body::after{ display:none } }
+/* 低端机上这是一整层全屏合成,移动端不加没人发现 */
+@media (max-width:640px){ body::after{ display:none } }
+/* =============================================================== */
+
+.switch{ position:fixed; left:50%; bottom:1.2rem; transform:translateX(-50%); z-index:10000;
+  display:flex; gap:.25rem; padding:.3rem; border-radius:999px; background:rgba(20,20,20,.88); }
+.switch button{ border:0; cursor:pointer; font:inherit; font-size:.7rem; letter-spacing:.1em;
+  text-transform:uppercase; padding:.5rem .9rem; border-radius:999px; background:transparent; color:#f4f4ed;
+  transition:background var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.switch button[aria-pressed="true"]{ background:var(--accent); color:#111; }
+.switch button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+</style>
+</head>
+<body data-grain="on">
+
+<main>
+  <h1>噪点颗粒层</h1>
+  <p>纯色和纯渐变是<strong>数字感</strong>的来源:太干净、太平,一眼就是屏幕。
+     铺一层几乎看不见的颗粒,画面立刻有了"介质"——像印在纸上、拍在胶片上。</p>
+  <p>下面的开关来回切,盯着色块看。<strong>关掉的那一秒最能看出差别</strong>。
+     "过量"那档是故意做过头的,让你看到 <code>.1</code> 以上就从"质感"掉进"脏"的边界。</p>
+
+  <div class="swatch">
+    <div class="s1">品牌色</div><div class="s2">纸白</div>
+    <div class="s3">蓝</div><div class="s4">近黑</div>
+  </div>
+
+  <p>零请求、零依赖、不到 300 字节,而且<strong>分辨率无关</strong>——不像贴一张噪点 PNG 会在高分屏上糊掉。
+     扫描里 <code>feTurbulence</code> 只探到 4 站,不是因为没人用颗粒,是因为绝大多数站贴的是图。</p>
+
+  <p class="note"><code>position:fixed</code> 让颗粒不跟着滚动——跟着滚会立刻暴露它是一张图,固定住才像"镜头上的颗粒"。<br>
+     移动端整个关掉了(全屏合成层,低端机上叠在动画之上会掉帧,而且没人会发现少了)。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<div class="switch" role="group" aria-label="颗粒强度">
+  <button data-g="on" aria-pressed="true">默认 .055</button>
+  <button data-g="loud" aria-pressed="false">过量 .16</button>
+  <button data-g="off" aria-pressed="false">关闭</button>
+</div>
+
+<script>
+// 效果本身零 JS,这里只是演示开关
+const sw = document.querySelector('.switch');
+sw.addEventListener('click', e => {
+  const b = e.target.closest('button[data-g]'); if (!b) return;
+  document.body.dataset.grain = b.dataset.g;
+  for (const x of sw.querySelectorAll('button')) x.setAttribute('aria-pressed', String(x === b));
+});
+</script>
+</body>
+</html>

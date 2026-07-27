@@ -9,3 +9,4 @@
 | [逐行/逐字拆分入场](split-text-reveal/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/split-text-reveal/demo.html) |
 | [滚动响应字幕](scroll-marquee/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/scroll-marquee/demo.html) |
 | [数字滚动](count-up/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/count-up/demo.html) |
+| [文字挖空露媒体](text-mask-media/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/text-mask-media/demo.html) |
