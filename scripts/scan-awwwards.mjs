@@ -48,6 +48,49 @@ const listSites = () => readFileSync(LIST, 'utf8').split(/\r?\n/)
 const tally = (map, k, n = 1) => { if (k) map.set(k, (map.get(k) || 0) + n); };
 const top = (map, n) => [...map.entries()].sort((a, b) => b[1] - a[1]).slice(0, n);
 
+// 机制普查:找"库里可能没有、站上却常见"的手法。
+// 前几轮只统计预设的那几项(色/字/时长/缓动/圆角/光标/blend),等于拿着几百站
+// 的矿只筛三种金属。这张表是用来问"还有什么"的。
+// 判定按**出现次数**而不是有无:工具类框架每个类只出现一次,真在用的会出现很多次
+const FEATURES = {
+  'mask-image 遮罩':            /(?:-webkit-)?mask(?:-image)?\s*:\s*(?:url|linear-|radial-|conic-)/gi,
+  'backdrop-filter 毛玻璃':      /backdrop-filter\s*:/gi,
+  'filter: blur':               /filter\s*:[^;}]{0,40}blur\(/gi,
+  'filter: grayscale/sepia':    /filter\s*:[^;}]{0,40}(?:grayscale|sepia)\(/gi,
+  'clip-path polygon':          /clip-path\s*:[^;}]{0,60}polygon\(/gi,
+  'clip-path inset/circle':     /clip-path\s*:[^;}]{0,60}(?:inset|circle|ellipse)\(/gi,
+  'CSS 3D(preserve-3d)':       /transform-style\s*:\s*preserve-3d/gi,
+  'perspective':                /perspective\s*:\s*\d/gi,
+  'text-stroke 描边字':          /-webkit-text-stroke/gi,
+  'background-clip:text 渐变字': /background-clip\s*:\s*text/gi,
+  'writing-mode 竖排':           /writing-mode\s*:\s*vertical/gi,
+  'font-variation-settings 可变字': /font-variation-settings\s*:/gi,
+  '@property 类型化变量':         /@property\s/gi,
+  '容器查询 @container':          /@container[\s({]|container-type\s*:/gi,
+  ':has() 选择器':               /:has\(/gi,
+  'scroll 驱动动画':              /animation-timeline\s*:|scroll-timeline|view-timeline/gi,
+  'scroll-snap':                /scroll-snap-type\s*:/gi,
+  'position: sticky':           /position\s*:\s*sticky/gi,
+  'View Transitions':           /view-transition-name\s*:|::view-transition/gi,
+  '自定义滚动条':                 /::-webkit-scrollbar|scrollbar-color\s*:/gi,
+  '::selection 选中样式':         /::selection/gi,
+  'SVG feTurbulence 噪声':        /feTurbulence/gi,
+  'blend multiply/screen/overlay': /mix-blend-mode\s*:\s*(?:multiply|screen|overlay|lighten|darken|color-dodge)/gi,
+  '下划线微调':                   /text-underline-offset|text-decoration-thickness/gi,
+  'oklch / color-mix':          /oklch\(|color-mix\(/gi,
+  'light-dark()':               /light-dark\(/gi,
+  'aspect-ratio':               /aspect-ratio\s*:/gi,
+  'content-visibility/contain': /content-visibility\s*:|contain\s*:\s*(?:strict|content|layout)/gi,
+  'popover / dialog / ::backdrop': /\[popover\]|::backdrop|^\s*dialog\s*\{/gim,
+  '多栏 columns':                /column-count\s*:|columns\s*:\s*\d/gi,
+  'background-attachment:fixed': /background-attachment\s*:\s*fixed/gi,
+  'image-rendering:pixelated':  /image-rendering\s*:\s*pixelated/gi,
+  'anchor 定位':                 /anchor-name\s*:|position-anchor\s*:/gi,
+  'text-wrap balance/pretty':   /text-wrap\s*:\s*(?:balance|pretty)/gi,
+  'accent-color':               /accent-color\s*:/gi,
+  'overscroll-behavior':        /overscroll-behavior/gi,
+};
+
 async function probe(site) {
   const html = await get(site.url, 20000);
   if (!html) return { ...site, err: 'fetch failed' };
@@ -110,9 +153,15 @@ async function probe(site) {
   const followerSel = cursorishSel.filter(s => classUsed(s)).slice(0, 4);
   const tracksPointer = /pointermove|mousemove/.test(html);
 
+  const feat = {};
+  for (const [name, re] of Object.entries(FEATURES)) {
+    const n = (css.match(re) || []).length;
+    if (n) feat[name] = n;
+  }
+
   const has = re => re.test(html) || re.test(css);
   return {
-    ...site,
+    ...site, feat,
     cssBytes: css.length, cssFiles: files,
     vars: top(vars, 14).map(([k, n]) => `${k}${n > 2 ? ` ×${n}` : ''}`),
     varCount: vars.size,
@@ -195,6 +244,16 @@ console.log(`  ↳ ${ok.filter(r => r.blendUsed).map(r => r.title).slice(0, 14).
 console.log('  (粗筛=选择器的类名出现在 HTML class 属性里;JS 运行时加的类会被低估)');
 const libCount = new Map();
 for (const r of ok) for (const l of r.libs) libCount.set(l, (libCount.get(l) || 0) + 1);
+console.log('\n=== 机制普查(站数:出现≥3次才算真在用 / 括号内是有出现的站数)===');
+const rows = Object.keys(FEATURES).map(k => {
+  const real = ok.filter(r => (r.feat?.[k] || 0) >= 3).length;
+  const any = ok.filter(r => r.feat?.[k]).length;
+  const total = ok.reduce((s, r) => s + (r.feat?.[k] || 0), 0);
+  return { k, real, any, total };
+}).sort((a, b) => b.real - a.real);
+for (const r of rows)
+  console.log(`  ${String(r.real).padStart(3)}/${ok.length} (${String(r.any).padStart(3)})  ×${String(r.total).padStart(5)}  ${r.k}`);
+
 console.log('\n=== 库 ===');
 for (const [k, n] of top(libCount, 10)) console.log(`  ${k}  ${n}/${ok.length}`);
 console.log('\n=== 失败 ===');

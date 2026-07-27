@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>图片光标 Image Cursor — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:56rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.02em; margin:0 0 .5rem; }
+p{ opacity:.75; max-width:40rem; }
+code{ background:#2a2a2f; padding:.1em .35em; border-radius:3px; font-size:.88em; }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1px;
+       background:#2e2e33; border:1px solid #2e2e33; border-radius:6px; overflow:hidden; margin:2.5rem 0; }
+.cell{ background:#232327; padding:2.5rem 1.5rem; min-height:11rem;
+       display:flex; flex-direction:column; justify-content:flex-end; }
+.cell b{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
+.cell span{ display:block; margin-top:.4rem; font-size:.85rem; opacity:.6; }
+
+/* ============ 核心:一行 CSS,零 JS ============
+   末尾的 auto 是必需兜底 —— 图挂了就回落系统光标,不写整条声明作废。
+   "16 16" 是热点坐标,不写默认左上角,十字光标会整体偏半个图。 */
+.c-dot{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23d2ff00' stroke='%23141416' stroke-width='2'/%3E%3C/svg%3E") 16 16, auto;
+}
+.c-cross{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='%23f4f4ed' stroke-width='2'%3E%3Cpath d='M16 4v24M4 16h24'/%3E%3C/g%3E%3C/svg%3E") 16 16, crosshair;
+}
+.c-arrow{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M8 20h22M22 12l8 8-8 8' fill='none' stroke='%23d2ff00' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") 20 20, pointer;
+}
+/* 热点写错的对照:同一张图,热点留默认 0 0 —— 圆心会偏到指针右下 */
+.c-bad{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23ff6b00' stroke-width='2'/%3E%3C/svg%3E"), auto;
+}
+/* 超尺寸的对照:200×200 超过浏览器 128px 上限 → 整条声明被忽略,悄无声息失效 */
+.c-toobig{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ccircle cx='100' cy='100' r='90' fill='%23ff6b00'/%3E%3C/svg%3E") 100 100, auto;
+}
+/* ============================================== */
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+@media not all and (hover:hover){ .fine-only{ display:none; } }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>图片光标</h1>
+  <p>一行 CSS 换掉光标图形。<strong>零 JS、零 rAF、零滞后</strong>——它就是系统光标,由合成器画,永远不掉帧。
+     代价是不能动画:想要放大/变形得换 <code>follower-ring</code>。</p>
+  <p class="fine-only">把指针移进下面每一格看差别。</p>
+
+  <div class="grid">
+    <div class="cell c-dot"><b>实心圆点</b><span>热点 16 16,圆心对准指针</span></div>
+    <div class="cell c-cross"><b>十字</b><span>兜底写 crosshair,不是 auto</span></div>
+    <div class="cell c-arrow"><b>箭头(40px)</b><span>兜底 pointer,提示可点</span></div>
+    <div class="cell c-bad"><b>热点写错</b><span>留默认 0 0 → 圆心偏到指针右下</span></div>
+    <div class="cell c-toobig"><b>超尺寸 200px</b><span>超过 128px 上限 → 整条失效,回落系统光标</span></div>
+    <div class="cell"><b>不设置</b><span>系统默认,作对照</span></div>
+  </div>
+
+  <p>全部用内联 <code>data:image/svg+xml</code>:不多一次请求、不会"闪一下才出现"、颜色直接写在里面
+     (<code>#</code> 要转义成 <code>%23</code>)。</p>
+
+  <p class="note">触屏上整个效果不存在,但也无害——不用像跟随类光标那样特意关掉。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+</body>
+</html>

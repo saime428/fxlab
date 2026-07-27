@@ -35,6 +35,11 @@
 | [3d-webgl/canvas-ambient-bg](patterns/3d-webgl/canvas-ambient-bg/) | Canvas 氛围背景 | ★★ | 渐变圆斑 + lighter 叠加 + 正弦漂移 | 任何站的氛围背景层,高级感地板价 |
 | [layout/blend-invert](patterns/layout/blend-invert/) | 覆盖层自动反色 | ★ | mix-blend-mode:difference,白色层自动反相 | 固定 header/logo 压在明暗不定的内容上,零 JS |
 | [cursor/hide-and-follow](patterns/cursor/hide-and-follow/) | 区域内隐藏光标 + 跟随标签 | ★★ | 区域 cursor:none + rAF lerp 跟随元素 | 作品网格/画廊,把光标变成说明 UI |
+| [cursor/image-cursor](patterns/cursor/image-cursor/) | 图片光标 | ★ | cursor:url(data-URI) + 热点坐标,零 JS | 只想换图标形状,全库成本最低的自定义光标 |
+| [cursor/follower-ring](patterns/cursor/follower-ring/) | 跟随圆环 | ★ | 不藏原生光标,叠一个 lerp 滞后的圆环 | 全站常驻质感,自定义光标里可用性代价最小 |
+| [cursor/blend-dot](patterns/cursor/blend-dot/) | 反色光标点 | ★★ | 跟随点 + mix-blend-mode:difference | 深浅背景混排的站,光标永远可见 |
+| [cursor/magnetic-pull](patterns/cursor/magnetic-pull/) | 磁性吸附 | ★★ | 按钮朝指针位移,松开靠 transition 弹回 | 主 CTA / logo,不改光标所以可与任意光标叠加 |
+| [cursor/cursor-trail](patterns/cursor/cursor-trail/) | 光标拖尾 | ★★ | 链式 lerp:第 n 点追第 n−1 点 | 体验型站/作品集的纯装饰,B 端别用 |
 
 ## 气质套餐(场景 → 组合)
 
