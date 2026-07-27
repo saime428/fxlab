@@ -67,6 +67,26 @@ async function probe(site) {
   for (const m of css.matchAll(/cubic-bezier\(\s*[\d.\-\s,]+\)/gi)) tally(eases, m[0].replace(/\s+/g, ''));
   for (const m of css.matchAll(/border-radius\s*:\s*([^;}]{1,24})/gi)) tally(radii, m[1].trim());
 
+  // 声明 ≠ 使用。Tailwind 之类会把没用上的工具类整个打进 bundle:首轮扫描
+  // 报了 30 站有 cursor:none,开浏览器查计算样式实际生效数全是 0。
+  // 粗筛办法:取规则的选择器,看它的类名是否出现在 HTML 的 class 属性里。
+  // ponytail: 挡得住"打包了没用上",挡不住 JS 运行时加的类 —— 那种会被低估,
+  //           要准数只能开浏览器查 getComputedStyle
+  const classUsed = sel => {
+    const cls = [...sel.matchAll(/\.([\w-]+)/g)].map(m => m[1]);
+    if (!cls.length) return true;                      // 元素/属性选择器,按在用算
+    return cls.some(c => new RegExp(`class=["'][^"']*(?<![\\w-])${c}(?![\\w-])`).test(html));
+  };
+  const declVsUsed = body => {
+    let decl = 0, used = 0;
+    for (const m of css.matchAll(new RegExp(`([^{}]+)\\{[^{}]*${body}[^{}]*\\}`, 'gi'))) {
+      decl++; if (classUsed(m[1])) used++;
+    }
+    return [decl, used];
+  };
+  const [curDecl, curUsed] = declVsUsed('cursor\\s*:\\s*none');
+  const [blDecl, blUsed] = declVsUsed('mix-blend-mode\\s*:\\s*(?:difference|exclusion)');
+
   const has = re => re.test(html) || re.test(css);
   return {
     ...site,
@@ -78,8 +98,8 @@ async function probe(site) {
     durs: top(durs, 6).map(([k, n]) => `${k} ×${n}`),
     eases: top(eases, 5).map(([k, n]) => `${k} ×${n}`),
     radii: top(radii, 3).map(([k]) => k),
-    cursorNone: /cursor\s*:\s*none/i.test(css),          // 自定义光标的强信号
-    mixBlend: /mix-blend-mode\s*:\s*(difference|exclusion)/i.test(css),
+    cursorNoneDecl: curDecl, cursorNoneUsed: curUsed,    // 声明数 / 粗筛后疑似在用
+    blendDecl: blDecl, blendUsed: blUsed,
     libs: [
       has(/\bgsap\b/i) && 'GSAP', has(/three(\.min)?\.js|THREE\./) && 'Three',
       has(/\blenis\b/i) && 'Lenis', has(/locomotive/i) && 'Locomotive',
@@ -128,12 +148,14 @@ console.log('\n=== 时长档普查 ===');
 for (const [k, n] of census('durs', 14)) console.log(`  ${k}  ×${n}`);
 console.log('\n=== 圆角 ===');
 for (const [k, n] of census('radii', 10)) console.log(`  ${k}  ×${n}`);
-console.log('\n=== 结构 ===');
+console.log('\n=== 结构(声明 vs 粗筛后疑似在用)===');
 console.log(`  有 CSS 变量体系(≥10 个 --var)  ${sitesWith('varCount', v => v >= 10)}/${ok.length}`);
-console.log(`  有 cursor:none(自定义光标强信号) ${ok.filter(r => r.cursorNone).length}`);
-console.log(`  ↳ ${ok.filter(r => r.cursorNone).map(r => r.title).join(', ') || '(无)'}`);
-console.log(`  用 mix-blend-mode: difference/exclusion  ${ok.filter(r => r.mixBlend).length}`);
-console.log(`  ↳ ${ok.filter(r => r.mixBlend).map(r => r.title).slice(0, 12).join(', ')}`);
+const cnt = k => ok.filter(r => r[k] > 0).length;
+console.log(`  cursor:none            声明 ${cnt('cursorNoneDecl')} 站 → 疑似在用 ${cnt('cursorNoneUsed')} 站`);
+console.log(`  ↳ ${ok.filter(r => r.cursorNoneUsed).map(r => r.title).join(', ') || '(无)'}`);
+console.log(`  mix-blend difference/exclusion  声明 ${cnt('blendDecl')} 站 → 疑似在用 ${cnt('blendUsed')} 站`);
+console.log(`  ↳ ${ok.filter(r => r.blendUsed).map(r => r.title).slice(0, 14).join(', ')}`);
+console.log('  (粗筛=选择器的类名出现在 HTML class 属性里;JS 运行时加的类会被低估)');
 const libCount = new Map();
 for (const r of ok) for (const l of r.libs) libCount.set(l, (libCount.get(l) || 0) + 1);
 console.log('\n=== 库 ===');
