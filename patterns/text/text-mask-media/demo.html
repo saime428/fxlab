@@ -45,7 +45,12 @@ h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacit
 /* ============ 方案 B:mask 挖穿盖层,露出底下的"媒体" ============
    background-clip 吃不了 <video>。反过来做:媒体铺底,盖一层纯色,
    用文字形状把盖层挖穿。SVG 遮罩里不继承页面 CSS、加载不到 webfont,
-   所以 <text> 必须写死 font-family/size/weight,或把字转成 <path> */
+   所以 <text> 必须写死 font-family/size/weight,或把字转成 <path>。
+
+   ⚠ 最容易踩的坑:CSS mask-image 默认按 **alpha** 通道判定,不是亮度。
+   直接写"白矩形 + 黑文字"两者 alpha 都是 1 → 盖层整块留下 → 一个纯黑方块,
+   什么都看不到。必须在 SVG **内部**先用 <mask> 把字从矩形里扣掉,
+   让最终图形在文字处 alpha=0,CSS 才知道那里要挖穿。 */
 .stage-b{ position:relative; height:clamp(9rem,26vw,17rem); border-radius:10px; overflow:hidden; }
 .media{
   position:absolute; inset:0;
@@ -55,8 +60,8 @@ h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacit
 @keyframes spin{ to{ rotate:360deg } }
 .cover{
   position:absolute; inset:0; background:var(--bg);
-  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='260'%3E%3Crect width='800' height='260' fill='white'/%3E%3Ctext x='400' y='175' font-family='Helvetica,Arial,sans-serif' font-size='150' font-weight='900' letter-spacing='-6' text-anchor='middle' fill='black'%3EMEDIA%3C/text%3E%3C/svg%3E");
-          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='260'%3E%3Crect width='800' height='260' fill='white'/%3E%3Ctext x='400' y='175' font-family='Helvetica,Arial,sans-serif' font-size='150' font-weight='900' letter-spacing='-6' text-anchor='middle' fill='black'%3EMEDIA%3C/text%3E%3C/svg%3E");
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='260'%3E%3Cdefs%3E%3Cmask id='m'%3E%3Crect width='800' height='260' fill='white'/%3E%3Ctext x='400' y='178' font-family='Helvetica,Arial,sans-serif' font-size='150' font-weight='900' letter-spacing='-6' text-anchor='middle' fill='black'%3EMEDIA%3C/text%3E%3C/mask%3E%3C/defs%3E%3Crect width='800' height='260' fill='black' mask='url(%23m)'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='260'%3E%3Cdefs%3E%3Cmask id='m'%3E%3Crect width='800' height='260' fill='white'/%3E%3Ctext x='400' y='178' font-family='Helvetica,Arial,sans-serif' font-size='150' font-weight='900' letter-spacing='-6' text-anchor='middle' fill='black'%3EMEDIA%3C/text%3E%3C/mask%3E%3C/defs%3E%3Crect width='800' height='260' fill='black' mask='url(%23m)'/%3E%3C/svg%3E");
   -webkit-mask-size:100% 100%; mask-size:100% 100%;
   -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
 }

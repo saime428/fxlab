@@ -33,10 +33,12 @@ body::after{
 
 - `baseFrequency` 是颗粒粗细:`.6` 粗颗粒(胶片感)、`.85` 常用、`1.2` 细到接近电视雪花
 - `numOctaves` 越高层次越丰富也越慢,**2-3 足够**,再高看不出差别
-- **不透明度是这个效果的全部分寸**:`.03–.08`。超过 `.1` 就从"质感"掉进"脏"
+- **不透明度是这个效果的全部分寸,而且分深浅两套**:
+  - **深色底**(本库默认口味):`.08–.14`,**不要写 `mix-blend-mode`**。overlay 对暗背景的结果约等于 `2×backdrop×blend`,暗的还是暗——叠上去几乎是空操作,再配 `.05` 的透明度就是"完全看不出差别"
+  - **浅色底**:`.03–.06` + `mix-blend-mode:overlay` 或 `soft-light`,更自然
+  - 超过 `.3` 从"质感"掉进"脏"
 - `pointer-events:none` 必须写,否则整页点不动
 - `position:fixed` 让颗粒**不跟着滚动**——跟着滚会立刻暴露它是一张图,固定住才像"镜头上的颗粒"
-- 深色底用 `mix-blend-mode:overlay` 或 `soft-light` 更自然;浅色底直接叠就行
 - **动起来要用 `steps()`**:连续平移会看到噪声在"流",电影颗粒是逐帧跳变的。`animation:grain 8s steps(10) infinite` + 每步换 `background-position`
 
 ## 代价与注意
