@@ -1,0 +1,776 @@
+# Awwwards 列表快照 2026-07-27,/websites/ 第 1-25 页
+# 取法:浏览器注入解析卡片 data-collectable-model-value,POST 给 scripts/collect.mjs
+# 格式:站名|外链|奖项|标签(~分隔)|日期
+TRIONN|https://trionn.com|DEV+SOTD|Design Agencies~Technology~Web & Interactive~Animation~Portfolio~GSAP~Three.js~3D~Interaction Design~Microinteractions~404 pages~Next.js|2026-07-27
+Partizan|https://partizan.com/|DEV+SOTD|Design Agencies~Film & TV~Portfolio~WebGL~Transitions~GSAP~Three.js~Filters and Effects~404 pages|2026-07-26
+Artem Shcherbakov|https://artemartemartem.com/|DEV+SOTD|Design Agencies~Film & TV~Animation~Portfolio~GSAP~Three.js~Photo & Video~About Page~Project Page~404 pages~Next.js|2026-07-25
+Spotify Wrapped Party|https://wrapped-party.activetheory.dev|DEV+SOTD|Games & Entertainment~Mobile & Apps~Music & Sound~Animation~WebGL~Transitions~Data Visualization~Sound-Audio~GSAP~Firebase|2026-07-24
+NORMAL IS BORING|https://normalisboring.es/|DEV+SOTD|Architecture~Animation~Clean~Wordpress~CSS~Graphic design~Typography~Photography~Transitions~GSAP~UI design~Luxury|2026-07-23
+Dragonfly Redux|https://www.dragonfly.xyz/|SOTD|Business & Corporate~Other~Technology~Scrolling~WebGL~Menu - Vertical~GSAP~3D~Filters and Effects~Vue.js|2026-07-22
+Lacoste — Polo Factory|https://members-play.lacoste.com/polo-factory-experience|DEV+SOTD|Architecture~Fashion~Games & Entertainment~Colorful~Fullscreen~WebGL~Three.js~3D|2026-07-21
+Lama Lama|https://lamalama.com/|DEV+SOTD|Design Agencies~E-Commerce~Web & Interactive~Animation~Graphic design~WebGL~GSAP~Javascript|2026-07-20
+Glitch&Grit|https://glitchandgrit.com/|SOTD|Design Agencies~Film & TV~Portfolio~Typography~Video~Transitions~Photo & Video~Footer Design~Webflow~Figma|2026-07-19
+IZANAMI|https://izanami-official.com/|DEV+SOTD|Art & Illustration~Business & Corporate~Scrolling~Typography~WebGL~Storytelling~GSAP~Copy design~Figma|2026-07-18
+Hiroto Sato|https://www.hirotos.com|DEV+SOTD|Web & Interactive~Portfolio~WebGL~GSAP~3D~Blender|2026-07-17
+CoffeeTech®|https://coffee-tech.com/|DEV+SOTD|Business & Corporate~Technology~Clean~Minimal~Transitions~360~GSAP~3D~Webflow~Javascript|2026-07-16
+RISK|https://www.risk.film|DEV+SOTD|Film & TV~Animation~Fullscreen~Horizontal Layout~Infinite Scroll~WebGL~Transitions~Filters and Effects~Webflow~Figma|2026-07-15
+House of Honey|https://www.houseofhoney.com/|DEV+SOTD|Architecture~Culture & Education~Minimal~Portfolio~Typography~Copy design~Interaction Design~Microinteractions~Motion~Next.js~Sanity~Luxury|2026-07-14
+PP Neue Montreal|https://neuemontreal.com/|DEV+SOTD|Promotional~Web & Interactive~Animation~Clean~Colorful~Fullscreen~Graphic design~Experimental~Footer Design~Motion~Figma~Framer|2026-07-13
+Longbow|https://db-longbow.webflow.io/|SOTD|Promotional~Technology~Web & Interactive~Typography~Photo & Video~UI design~Footer Design~Webflow~Figma|2026-07-12
+Vectr|https://vectrfl.com/|DEV+SOTD|Technology~Animation~WebGL~Transitions~Storytelling~Three.js~3D~Startups~Astro|2026-07-11
+21 Hrs On The Moon|https://www.21hrs.space/|SOTD|Culture & Education~Photographic~WebGL~Photography~Experimental~Sound-Audio~Storytelling~3D~Figma|2026-07-10
+Brunello Cucinelli - AI E-com|https://shop.brunellocucinelli.com/en-gb/ai|DEV+SOTD|E-Commerce~Fashion~Clean~HTML5~Unusual Navigation~Interaction Design~Luxury|2026-07-09
+Julien Calot|https://www.juliencalot.com|SOTD|Art & Illustration~Animation~Big Background Images~Infinite Scroll~Portfolio~WebGL~Gallery~404 pages~Webflow~Figma~Luxury|2026-07-08
+Depo Luxe|https://depoluxe.xyz/|DEV+SOTD|Film & TV~Animation~Clean~Navigation Menu~Photo & Video~Microinteractions~11ty~Luxury|2026-07-07
+MONOLOG|https://bymonolog.com/|AH+DEV+SOTD|Design Agencies~Clean~Flat Design~Typography~GSAP~Three.js~Webflow|2026-07-06
+Hildén & Kaira|https://www.hildenkaira.fi/|AH+DEV+SOTD|Business & Corporate~Film & TV~Social Integration~GSAP~UI design~Header Design~Microinteractions~Footer Design~Contentful~Webflow~Social responsibility|2026-07-05
+Radian|https://www.rideradian.com/|DEV+SOTD|E-Commerce~Sports~Animation~Scrolling~Video~GSAP~Interaction Design~Header Design~Project Page~BARBA.js~Startups~Webflow|2026-07-04
+Bucks Sauce|https://buckssauce.com/|AH+DEV+SOTD|E-Commerce~Food & Drink~Icons~Menu - Vertical~GSAP~UI design~About Page~Microinteractions~Startups~Vercel~Javascript|2026-07-03
+Units|https://units.gr/en/homepage/|SOTD|Business & Corporate~Culture & Education~Hotel / Restaurant~Colorful~Scrolling~WebGL~Illustration~Transitions~Gallery~Contentful~Lottie~Javascript|2026-07-02
+Wembi|https://www.wembi.ai/|AH+DEV+SOTD|Business & Corporate~Technology~Clean~Colorful~Minimal~GSAP~Craft CMS~Startups~Nuxt.js|2026-07-01
+NRG   Build Your Data Center|https://business.nrg.com/campaigns/build-your-data-center/|DEV+SOTD|Business & Corporate~Animation~Colorful~Fullscreen~HTML5~Scrolling~About Page~Microinteractions~Javascript~Figma|2026-06-30
+Meech213|https://www.meech213.com/|SOTD|Fashion~Web & Interactive~CSS~Fullscreen~Portfolio~Photography~Gallery~Webflow~Javascript|2026-06-29
+IVRESS SPIN A TALE|https://brand.ivress.co.jp/|DEV+SOTD|Technology~Web & Interactive~WebGL~Transitions~Storytelling~3D|2026-06-28
+Marsea|https://www.centremarsea.com/|HM|Graphic design~Typography~GSAP~UI design~About Page~Fashion~Webflow~Other~Figma~Fullscreen~Luxury|2026-06-27
+Future of Finance|https://futureoffinance.peachweb.io/|HM|Technology~Web & Interactive~Animation~Scrolling~WebGL~Storytelling~3D~Business & Corporate|2026-06-27
+Palazzo Sogni|https://www.palazzosogni.com|HM|Typography~Footer Design~Hotel / Restaurant~Wordpress~Colorful~CSS~HTML5~Scrolling|2026-06-27
+Samuel Regan|https://www.samuelregan.com|HM|Infinite Scroll~Minimal~Navigation Menu~Film & TV~Photography~Web & Interactive~Framer~Animation~Fullscreen~Horizontal Layout|2026-06-27
+POETIC|http://www.poetic.com|HM|UI design~Microinteractions~Startups~Business & Corporate~next.js~Technology~Figma~Animation~Next.js~Typography~Transitions|2026-06-27
+Podium|https://podium.global/|AH+DEV+SOTD|Film & TV~Sports~Portfolio~Single page~WebGL~Photography~Transitions~GSAP~Three.js~3D~Photo & Video~Microinteractions|2026-06-27
+MIJIHEON|https://mijiheon.com/|HM|Video~Sound-Audio~Storytelling~Events~GSAP~Promotional~3D~Web & Interactive~Javascript~Responsive Design~Adobe XD~Scrolling|2026-06-26
+Twitch Rivals|https://twitchrivals.com/|HM|Three.js~React~3D~Games & Entertainment~Microinteractions~Technology~404 pages~Web & Interactive~next.js~Animation~Next.js~Single page|2026-06-26
+Grair|https://grair.undreamstudio.com/|HM|Web & Interactive~Infinite Scroll~Storytelling~Three.js~3D~Figma~Blender~Fashion~Luxury|2026-06-26
+Abvtek Interiors|https://abvtek.com/|HM|Real Estate~Architecture~About Page~Business & Corporate~Next.js~Minimal~Portfolio~Transitions~Gallery~Gestures / Interaction|2026-06-26
+Axiom Research|https://axiom.peppermint.id/|HM|Scrolling~Single page~Interaction Design~Business & Corporate~Startups~Web & Interactive~Figma~Animation~Next.js~Horizontal Layout~Canvas API~Parallax|2026-06-26
+Made With Gsap|https://madewithgsap.com/|HM+DEV|Culture & Education~Technology~Web & Interactive~Animation~Clean~Scrolling~GSAP~Gestures / Interaction~Vanilla JS|2026-06-26
+Diamante|https://www.diamante.io/|HM|Responsive~Footer Design~Figma~Technology~Adobe Photoshop~Animation~Framer~Colorful~Parallax~Illustration|2026-06-26
+Ten Years Away|https://ten.375.studio/en|DEV+SOTD|Art & Illustration~Animation~Scrolling~WebGL~Transitions~Storytelling~GSAP~Three.js~3D~Gestures / Interaction|2026-06-26
+Obys® Experiment Space|https://experiment.obys.agency/|HM|Art & Illustration~Design Agencies~Animation~Clean~Typography~WebGL~Experimental~Gallery~GSAP~Three.js~3D|2026-06-25
+KEI inc.|https://kei-inc.jp/|HM|Javascript~Design Agencies~Clean~Wordpress~CSS~Minimal~Typography~Footer Design|2026-06-25
+Blood Donation|https://blood-donation.com/|HM|Three.js~React~3D~Culture & Education~Blender~Web & Interactive~Animation~Colorful~Storytelling|2026-06-25
+CIAO ENERGY - LAUNCH WEBSITE|https://www.ciaoenergy.com/|HM|Experimental~Sound-Audio~Three.js~Food & Drink~3D~Promotional~Webflow~Animation~Blender~Clean~Infinite Scroll|2026-06-25
+Sentient Foundation|https://sentient.foundation/|HM|Animation~Figma~Clean~Parallax~Responsive Design~Transitions~Photo & Video~Webflow~Technology~After Effects|2026-06-25
+yeqq - yunus emre korkmaz|https://yeqq.com.tr|HM|Colorful~Minimal~Portfolio~Art & Illustration~GSAP~Mobile & Apps~React~Web & Interactive~Lo-dash~Animation~Interaction Design~Clean|2026-06-25
+Obama Presidency Oral History|https://obamaoralhistory.columbia.edu/|HM|Typography~Typescript~Video~Data Visualization~Storytelling~GSAP~Culture & Education~Three.js~Institutions~Microinteractions~Responsive Design~Social responsibility|2026-06-25
+Urbi|https://urbi.ae/|HM|404 pages~Startups~Webflow~Business & Corporate~After Effects~Technology~Figma~Clean~Illustration~Data Visualization|2026-06-25
+IL CAPO PRODUCTION|https://www.ilcapoproduction.com/|DEV+SOTD|Film & TV~Animation~Portfolio~Photo & Video~Prismic~Next.js~Tailwind|2026-06-25
+WORK IN PROGRESS 2026|https://wip.workoholics.es|HM|Animation~After Effects~Graphic design~Astro~Scrolling~Video~Experimental~React~Events~Copy design~Promotional~UI design|2026-06-24
+2xA Studio|https://2xa.studio/|HM|Typography~Responsive~Javascript~Design Agencies~Animation~CSS~Graphic design~HTML5|2026-06-24
+galekto|https://galekto.com/|HM|Illustration~Experimental~Gestures / Interaction~Art & Illustration~Filters and Effects~Web & Interactive~Interaction Design~Portfolio~Javascript~Retro~Sanity~WebGL|2026-06-24
+Pahāri|https://pahari.vercel.app/|HM|Three.js~3D~next.js~Art & Illustration~Next.js~Culture & Education~Experimental~Gallery~GSAP|2026-06-24
+Irina Moi Portfolio|https://irinamoi.com/|HM|Typography~Storytelling~GSAP~Other~Microinteractions~Web & Interactive~Project Page~Animation~Javascript~CSS~Portfolio|2026-06-24
+Madrepunk™ Studio|https://www.madrepunk.com/|HM|Interaction Design~UI design~Design Agencies~Microinteractions~Web & Interactive~Framer~Infinite Scroll~Portfolio~WebGL~Three.js|2026-06-24
+Icare - A WorldLabs Showcase|https://icare-game.world|HM|3D~Startups~Blender~Games & Entertainment~Experimental~Storytelling~Three.js~GLSL|2026-06-24
+CalArts Graphic Design 2026|https://design2026.calarts.edu/|HM|Institutions~Photo & Video~Animation~Nuxt.js~Colorful~CSS~Graphic design~HTML5~Art & Illustration~Video~Culture & Education~Gallery|2026-06-24
+Yoo Interior|https://yoointerior.com|HM|Photo & Video~UI design~Vue.js~Architecture~Nuxt.js~Clean~Tailwind~Typography~Transitions~Interaction Design|2026-06-24
+Wolverine Worldwide|https://www.wolverineworldwide.com/|DEV+SOTD|Business & Corporate~Fashion~Sports~Big Background Images~Clean~GSAP~Craft CMS~Photo & Video~UI design~Locomotive Scroll|2026-06-24
+Lacoste Ace Breaker|https://members-play.lacoste.com/ace-breaker-rg|HM|WebGL~Three.js~3D~Fashion~Games & Entertainment~Sports~Fullscreen~Unusual Navigation|2026-06-23
+Kenichi Aikawa|https://aikawakenichi.com/|HM|GSAP~Three.js~3D~Animation~Photo & Video~Clean~Nuxt.js~Portfolio~Photography~Gallery|2026-06-23
+Iper|https://iper.com.au/|HM|Scrolling~Typography~Video~Design Agencies~Storytelling~Film & TV~GSAP~Promotional~Webflow~Animation~Figma~Portfolio|2026-06-23
+ACOR|https://acor-moe.fr|HM|Photographic~GSAP~Figma~Architecture~Clean~Wordpress~Fullscreen~Minimal|2026-06-23
+Terry Ho|https://terryhoproducts.com/|HM|Javascript~Figma~E-Commerce~Food & Drink~Colorful~Shopify~Microinteractions|2026-06-23
+Himachal - The Experience|https://himachal.cloud/|HM|Parallax~Transitions~Experimental~Art & Illustration~Responsive~Culture & Education~Three.js~Animation~Blender~HTML5~Infinite Scroll|2026-06-23
+Sui|https://www.sui.io/|DEV+SOTD|Business & Corporate~Technology~Web & Interactive~Animation~Filters and Effects~Content architecture~After Effects~Figma|2026-06-23
+aorum|https://www.aorum.io|HM|Sound-Audio~Storytelling~Three.js~Music & Sound~GLSL~Web & Interactive~3D~Fullscreen~Filters and Effects~WebGL~Interaction Design~Experimental|2026-06-22
+Vuna Partners|https://www.vunapartners.co.za/|HM|GSAP~BARBA.js~Lottie~Business & Corporate~Animation~Clean~Colorful~Minimal|2026-06-22
+Zitong Zhao's Website|https://zitongzhao.info/|HM|Experimental~Figma~Cinema 4D~Art & Illustration~Adobe Illustrator~Culture & Education~Animation~Graphic design~Typography|2026-06-22
+Reckon House Staples|https://reckon.house|HM|Web & Interactive~Next.js~Portfolio~Tailwind~Responsive Design~Transitions~Data Visualization~Three.js~Business & Corporate~Filters and Effects~Design Agencies~Interaction Design|2026-06-22
+EverSwap|https://everswap.com/|DEV+SOTD|Technology~Web & Interactive~WebGL~Illustration~Storytelling~3D~Startups~Figma~Blender|2026-06-22
+Nymphai Cosmetics|https://nymphaicosmetics.com|HM|Animation~Scrolling~WebGL~Storytelling~GSAP~Shopify~3D~E-Commerce~Luxury|2026-06-21
+COVEO Music|https://coveomusic.com/|HM|CSS~Minimal~Gallery~Art & Illustration~Storytelling~Music & Sound~Interaction Design~Web & Interactive~Locomotive Scroll~Animation~Cinema 4D~Clean|2026-06-21
+andreigorskikh.digital|https://andreigorskikh.digital/|HM|Typography~Illustration~3D~Business & Corporate~UI design~Design Agencies~After Effects~Web & Interactive~Figma~Animation~Framer~Portfolio|2026-06-21
+Where should I live|https://astrocartography.asknovaastrology.com/where-should-i-live|HM|Games & Entertainment~Colorful~SEO~Experimental~Next.js|2026-06-21
+Ferr Studio|https://ferrstudio.ch|HM|Infinite Scroll~WebGL~3D~Interaction Design~404 pages~Webflow~Cinema 4D~Design Agencies|2026-06-21
+Daima® Agency|https://wearedaima.framer.website/|HM|Portfolio~Responsive Design~Typography~Design Agencies~GSAP~Web & Interactive~UI design~Animation~Luxury~CSS~Framer~Photographic|2026-06-21
+digitalists|https://digitalists.at/|DEV+SOTD|Art & Illustration~Design Agencies~Web & Interactive~Animation~Wordpress~Colorful~Infinite Scroll~WebGL~Three.js~3D~Gestures / Interaction|2026-06-21
+Primer|https://primer.com/|HM|Web & Interactive~Webflow~Animation~Figma~Colorful~Scrolling~Photography~Content architecture~Copy design~Culture & Education~Footer Design|2026-06-20
+Redondo|https://www.redondo.design/|HM|Gestures / Interaction~Interaction Design~Microinteractions~Design Agencies~Footer Design~Web & Interactive~Webflow~Clean~Figma~Transitions~GSAP|2026-06-20
+Primora|https://primora.xyz/|HM|Data Visualization~Microinteractions~Footer Design~Business & Corporate~Startups~Technology~Webflow~Animation~Figma~Clean~Illustration|2026-06-20
+Nithin • Visual Designer|https://www.nithinmwarrier.com|HM|Responsive Design~Three.js~Interaction Design~Design Agencies~UI design~Promotional~next.js~Web & Interactive~Figma~Animation~Next.js~Portfolio|2026-06-20
+Méline Gobet - Kinésiologue|https://www.melinegobet.fr/|HM|Gestures / Interaction~Photo & Video~Footer Design~Other~Contentful~Animation~Webflow~Scrolling~Figma~Experimental~GSAP|2026-06-20
+Agentura|https://agentura.framer.website|HM|Fullscreen~Graphic design~Photography~Art & Illustration~UI design~Design Agencies~Figma~Animation~Framer~Big Background Images~Clean|2026-06-20
+Pil Rebranding Site|https://pilcommunication.com/|HM|React~3D~Interaction Design~Business & Corporate~Footer Design~Design Agencies~Tailwind~Fashion~Typescript~Clean~Web Fonts|2026-06-20
+RPA COMUNICACIÓN|https://rpacomunicacion.com/|SOTD|Events~Animation~Wordpress~Colorful~CSS~Typography~Transitions~GSAP~Microinteractions|2026-06-20
+Creative Marketing AI|https://creativemarketing.peachweb.io/|HM|WebGL~Storytelling~3D~Business & Corporate~Technology~Web & Interactive~Portfolio~Single page|2026-06-19
+Order & Chaos|https://ordernchaos.aiziza.com/|HM|Experimental~Responsive~GSAP~Design Agencies~Three.js~Web & Interactive~3D~Clean~UI design~Minimal~Next.js~Typography|2026-06-19
+Balmoral|https://www.balmoralrunning.com|DEV+SOTD|E-Commerce~Fashion~Sports~Clean~Fullscreen~Shopify|2026-06-19
+Susie & Jay: A Journey of Love|https://wedding.jongjeonglee.com/|HM|Transitions~Storytelling~GSAP~Events~Three.js~Fullscreen~Interaction Design~Minimal~Unusual Navigation~WebGL|2026-06-13
+Produx Design|https://www.produx.design|HM|Filters and Effects~404 pages~Next.js~Design Agencies~Animation~GSAP~Three.js~3D|2026-06-13
+Qiao|https://qiaooli.com/|HM|Responsive~Storytelling~3D~Other~Figma~Web & Interactive~Blender~Animation~Framer~Portfolio~Gallery|2026-06-13
+Grain & Mortar|https://grainandmortar.com|HM|Graphic design~Icons~Portfolio~Design Agencies~Illustration~Promotional~Gallery~Web & Interactive~Figma~Animation~Adobe Illustrator~Wordpress|2026-06-13
+Crav Burgers|https://www.cravburgers.shop/|DEV+SOTD|E-Commerce~Food & Drink~Hotel / Restaurant~Animation~Colorful~SVG~Typography~Web Fonts~GSAP~404 pages~next.js~Next.js|2026-06-13
+Spatial Festival|https://spatial-festival.program.studio/|HM|Transitions~Experimental~Three.js~GLSL~Web & Interactive~3D~Animation~Filters and Effects~Single page~Interaction Design~WebGL|2026-06-12
+Charmer Studio|https://charmerstudio.com|HM|Footer Design~Vue.js~Nuxt.js~Design Agencies~Sanity~Animation~Clean~About Page~Contact Page|2026-06-12
+Supari Studios|https://www.suparistudios.com/|HM|Typography~Illustration~Interaction Design~Film & TV~Webflow~Games & Entertainment~Adobe XD~Clean~Adobe Illustrator~Portfolio~Responsive Design|2026-06-12
+Acova|https://acova.ai/|HM|Webflow~Technology~Animation~Clean~Minimal~GSAP|2026-06-12
+Pixelismo Studio|https://www.pixelismo.it|HM|GSAP~3D~Filters and Effects~Design Agencies~Interaction Design~Technology~BARBA.js~Web & Interactive~Animation~WebGL|2026-06-12
+cmd+zest|https://www.wearesour.studio/cmd-zest|HM|Sound-Audio~Interaction Design~UI design~Design Agencies~Webflow~Music & Sound~Web & Interactive~Single page~WebGL|2026-06-12
+duoswynwood.com|https://duoswynwood.com/|HM|Real Estate~After Effects~Figma~Art & Illustration~Adobe Photoshop~Hotel / Restaurant~Graphic design~Illustration~Storytelling|2026-06-12
+Lasala Plaza Hotel|https://www.lasalaplazahotel.com/|HM|Parallax~Content architecture~Interaction Design~Business & Corporate~Hotel / Restaurant~CSS~Flat Design~HTML5|2026-06-12
+My Web Lab - Web Agency Milano|https://myweblab.it|HM|Parallax~Scrolling~Three.js~Design Agencies~UI design~Web & Interactive~Header Design~Animation~next.js~Wordpress~CSS|2026-06-12
+Tresmares Capital|https://www.tresmarescapital.com/|DEV+SOTD|Business & Corporate~Institutions~Animation~Clean~Minimal~Parallax~Scrolling~SVG~GSAP~Startups~Vanilla JS|2026-06-12
+Septiembre Arquitectura|https://www.septiembrearquitectura.com/|HM|Content architecture~Architecture~Clean~CSS~HTML5~Bootstrap~Gestures / Interaction~Filters and Effects|2026-06-11
+Teka Teki Studios|https://www.tekatekistudios.com/|HM|Illustration~Interaction Design~Microinteractions~Games & Entertainment~Motion~Web & Interactive~Next.js~Animation~Tailwind~Responsive Design~Single page|2026-06-11
+D D O T T Type Foundry|https://ddott.net/|HM|Minimal~Responsive Design~Typography~Design Agencies~Web Fonts~E-Commerce~WooCommerce~Clean~Wordpress~Flat Design|2026-06-11
+ARETÈ IMMOBILIARE|https://www.areteimmobiliare.com|HM|Responsive Design~Real Estate~Content architecture~Interaction Design~Architecture~Next.js~Animation~Graphic design~Navigation Menu|2026-06-11
+Serve Robotics|https://www.serverobotics.com/|DEV+SOTD|Business & Corporate~Technology~Web & Interactive~Storytelling~React~Interaction Design~Microinteractions~Tailwind~Sanity|2026-06-11
+Zorge 9|https://zorge9.estate/|HM|GSAP~Real Estate~Javascript~Architecture~Luxury~jQuery~Parallax~Single page~Responsive|2026-06-10
+Hello Party|https://thisishelloparty.com/|HM|Film & TV~Games & Entertainment~Colorful~Video~Filters and Effects~Photo & Video~Webflow~Design Agencies|2026-06-10
+nirnor inc.|https://nirnor.jp/|HM|Figma~Adobe Photoshop~Adobe Illustrator~Design Agencies~Web & Interactive~Graphic design~3D~Interaction Design|2026-06-10
+Ponder AI|https://ponder.ai|HM|GSAP~Photo & Video~UI design~Business & Corporate~Microinteractions~Promotional~Startups~Animation~Contentful~Minimal~Webflow~WebGL|2026-06-10
+Haven Constructions|https://www.havenconstructions.com.au/|HM|Gallery~React~Motion~Architecture~Next.js~Animation~Luxury~Clean~Minimal~Parallax|2026-06-10
+Armory AI Agency|https://armory.framer.ai/?via=eyitayo64|HM|Illustration~Data Visualization~Interaction Design~Design Agencies~Startups~Technology~Figma~Icons~Next.js~Navigation Menu~Framer~Portfolio|2026-06-10
+Emily Nixon|https://www.emilynixon.com|HM|Shopify~Interaction Design~UI design~E-Commerce~Microinteractions~Web & Interactive~Figma~CSS~Luxury~Responsive Design~Storytelling|2026-06-10
+Gusta|https://gusta.studio|HM|UI design~About Page~Header Design~Design Agencies~Figma~Web & Interactive~Framer~Colorful~Portfolio~Interaction Design|2026-06-10
+Hubtown|https://hubtown.co.in/|DEV+SOTD|Business & Corporate~Animation~HTML5~WebGL~Experimental~Storytelling~GSAP~3D~Real Estate~Interaction Design|2026-06-10
+Ome Duo Events|https://omeduogroningen.nl/|HM|GSAP~Microinteractions~Figma~Events~Astro~Animation~Scrolling~Single page~Video|2026-06-09
+Copula Agency|https://copula.agency/|HM|Transitions~React~Interaction Design~Design Agencies~Motion~Animation~Next.js~Colorful~Flat Design~Illustration|2026-06-09
+Raw House|https://rawhouseathens.gr/en/|HM|Responsive Design~Scrolling~GSAP~Art & Illustration~Content architecture~Design Agencies~UI design~Games & Entertainment~Figma~Animation~Astro~Graphic design|2026-06-09
+Relais Rossar|https://www.relaisrossar.it|HM|Video~Responsive~Photo & Video~Hotel / Restaurant~Javascript~Clean~Figma~HTML5~Luxury~Photographic~Typography|2026-06-09
+Pacôme Pertant Portfolio|https://pacomepertant.com/|AH+DEV+SOTD|Art & Illustration~Music & Sound~Promotional~Animation~Portfolio~Scrolling~Transitions~GSAP~Three.js~3D~Microinteractions~Nuxt.js|2026-06-09
+X8 Eyewear|https://x8.adencys.com/|HM|E-Commerce~Fashion~Promotional~Animation~Typography~Transitions~Storytelling~GSAP~Shopify~Interaction Design~UI design~After Effects|2026-06-08
+UDS Website|https://ulyssesdesanti.com|HM|Art & Illustration~Web & Interactive~Clean~Flat Design~Graphic design~Typography~Interaction Design~Photo & Video~Prismic~After Effects~Figma~Luxury|2026-06-08
+creativeapproa.ch|https://creativeapproa.ch|HM|HTML5~Portfolio~Experimental~Art & Illustration~Gallery~Web & Interactive~Responsive~Animation~Gestures / Interaction~CSS~Vanilla JS~Fullscreen|2026-06-08
+IGNITE® Agency|https://igniteagency.com/|HM|CSS~Navigation Menu~Typography~Design Agencies~Transitions~Technology~GSAP~Web & Interactive~Copy design~Animation~Webflow~Clean|2026-06-08
+Reyou|https://www.reyou.life|HM|Transitions~GSAP~Content architecture~Business & Corporate~BARBA.js~Clean~Webflow~Parallax~Responsive Design~SEO|2026-06-08
+Tamannaah Fine Jewellery|https://tamannaah.com|HM|E-Commerce~Fashion~Clean~Minimal~Responsive Design~Gallery~GSAP~Shopify~About Page~Microinteractions~Figma~Luxury|2026-06-08
+FORN Studio|https://forn.dk/en|HM|Scrolling~Single page~Technology~SVG~Web & Interactive~WebGL~Animation~Experimental~Clean~Svelte~Minimal~Portfolio|2026-06-08
+invoko - AI helper on your Mac|https://invoko.ai/|HM|Interaction Design~UI design~Technology~Startups~App Style~Tailwind~Clean~CSS~Minimal~Storytelling|2026-06-08
+The Power of Storytelling|https://storytelling.noomoagency.com|DEV+SOTD|Design Agencies~Promotional~Animation~Scrolling~WebGL~Transitions~Storytelling~GSAP~Three.js~3D~UI design~Luxury|2026-06-08
+noteworthy studio|https://noteworthy.studio/|HM|Data Visualization~React~Interaction Design~Design Agencies~UI design~Web & Interactive~Next.js~Animation~Typescript~Clean~Typography|2026-06-07
+Readymag Madrid Meetup|https://readymag.com/madrid-meetup?utm_source=awwwards&utm_medium=partnership_submission&utm_campaign=community|HM|Culture & Education~Events~Web & Interactive~Graphic design~Forms and Input~Photo & Video~Readymag|2026-06-07
+Boa Concept|https://www.boa-concept.com/en-gb/|HM|Nuxt.js~Prismic~Business & Corporate~Technology~Typography~Video~GSAP|2026-06-07
+SOHub|https://sohub.digital|SOTD|Design Agencies~Technology~Web & Interactive~Clean~Minimal~Portfolio~Transitions~GSAP~Contact Page~Footer Design~Next.js~Sanity|2026-06-07
+AI Cybercafé|https://cybercafe.tw/|HM|WebSockets~Data Visualization~Responsive~Art & Illustration~GSAP~Events~Interaction Design~Web & Interactive~Swiper.js~Fullscreen~Single page|2026-06-06
+Apechain|https://apechain.com/|DEV+SOTD|Business & Corporate~Technology~Colorful~WebGL~Experimental~3D~Interaction Design~Next.js|2026-06-06
+Imperiale Bolgheri|https://www.imperialebolgheri.com/en/|HM|HTML5~Filters and Effects~Content architecture~Business & Corporate~About Page~Food & Drink~Footer Design~Animation~Javascript~Big Background Images~CSS|2026-06-05
+BEAUTY IN STEM|https://beautyinstem.com/|HM|Business & Corporate~E-Commerce~Other~Animation~Clean~Parallax~Storytelling~GSAP~Shopify~Interaction Design~UI design~Motion|2026-06-05
+MNBAQ|https://www.mnbaq.org/|HM|Parallax~Scrolling~UI design~Art & Illustration~Header Design~Culture & Education~Javascript~Clean~Figma~Graphic design~HTML5|2026-06-05
+verteal|https://verteal.com/|HM|Portfolio~Typography~Transitions~Business & Corporate~Gestures / Interaction~Design Agencies~Motion~Web & Interactive~Figma~Clean~Next.js~Parallax|2026-06-05
+VOLDOG FOOD|https://www.voldogfood.com/|HM|E-Commerce~Food & Drink~Web & Interactive~Animation~Colorful~SVG~Transitions~Storytelling~GSAP~Interaction Design~UI design~Vanilla JS|2026-06-05
+CURA|https://www.curaclimate.com/|HM|Graphic design~Parallax~3D~Webflow~Business & Corporate~Figma~Technology~Animation~Colorful|2026-06-05
+ARS Type foundry|https://www.arstype.com/|HM|Design Agencies~E-Commerce~Promotional~Clean~Typography~Unusual Navigation~Web Fonts~Gallery~Responsive~Angular~Ruby~Javascript|2026-06-05
+Son Daven|https://sondaven.com/en|AH+DEV+SOTM|E-Commerce~Food & Drink~Hotel / Restaurant~Animation~Scrolling~WebGL~Storytelling~GSAP~UI design~Microinteractions~Webflow|2026-06-05
+Brady Perron|https://www.bradyperron.com/|HM|WebGL~Photography~Gallery~Film & TV~GSAP~Web & Interactive~Filters and Effects~Infinite Scroll~Photo & Video~Minimal~Sanity~Portfolio|2026-06-04
+Siberia|https://siberia.es/|HM|Graphic design~Responsive~Interaction Design~Business & Corporate~UI design~Design Agencies~Project Page~Web & Interactive~Javascript~Animation~Figma~Wordpress|2026-06-04
+Steven.com|https://steven.com|DEV+SOTD|Business & Corporate~Animation~Parallax~Unusual Navigation~WebGL~Experimental~Storytelling~Three.js~3D~Startups~Webflow|2026-06-04
+Become A Yogi|https://final-bay.webflow.io/|HM|GSAP~Interaction Design~Contact Page~Culture & Education~Microinteractions~Sports~Webflow~Responsive Design~Javascript~Typography~Transitions|2026-06-03
+Bill Chien|https://www.billchien.net/|HM|Flat Design~Graphic design~Navigation Menu~Portfolio~Microinteractions~Art & Illustration~Webflow~Web & Interactive~Figma~Clean~Adobe Photoshop|2026-06-03
+Exebenus|https://exebenus.com/|HM|WebGL~3D~Startups~Business & Corporate~Webflow~Technology~Figma~Animation~Clean~Scrolling|2026-06-18
+Object & Archive|https://objectandarchive.com/|HM|Storytelling~Shopify~Interaction Design~Art & Illustration~Footer Design~Culture & Education~Contentful~E-Commerce~Javascript~Big Background Images~Vanilla JS~Gallery|2026-06-18
+Airfield La Caminera|https://airfieldlacaminera.com|HM|Minimal~Gallery~Storytelling~Business & Corporate~Microinteractions~Hotel / Restaurant~Javascript~Animation~Figma~Clean~Luxury~CSS|2026-06-18
+Studio Simms|https://studio-simms.com/|HM|Photography~Contentful~Prismic~Design Agencies~Figma~Promotional~Clean~Flat Design~Unusual Navigation|2026-06-18
+ArtClass|https://www.artclasscontent.com/|HM|Contentful~Webflow~Film & TV~Clean~Minimal~Portfolio~GSAP|2026-06-18
+Van Praet|https://vanpraet.be/|HM|Gestures / Interaction~BARBA.js~Luxury~Architecture~Other~Clean~Wordpress~Photographic|2026-06-18
+Indigo Laboratory|https://indigo-laboratory.it/|DEV+SOTD|Fashion~Music & Sound~Animation~Single page~Experimental~Sound-Audio~Storytelling~GSAP~Microinteractions~Nuxt.js~Curtains.js|2026-06-18
+Ballena   Fine Dining|https://ballenacabo.com|HM|Storytelling~Interaction Design~Microinteractions~Food & Drink~Contentful~Hotel / Restaurant~Javascript~CSS~Figma~Gallery~Luxury~Menu - Horizontal|2026-06-17
+Playfight|http://www.letsplayfight.com|HM|Video~WebGL~Storytelling~GSAP~Design Agencies~Photo & Video~Film & TV~Webflow~Animation~Portfolio|2026-06-17
+Cipher Digital|https://cipherdigital.com/|HM|3D~Interaction Design~UI design~Business & Corporate~Figma~Technology~Cinema 4D~Web & Interactive~Wordpress~Transitions|2026-06-17
+WC26 Unofficial Player Album|https://playeralbum.com/|HM|Sports~3D~Animation~Gestures / Interaction~Colorful~Next.js~WebGL~Illustration~Experimental~Gallery~Games & Entertainment~GSAP|2026-06-17
+Armory|https://www.armory.in/|HM|Storytelling~Three.js~3D~Design Agencies~Interaction Design~Web & Interactive~Startups~Animation~Webflow~Scrolling~Blender~Video|2026-06-17
+Gucci: Mystery Unfolds|https://lafamigliamysteryunfolds.gucci.com/|SOTD|Fashion~Games & Entertainment~Web & Interactive~Animation~App Style~Storytelling~GSAP~Gestures / Interaction~Interaction Design~UI design~GraphQL|2026-06-17
+Hero Studios|https://www.herostudios.tv|HM|Craft CMS~After Effects~Figma~Art & Illustration~Design Agencies~Clean~Colorful~Portfolio|2026-06-16
+FUNTECH BRAND IDENTITY|https://ci.funtech.inc/en|HM|GSAP~Interaction Design~next.js~Design Agencies~Next.js~Web & Interactive~Animation~Colorful~WebGL|2026-06-16
+South Cliff Dental Group|https://southcliffdentalgroup.com/|HM|Three.js~3D~Gestures / Interaction~Art & Illustration~Interaction Design~Design Agencies~UI design~Web & Interactive~Microinteractions~WebGL~Next.js~Storytelling|2026-06-16
+Gustaf Furusten Portfolio|https://gustaffurusten.se|HM|Portfolio~Typography~Experimental~Other~About Page~Web & Interactive~Framer~Animation~Clean~Minimal|2026-06-16
+UX/UI designer portfolio|https://www.ulrychkristian.cz/|HM|Portfolio~Transitions~UI design~Design Agencies~Project Page~Mobile & Apps~Vercel~Web & Interactive~Figma~Animation~Next.js~Parallax|2026-06-16
+Fauna Robotics|https://faunarobotics.com|AH+DEV+SOTD|Technology~Colorful~Graphic design~Icons~Illustration~Gestures / Interaction~Interaction Design~Startups~Webflow|2026-06-16
+Delvaux Digital Flagship Store|https://delvaux.com|HM|Minimal~GSAP~Craft CMS~E-Commerce~UI design~Fashion~Footer Design~Animation~Figma~Big Background Images~Luxury~Graphic design|2026-06-15
+Dash Creative|https://www.dashcreative.co|HM|3D~Filters and Effects~Design Agencies~Project Page~E-Commerce~Webflow~Web & Interactive~Figma~Animation~Portfolio~Video|2026-06-15
+XNRGY Club|https://xnrgyclub.com/|HM|Bootstrap~Swiper.js~Business & Corporate~Sports~Clean~Transitions~GSAP|2026-06-15
+Loft 31|https://www.loftthirtyone.com|HM|Real Estate~Interaction Design~Figma~Architecture~Framer~Animation~Infinite Scroll~Parallax~Gallery|2026-06-15
+Elva|https://elva-labs.com/|DEV+SOTD|Design Agencies~Mobile & Apps~Web & Interactive~Animation~Responsive Design~Single page~WebGL~GSAP~Three.js~Forms and Input~Filters and Effects~UI design|2026-06-15
+Lemaire|http://www.lemaire.fr|HM|Big Background Images~Clean~Minimal~Photographic~Photo & Video~After Effects~E-Commerce~Figma~Fashion~Adobe Photoshop|2026-06-14
+Matthäus Jandl|https://www.matthaeusjandl.com|HM|Portfolio~Typography~Illustration~Art & Illustration~Lottie~Design Agencies~Adobe Illustrator~Clean~Framer~Graphic design~Icons|2026-06-14
+The Bend Club|https://www.thebendclub.com|HM|Transitions~GSAP~Real Estate~Hotel / Restaurant~next.js~Animation~Figma~Clean~Next.js~Scrolling~Luxury~Single page|2026-06-14
+Project Aperture|https://www.project-aperture.com/|HM|Transitions~Experimental~Gallery~Web & Interactive~GSAP~Animation~Three.js~Photographic~Interaction Design~Unusual Navigation~Nuxt.js~Photography|2026-06-14
+sakazuki|https://sakazuki.io/|AH+SOTD|Culture & Education~Food & Drink~Animation~Graphic design~Photographic~Experimental~Figma~Adobe Illustrator|2026-06-14
+What If Orwell Had a Website|https://orwell.byholm.co/|HM|Web & Interactive~Animation~Illustration~Storytelling~GSAP~Three.js~Javascript~Art & Illustration|2026-06-13
+Halston: Architecture template|https://halston-architecture-template.webflow.io/|HM|Portfolio~Responsive~GSAP~Architecture~Real Estate~Business & Corporate~Interaction Design~Animation~Webflow~Clean~Minimal|2026-06-13
+RCK PORTFOLIO®|https://www.rickallan.work/|HM|Sound-Audio~UI design~Tailwind~Design Agencies~Typescript~Web & Interactive~Framer~Animation~Experimental~Gallery|2026-06-03
+GEBERIT CAMPUS GRAND OPENING|https://dev.n-h-ulm.de/geberit/teaser-v1/|HM|Storytelling~GSAP~Content architecture~Architecture~Microinteractions~Promotional~Lottie~Web & Interactive~After Effects~Graphic design~Parallax|2026-06-03
+John and Patricia's Space|https://john-and-patricias-comfort-site-about-attachment-styles.com/|HM|Figma~Blender~Culture & Education~Other~Storytelling~Three.js~3D|2026-06-03
+Lydia Leiwang's Portfolio|https://lydialeiwang.com/|HM|Minimal~Node.js~Filters and Effects~Design Agencies~Javascript~Promotional~Figma~Web & Interactive~Colorful~Flat Design|2026-06-03
+Truck’N Roll®|https://trucknroll.com/|DEV+SOTD|Business & Corporate~Events~Promotional~Clean~Photographic~Typography~Craft CMS~Javascript~Locomotive Scroll|2026-06-03
+Mira|https://mira-dev.webflow.io|HM|Business & Corporate~E-Commerce~Parallax~GSAP~Shopify~3D~UI design~About Page~Microinteractions~Startups~After Effects|2026-06-02
+THE RED|https://www.333southwabash.com/|HM|Architecture~Food & Drink~Colorful~Scrolling~Typography~WebGL~3D~Gestures / Interaction~Real Estate~Javascript|2026-06-02
+Still Night|https://stillnight.joshua-garcia.com|HM|Sound-Audio~Gestures / Interaction~Filters and Effects~Music & Sound~Interaction Design~Web & Interactive~Vanilla JS~Animation~WebGL~Experimental|2026-06-02
+MomoAmo|https://momoamo.com|HM|GSAP~Interaction Design~next.js~Events~Motion~Colorful~Next.js~Photographic~Luxury~Responsive Design~Storytelling|2026-06-02
+BLUEPRINT|https://blueprintapps.io/|HM|Parallax~Transitions~GSAP~Business & Corporate~Content architecture~Mobile & Apps~Header Design~Technology~Nuxt.js~Animation~Prismic~Horizontal Layout|2026-06-02
+REF Digital|https://ref.digital/|DEV+SOTD|Design Agencies~Animation~Portfolio~GSAP~GLSL~About Page~Header Design~Microinteractions~Project Page~Nuxt.js|2026-06-02
+UXBERT LABS|https://uxbert.com/|HM|3D~Interaction Design~Design Agencies~Photo & Video~Technology~After Effects~Web & Interactive~Figma~Animation~Blender~Scrolling~Storytelling|2026-06-01
+Lumena|https://lumena-partners.com/|HM|Filters and Effects~Anime.js~Business & Corporate~Clean~Wordpress~Minimal~Single page|2026-06-01
+How F1 has evolved since 1950|https://www.espn.com/espn/feature/story?id=43832710|HM|Single page~Transitions~React~Magazine / Newspaper / Blog~Filters and Effects~Sports~UI design~Animation~Javascript~CSS~Scrolling|2026-06-01
+Parallel Universe|https://paralleluniverse.com.ua/en/|HM|Portfolio~Experimental~Sound-Audio~Culture & Education~Storytelling~Animation~GSAP~Wordpress~Luxury~CSS~Parallax|2026-06-01
+Slow Down Creative|http://www.slowdowncreative.com|HM|Icons~About Page~Footer Design~Art & Illustration~Webflow~Design Agencies~Figma~Animation~Social responsibility~Clean~Adobe Illustrator~Graphic design|2026-06-01
+Yazdani Studio|https://yazdanistudio.com/|HM|Flat Design~Minimal~Responsive Design~Gallery~next.js~Architecture~Vercel~Clean~Next.js~Wordpress|2026-06-01
+Hashgraph Ventures|https://hashgraphvc.com/|DEV+SOTD|Business & Corporate~Technology~Animation~Storytelling~Three.js~3D~Nuxt.js~Sanity|2026-06-01
+Digital Culture|https://digital-culture.valmax.dev/|HM|Flat Design~Transitions~Interaction Design~Business & Corporate~Microinteractions~Web & Interactive~Figma~Animation~Clean~Wordpress|2026-05-31
+Domitur|https://www.domitur.pt/|HM|Photographic~Scrolling~Responsive~Business & Corporate~UI design~Wordpress~Sketch~Flat Design~HTML5~Navigation Menu|2026-05-31
+RSquad Blockchain Lab|https://rsquad.io/|HM|Technology~Web & Interactive~Animation~Scrolling~Typography~Experimental~Storytelling~Three.js~Interaction Design~UI design~BARBA.js~Webflow|2026-05-31
+Vaulk|https://vaulk.com/|DEV+SOTD|Architecture~Parallax~Video~GSAP~Real Estate~Vue.js~Nuxt.js|2026-05-31
+Creative Cruise 2026|https://creativecruise.nl|HM|Infinite Scroll~WebGL~Transitions~Business & Corporate~Three.js~Events~3D~Web & Interactive~Svelte~Animation~Colorful|2026-05-30
+Yuta Abe — Portfolio|https://yutaabe.com/|HM|GSAP~Three.js~Interaction Design~Blender~Web & Interactive~Animation~Portfolio|2026-05-30
+ZettaJoule|https://zetta-joule.com/|DEV+SOTD|Technology~Animation~Big Background Images~Clean~Fullscreen~Video~3D~Webflow~Figma~Blender|2026-05-30
+Interiorglobe|https://www.interiorglobe.co/|HM|About Page~Footer Design~Svelte~Architecture~Figma~Magazine / Newspaper / Blog~Clean~Gallery~Storytelling|2026-05-29
+KIE|https://www.kie-design.com/|HM|GSAP~UI design~Microinteractions~Design Agencies~Next.js~Animation~Minimal~Portfolio~Transitions|2026-05-29
+Wibify Agency|https://wibify.agency/|HM|SEO~Interaction Design~UI design~Business & Corporate~next.js~Design Agencies~Figma~Web & Interactive~Next.js~Animation~Framer~Portfolio|2026-05-29
+Since You Arrived|https://sinceyouarrived.world/hub|HM|Magazine / Newspaper / Blog~Animation~CSS~HTML5~Minimal~Typography~Experimental~Storytelling~Interaction Design~Microinteractions~Javascript|2026-05-29
+Korowa Anglican Girls' School|https://www.korowa.vic.edu.au/|HM|UI design~Header Design~Webflow~Culture & Education~Institutions~Big Background Images~CSS~GSAP|2026-05-29
+Sowieso Wero|https://sowieso.wero-wallet.eu/nl-en/merchant|DEV+SOTD|Business & Corporate~E-Commerce~Technology~Animation~Colorful~Scrolling~Transitions~Storytelling~GSAP~Nuxt.js~Lottie|2026-05-29
+I•IARMONY|https://harmony.now/|HM|Events~Music & Sound~Colorful~Fullscreen~Unusual Navigation~Transitions~3D~UI design~Vanilla JS~Timber~Sass|2026-05-28
+Oddly Made|https://oddlymade.webflow.io|HM|Design Agencies~Web & Interactive~Animation~Colorful~Minimal~Portfolio~GSAP~Interaction Design~UI design~Webflow~Figma|2026-05-28
+NVRMND Studio|https://www.nvrmndstudio.com|HM|Design Agencies~Technology~Web & Interactive~Responsive Design~Unusual Navigation~Storytelling~Content architecture~Interaction Design~Microinteractions~Webflow~Figma|2026-05-28
+Cdiscount - Jumping Max|https://jumpingmax.cdiscount.com/|DEV+SOTD|E-Commerce~Games & Entertainment~Promotional~Colorful~Three.js~3D|2026-05-28
+Kerna Studio|https://www.kerna.studio/|HM|Business & Corporate~Design Agencies~Technology~Clean~Flat Design~Minimal~Responsive Design~Project Page~Tailwind~Typescript~Astro|2026-05-27
+FURO Web|https://www.furoweb.eu/|HM|Business & Corporate~Design Agencies~Web & Interactive~Clean~Graphic design~SEO~Responsive~Storytelling~GSAP~Gestures / Interaction~Webflow~Javascript|2026-05-27
+Britain's Favourite Butterfly|https://britainsfavouritebutterfly.co.uk/|HM|CSS~HTML5~Illustration~Art & Illustration~Transitions~Culture & Education~Storytelling~Games & Entertainment~Microinteractions~Animation~Javascript~Colorful|2026-05-27
+Yann Novak|https://www.yannnovak.com|HM|Minimal~Portfolio~Experimental~Art & Illustration~UI design~Music & Sound~Wordpress~CSS~HTML5|2026-05-27
+AIR|https://aircenter.space/|DEV+SOTD|Architecture~Business & Corporate~Minimal~WebGL~Three.js~Real Estate|2026-05-27
+Blit Studio|https://blit.studio/|HM|Design Agencies~Web & Interactive~Clean~Wordpress~Minimal~Portfolio~WebGL~Experimental~GSAP~Photo & Video|2026-05-26
+Shining|https://shining.302chanwoo.com|HM|Art & Illustration~Web & Interactive~Colorful~Portfolio~Typography~Experimental~Storytelling~GSAP~Three.js~GLSL~3D~Interaction Design|2026-05-26
+Volt|https://voltlites.com|HM|Business & Corporate~Events~Games & Entertainment~Wordpress~Scrolling~Video~WebGL~GSAP~UI design~Microinteractions|2026-05-26
+Iris K|https://theirisk.com/|HM|Art & Illustration~Music & Sound~Animation~Minimal~Transitions~Sound-Audio~Storytelling~Three.js~3D~Javascript~Luxury~Vite|2026-05-26
+Luke Baffait|https://www.lukebaffait.fr|HM|Art & Illustration~Technology~Web & Interactive~Animation~Graphic design~Portfolio~WebGL~Storytelling~GSAP~3D~UI design~Blender|2026-05-26
+Razorpay Sprint 26|https://razorpay.com/sprint/26|DEV+SOTD|Art & Illustration~Technology~Web & Interactive~Animation~Scrolling~WebGL~Illustration~Three.js~3D~Interaction Design~Microinteractions~Webflow|2026-05-26
+Daily Rituals — 0% AI|https://remote-rituals.framer.website/|HM|Art & Illustration~Design Agencies~Other~Clean~Colorful~Flat Design~Minimal~Scrolling~SVG~Illustration~Figma~Framer|2026-05-25
+Olive®|https://www.olivedesign.fr|HM|E-Commerce~Fashion~Clean~CSS~Minimal~Scrolling~Typography~Unusual Navigation~Experimental~Storytelling~Shopify~Javascript|2026-05-25
+Ario Law Firm|https://ario.law/en/|HM|Business & Corporate~Animation~Clean~Transitions~Responsive~GSAP~PHP~3D~Figma|2026-05-25
+Geolava|https://geolava.com/|HM|Business & Corporate~Other~Technology~Animation~Fullscreen~Data Visualization~Webflow|2026-05-25
+Hex Pens|https://www.hexpens.com|HM|E-Commerce~Graphic design~Minimal~Shopify~Startups~Figma~Adobe Illustrator|2026-05-25
+Cartier Watches & Wonders 2026|https://www.cartier.com/en-fr/watchesandwonders|DEV+SOTD|Promotional~Scrolling~Experimental~Three.js~GLSL~3D~Gestures / Interaction~Blender~Luxury|2026-05-25
+Aimee's Papercraft World|https://aimees-papercraft-world.com/|DEV+SOTD|Art & Illustration~Web & Interactive~Colorful~Infinite Scroll~Unusual Navigation~Storytelling~Three.js~React~3D~Blender|2026-05-24
+Save for later|https://www.clicktokeep.com/|HM|Games & Entertainment~Fullscreen~Graphic design~Data Visualization~Experimental~Filters and Effects~Header Design~Contentful~Social responsibility~Wix Studio|2026-05-23
+sen knife by Takahashikusu|https://sen-knife.com/2.0/|HM|Food & Drink~Other~Animation~Minimal~Scrolling~3D~After Effects~Figma~Blender|2026-05-23
+Ouzo Matarellis|https://www.matarellis.gr/en/|HM|Food & Drink~Wordpress~Parallax~Typography~Transitions~Storytelling~GSAP~UI design~Microinteractions~Tailwind|2026-05-23
+Price & Pierce|https://www.price-pierce.co.uk/|HM|Business & Corporate~Web & Interactive~Big Background Images~Wordpress~CSS~HTML5~Scrolling~Video~Photography~Transitions~Responsive|2026-05-23
+Cynx ー Portfolio 2026|https://cynx.io|HM|Web & Interactive~Animation~Clean~Infinite Scroll~WebGL~Photography~Experimental~GSAP~GLSL~Interaction Design|2026-05-23
+Wesley College|https://www.wesleycollege-usyd.edu.au/|HM|Culture & Education~Institutions~Big Background Images~Flat Design~Navigation Menu~Typography~Unusual Navigation~Video~GSAP~Webflow|2026-05-23
+Tenity|https://www.tenity.com/|HM|Business & Corporate~Events~Animation~Wordpress~Colorful~Parallax~Scrolling~Typography~WebGL~GSAP~Startups|2026-05-23
+Venetian Nail Spa|https://venetianspa.ca|HM|Business & Corporate~Fashion~Animation~Wordpress~Scrolling~Video~Figma~Elementor~Luxury|2026-05-23
+Tony Mak — Art Direction & Systems|http://www.tonymak.co/creative/?company=Awwwards|HM|Design Agencies~Animation~Big Background Images~Minimal~Video~Experimental~GSAP~Three.js~Interaction Design~Tailwind|2026-05-23
+Festival Les Francouvertes|https://francouvertes.com/|HM|Events~Games & Entertainment~Promotional~Wordpress~Colorful~Portfolio~GSAP~Content architecture~Photo & Video~Contentful~Javascript|2026-05-23
+Cleo AI|https://web.meetcleo.com/|DEV+SOTD|Business & Corporate~Technology~Web & Interactive~Clean~Responsive Design~Transitions~Data Visualization~Storytelling~React~Interaction Design~Next.js~Framer|2026-05-23
+Bruno Cisco|https://brunocis.co|HM|Mobile & Apps~Sports~Technology~CSS~Minimal~Portfolio~Storytelling~Copy design~Project Page~Javascript~Figma|2026-05-22
+Matveyan designer|https://matveyan.com/|HM|Design Agencies~Animation~Portfolio~WebGL~3D~UI design~Figma~Blender|2026-05-22
+Sidewave|https://sidewave.it/|DEV+SOTD|Business & Corporate~Technology~Web & Interactive~Animation~HTML5~Portfolio~Unusual Navigation~WebGL~Storytelling~3D~Interaction Design~Unity|2026-05-22
+Goodman Gallery|https://goodman-gallery.com/|HM|Art & Illustration~Business & Corporate~Portfolio~Transitions~React~UI design~Sanity~AWS|2026-05-21
+Shakanksh Sinha|https://shakanksh.com/|HM|Design Agencies~Other~Web & Interactive~Flat Design~Transitions~GSAP~Gestures / Interaction~Footer Design~404 pages~next.js~Next.js~Tailwind|2026-05-21
+Synapser Studio|https://www.synapserstudio.com/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~Minimal~Portfolio~Scrolling~Video~GSAP~Three.js~Interaction Design~Next.js|2026-05-21
+La Revoltosa|https://larevoltosa.es/|DEV+SOTD|Art & Illustration~Food & Drink~Web & Interactive~Animation~WebGL~Illustration~Storytelling~GSAP~Three.js~3D~Copy design~Interaction Design|2026-05-21
+2Advanced   Field Station 02|https://keseysignal.2advanced.com/|HM|E-Commerce~Promotional~Web & Interactive~Animation~CSS~HTML5~Sound-Audio~Storytelling~UI design~Javascript|2026-05-20
+Lunchlab - Lumen|https://lunchlab.fr/|HM|Art & Illustration~Design Agencies~Web & Interactive~Animation~CSS~HTML5~Minimal~WebGL~Illustration~Gallery~Sound-Audio~Storytelling|2026-05-20
+Strawberry Group|https://www.strawberrygroup.no/|HM|Business & Corporate~Web & Interactive~Animation~Navigation Menu~Scrolling~GSAP~Filters and Effects~Interaction Design~Microinteractions~Webflow~Javascript|2026-05-20
+Helix Earth|https://helixearth.com/|HM|Business & Corporate~Technology~Animation~HTML5~UI design~Startups~Javascript~Tailwind|2026-05-20
+aino.agency|https://aino.agency|DEV+SOTD|Design Agencies~Technology~Animation~Portfolio~Transitions~Data Visualization~Experimental~UI design~Microinteractions~Vanilla JS|2026-05-20
+Piranha Bar|https://piranhabar.ie/|HM|Film & TV~Animation~Colorful~CSS~HTML5~Gallery~GSAP|2026-05-19
+Wildbran|https://www.wildbran.pt/|HM|Business & Corporate~Food & Drink~Other~Colorful~Transitions~GSAP~UI design~Contact Page~Microinteractions~BARBA.js~Webflow|2026-05-19
+A Better Lou|https://abetterlou.com/|HM|Culture & Education~Other~Big Background Images~Clean~Minimal~Scrolling~Typography~WebGL~GSAP~Webflow|2026-05-19
+DANZAN|https://danzan.jiejoe.com|HM|Promotional~Web & Interactive~Animation~Scrolling~Illustration~GSAP~Three.js~3D~Lottie|2026-05-18
+Valentin Gassend Portfolio|https://valentingassend.com/|HM|Design Agencies~Web & Interactive~Animation~Infinite Scroll~Portfolio~Scrolling~WebGL~Experimental~GSAP~Three.js~3D~Interaction Design|2026-05-18
+Noxediem Creative & Production|https://noxediem.ch/en/|HM|Film & TV~Promotional~Animation~Wordpress~Fullscreen~Video~Photography~Transitions~GSAP~Interaction Design~Footer Design~Tailwind|2026-05-18
+Mads Matters|https://madsmatters.com|HM|Design Agencies~Colorful~Typography~Three.js~3D~Figma~Framer|2026-05-18
+Synthesis Capital|https://www.synthesis.capital/|HM|Business & Corporate~Clean~Parallax~Photographic~Storytelling~Node.js~UI design~Javascript~Next.js~Social responsibility|2026-05-18
+Capitolium|https://www.collabcapitolium.fr|DEV+SOTD|Culture & Education~Fashion~Sports~Animation~Big Background Images~Fullscreen~Horizontal Layout~Photographic~GSAP~Nuxt.js~Typescript|2026-05-18
+Mohamed Shehata Personal|https://mohamedshehata.net/|HM|Web & Interactive~Animation~Scrolling~Single page~WebGL~Experimental~GSAP~Three.js~Gestures / Interaction~UI design~About Page~Startups|2026-05-17
+Lesse Studio|https://lessestudio.com/|HM|Business & Corporate~Design Agencies~Technology~Animation~Portfolio~Three.js~3D~Forms and Input~Interaction Design~Microinteractions~Svelte|2026-05-17
+Oz Gultekin|https://ozgur.design|HM|Design Agencies~Technology~Web & Interactive~Clean~Flat Design~Minimal~Portfolio~Typography~Storytelling~GSAP~Typescript~Astro|2026-05-17
+KVS Studio|https://www.kvs.services/|DEV+SOTD|Design Agencies~Technology~Web & Interactive~Animation~Responsive Design~WebGL~Sound-Audio~Three.js~3D~UI design~Microinteractions~Vue.js|2026-05-17
+HYDROFLOW|https://hydroflowdrink.com/|HM|Food & Drink~Technology~Web & Interactive~Animation~Three.js~React~3D~UI design~Contentful~Next.js|2026-05-16
+Auwa|https://auwa.life|HM|Art & Illustration~Magazine / Newspaper / Blog~Clean~Minimal~Photographic~Illustration~Storytelling~Copy design~Next.js~Tailwind~Typescript~Luxury|2026-05-16
+HBA|https://hba.com/|HM|Architecture~Business & Corporate~Hotel / Restaurant~Wordpress~CSS~Fullscreen~Infinite Scroll~Video~Transitions~Gallery~Menu - Vertical~Javascript|2026-05-16
+Marin Kurir - Digital Designer|https://www.marinkurir.com/|HM|Promotional~Technology~Web & Interactive~Animation~Clean~Portfolio~Storytelling~Interaction Design~UI design~Webflow~After Effects~Figma|2026-05-16
+Enerblock|https://enerblock.net/en/|DEV+SOTD|Business & Corporate~GSAP~UI design~Microinteractions~Footer Design~Sanity~Astro|2026-05-16
+Pomelo|https://pomelo.la/en|HM|Business & Corporate~Other~Technology~Animation~Scrolling~Illustration~GSAP~Vercel~Prismic|2026-05-15
+Tout Bien Pils|https://toutbienpils.com/|HM|E-Commerce~Food & Drink~Animation~Colorful~GSAP~Shopify|2026-05-15
+Laurenti Web Design Studio|https://laurentiwebdesign.it/|HM|Design Agencies~Web & Interactive~Animation~Portfolio~Typography~GSAP~Interaction Design~UI design~Next.js~Sanity|2026-05-15
+L'OISEAU DÉ|https://loiseau.framer.website/|HM|E-Commerce~Fashion~Animation~Big Background Images~Clean~Colorful~Fullscreen~Minimal~Luxury~Framer|2026-05-15
+Dropship|https://www.dropship.io|HM|E-Commerce~Technology~Web & Interactive~Animation~Colorful~Icons~Transitions~GSAP~UI design~Microinteractions~Webflow~Figma|2026-05-15
+Juan Mora|https://juanmora.co/|DEV+SOTD|Design Agencies~Promotional~Web & Interactive~Colorful~Portfolio~Scrolling~GSAP~Interaction Design~About Page~Footer Design~Lottie~Webflow|2026-05-15
+Flesh and Bones|https://wearefleshandbones.com|HM|Art & Illustration~Design Agencies~Video~Illustration~Transitions~Vue.js~Nuxt.js|2026-05-14
+NorthGarden|https://www.northgarden.com|HM|Design Agencies~Technology~Web & Interactive~Minimal~Portfolio~Gallery~Menu - Horizontal~Three.js~GLSL~3D~Microinteractions~Next.js|2026-05-14
+Leil Saunas|https://leilsaunas.com|HM|Other~Web & Interactive~Clean~Wordpress~Storytelling~Interaction Design~Javascript~Figma~Luxury|2026-05-14
+Modus Projects|https://www.modusprojects.nl/|HM|Architecture~Animation~Big Background Images~Clean~Fullscreen~Scrolling~GSAP~Real Estate~Footer Design~Webflow~Javascript|2026-05-14
+Salo Creative|https://salo.uk|HM|Design Agencies~GSAP~UI design~Astro|2026-05-14
+fromanother.love|https://www.fromanother.love/|DEV+SOTD|Design Agencies~Animation~Clean~Colorful~Portfolio~React~Interaction Design~Prismic~Next.js|2026-05-14
+Auremin|https://www.auremin.com/|HM|Business & Corporate~Animation~Scrolling~Transitions~Three.js~Filters and Effects~UI design|2026-05-13
+Novu: Just talk. Find focus.|https://www.withnovu.com|HM|Mobile & Apps~Animation~Clean~CSS~Typography~Video~Gestures / Interaction~Startups~Motion~Next.js|2026-05-13
+Palladio Group|https://palladiogroup.com/|HM|Magazine / Newspaper / Blog~Business & Corporate~Web & Interactive~Animation~Big Background Images~Wordpress~Fullscreen~Video~GSAP~3D~UI design~Javascript|2026-05-13
+Floema|https://www.floema.com/en|DEV+SOTM|Business & Corporate~E-Commerce~Promotional~Photographic~WebGL~Storytelling~GSAP~3D~Header Design~Nuxt.js|2026-05-13
+Major Media Agency|https://thiswasmajor.com/|HM|Events~Film & TV~Sports~Portfolio~Gallery~Photo & Video~UI design~About Page~Contact Page~Figma~Cinema 4D~Framer|2026-05-12
+Luca Nardi Portfolio|https://www.aboutluca.com/|HM|Music & Sound~Web & Interactive~Portfolio~Scrolling~WebGL~Experimental~Sound-Audio~Storytelling~GSAP~Three.js~3D~Interaction Design|2026-05-12
+UMANO DESIGN STUDIO|http://umanodesign.studio|HM|Design Agencies~Mobile & Apps~CSS~HTML5~Scrolling~Transitions~UI design~About Page~Header Design~Startups|2026-05-12
+Banh Mi World|https://banhmiworld.ca/|HM|Food & Drink~Wordpress~Colorful~Graphic design~Illustration~Storytelling~UI design~Figma~Elementor|2026-05-12
+Code by Jesse|https://www.codebyjesse.com/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~Portfolio~Responsive Design~WebGL~Transitions~Footer Design~BARBA.js~Webflow|2026-05-12
+Happly|https://gethapply.com|DEV+SOTD|Design Agencies~E-Commerce~Web & Interactive~Animation~Clean~Colorful~CSS~Parallax~Typography~Storytelling~Shopify~Figma|2026-05-12
+CREATIVECUE®|https://www.creativecue.co/|HM|Design Agencies~Technology~Colorful~Graphic design~Minimal~Portfolio~React~Microinteractions~404 pages~Lottie~Figma|2026-05-11
+363 Car & Social Club|https://363sudbury.com/|HM|Business & Corporate~App Style~Clean~Navigation Menu~Menu - Horizontal~Responsive~GSAP~React~UI design~Astro|2026-05-11
+Yan Hladchenko|https://yanhladchenko.com/|HM|Other~Technology~Web & Interactive~Portfolio~Transitions~Storytelling~Interaction Design~UI design~Microinteractions~Figma~Framer|2026-05-11
+Bevel Health|https://www.bevel.health/|HM|Mobile & Apps~Sports~Animation~App Style~Colorful~Data Visualization~UI design~Header Design~Startups~Webflow~After Effects~Figma|2026-05-11
+Outfit|https://outfit.hellohello.is/|AH+DEV+SOTD|Design Agencies~E-Commerce~Fashion~Animation~Clean~Minimal~Photographic~GSAP~React~Shopify~Interaction Design~UI design|2026-05-11
+FCTRY LAb|https://fctrylab.com/|HM|E-Commerce~Fashion~Responsive Design~Gallery~Shopify~UI design~About Page~Microinteractions~Footer Design~Javascript~Figma~Luxury|2026-05-10
+Micha Brandt|http://michabrandt.de|HM|Mobile & Apps~Technology~Web & Interactive~Wordpress~CSS~Flat Design~HTML5~Minimal~Portfolio~Responsive Design~Content architecture~UI design|2026-05-10
+Mily Group|https://milygroup.com|HM|Business & Corporate~Web & Interactive~Clean~Wordpress~Minimal~Typography~Menu - Vertical~PHP~Luxury|2026-05-10
+Glossar|https://glossar.app/|HM|Culture & Education~Mobile & Apps~Web & Interactive~App Style~Minimal~Scrolling~Storytelling~Interaction Design~Next.js|2026-05-10
+imflorea — Software Architect|https://imflorea.dev|HM|Design Agencies~Web & Interactive~Graphic design~Minimal~Parallax~Scrolling~Experimental~Laravel~Interaction Design~UI design~Vue.js~Figma|2026-05-10
+Dasupply|https://dasupply.xyz/|HM|Art & Illustration~Animation~Minimal~Portfolio~Photography~Photo & Video~About Page~404 pages~Figma|2026-05-10
+XOX|https://xox.makemepulse.com/|DEV+SOTD|Games & Entertainment~Web & Interactive~Animation~Colorful~WebGL~Experimental|2026-05-10
+Boaz Walma|https://boazwalma.com/|HM|Film & TV~Infinite Scroll~Navigation Menu~Photography~GSAP~About Page~Microinteractions~Sanity~Astro|2026-05-09
+Ownitt|https://ownitt.fr/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~Big Background Images~CSS~Minimal~Navigation Menu~Scrolling~Interaction Design~Vercel~Next.js|2026-05-09
+Horeca Social – Made Viral|https://www.horeca-social.com/|HM|Business & Corporate~Hotel / Restaurant~Web & Interactive~Animation~Clean~Scrolling~Transitions~GSAP~Gestures / Interaction~Interaction Design~Webflow~Figma|2026-05-09
+Duyu Care|https://duyucare.dops.agency/|HM|Promotional~Web & Interactive~360~GSAP~React~3D~Photo & Video~UI design~About Page~404 pages~Startups~Next.js|2026-05-09
+Papumba - Educational App|https://www.papumba.com/|HM|Art & Illustration~Culture & Education~Web & Interactive~Colorful~Illustration~Storytelling~UI design~Webflow~Figma~Adobe Illustrator|2026-05-09
+Simonholm.studio|https://www.simonholm.studio|SOTD|Design Agencies~Promotional~Clean~Portfolio~Interaction Design~Webflow|2026-05-09
+WatchHouse.|https://watchhouse.com|HM|Architecture~E-Commerce~Food & Drink~Typography~Menu - Horizontal~Storytelling~Shopify~UI design~Footer Design~Figma|2026-05-08
+Platse|https://rumbekeplatse.be|HM|Food & Drink~Hotel / Restaurant~Web & Interactive~Animation~Wordpress~Responsive Design~Single page~Illustration~GSAP~Gestures / Interaction~Interaction Design~Figma|2026-05-08
+And we were...|https://canariasart.com/|AH|Art & Illustration~Culture & Education~Games & Entertainment~Unusual Navigation~WebGL~Illustration~Sound-Audio~Storytelling~3D~Interaction Design~Vue.js~Typescript|2026-05-08
+Here & Away|https://www.here-away.com/|HM|Architecture~Hotel / Restaurant~Big Background Images~Wordpress~Minimal~Photographic~Gallery~Storytelling~Filters and Effects~Figma~Next.js~Luxury|2026-05-08
+Clevermellow|https://www.clevermellow.co/|HM|Design Agencies~Institutions~Animation~Colorful~WebGL~Transitions~Filters and Effects~UI design~Header Design~Webflow~Figma~Social responsibility|2026-05-08
+Weird Folders|https://weirdfolders.com/|AH|E-Commerce~Web & Interactive~Infinite Scroll~Minimal~Experimental~Gallery~GSAP~React|2026-05-08
+Aeruk|https://aerukart.com|HM|Design Agencies~Web & Interactive~Wordpress~Graphic design~Portfolio~Responsive Design~3D~UI design~Project Page~Elementor~Blender|2026-05-08
+Dungeons & Dragons|https://www.dungeonsanddragons.com|HM|Games & Entertainment~Animation~Big Background Images~Graphic design~GSAP~React~Copy design~Lottie|2026-05-08
+Studio Namma|https://studionamma.com|DEV+SOTD|Design Agencies~Web & Interactive~Animation~Navigation Menu~Portfolio~Transitions~GSAP~Contact Page~Footer Design~Webflow~Javascript|2026-05-08
+Vorszk|https://www.vorszk.com|HM|Business & Corporate~Other~Animation~Clean~Scrolling~Three.js~3D~Real Estate~Contact Page~Nuxt.js~Figma|2026-05-07
+Evagria|https://evagria.com|HM|Business & Corporate~Fashion~Big Background Images~Clean~Flat Design~Fullscreen~Minimal~Photography~About Page~Framer|2026-05-07
+KHUFU'S|https://khufus.com|HM|Architecture~Hotel / Restaurant~Web & Interactive~HTML5~Responsive Design~Storytelling~PHP~UI design~Figma|2026-05-07
+Lucien|https://www.lucien.com/|HM|Technology~Web & Interactive~Animation~Clean~Graphic design~Responsive~UI design~Startups~Webflow~Figma~Cinema 4D|2026-05-07
+Marvell Tile & Stone|https://www.marvellco.com.au/|DEV+SOTD|Architecture~Business & Corporate~Big Background Images~Clean~Minimal~Transitions~React~Gestures / Interaction~Next.js~Luxury|2026-05-07
+Pattern Breaking|https://patternbreak.ing/|HM|E-Commerce~Fashion~Colorful~Single page~Data Visualization~Storytelling~GSAP~React~UI design~Social responsibility|2026-05-06
+Scottish Malt Whisky Society|https://outturn.smwsa.com/|HM|Food & Drink~Music & Sound~Web & Interactive~Parallax~Single page~Typography~Video~Copy design~Interaction Design~Framer|2026-05-06
+Paul Dunbar Selected Work|https://studiodunbar.xyz/|HM|Promotional~Web & Interactive~Graphic design~Portfolio~Retro~Unusual Navigation~Experimental~Interaction Design~Microinteractions~Netlify~Figma~Vite|2026-05-06
+The Presidency of Iceland|https://www.forseti.is|HM|Design Agencies~Web & Interactive~Graphic design~Responsive Design~Gallery~Storytelling~React~Photo & Video~UI design~Next.js~Sanity|2026-05-06
+No Football Colors|https://nofootballcolors.com/|HM|Magazine / Newspaper / Blog~E-Commerce~Sports~Responsive Design~Storytelling~Shopify~Interaction Design~About Page~Microinteractions~404 pages~Vercel~Next.js|2026-05-06
+Nube|https://www.espaciolanube.com|HM|Architecture~Events~App Style~CSS~Minimal~Parallax~Unusual Navigation~3D~Gestures / Interaction~Figma~Sanity|2026-05-05
+BICIDEA|https://www.biccamera.com/bc/c/bicidea/index.jsp|HM|Business & Corporate~Animation~Colorful~CSS~Scrolling~Web Fonts~3D~Interaction Design|2026-05-05
+ARKITEKWEB|https://www.arkitekweb.com/|HM|Design Agencies~Technology~Web & Interactive~Animation~Responsive Design~Transitions~GSAP~Three.js~3D~Interaction Design~Microinteractions~Blender|2026-05-05
+Dirac.com|https://www.dirac.com|HM|Business & Corporate~E-Commerce~Technology~WebGL~Data Visualization~Sound-Audio~Storytelling~Three.js~Content architecture~Interaction Design~UI design~Typescript|2026-05-05
+ASTRODITHER|https://astrodither.robertborghesi.is/|DEV+SOTD|Technology~Web & Interactive~Animation~Colorful~Fullscreen~Single page~WebGL~Experimental~Three.js~3D~Filters and Effects~Astro|2026-05-05
+Rabanne - Invictus Elixir|https://invictus-elixir-experience.rabanne.com|HM|E-Commerce~Promotional~Animation~Scrolling~WebGL~Storytelling~GSAP~Three.js~Luxury|2026-05-04
+Shinkei Systems|https://shinkei.systems/|HM|Food & Drink~Technology~Colorful~Typography~Illustration~Storytelling~Filters and Effects~Footer Design~Startups~Vercel~Figma~Next.js|2026-05-04
+Looking for Parking|http://lookingforparkingthegame.com|HM|Games & Entertainment~Web & Interactive~Animation~Graphic design~Scrolling~Storytelling~Adobe Photoshop~Adobe Illustrator|2026-05-04
+Reverie Safaris|https://reveriesafaris.com/|HM|Hotel / Restaurant~Fullscreen~Video~Photography~Gallery~Storytelling~Photo & Video~Contentful~Figma~Luxury~Framer|2026-05-04
+Obys|https://obys.agency/|AH+DEV+SOTD|Business & Corporate~Design Agencies~Web & Interactive~Portfolio~Scrolling~WebGL~Gallery~Storytelling~UI design~Project Page~Figma|2026-05-04
+Kindred Of Ireland|https://kindredofireland.com|HM|E-Commerce~Fashion~Typography~Video~Storytelling~Shopify~About Page~404 pages~Figma|2026-05-03
+5051 — Punk Band|https://band5051.com/|HM|Art & Illustration~Games & Entertainment~Music & Sound~Animation~CSS~Horizontal Layout~Retro~Illustration~Sound-Audio~Storytelling~Javascript~Canvas API|2026-05-03
+Victor Furuya '26|https://victorfuruya.com|HM|Technology~Web & Interactive~Parallax~Portfolio~Photography~Transitions~GSAP~Interaction Design~About Page~Project Page~Vanilla JS~Vite|2026-05-03
+Eatnaked|https://eatnaked.co|HM|E-Commerce~Food & Drink~Animation~Three.js~React~3D~UI design~About Page~Contact Page~Figma|2026-05-03
+Where Worlds Take Shape|https://paodao.fr/|DEV+SOTD|Games & Entertainment~Web & Interactive~Portfolio~Unusual Navigation~WebGL~Experimental~Storytelling~Three.js~GLSL~3D~Gestures / Interaction~Interaction Design|2026-05-03
+DOSS|https://www.doss.com/|HM|Business & Corporate~Technology~Animation~Clean~Minimal~Illustration~Menu - Horizontal~UI design~After Effects~Sanity~Astro|2026-05-02
+TREY HOLLINGER|https://www.treyhollinger.com/|HM|Technology~Web & Interactive~Graphic design~Portfolio~WebGL~Data Visualization~Experimental~Storytelling~Three.js~GLSL~Filters and Effects~next.js|2026-05-02
+Flyward|https://www.flyward.com|HM|Business & Corporate~Culture & Education~Hotel / Restaurant~Animation~Scrolling~Gallery~About Page~Contact Page~Footer Design~Webflow~Figma~Adobe Illustrator|2026-05-02
+Fourmula AI|https://fourmula.ai|SOTD|Web & Interactive~Animation~Navigation Menu~Scrolling~Typography~Photography~Transitions~GSAP~UI design~Startups~Webflow~Figma|2026-05-02
+THE NO-CODE SHADER|https://the-nocodeshader.com/|HM|Culture & Education~Design Agencies~Animation~Clean~Experimental~Three.js~Interaction Design~Sanity~Astro|2026-05-01
+Bulgari Eclettica|https://eclettica.bulgari.com/emerald-strata|HM|Fashion~Big Background Images~Fullscreen~Horizontal Layout~Parallax~Scrolling~Single page~GSAP~Webflow~Figma~Luxury|2026-05-01
+Sweeping Corp|https://sweepingcorp.com/|HM|Business & Corporate~Technology~Web & Interactive~Big Background Images~Wordpress~Responsive Design~Header Design~Figma~Blender|2026-05-01
+Brets|https://www.brets.fr/fr|HM|Food & Drink~Animation~Wordpress~Colorful~Parallax~Laravel~Interaction Design~UI design~404 pages~Next.js|2026-05-01
+Sazabi|https://sazabi.com|HM|Technology~Web & Interactive~Typography~WebGL~Sound-Audio~Storytelling~GSAP~3D~404 pages~Startups~Next.js|2026-05-01
+Adcker|https://adcker.com/|AH+DEV+SOTD|Fashion~Web & Interactive~Animation~Clean~Wordpress~Portfolio~Typography~Photography~GSAP~Photo & Video~About Page~BARBA.js|2026-05-01
+Paradiso Institute|https://paradisoinstitute.org/|HM|Culture & Education~Design Agencies~Institutions~Typography~WebGL~Transitions~Three.js~3D~Interaction Design~next.js~Next.js|2026-04-30
+'25-26 update — katherine*|https://picnic.katherine-le.com/|HM|Art & Illustration~Web & Interactive~Portfolio~Single page~Sound-Audio~GSAP~Three.js~3D|2026-04-30
+Camper & Nicholsons|https://camperandnicholsons.com/|HM|Business & Corporate~Other~Big Background Images~Clean~Minimal~Navigation Menu~Responsive~PHP~Filters and Effects~Figma~Tailwind~Luxury|2026-04-30
+Mors — Creative Studio|https://www.mors.design|HM|Design Agencies~Graphic design~Portfolio~Typography~Experimental~GSAP~About Page~Microinteractions~404 pages~Vercel~Next.js|2026-04-30
+Tomasz "ITom" Szmajda Folio|https://itomdev.com|HM|Web & Interactive~Animation~Portfolio~Responsive Design~WebGL~Experimental~GSAP~Three.js~3D~Contentful|2026-04-30
+Mina Massoud|https://mina-massoud.com/|HM|Web & Interactive~Animation~Portfolio~Typography~WebGL~Illustration~Experimental~Storytelling~GSAP~GLSL~Interaction Design|2026-04-30
+Interract|https://interractlabs.com|HM|Design Agencies~Web & Interactive~Animation~Clean~SEO~Responsive~GSAP~Three.js~PixiJS~Filters and Effects~Interaction Design~Startups|2026-04-30
+Pixila Digital Studio|https://pixila.net|HM|Design Agencies~Technology~Web & Interactive~Animation~Big Background Images~Illustration~Transitions~Three.js~React~3D~Astro|2026-04-30
+Switch Nails|https://switch-nails.com/|HM|E-Commerce~Navigation Menu~Social Integration~Storytelling~Shopify~UI design~Header Design|2026-04-24
+Ashley Brooke|https://ashleybrookecs.com/|DEV+SOTD|Business & Corporate~Design Agencies~Film & TV~Animation~Typography~Storytelling~GSAP~About Page~Microinteractions~Project Page~Webflow|2026-04-24
+Mara|https://marasrl.it/en/|HM|Architecture~Business & Corporate~Clean~Colorful~CSS~Graphic design~HTML5~Minimal~Typography~Vue.js~Luxury|2026-04-23
+Julia Krantz|https://juliakrantz.com/|HM|Fashion~Other~Technology~Animation~CSS~HTML5~Portfolio~Gallery~About Page~Microinteractions~Javascript|2026-04-23
+Wonder Makers|https://www.wondermakers.digital|HM|Mobile & Apps~Technology~Web & Interactive~Animation~Navigation Menu~Responsive Design~Typography~UI design~About Page~Astro|2026-04-23
+Marimba. Designs Portfolio|https://marimba.design|HM|Design Agencies~Web & Interactive~CSS~HTML5~Portfolio~GSAP|2026-04-23
+Yan Liu portfolio|https://yanliuportfolio.vercel.app|HM|Web & Interactive~Portfolio~Single page~Experimental~Storytelling~Interaction Design~Microinteractions~Next.js~Tailwind~Typescript|2026-04-23
+PRMO Inc.|https://prm.ooo/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~Clean~Unusual Navigation~WebGL~Sound-Audio~GSAP~Three.js~3D~Gestures / Interaction|2026-04-23
+Off Menu|http://offmenu.design|DEV+SOTD|Design Agencies~Animation~Clean~CSS~Portfolio~Scrolling~Transitions~GSAP~Gestures / Interaction~Next.js|2026-04-23
+World of NRG|https://worldofnrg.com|HM|Business & Corporate~Culture & Education~Web & Interactive~Colorful~Responsive Design~3D~Craft CMS~About Page~Microinteractions~After Effects~Figma|2026-04-22
+WGB|https://wgb.agency/|HM|Business & Corporate~Web & Interactive~Scrolling~Transitions~Storytelling~GSAP~UI design~Header Design~BARBA.js~Webflow~Social responsibility|2026-04-22
+Carlos Prado|https://carlosprado.dev/|HM|Web & Interactive~Clean~Minimal~Portfolio~Transitions~Gallery~GSAP~Three.js~Interaction Design~Nuxt.js|2026-04-22
+LOUD. Digital Product Company.|https://loudsrl.com|HM|Design Agencies~Web & Interactive~Animation~Big Background Images~Fullscreen~Transitions~Gestures / Interaction~Real Estate~UI design~Next.js~Tailwind~AWS|2026-04-22
+Overwatch|https://thelobbynews.com/overwatch|HM|Magazine / Newspaper / Blog~Institutions~Retro~Data Visualization~GSAP~next.js~Vercel~Next.js|2026-04-22
+Jasmine Gunarto|https://jasminegunarto.com/|DEV+SOTD|Art & Illustration~Wordpress~Graphic design~Portfolio~Illustration~Gallery~GSAP~UI design~Vite|2026-04-22
+25 Years of University in Zlin|https://jenamdvacetpet.cz/|HM|Culture & Education~Events~Web & Interactive~Unusual Navigation~WebGL~Storytelling~3D~Vue.js~Blender|2026-04-21
+Kluster Collectif|https://klustercollectif.com/|HM|Culture & Education~Events~Music & Sound~Graphic design~Minimal~Typography~Content architecture~Microinteractions~Adobe Illustrator~Framer|2026-04-21
+Café Binocle|https://www.cafebinocle.com/|HM|E-Commerce~Food & Drink~Web & Interactive~Animation~Colorful~Graphic design~Responsive Design~Responsive~GSAP~Shopify~Contentful|2026-04-21
+NextSense|https://nextsense.io/|HM|E-Commerce~Technology~Big Background Images~Parallax~Photographic~Storytelling~Shopify~UI design~Nuxt.js~Motion|2026-04-21
+Defined|https://definedvc.com|HM|Business & Corporate~Technology~Parallax~Gestures / Interaction~Filters and Effects~Startups~Framer|2026-04-21
+Ruinart - Digital fresco|https://fresque.ruinart.com|DEV+SOTD|Art & Illustration~Culture & Education~Food & Drink~Animation~Big Background Images~WebGL~Illustration~WebVR|2026-04-21
+HUPR|https://hupr.ca/|HM|Institutions~Animation~Wordpress~CSS~GSAP~Filters and Effects~Social responsibility|2026-04-20
+Suero Studio|https://www.ethansuero.com/|HM|Design Agencies~Portfolio~Typography~Storytelling~GSAP~Filters and Effects~Microinteractions~Footer Design~Webflow|2026-04-20
+Pixel Melbourne|https://pixel.melbourne/|HM|Design Agencies~Film & TV~Web & Interactive~Animation~Graphic design~Portfolio~Gallery~GSAP~Photo & Video~Footer Design~Webflow~Figma|2026-04-20
+Poeza|https://poezabride.com/|HM|E-Commerce~Events~Fashion~Animation~CSS~Fullscreen~HTML5~Parallax~Scrolling~Typography~Transitions~Node.js|2026-04-20
+Metajive|https://metajive.com|HM|Design Agencies~Technology~Web & Interactive~Colorful~Portfolio~Responsive Design~Typography~WebGL~Transitions~Craft CMS~GraphQL|2026-04-20
+Spade|https://spade.com|HM|Technology~Animation~Clean~Flat Design~Minimal~Startups~Figma~Next.js|2026-04-20
+Shader Development Studio|https://www.shader.se/|DEV+SOTD|Business & Corporate~Web & Interactive~Portfolio~Retro~WebGL~Experimental~Storytelling~Three.js~React~3D~404 pages~next.js|2026-04-20
+Hedwig: Curated Travel|https://hedwigtravel.com/|HM|Culture & Education~Web & Interactive~Clean~Colorful~Graphic design~Photography~Storytelling~About Page~Readymag|2026-04-19
+Meyers|http://meyers.dk|HM|E-Commerce~Food & Drink~Web & Interactive~Big Background Images~Colorful~Illustration~Photo & Video~UI design~Header Design~Nuxt.js~Tailwind~Sanity|2026-04-19
+MANGO 🥭 IN SPACE ✨ 6.0|https://nonsense-that-works-despite-all-known-laws-of-logic.mango-media.eu/|HM|Art & Illustration~Web & Interactive~Animation~Colorful~Portfolio~Experimental~GSAP~Three.js~React~3D~Interaction Design~Microinteractions|2026-04-19
+Yellow Peach|https://yellowpeach.co.uk|HM|Design Agencies~Technology~Web & Interactive~Animation~Wordpress~Navigation Menu~Responsive Design~Typography~Transitions~GSAP~UI design~Figma|2026-04-19
+Mad Creative Agency|https://mad-creative-agency.com/|HM|Art & Illustration~Design Agencies~Web & Interactive~Filters and Effects~Interaction Design~UI design~Figma~Adobe Illustrator|2026-04-19
+The Agency of Love & Logic|https://loloagency.com/|DEV+SOTD|Design Agencies~Graphic design~Portfolio~Responsive~GSAP~Interaction Design~UI design~Project Page~Sanity~Astro|2026-04-19
+Omai|https://omaivillas.com|HM|Architecture~Hotel / Restaurant~Big Background Images~Clean~Wordpress~Photographic~Scrolling~Photo & Video~Figma~Luxury|2026-04-18
+Assistantly|https://www.assistantly.com/|HM|Art & Illustration~Business & Corporate~Web & Interactive~Animation~Colorful~Illustration~GSAP~Copy design~Header Design~Footer Design~Webflow~Figma|2026-04-18
+Lagom Development|https://lagom-development.com/|HM|Wordpress~Parallax~Typography~Gallery~Responsive~PHP~Real Estate~Photo & Video~Header Design~Swiper.js|2026-04-18
+Evolve|https://madeinevolve.com/|DEV+SOTD|Design Agencies~Animation~Clean~About Page~Footer Design~404 pages~Webflow~Figma|2026-04-18
+Tanuja Shastri|https://www.tanujashastri.com|HM|Web & Interactive~Animation~Storytelling~UI design~Microinteractions~After Effects~Figma~Framer|2026-04-17
+ilithya.rocks|https://www.ilithya.rocks/|HM|Technology~Web & Interactive~CSS~Graphic design~Portfolio~WebGL~Experimental~Responsive~Three.js~3D~Filters and Effects~Interaction Design|2026-04-17
+Portfolio of Daniel Destefanis|https://www.danield.design/|HM|Mobile & Apps~Web & Interactive~Clean~Colorful~Portfolio~WebGL~Motion~Figma|2026-04-17
+Studio X|https://www.thisisstudiox.com|DEV+SOTD|Architecture~Business & Corporate~Design Agencies~Clean~Portfolio~Typography~Unusual Navigation~Transitions~GSAP~Footer Design~BARBA.js~Webflow|2026-04-17
+Soft Touch Post-Mastectomy|https://softtouchmastectomy.com/|HM|Business & Corporate~Other~Animation~Clean~Wordpress~Photographic~Interaction Design~Photo & Video~Social responsibility|2026-04-16
+l´amour d´azur|https://www.lamourdazur.com|HM|Food & Drink~Animation~Colorful~Responsive Design~Scrolling~Single page~Photo & Video~Nuxt.js~Motion~Tailwind|2026-04-16
+Ausify Your Algo|https://ausify.com.au/|HM|Music & Sound~Web & Interactive~Retro~Unusual Navigation~WebGL~Experimental~Sound-Audio~Gestures / Interaction~Filters and Effects~Interaction Design|2026-04-16
+Morten Stig Christensen|https://www.mschristensen.com/|HM|Promotional~Web & Interactive~Minimal~Portfolio~Transitions~Storytelling~GSAP~Interaction Design~UI design~BARBA.js~Webflow|2026-04-16
+Max Mara - Jacket Circle|https://thejacketcirclegame.maxmara.com/|DEV+SOTD|Fashion~Animation~Big Background Images~HTML5~Illustration~Experimental~GSAP~PixiJS~3D~Microinteractions~Luxury|2026-04-16
+Rock & Roll Hall of Fame|https://rockhall.com/|HM|Culture & Education~Music & Sound~Web & Interactive~Wordpress~Graphic design~Navigation Menu~Scrolling~Sound-Audio~Node.js~React~Interaction Design~UI design|2026-04-15
+Ravi Klaassens|https://www.raviklaassens.com/|DEV+SOTD|Design Agencies~Web & Interactive~Animation~Portfolio~Typography~Transitions~Experimental~GSAP~Interaction Design~UI design~BARBA.js~Webflow|2026-04-15
+Ampevino|https://www.ampevino.fr|HM|Business & Corporate~Food & Drink~Institutions~Wordpress~Graphic design~Parallax~Scrolling~Storytelling~GSAP~Locomotive Scroll|2026-04-14
+Nullmask|https://nullmask.io/|HM|Technology~Animation~Graphic design~Illustration~Responsive~Storytelling~Startups~Figma~Adobe Illustrator|2026-04-14
+SHAPESHIFT FESTIVAL 2026|https://shapeshiftfestival.com/|HM|Events~Web & Interactive~Animation~Infinite Scroll~Scrolling~Gallery~GSAP~Footer Design~BARBA.js~Vanilla JS|2026-04-14
+Alexandre Araújo Portfolio|https://alexandre-araujo.com/|HM|Design Agencies~Web & Interactive~Clean~Transitions~Gallery~3D~About Page~Project Page~Vue.js~Vercel~Sanity|2026-04-14
+The Obsidian Assembly|https://obsidianassembly.com/|DEV+SOTD|Promotional~Big Background Images~Scrolling~Gallery~Filters and Effects~About Page~Project Page~Nuxt.js~Typescript~Luxury|2026-04-14
+4WIDE|https://4wide.jp/|HM|Business & Corporate~Technology~Web & Interactive~Animation~Clean~Minimal~Parallax~Typography~Video~GSAP~Three.js~Astro|2026-04-13
+NewmixCoffee|https://www.newmixcoffee.com/|HM|Business & Corporate~Food & Drink~Web & Interactive~Animation~Three.js~React~Interaction Design~UI design~Microinteractions~Canvas API|2026-04-13
+Infinite Field|https://www.infinitefield.xyz/|HM|Technology~Web & Interactive~Animation~Infinite Scroll~Unusual Navigation~WebGL~Transitions~Storytelling~GSAP~Three.js~Interaction Design~Startups|2026-04-13
+Tom Carder Media|https://www.tomcardermedia.com/|HM|Film & TV~Big Background Images~Photographic~Portfolio~Photography~Gallery~GSAP~Photo & Video~Microinteractions~Webflow~Javascript|2026-04-13
+RabenRifaie Studio|https://www.rabenrifaie.com/|HM|Web & Interactive~Horizontal Layout~Portfolio~Unusual Navigation~Experimental~3D~Interaction Design~Microinteractions~Blender~Framer|2026-04-13
+Oryzo AI|https://oryzo.ai|DEV+SOTM|Art & Illustration~Design Agencies~Web & Interactive~WebGL~Transitions~Storytelling~GSAP~Three.js~3D~Filters and Effects|2026-04-13
+Diamond Rose Sanctuary|https://diamondrosesanctuary.com/|HM|Culture & Education~Other~Animation~Clean~Fullscreen~Experimental~GSAP~3D~Interaction Design~Webflow~Cinema 4D|2026-04-12
+Autonomous Finances|https://fine-n7vljkp34f.peachworlds.com/|HM|Design Agencies~Web & Interactive~Animation~Scrolling~WebGL~Storytelling~3D~Interaction Design~Startups|2026-04-12
+Studio375|https://375.studio/en|DEV+SOTD|Business & Corporate~Design Agencies~Web & Interactive~Animation~Portfolio~Scrolling~Typography~WebGL~Transitions~GSAP~Next.js|2026-04-30
+Idyllic Disruptive Design|https://www.idyllic.co.nz|HM|Design Agencies~Web & Interactive~Animation~Wordpress~Graphic design~Portfolio~Photography~GSAP~PHP~Gestures / Interaction~Photo & Video~Contact Page|2026-04-29
+ORDR|https://www.ordrhealth.com|HM|Magazine / Newspaper / Blog~Culture & Education~Sports~Animation~Parallax~Typography~GSAP~Interaction Design~UI design~Microinteractions~Webflow~Figma|2026-04-29
+The Push|https://www.thepush.com.au/|HM|Culture & Education~Music & Sound~Clean~Colorful~Transitions~Shopify~Content architecture~UI design~Microinteractions~Vercel~Next.js~Social responsibility|2026-04-29
+Vivre - Hotel Marketing Agency|https://vivre.agency|HM|Design Agencies~Hotel / Restaurant~Animation~Big Background Images~Wordpress~CSS~Photographic~Portfolio~Typography~Transitions~Figma~Luxury|2026-04-29
+PieterKoopt®|https://pieterkoopt.nl/|AH+DEV+SOTD|Business & Corporate~Culture & Education~Animation~Scrolling~Storytelling~Microinteractions~Webflow|2026-04-29
+KayiSeisagu|https://kayiseisagu.com/|HM|Art & Illustration~Music & Sound~Data Visualization~Sound-Audio~GSAP~Photo & Video~Vue.js~Canvas API|2026-04-28
+Shelby|https://shelby.ashfall.studio/|HM|Promotional~Technology~Animation~Colorful~Scrolling~Storytelling~GSAP~Vue.js~Startups~Prismic|2026-04-28
+Avinyr|https://www.avinyr.com/|HM|Business & Corporate~Technology~Web & Interactive~Animation~Responsive Design~Typography~GSAP~Interaction Design~UI design~Microinteractions~Webflow~Javascript|2026-04-28
+THE UN KNOWN ® Next-Gen Creative Consultancy|https://theunknown.tv|HM|Business & Corporate~Design Agencies~Colorful~Graphic design~360~Node.js~Content architecture~Copy design~Footer Design~Startups~Contentful~Astro|2026-04-28
+Silent House|https://silent-house.com/|DEV+SOTD|Events~Film & TV~Music & Sound~Clean~CSS~Minimal~Navigation Menu~Portfolio~GSAP~Project Page~Figma|2026-04-28
+Really Up There|https://www.reallyupthere.com|HM|Art & Illustration~Design Agencies~Web & Interactive~Animation~Clean~Graphic design~Portfolio~Illustration~Gallery~Webflow~Figma~Adobe Illustrator|2026-04-27
+MRM Brazil|https://mrmbrasil.com.br/|HM|Design Agencies~CSS~Portfolio~Scrolling~Transitions~GSAP~Laravel~Interaction Design~About Page~Microinteractions|2026-04-27
+Detroit Paris|https://www.detroit.paris/|DEV+SOTD|Art & Illustration~Fashion~Animation~Infinite Scroll~Scrolling~Typography~Photography~Transitions~GSAP~Footer Design~Webflow~Javascript|2026-04-27
+X2Y Creative|https://www.x2ycreative.com/|HM|Design Agencies~Events~Music & Sound~Animation~Infinite Scroll~Portfolio~Typography~Video~GSAP~Microinteractions~Webflow~Figma|2026-04-26
+Common Vow Influencer Agency|https://www.commonvow.com/|HM|Design Agencies~Promotional~Web & Interactive~Typography~Storytelling~Gestures / Interaction~Interaction Design~Webflow~After Effects~Figma|2026-04-26
+Wonder Petit Shopify Theme|http://wonder-theme-petit-demo.myshopify.com/|HM|E-Commerce~Animation~Responsive Design~Video~Gallery~Storytelling~Shopify~About Page|2026-04-26
+Tribe Stays|https://tribestays.com/student-hostel|HM|Business & Corporate~Hotel / Restaurant~Animation~Colorful~Responsive Design~Transitions~React~Microinteractions~Footer Design~Next.js~Luxury|2026-04-26
+Ný ásýnd Vettvangs|https://brand.vettvangur.is|HM|Web & Interactive~Animation~Scrolling~Single page~Transitions~Responsive~GSAP~Typescript~Astro|2026-04-26
+Wild Week - Athens|https://week.wild.plus/athens-26|SOTD|Events~Clean~WebGL~Gestures / Interaction~Filters and Effects~Framer|2026-04-26
+Chris Macari|https://chrismacarifilms.com|HM|Film & TV~Portfolio~WebGL~Gallery~Photo & Video~404 pages|2026-04-25
+Dr Grigoriak|https://grigoriak.doctor/|HM|Business & Corporate~Promotional~Animation~Storytelling~Three.js~Copy design~Luxury|2026-04-25
+New Studio Partners|https://www.new.studio|HM|Design Agencies~Web & Interactive~Animation~Graphic design~Portfolio~GSAP~Footer Design~Project Page~404 pages~Next.js~Sanity|2026-04-25
+Two Leaves And a Bud|https://twoleavestea.com/|HM|E-Commerce~Food & Drink~Icons~Responsive Design~Typography~Illustration~Shopify~Footer Design~404 pages~Lottie~Figma|2026-04-25
+Matter|https://www.matter.com/|HM|Business & Corporate~Technology~Animation~Responsive Design~GSAP~Three.js~Interaction Design~Startups~Webflow|2026-04-25
+Don Molinico|https://www.donmolinico.es/|DEV+SOTD|Food & Drink~Animation~Big Background Images~Colorful~Navigation Menu~GSAP~Nuxt.js~Prismic|2026-04-25
+Audi F1 - Feel Every Second|https://f1.audi.com.au/|HM|Events~Sports~Technology~Animation~Fullscreen~UI design~Microinteractions~Figma|2026-04-24
+CarmoWood|https://www.carmowood.com/|HM|Business & Corporate~Flat Design~Navigation Menu~Parallax~Scrolling~UI design~Project Page~Sketch|2026-04-24
+Left Coast Design Studio|http://leftcoast.refractweb.com/|HM|Architecture~Design Agencies~Hotel / Restaurant~Animation~Navigation Menu~React~3D~Forms and Input~next.js~Next.js~Tailwind|2026-04-24
+Atomic © Black|https://atomic.black/|HM|Design Agencies~Web & Interactive~Clean~Portfolio~Interaction Design~UI design~Microinteractions~Footer Design~Next.js~Tailwind~Typescript~Luxury|2026-04-24
+Gigantic Media|https://giganticmedia.net/|HM|Business & Corporate~Music & Sound~Animation~Parallax~Scrolling~Transitions~Experimental~Sound-Audio~GSAP~Gestures / Interaction~Webflow~Figma|2026-04-06
+Cluma - Modular Design Agency|https://cluma.design|HM|Design Agencies~Web & Interactive~Animation~Colorful~Storytelling~GSAP~3D~Interaction Design~Microinteractions~Startups~Webflow~Blender|2026-04-06
+Champions For Good|https://www.champions4good.club/|DEV+SOTD|Art & Illustration~Business & Corporate~Sports~Animation~Colorful~Illustration~Transitions~Sound-Audio~Storytelling~GSAP~Lottie~Webflow|2026-04-06
+sequel|https://sequel.co/|HM|Sports~Technology~Minimal~Navigation Menu~Parallax~Video~Storytelling~GSAP~Interaction Design~Startups~After Effects~Astro|2026-04-05
+Cinnamon|https://www.cinnamon.co.uk/|HM|Games & Entertainment~Web & Interactive~Animation~Transitions~Storytelling~Three.js~3D~next.js~Next.js~Blender|2026-04-05
+Susurrus|https://susurrus.vercel.app/|HM|Art & Illustration~Music & Sound~Web & Interactive~Colorful~Retro~WebGL~Responsive~Sound-Audio~Storytelling~Three.js~Interaction Design~Blender|2026-04-05
+Mescubook|https://mescubook.com/|HM|Business & Corporate~Web & Interactive~Animation~CSS~HTML5~Portfolio~Scrolling~Interaction Design~About Page~Contact Page~Javascript|2026-04-05
+Arrodz|https://www.arrodz.com/|HM|Business & Corporate~Hotel / Restaurant~Clean~Minimal~Parallax~Responsive Design~Typography~Storytelling~GSAP~Webflow~Javascript|2026-04-05
+DripModa|https://dripmodauk.co.uk/|HM|Fashion~Minimal~Navigation Menu~Shopify~UI design~Figma~Luxury|2026-04-05
+Artem Shcherban Portfolio|https://artemshcherban.com|SOTD|Design Agencies~Other~Web & Interactive~Clean~Minimal~Portfolio~GSAP~Content architecture~Interaction Design~Webflow~Figma|2026-04-05
+Ssscript™ App|https://ssscript.app/|HM|Mobile & Apps~Technology~Web & Interactive~Animation~App Style~Clean~Single page~WebGL~GSAP~Interaction Design~UI design~Webflow|2026-04-04
+Bam. 83.|https://bam83.webflow.io/|HM|Events~Sports~Web & Interactive~Animation~CSS~Horizontal Layout~Scrolling~Data Visualization~Storytelling~Header Design~Webflow~Javascript|2026-04-04
+Barrier Group|https://barriergroup.com/|HM|Business & Corporate~Promotional~Web & Interactive~Wordpress~Typography~Video~Transitions~Interaction Design~Photo & Video~UI design~Javascript~Tailwind|2026-04-04
+Cofactr|https://cofactr.com/|HM|Business & Corporate~Technology~Animation~Illustration~Data Visualization~GSAP~Interaction Design~UI design~Microinteractions~Startups~Sanity~Framer|2026-04-04
+SŌM|https://www.drinksom.eu/|DEV+SOTD|E-Commerce~Food & Drink~Promotional~Animation~Infinite Scroll~Scrolling~WebGL~Transitions~GSAP~3D~Interaction Design~Vercel|2026-04-04
+Ibrahem Ghareib – Portfolio|https://ibrahemghareib.com/|HM|Film & TV~Other~Animation~Portfolio~Typography~Video~Photography~Photo & Video~UI design~Figma~Tilda|2026-04-03
+Maison Boursier|https://www.maisonboursier.com/|HM|Art & Illustration~Animation~Big Background Images~Clean~Unusual Navigation~WebGL~Illustration~Gallery~GSAP~Figma~Luxury|2026-04-03
+Ontier|https://www.ontier.law/producto/perfume-aretha/|HM|Business & Corporate~Animation~Clean~Wordpress~Video~Three.js~Figma|2026-04-03
+Jack Watkins|https://www.jackwatkins.co|HM|Art & Illustration~Design Agencies~Music & Sound~Minimal~Portfolio~Typography~Storytelling~GSAP~Content architecture~Interaction Design~Webflow~Sketch|2026-04-03
+Broadway Platform|https://broadwayplatform.com/|HM|Games & Entertainment~Animation~Wordpress~Responsive Design~Scrolling~3D~UI design~Blender~Adobe Illustrator|2026-04-03
+Portfolio Mats Erdkamp|https://mats.zip/|HM|Web & Interactive~Portfolio~Three.js~3D~Header Design~Vue.js~Blender|2026-04-03
+Artefakt|https://artefakt.mov/|DEV+SOTD|Film & TV~Wordpress~Portfolio~Typography~WebGL~Transitions~GSAP~3D~Photo & Video~Microinteractions|2026-04-03
+The Gum|https://the-gum.com/|HM|Design Agencies~Big Background Images~CSS~Horizontal Layout~HTML5~Infinite Scroll~Portfolio~Unusual Navigation~Photo & Video~Javascript|2026-04-02
+Album Atlas®|https://albumatlas.vercel.app|HM|Music & Sound~Web & Interactive~Animation~Clean~Minimal~Transitions~Experimental~Sound-Audio~Three.js~3D~Anime.js~Svelte|2026-04-02
+Da Maria|https://damaria-roma.webflow.io|HM|Food & Drink~Hotel / Restaurant~Animation~Typography~Unusual Navigation~Transitions~Experimental~GSAP~UI design~Microinteractions~BARBA.js~Webflow|2026-04-02
+Pulztronic|https://www.pulz.ai|HM|Technology~Animation~Three.js~Interaction Design~Startups~Next.js|2026-04-02
+Kunumi Institute|https://www.kunuminst.org|HM|Culture & Education~Technology~Clean~Unusual Navigation~Three.js~React~3D~Interaction Design~Microinteractions~Sanity~Social responsibility|2026-04-02
+iyO|https://www.iyo.ai/|DEV+SOTD|E-Commerce~Technology~Web & Interactive~Infinite Scroll~Unusual Navigation~WebGL~Sound-Audio~Three.js~3D~Interaction Design~UI design~Webflow|2026-04-02
+365days PROJECT in 2024|https://www.kamimae.com/365days/|HM|Art & Illustration~Music & Sound~Web & Interactive~Animation~Fullscreen~Minimal~Gallery~Sound-Audio~Three.js~3D~Typescript~Vite|2026-04-01
+Yango Group|https://yango.com/|HM|Business & Corporate~Technology~Animation~Colorful~Graphic design~Storytelling~Content architecture~Interaction Design~Next.js|2026-04-01
+Frontify home page|https://brandlibs.frontify.com/|HM|Technology~Web & Interactive~Animation~Big Background Images~Fullscreen~Scrolling~Single page~Webflow|2026-04-01
+Art Of Noticing|https://thomasmamfredas.com|HM|Art & Illustration~Film & TV~Clean~Parallax~Scrolling~Photography~Transitions~GSAP~Three.js~UI design~Microinteractions~Javascript|2026-04-12
+Royal Stranger|https://royalstranger.com/|HM|E-Commerce~Other~Animation~Wordpress~Colorful~Graphic design~Typography~Forms and Input~Footer Design~Luxury|2026-04-12
+Inspired By Iceland|https://www.inspiredbyiceland.com/|HM|Web & Interactive~Colorful~Responsive Design~SEO~Storytelling~React~UI design~Framer|2026-04-12
+NaughtyDuk©|https://naughtyduk.com|DEV+SOTD|Design Agencies~Games & Entertainment~Music & Sound~Animation~Portfolio~WebGL~Gallery~GSAP~React~Interaction Design|2026-04-12
+Kimbrandesign|https://kimbrandesign.com/|HM|Business & Corporate~Design Agencies~Parallax~Portfolio~Single page~GSAP~Figma~Astro|2026-04-11
+Olivia Harper Homes|https://oliviaharperhomes.com/|HM|Hotel / Restaurant~Clean~Wordpress~Graphic design~Minimal~GSAP~Real Estate~Elementor~Luxury|2026-04-11
+Killian Herzer|http://killianherzer.com|HM|Technology~Web & Interactive~Portfolio~WebGL~WebSockets~Experimental~Sound-Audio~Storytelling~React~3D~Filters and Effects~Interaction Design|2026-04-11
+Dark Star Labs|https://darkstarlabs.io|HM|Business & Corporate~Technology~Web & Interactive~Big Background Images~Wordpress~Graphic design~Responsive Design~Illustration~3D~Microinteractions~Javascript~Adobe Illustrator|2026-04-11
+Odd Ritual|https://oddritualgolf.com/|DEV+SOTD|E-Commerce~Fashion~Clean~Minimal~GSAP~Three.js~About Page~BARBA.js~Contentful|2026-04-11
+Elyse Residence|https://elyse-residence-dev.webflow.io|HM|Web & Interactive~Big Background Images~Fullscreen~Gallery~Real Estate~UI design~Webflow~Figma~Luxury|2026-04-10
+LESA|http://www.lesa.app|HM|Culture & Education~Games & Entertainment~Mobile & Apps~App Style~Colorful~Illustration~Storytelling~React~Interaction Design~UI design~Framer|2026-04-10
+First Internet|https://www.firstinternet.co.uk|HM|Business & Corporate~Design Agencies~Web & Interactive~Wordpress~Colorful~Retro~Transitions~Responsive~GSAP~Gestures / Interaction~Microinteractions~Lottie|2026-04-10
+chkstepan|https://chkstepan.com|HM|Design Agencies~Web & Interactive~Animation~Portfolio~Web Fonts~GSAP~Three.js~3D~Footer Design~404 pages~Next.js|2026-04-10
+Anthony Custable Portfolio|https://www.acustable.com/|HM|Technology~Web & Interactive~Flat Design~Data Visualization~GSAP~React~3D~Interaction Design~UI design~Next.js|2026-04-10
+MERSI|https://www.mersi-architecture.com|AH+DEV+SOTD|Architecture~Animation~Horizontal Layout~Portfolio~Transitions~GSAP~Real Estate~Contact Page~Footer Design~Webflow~Figma~Luxury|2026-04-10
+Digital Flagship|https://digitalflagship.com/|HM|Design Agencies~Technology~Web & Interactive~Wordpress~Colorful~Parallax~Portfolio~Typography~Gallery~Shopify~Elementor|2026-04-09
+Nivis Gear|https://www.nivisgear.com/|HM|E-Commerce~Sports~Big Background Images~Navigation Menu~Shopify~UI design|2026-04-09
+Vertex3D|https://www.vertex3d.asia/|HM|Design Agencies~Web & Interactive~Portfolio~Responsive Design~WebGL~Experimental~Storytelling~GSAP~3D~Gestures / Interaction~Interaction Design~Webflow|2026-04-09
+ROIHEADS|https://roiheads.com/|HM|Business & Corporate~Technology~Animation~Parallax~Typography~Transitions~Experimental~Footer Design~Project Page~Webflow~After Effects~Figma|2026-04-09
+Wes Dieleman Portfolio|https://wesdieleman.com|HM|Design Agencies~Web & Interactive~Clean~Portfolio~Retro~SEO~Responsive~UI design~Next.js~Tailwind~Typescript|2026-04-09
+ICOMAT|https://www.icomat.co.uk/|DEV+SOTD|Business & Corporate~Technology~Animation~Clean~CSS~Scrolling~Storytelling~UI design~Vue.js~Startups~Vercel|2026-04-09
+Bisous|https://bisous-production.com/|HM|Design Agencies~Wordpress~Portfolio~Unusual Navigation~Transitions~GSAP~3D~Microinteractions~Luxury|2026-04-08
+Git Together|https://www.liquidink.design/github_web/|HM|Events~Illustration~Experimental~Storytelling~Anime.js~Javascript~Blender|2026-04-08
+The Cube|https://www.thecube.dk|HM|Architecture~Business & Corporate~Music & Sound~Animation~Parallax~Scrolling~Unusual Navigation~Storytelling~VR~GSAP~Gestures / Interaction~Webflow|2026-04-08
+QUIN: Queer Info Network|https://www.quin.org.au/|HM|Culture & Education~Big Background Images~Colorful~Graphic design~HTML5~Navigation Menu~UI design~Javascript~Next.js~Social responsibility|2026-04-08
+Nine To Five|https://www.9to5studio.it/|DEV+SOTD|Architecture~Business & Corporate~Clean~Flat Design~Photography~Gallery~GSAP~Content architecture~Vue.js~Nuxt.js|2026-04-08
+Home of Ambrose|https://www.homeofambrose.com/|HM|Business & Corporate~Scrolling~Typography~Real Estate~Footer Design~Contentful~Figma~Luxury|2026-04-07
+Elthy — A My Days Series|https://my-days.framer.ai/|HM|Design Agencies~Clean~CSS~Photographic~Storytelling~3D~Interaction Design~UI design~Adobe Photoshop~Framer|2026-04-07
+Hazey|https://studiohazey.com|HM|Design Agencies~Animation~Scrolling~Typography~GSAP~Interaction Design~Microinteractions~Webflow~Locomotive Scroll|2026-04-07
+Front Yard|https://www.byfrontyard.com/|HM|Design Agencies~Web & Interactive~Animation~Clean~Portfolio~WebGL~Illustration~Storytelling~Footer Design~Startups~After Effects~Framer|2026-04-07
+Maxima Therapy|https://maximatherapy.com/|DEV+SOTD|Culture & Education~Animation~Colorful~Flat Design~Illustration~Transitions~GSAP~React~404 pages~Lottie~Social responsibility|2026-04-07
+charly.graphics|https://charly.graphics|HM|Web & Interactive~Graphic design~Portfolio~Responsive Design~Webflow~After Effects~Figma|2026-04-01
+THE TAWARAYA|https://the-tawaraya.jp/|HM|Web & Interactive~Fullscreen~Minimal~Video~Sound-Audio~Javascript~Next.js|2026-04-01
+Indrajaal|https://www.indrajaal-museum.com/|HM|Music & Sound~Web & Interactive~Big Background Images~Infinite Scroll~WebGL~Transitions~Experimental~Gallery~GSAP~Webflow|2026-04-01
+Vast|https://vastspace.com|DEV+SOTD|Technology~Web & Interactive~Typography~WebGL~Transitions~Storytelling~Three.js~Photo & Video~Webflow|2026-04-01
+Tattoo Digital|http://www.wearetattoodigital.com/|HM|Design Agencies~Web & Interactive~Animation~Parallax~Portfolio~Typography~GSAP~Interaction Design~UI design~Webflow~Swiper.js|2026-03-31
+KOOKIE|https://www.kookie-kollective.com|HM|Film & TV~Parallax~Portfolio~Unusual Navigation~Photography~Transitions~3D~Photo & Video~Webflow~Figma|2026-03-31
+EV2|https://ev2.bambus.com.ua/|AH|Games & Entertainment~Animation~Big Background Images~Illustration~Storytelling~PHP~PixiJS~3D~next.js~Next.js|2026-03-31
+La Doux Editions|https://www.editionsladoux.com/|HM|Art & Illustration~Culture & Education~Animation~Big Background Images~Colorful~CSS~Graphic design~UI design~Webflow~Figma|2026-03-31
+Just Phil|https://www.justphilride.co.uk|AH|Events~Promotional~Sports~Clean~Colorful~Graphic design~Typography~Storytelling~Header Design~Figma~Adobe Illustrator~Framer|2026-03-31
+The Augustinus Foundation|https://augustinusfonden.dk/da|HM|Culture & Education~Big Background Images~Clean~Colorful~Minimal~Gallery~Header Design|2026-03-31
+San Rita|https://sanrita.ca/|DEV+SOTD|Design Agencies~Web & Interactive~Animation~Portfolio~Unusual Navigation~WebGL~Experimental~Storytelling~3D~UI design~Next.js~DatoCMS|2026-03-31
+Aptos Network|https://aptosnetwork.com/|HM|Institutions~Technology~Web & Interactive~Animation~Clean~Colorful~Illustration~Header Design~Tailwind~DatoCMS~Astro|2026-03-30
+Dave Holloway - Portfolio|https://daveholloway.uk|HM|Art & Illustration~Design Agencies~Web & Interactive~Animation~Portfolio~Vector~Illustration~Transitions~GSAP~Three.js~Microinteractions~Astro|2026-03-30
+FUROBOT|http://www.fu-design.com|HM|Art & Illustration~Technology~Animation~Portfolio~WebGL~Illustration~Experimental~Node.js~3D~Firebase|2026-03-30
+TRANS×HOME|https://ogud.co.jp/urbanex/next21/|HM|Animation~CSS~Graphic design~Illustration~GSAP~Real Estate~Javascript|2026-03-30
+Fluid Glass|https://fluid.glass/|AH+DEV+SOTD|Architecture~Business & Corporate~Clean~Horizontal Layout~Minimal~Portfolio~Unusual Navigation~GSAP~Real Estate~Footer Design~Nuxt.js~Vercel|2026-03-30
+CULTISH 5|https://5.cultish.com/|HM|E-Commerce~Fashion~Animation~Infinite Scroll~Single page~Photography~Three.js~React~Filters and Effects~Motion|2026-03-29
+\\' Brand Consultant|https://workbyw.com/|HM|Design Agencies~Scrolling~Typography~Gallery~3D~Interaction Design~Contentful~Figma~Cinema 4D~Framer|2026-03-29
+Duyvenvoorde|https://duyvenvoorde.nl|HM|Business & Corporate~Web & Interactive~Animation~HTML5~Parallax~Video~React~Microinteractions~Next.js~Luxury|2026-03-29
+Secret Level|https://www.secretlevel.co|HM|Film & TV~Promotional~Portfolio~Video~Transitions~GSAP~React~Filters and Effects~Photo & Video~next.js~Next.js|2026-03-29
+Gluwz - Household Harmony|https://gluwz.be|HM|Design Agencies~Web & Interactive~Animation~Colorful~Graphic design~Navigation Menu~Parallax~UI design~Startups~Webflow~After Effects~Figma|2026-03-29
+Utopia Tokyo|https://www.utopiatokyo.com/|DEV+SOTD|Games & Entertainment~Web & Interactive~Single page~Experimental~GSAP~3D~Filters and Effects~UI design~Microinteractions~Footer Design~BARBA.js~Webflow|2026-03-29
+Cactus Website|https://cactusdigitale.com/|HM|Design Agencies~Fashion~Minimal~Responsive Design~WebGL~Gestures / Interaction~UI design~Microinteractions~Contentful~Next.js~Sanity~Luxury|2026-03-28
+Sirnik|http://sirnik.co/|HM|Design Agencies~Web & Interactive~Animation~Clean~Minimal~Portfolio~GSAP~Interaction Design~UI design~Webflow~Figma|2026-03-28
+Verbal+Visual|https://www.vpv.co/|HM|Design Agencies~Clean~Flat Design~Photographic~Interaction Design~Webflow~Luxury|2026-03-28
+Pedro Luz e Lobos|https://www.pedroluzelobos.com|HM|Magazine / Newspaper / Blog~Web & Interactive~Minimal~Navigation Menu~Parallax~Portfolio~Typography~Photography~Gallery~GSAP~React~Typescript|2026-03-28
+DROPDEAD|https://dropdead.world/|HM|Fashion~Minimal~Navigation Menu~Shopify~Contentful~Figma~Luxury|2026-03-28
+Jungheon Lee - portfolio|https://jungheonlee.com/|HM|Web & Interactive~Animation~CSS~HTML5~Portfolio~Experimental~Three.js~About Page~Contact Page|2026-03-28
+SUTÉRA|https://www.sutera.ch/|DEV+SOTD|Other~Technology~Animation~Single page~WebGL~Transitions~GSAP~Gestures / Interaction~Filters and Effects~Microinteractions~Nuxt.js|2026-03-28
+The Lookback|https://tlb.betteroff.studio/|DEV+SOTD|Magazine / Newspaper / Blog~Culture & Education~Design Agencies~Horizontal Layout~Infinite Scroll~Transitions~Gallery~GSAP~Interaction Design~About Page~Vue.js~Netlify|2026-03-27
+Pixel Vault|https://www.pixelvault.fit/|AH|E-Commerce~Fashion~Animation~Minimal~Unusual Navigation~WebGL~360~Experimental~Gallery~Three.js~3D~Vue.js|2026-03-26
+Hyperia by Vaonis|https://vaonis.com/pages/product/hyperia|HM|E-Commerce~Animation~Sound-Audio~Shopify~3D~Interaction Design~Photo & Video~Figma|2026-03-26
+Douglus — Creative Developer|https://douglus.site/|HM|Web & Interactive~Animation~Clean~CSS~Horizontal Layout~HTML5~Minimal~GSAP|2026-03-26
+10 Years Digital Present|https://digitalpresent.io/|HM|Design Agencies~Web & Interactive~Animation~Clean~Wordpress~WebGL~Menu - Horizontal~GSAP~Interaction Design~UI design~Contentful|2026-03-26
+Vlad Burca - Product Designer|https://vladburca.com|HM|Web & Interactive~CSS~HTML5~Portfolio~Responsive Design~Retro~Single page~Experimental~Interaction Design~404 pages~Javascript|2026-03-26
+Sasha Satchi|https://sashasatchi.com/|HM|Art & Illustration~Clean~Photographic~Portfolio~Photography~Gallery~UI design~Nuxt.js~Sanity|2026-03-26
+Rye Island roastery|https://ryeisland.com/|HM|E-Commerce~Food & Drink~Clean~Fullscreen~HTML5~Craft CMS~Photo & Video~Figma|2026-03-26
+Saki|https://www.sakiproducts.com/|HM|E-Commerce~Food & Drink~Big Background Images~Clean~Gallery~Interaction Design~UI design~Footer Design~After Effects~Figma~Cinema 4D|2026-03-26
+GQ & AP The Extraordinary Lab|https://www.gq.com/sponsored/story/the-extraordinary-lab|DEV+SOTM|Fashion~Web & Interactive~Responsive Design~WebGL~Experimental~3D~Gestures / Interaction~Nuxt.js~Blender|2026-03-26
+GRU Space|https://gru.space|HM|Hotel / Restaurant~Animation~Scrolling~UI design~Startups~Webflow~Figma~Luxury|2026-03-25
+Altis - Beautiful Satellites|https://altis.to/|HM|Technology~Web & Interactive~Animation~WebGL~Data Visualization~Interaction Design~Anime.js~Vanilla JS|2026-03-25
+Joseph Santamaria '26|https://joseph-san.com/|HM|Web & Interactive~Infinite Scroll~Parallax~Portfolio~Single page~WebGL~Storytelling~GSAP~GLSL~Interaction Design|2026-03-25
+Event Horizon|https://fade.run/|HM|Games & Entertainment~Web & Interactive~Parallax~Scrolling~WebGL~Experimental~Three.js~React~3D~Gestures / Interaction~UI design|2026-03-25
+UNLEARNED|https://readymag.com/unlearned?utm_source=awwwards&utm_medium=partnership_submission&utm_campaign=unlearned|HM|Magazine / Newspaper / Blog~Culture & Education~Web & Interactive~Animation~Copy design~Project Page~Contentful~Readymag|2026-03-25
+Carles Faus|https://www.carlesfaus.com/|HM|Architecture~Animation~Portfolio~WebGL~404 pages~Figma~Sanity|2026-03-25
+Abadir Academy|https://www.abadir.net/|HM|Culture & Education~Colorful~CSS~Fullscreen~Graphic design~HTML5~Responsive Design~Typography~UI design~Figma|2026-03-25
+SIT Virtual Campus Tour|https://www.singaporetech.edu.sg/openhouse/virtual-campus-tour/|HM|Culture & Education~Events~Games & Entertainment~Unusual Navigation~360~Storytelling~Three.js~3D~Blender|2026-03-25
+Save Design|https://save.design|HM|Culture & Education~Technology~Web & Interactive~Parallax~Typography~Three.js~React~3D~UI design~Microinteractions~404 pages~Next.js|2026-03-25
+Lanterne Architectes|https://lanternearchitectes.com/|HM|Architecture~Business & Corporate~Animation~Colorful~Portfolio~3D~Content architecture~Webflow|2026-03-25
+Core Atelier Pilates|https://coreatelierpilates.com/|HM|Business & Corporate~E-Commerce~Animation~Big Background Images~Wordpress~Responsive~GSAP~Filters and Effects~UI design~Footer Design~Tailwind~Luxury|2026-03-25
+Fondation des États-Unis|https://www.fondationdesetatsunis.org/|HM|Art & Illustration~Culture & Education~Animation~Colorful~Footer Design~Figma|2026-03-25
+Coffee Ground Zero (BKKDW2026)|https://bkkdw26.greydientlab.com/|HM|Culture & Education~Web & Interactive~Animation~CSS~Responsive~Storytelling~GSAP~Filters and Effects~Microinteractions~Footer Design~Figma~Social responsibility|2026-03-24
+Koto|https://koto.com/|HM|Design Agencies~Web & Interactive~Clean~Portfolio~WebGL~Transitions~UI design~Microinteractions~Project Page~Next.js~Sanity|2026-03-24
+The J12 Watch|https://www.chanel.com/us/watches/the-j12-watch/|HM|Clean~Scrolling~Single page~React~Luxury|2026-03-24
+Robin Thomas Presentation|https://www.robin-thomas.me/|HM|Other~Scrolling~SEO~Experimental~Three.js~React~3D~Gestures / Interaction~Javascript|2026-03-24
+Portfolio by Shruti|https://www.portfoliobyshruti.com/|HM|Art & Illustration~Colorful~CSS~Flat Design~Graphic design~Portfolio~Illustration~Experimental~GSAP~Javascript|2026-03-24
+Warwick Acoustics|https://warwickacoustics.com/|HM|Design Agencies~Music & Sound~Technology~Big Background Images~Clean~Storytelling~React~Interaction Design~Photo & Video~UI design~Gatsby~Figma|2026-03-24
+Higherlife Foundation|https://higherlifefoundation.org/|HM|Culture & Education~Institutions~Clean~Minimal~Storytelling~GSAP~React~Sanity~Social responsibility|2026-03-24
+Unseen Studio 2025 Wrapped|https://2025.unseen.co/|DEV+SOTD|Design Agencies~Promotional~Web & Interactive~Graphic design~Parallax~Scrolling~Typography~WebGL~Interaction Design~After Effects~Cinema 4D|2026-03-24
+Design By Brandin|https://designbybrandin.com/|HM|Design Agencies~Web & Interactive~Clean~Wordpress~Fullscreen~jQuery~Parallax~Portfolio~Scrolling~Single page~GSAP|2026-03-23
+YK PRODUCE Inc.|https://ykproduce.co.jp/|HM|Business & Corporate~Web & Interactive~Wordpress~Minimal~Navigation Menu~Parallax~Scrolling~Web Fonts~Photography~GSAP~Three.js~Photo & Video|2026-03-23
+The3Key|https://the3key.com/|HM|Business & Corporate~Animation~Wordpress~Typography~Illustration~GSAP~UI design~Figma|2026-03-23
+Shed|https://shed.design/|DEV+SOTD|Architecture~Business & Corporate~Animation~Colorful~Scrolling~Typography~GSAP~Interaction Design~Footer Design~Nuxt.js~DatoCMS|2026-03-23
+WorldQuant Foundry|https://www.worldquantfoundry.com/|HM|Business & Corporate~Other~Technology~Animation~Clean~Minimal~Illustration~Transitions~GSAP~3D~Craft CMS~Figma|2026-03-22
+FC Porto Memorial|https://memorial.fcporto.pt/|DEV+SOTD|Sports~Web & Interactive~Animation~Responsive Design~Scrolling~Single page~Interaction Design~UI design~After Effects~Adobe Photoshop|2026-03-22
+Drop Edition|https://dropedition.com|AH|E-Commerce~Fashion~Minimal~Parallax~GSAP~Shopify~UI design~next.js~Next.js~Luxury|2026-03-21
+Danik Bartolini|https://www.danikbartolini.com/|HM|Design Agencies~Film & TV~Animation~Portfolio~Typography~Video~Photography~Photo & Video~Wix Studio|2026-03-21
+Andrew Reff — Product Designer|https://andrewreff.com|HM|Web & Interactive~Portfolio~Storytelling~GSAP~React~Gestures / Interaction~Interaction Design~About Page~Microinteractions~Vercel|2026-03-21
+Darknode|https://www.darknode.army/en|SOTD|Technology~Web & Interactive~Animation~Scrolling~GSAP~3D~UI design~Microinteractions~Footer Design~Webflow~Social responsibility~Blender|2026-03-21
+Marion Parke|https://marionparke.com/|HM|E-Commerce~Fashion~Big Background Images~Flat Design~Navigation Menu~Shopify~Copy design~Photo & Video|2026-03-20
+Poly|https://poly.app/|HM|Promotional~Technology~Animation~HTML5~Retro~Scrolling~Transitions~GSAP~Startups~Figma|2026-03-20
+Red Blue Yellow Black Again|https://davincis.digital/rbyba|HM|Art & Illustration~Culture & Education~Photographic~Photography~Storytelling~Photo & Video~Figma~Readymag|2026-03-20
+Joel Maynard|https://www.mynrd.co.uk/|HM|Design Agencies~E-Commerce~Promotional~Parallax~Portfolio~Scrolling~Illustration~Interaction Design~Lottie~Figma|2026-03-20
+of Skin and Souls|https://www.ofskinandsouls.com|HM|Film & TV~Navigation Menu~Responsive Design~Video~Photography~Transitions~Storytelling~GLSL~Photo & Video~Next.js~Tailwind|2026-03-20
+Stuff by Kris Temmerman|https://neuroproductions.be|DEV+SOTD|Design Agencies~Web & Interactive~Animation~Portfolio~WebGL~Experimental~GSAP|2026-03-20
+Yes Now creative agency|https://yesnowww.com/|HM|Art & Illustration~Design Agencies~Web & Interactive~Animation~Graphic design~Scrolling~Vector~Illustration~GSAP~Gestures / Interaction~Lottie~Framer|2026-03-19
+Halfdays|https://www.halfdays.com/|HM|E-Commerce~Fashion~Clean~Colorful~Navigation Menu~Storytelling~Shopify~Content architecture|2026-03-19
+PARTICOLARE STUDIO|https://www.particolarestudio.it|HM|Design Agencies~Graphic design~Photographic~Portfolio~Storytelling~Photo & Video~next.js~Next.js|2026-03-19
+Ascend Marketing|https://ascendmarketing.xyz/|HM|Design Agencies~Web & Interactive~Portfolio~WebGL~Storytelling~3D~Startups|2026-03-19
+WTF by Nikhil Kamath|https://www.allthingswtf.com/|HM|Art & Illustration~Culture & Education~Web & Interactive~Colorful~GSAP~Three.js~Footer Design~Nuxt.js~Contentful|2026-03-19
+FARMform|https://farmform.be|HM|Business & Corporate~Events~Hotel / Restaurant~Clean~Wordpress~Navigation Menu~GSAP~Contact Page~Microinteractions~Lottie|2026-03-19
+TRUEWERK|https://truewerk.com/|HM|E-Commerce~Fashion~Big Background Images~Responsive~Shopify~Content architecture~Photo & Video|2026-03-19
+Aventura Dental Arts|https://aventuradentalarts.com/|DEV+SOTD|Business & Corporate~Other~Big Background Images~Interaction Design~Photo & Video~UI design~Figma|2026-03-19
+Studio OFF-BEAT|https://www.offbeat.kr|HM|Photographic~Photography~GSAP~Webflow~Javascript|2026-03-18
+Neimil|https://neimil.com/|HM|E-Commerce~Fashion~Big Background Images~Clean~Fullscreen~HTML5~Responsive~Shopify~About Page~Javascript|2026-03-18
+FIND Real Estate|https://findrealestate.com/|HM|Architecture~Web & Interactive~Animation~Big Background Images~Responsive Design~Real Estate~Content architecture~Header Design~next.js~Figma~Next.js|2026-03-18
+Faherty|https://fahertybrand.com/|HM|E-Commerce~Fashion~Web & Interactive~Illustration~Storytelling~Shopify~Content architecture~Photo & Video~UI design~About Page|2026-03-18
+ZARCEROG|https://zarcerog.com|HM|Magazine / Newspaper / Blog~Design Agencies~Web & Interactive~CSS~Graphic design~Portfolio~Gallery~Responsive~GSAP~Microinteractions~Typescript|2026-03-18
+Good Fella|https://good-fella.com|DEV+SOTD|Other~Technology~Web & Interactive~Animation~Clean~Flat Design~WebGL~Transitions~GSAP~Gestures / Interaction~404 pages~Next.js|2026-03-18
+Juri jewelry brand|https://www.jurijewelry.com/|HM|E-Commerce~Fashion~Animation~Big Background Images~Clean~Filters and Effects~Header Design~Footer Design~Webflow~After Effects~Figma~Luxury|2026-03-17
+Best Audio Brands 2026|https://www.bestaudiobrands.com/|HM|Music & Sound~Web & Interactive~Clean~Graphic design~Scrolling~Storytelling~Microinteractions~Contentful~Framer|2026-03-17
+Midnight Dungeon Jumper|https://gas-prompt-34812787.figma.site/|HM|Games & Entertainment~Fullscreen~Responsive Design~Retro~WebGL~Three.js|2026-03-17
+BoxCar Apartments|https://www.boxcarapts.com/|HM|Responsive Design~Gestures / Interaction~Real Estate~Copy design~Interaction Design~UI design~Webflow~Figma|2026-03-17
+Aupale Vodka|https://www.aupalevodka.com/en/|DEV+SOTD|Business & Corporate~Food & Drink~Promotional~Animation~HTML5~Parallax~Video~Microinteractions~Javascript~Astro|2026-03-17
+Lago Lago 2026|https://lagolago.nl/en|HM|Events~Music & Sound~Animation~Wordpress~Colorful~Graphic design~Transitions~Photo & Video~Header Design~Lottie~Next.js|2026-03-16
+Joby|https://www.jobyaviation.com/|DEV+SOTD|Business & Corporate~Design Agencies~Technology~Big Background Images~Graphic design~Content architecture~Photo & Video~UI design~Figma|2026-03-16
+NewsCatcher|https://www.newscatcherapi.com/|HM|Business & Corporate~Technology~Animation~Graphic design~WebGL~Illustration~3D~Webflow|2026-03-15
+Arnaud Rocca - Portfolio|https://arnaudrocca.fr/|HM|Technology~Web & Interactive~Big Background Images~Parallax~Portfolio~WebGL~Responsive~GSAP~Filters and Effects~Microinteractions~Nuxt.js|2026-03-15
+Ammodo|https://www.ammodo.org/|HM|Architecture~Art & Illustration~Culture & Education~Clean~Graphic design~Minimal~Storytelling~Content architecture~UI design~Figma|2026-03-15
+Hear|https://hear.ai|HM|Business & Corporate~Technology~Animation~Scrolling~Typography~Illustration~GSAP~Interaction Design~Startups~Motion~Typescript|2026-03-15
+Ancestry Stories of US|https://www.ancestry.com/stories-of-us|HM|Art & Illustration~Culture & Education~Animation~Colorful~Transitions~Gallery~Storytelling~GSAP~Content architecture~Next.js~Tailwind~Social responsibility|2026-03-15
+Foudre, Human Social Club|https://www.agencefoudre.com/|DEV+SOTD|Other~Colorful~Single page~Transitions~Gestures / Interaction~Microinteractions~404 pages~BARBA.js~Anime.js~Locomotive Scroll|2026-03-15
+https://www.withradiance.com/|https://www.withradiance.com/|HM|Design Agencies~Technology~Web & Interactive~Animation~Portfolio~Data Visualization~Webflow|2026-03-14
+kontenta AI|https://kontenta.ai/|HM|Business & Corporate~Technology~Animation~Colorful~Scrolling~Transitions~Responsive~GSAP~Three.js~3D~Startups~Webflow|2026-03-14
+Tahiti Numérique|https://tahitinumerique.pf/|HM|Technology~Web & Interactive~Animation~Minimal~Startups~Framer|2026-03-14
+Planetoño|https://www.planetono.space|AH+DEV+SOTD|Food & Drink~Illustration~Sound-Audio~GSAP~Three.js~3D~Interaction Design~Blender|2026-03-14
+MoMoney|https://www.museumofmoney.com|DEV+SOTD|Culture & Education~Events~Promotional~Animation~Colorful~GSAP~About Page~Microinteractions~Footer Design~404 pages~Matter.js~Webflow|2026-03-13
+Tidescape|https://tidescape.framer.ai/|HM|Hotel / Restaurant~Animation~Big Background Images~Clean~Minimal~Gallery~UI design~Figma~Luxury~Framer|2026-03-12
+https://www.jeh.it/|https://www.jeh.it/|HM|Design Agencies~Wordpress~Graphic design~Infinite Scroll~Portfolio~Scrolling|2026-03-12
+THE GRIND|https://www.thegrind.nl|HM|Sports~Animation~Video~Storytelling~GSAP~Webflow|2026-03-12
+Ose Engineering|https://www.ose-engineering.fr/|HM|Business & Corporate~Technology~Transitions~GSAP~UI design~About Page~Header Design~Footer Design~404 pages~Startups~Webflow~Javascript|2026-03-12
+StoryLab|https://storylab.defineamerican.com/|HM|Culture & Education~Film & TV~Institutions~CSS~Video~Data Visualization~3D~Webflow~Javascript|2026-03-12
+Adam Bricker|https://www.adambricker.com/|DEV+SOTD|Film & TV~Animation~Portfolio~Typography~Video~Photography~Three.js~Photo & Video~UI design~Vercel~Figma|2026-03-12
+TIWIS|https://www.tiwis.fr/en|HM|Business & Corporate~Animation~Horizontal Layout~Portfolio~GSAP~About Page~404 pages~Webflow~Figma|2026-03-11
+Beaucoup|https://beaucoup.studio/en/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~Navigation Menu~Transitions~GSAP~Three.js~Gestures / Interaction~Interaction Design~Locomotive Scroll|2026-03-11
+THIBAULT GUIGNAND PORTFOLIO|https://thibaultguignand.com/|HM|Promotional~Web & Interactive~Animation~Portfolio~WebGL~Transitions~Experimental~GSAP~3D~Gestures / Interaction~Microinteractions~Typescript|2026-03-11
+Cargo Architecture|https://cargoarchitecture.ca/|HM|Architecture~Animation~Wordpress~Portfolio~Figma|2026-03-11
+Share|https://www.shareintensive.com/|HM|Culture & Education~Sports~Web & Interactive~Animation~Graphic design~Scrolling~Menu - Horizontal~About Page~Footer Design~Figma~Adobe Illustrator~Wix Studio|2026-03-11
+FUMILIFE|https://www.fumilife.com/|HM|Film & TV~Web & Interactive~Typography~Gallery~GSAP~Next.js|2026-03-11
+Join Talent|https://jointalent.net|HM|Business & Corporate~Technology~Animation~Wordpress~Illustration~Storytelling~UI design~Microinteractions~Figma~Elementor|2026-03-11
+Mr. Pandas Paper Portfolio|https://www.mr-pandas-psychologically-safe-portfolio.com/|DEV+SOTD|Art & Illustration~Other~Web & Interactive~Colorful~Infinite Scroll~Portfolio~Unusual Navigation~Storytelling~GSAP~Three.js~3D~Blender|2026-03-11
+Nory.ai|https://www.nory.ai/|HM|Hotel / Restaurant~Technology~Animation~Clean~Colorful~Minimal~Typography~GSAP~UI design~Startups~Motion~Webflow|2026-03-10
+Thessaloniki Sto Piato|https://thessalonikistopiato.gr|HM|Events~Food & Drink~Animation~Wordpress~Colorful~Graphic design~Icons~GSAP~Sass|2026-03-10
+IBEX Masters|https://ibex-masters.com/|HM|Art & Illustration~Institutions~Animation~Big Background Images~Clean~Colorful~WebGL~3D~Craft CMS~Microinteractions~Luxury~Astro|2026-03-10
+Adovasio|https://adovasio.it/|DEV+SOTD|Promotional~Clean~Minimal~Photographic~Portfolio~Photography~Gallery~GSAP~Filters and Effects~Figma~DatoCMS~Luxury|2026-03-05
+Cash App Fall Release|https://cash.app/new|HM|Mobile & Apps~Technology~Web & Interactive~Animation~App Style~Colorful~HTML5~Javascript|2026-03-04
+PeterOravec.com - portfolio|https://peteroravec.com|HM|Games & Entertainment~Web & Interactive~Animation~Colorful~Portfolio~Retro~Single page~Experimental~Storytelling~Angular~Javascript~Canvas API|2026-03-04
+Dick Clark Productions|https://www.dickclark.com/|HM|Events~Film & TV~Promotional~Clean~CSS~Fullscreen~Transitions~Photo & Video~Figma~Canvas API|2026-03-04
+Nexa|https://nexalabs.framer.ai/|HM|Mobile & Apps~Technology~Animation~App Style~Flat Design~Responsive Design~Data Visualization~Sound-Audio~Startups~Figma~Framer|2026-03-04
+GRIPH|https://griph-art.com/|HM|Art & Illustration~E-Commerce~Animation~Colorful~Flat Design~Graphic design~Illustration~Interaction Design~Figma~Framer|2026-03-04
+Brand Libs|https://brandlibs.frontify.com|HM|Promotional~Technology~CSS~HTML5~Minimal~Single page~Experimental~Storytelling~Forms and Input~Javascript|2026-03-04
+Gavin Schneider Productions|https://www.gsproductions.co.za/|AH+DEV+SOTD|Fashion~Film & TV~Minimal~Portfolio~Photography~Photo & Video~Next.js~Sanity~AWS|2026-03-04
+The Future Label|https://www.futurelabel.us|HM|Art & Illustration~Design Agencies~Typography~Unusual Navigation~Transitions~Interaction Design~Microinteractions~Startups~Contentful~Figma~Framer|2026-03-03
+Festivent|https://festivent.ca/|HM|Culture & Education~E-Commerce~Events~Animation~Wordpress~Colorful~Navigation Menu~Parallax~404 pages~Contentful~Timber~Vite|2026-03-03
+SRE|https://www.sre.ai/|HM|Technology~Animation~Colorful~Icons~Data Visualization~Responsive~After Effects~Blender|2026-03-03
+Lupine Lights|https://lupinelights.com|HM|E-Commerce~Sports~Technology~Animation~Storytelling~Shopify~Filters and Effects~Interaction Design~UI design~Footer Design|2026-03-03
+The Kraken|https://www.thekrakentraining.com/|HM|Business & Corporate~Other~Animation~GSAP~404 pages~Contentful~Webflow|2026-03-03
+Collectif Parcelles|https://collectifparcelles.com/|HM|Design Agencies~Web & Interactive~Animation~Clean~HTML5~Scrolling~Single page~WebGL~Filters and Effects~Microinteractions~Nuxt.js~Social responsibility|2026-03-03
+Jason Bergh|https://www.jasonbergh.com|AH+DEV+SOTD|Film & TV~Music & Sound~jQuery~Portfolio~Video~Gallery~GSAP~About Page~Contact Page~404 pages~Webflow~Luxury|2026-03-03
+LET US Ibiza|https://letusibiza.com/|HM|Architecture~Web & Interactive~Big Background Images~Clean~Wordpress~Real Estate~About Page~Header Design~Figma|2026-03-02
+PAISANA©Living|https://living.paisana.studio|HM|Design Agencies~Hotel / Restaurant~CSS~GSAP~Real Estate~Interaction Design~UI design~Microinteractions~Figma|2026-03-02
+atuin.media|http://www.atuin.media|HM|Business & Corporate~Technology~Web & Interactive~Minimal~Three.js~3D~Interaction Design~Vanilla JS~11ty|2026-03-02
+Haiqu|https://haiqu.ai/|HM|Technology~Animation~Data Visualization~3D~After Effects~Adobe XD~Adobe Photoshop|2026-03-02
+Royal Ontario Museum (ROM)|https://www.rom.on.ca/|HM|Art & Illustration~Culture & Education~Web & Interactive~Big Background Images~Clean~CSS~Drupal~HTML5~Responsive Design~Content architecture~Interaction Design~UI design|2026-03-02
+Casper's Caviar|https://casperscaviar.com/|HM|E-Commerce~Food & Drink~Animation~Clean~Parallax~GSAP~Shopify~3D~Interaction Design~Footer Design~Locomotive Scroll~Luxury|2026-03-02
+Shift 5|https://shift5.io|DEV+SOTD|Business & Corporate~Technology~Animation~Retro~WebGL~Data Visualization~3D~Sanity~Astro|2026-03-02
+Joondalup Festival|https://joondalupfestival.com.au/|HM|Events~Animation~Scrolling~WebGL~Transitions~3D~Gestures / Interaction~Javascript~Blender|2026-03-01
+Tatiana Braoun Photographer|https://tatianabraoun.com/|HM|Animation~CSS~Photographic~Portfolio~Photography~Figma~Tilda|2026-03-01
+Nameless Festival|https://www.namelessfestival.it/|HM|Events~Music & Sound~Promotional~Animation~Big Background Images~Graphic design~Photographic~About Page~404 pages~Nuxt.js|2026-03-01
+RefractWeb|https://www.refractweb.com|HM|Design Agencies~Technology~Web & Interactive~Animation~Responsive Design~Responsive~React~UI design~Header Design~Microinteractions~Blender~Adobe Photoshop|2026-03-01
+AVA SRG|https://srg.ava-digital.site/en|DEV+SOTD|Art & Illustration~Web & Interactive~Animation~Portfolio~Scrolling~WebGL~Three.js~3D~UI design~Lottie|2026-03-01
+Font Barcelona|https://fontbarcelona.com/en/|HM|Other~Clean~Wordpress~Flat Design~Graphic design~Minimal~Portfolio~GSAP~Content architecture~Swiper.js~Luxury|2026-02-28
+Avantgarde Artist Agency|https://www.avantgardeartistsagency.com/|HM|Business & Corporate~Music & Sound~Promotional~Animation~Clean~CSS~Fullscreen~HTML5~Minimal~Parallax~Responsive~Figma|2026-02-28
+piplanning.io|https://piplanning.io/|HM|Business & Corporate~Technology~Clean~jQuery~Minimal~Responsive Design~Typography~GSAP~Header Design~Microinteractions~Startups~Webflow|2026-02-28
+No graphism®|https://nographism.com|HM|Design Agencies~Web & Interactive~Wordpress~Colorful~Parallax~Portfolio~Typography~GSAP~Interaction Design~Footer Design~Tailwind|2026-02-28
+Bogdan Kolomiyets – Portfolio|https://bogdankolomiyets.com/|HM|Web & Interactive~Animation~Clean~Colorful~Transitions~GSAP~Photo & Video~Javascript~Figma|2026-02-28
+Neon Rated|https://neonrated.com|DEV+SOTD|E-Commerce~Film & TV~Web & Interactive~Fullscreen~Navigation Menu~Video~React~Shopify~Interaction Design~Microinteractions~Footer Design~Next.js|2026-02-28
+Cathy DOLLE Portfolio|https://www.cathydolle.com/|DEV+SOTD|Design Agencies~Web & Interactive~Portfolio~Photography~GSAP~Three.js~UI design~Next.js|2026-02-27
+LITESHOP2|https://liteshop.design/en|HM|Art & Illustration~Design Agencies~Animation~CSS~Portfolio~Gallery~UI design~After Effects~Figma|2026-02-26
+Through Sliding Doors|https://through-sliding-doors.rosiesplace.org.au/|HM|Art & Illustration~Culture & Education~Animation~Colorful~WebGL~Illustration~Storytelling~Three.js~GLSL~Filters and Effects~Interaction Design~Social responsibility|2026-02-26
+List Holding|https://www.list-holding.at/en/|HM|Business & Corporate~Technology~Colorful~Transitions~Gallery~React~Craft CMS~Social responsibility~Astro|2026-02-26
+Magic Receipt|https://magic-receipt.ai/|HM|Mobile & Apps~Technology~Animation~Colorful~Scrolling~Single page~Transitions~GSAP~Gestures / Interaction~Webflow~Javascript|2026-02-26
+Searching for Birds|https://searchingforbirds.visualcinnamon.com/|HM|Web & Interactive~Colorful~Single page~SVG~Illustration~Data Visualization~Experimental~Storytelling~D3~Javascript|2026-02-26
+Matrixspace|https://www.matrixspace.com/|HM|Technology~Web & Interactive~Animation~Clean~Graphic design~Responsive Design~360~UI design~Startups~Webflow~After Effects~Figma|2026-02-26
+1820 Productions|https://www.1820productions.com|DEV+SOTD|Business & Corporate~Film & TV~Animation~Fullscreen~Navigation Menu~Portfolio~Scrolling~Microinteractions~Webflow~Figma~Typescript|2026-02-26
+Max Mara - Catch The Lantern|https://catchthelantern.maxmara.com/|HM|Fashion~Web & Interactive~Animation~CSS~HTML5~WebGL~Storytelling~3D~Interaction Design~UI design~Luxury|2026-02-25
+Sport cover|https://www.sportcover.co/?view=index|HM|Business & Corporate~Sports~Clean~Minimal~Gallery~Three.js~Webflow~Figma|2026-02-25
+marchuenerwadel.com|https://www.marchuenerwadel.com/|HM|Art & Illustration~Culture & Education~Other~Clean~Portfolio~Gallery~Content architecture~Photo & Video~About Page~Blender~Framer|2026-02-25
+ZeroDrift AI|https://www.zerodrift.ai/|HM|Business & Corporate~Technology~Animation~App Style~Minimal~Data Visualization~GSAP~Interaction Design~UI design~Startups~Lottie~Webflow|2026-02-25
+Decheart|https://valentine.decart.ai/|HM|Games & Entertainment~Web & Interactive~Colorful~Retro~Typography~Experimental~Storytelling~Header Design~404 pages~Figma~Adobe Illustrator|2026-02-25
+Studio Dado|https://www.studiodado.com|DEV+SOTD|Architecture~Business & Corporate~Clean~Wordpress~Minimal~Gallery~Gestures / Interaction~Content architecture~Interaction Design~Luxury|2026-02-25
+Studio Linear|https://studiolinear.com/|HM|Design Agencies~Portfolio~Webflow~Adobe Photoshop|2026-02-24
+Let it Rip Pictures|https://letitrippictures.com|HM|Film & TV~Promotional~Big Background Images~Scrolling~Video~Photography~Storytelling~GSAP~Interaction Design~Photo & Video~Svelte~Sanity|2026-02-24
+Solais|https://solais.ai/|HM|Technology~Web & Interactive~Animation~Scrolling~Single page~Experimental~PHP~3D~Javascript~Blender|2026-02-24
+David Martín Suárez|https://davidmartinsuarez.com/|HM|Web & Interactive~Animation~Clean~Portfolio~Single page~Experimental~React~UI design~Microinteractions~Tailwind|2026-02-24
+PocketChange|https://pocketchangethe.world|HM|Culture & Education~Mobile & Apps~Animation~Colorful~Parallax~Single page~Storytelling~3D~Startups~Netlify~Next.js~DatoCMS|2026-02-24
+Dulcedo|https://dulcedo.com/|DEV+SOTD|Business & Corporate~Fashion~Animation~jQuery~Parallax~Typography~Photography~Craft CMS~Interaction Design~UI design~Javascript|2026-02-24
+Born & Bred|https://bornandbredbrand.com/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~Wordpress~CSS~Portfolio~Gallery~Responsive~GSAP~Interaction Design~Project Page|2026-02-23
+MASON'S|https://masons.it/?srsltid=AfmBOoqwyhV2rNZxufHoc8BgOQFkxJgFsOpRQ0k5PUwXZ2thT-tz4Q8L|HM|E-Commerce~Fashion~Colorful~Minimal~Photographic~GSAP~Shopify~UI design~Microinteractions~Figma|2026-02-23
+LunaObscura|https://lunaobscura.headspace.ru|HM|Art & Illustration~Design Agencies~Web & Interactive~HTML5~Single page~Video~Web Fonts~After Effects~Blender|2026-02-23
+Maze|https://mazehq.com/|HM|Business & Corporate~Technology~Parallax~WebGL~Data Visualization~Responsive~Three.js~React~Startups|2026-02-23
+OceanX 2025|https://2025.oceanx.org/|SOTD|Business & Corporate~Events~Animation~Horizontal Layout~Minimal~Scrolling~WebGL~Three.js~3D~Social responsibility~Blender|2026-02-23
+MindJoin|https://mindjoin.netlify.app/|HM|Technology~Animation~Big Background Images~Illustration~Data Visualization~GSAP~Startups|2026-02-22
+TOSEN   Architecture Studio|https://www.tosen.es/|HM|Architecture~Clean~WebGL~360~Three.js~3D~Gestures / Interaction~Filters and Effects~Real Estate~Interaction Design~Webflow|2026-02-22
+Quoti|https://www.getquoti.ai/|HM|Mobile & Apps~Technology~Clean~Scrolling~Single page~Typography~Vector~GSAP~Gestures / Interaction~Startups~Webflow~Javascript|2026-02-22
+Outsource Consultants, Inc|https://oci.madebybuzzworthy.com/|DEV+SOTD|Business & Corporate~Institutions~Animation~Typography~Transitions~Menu - Vertical~Three.js~Filters and Effects~Real Estate~UI design~Nuxt.js~Prismic|2026-03-10
+MXMS|https://mxms.studio/|HM|Music & Sound~Wordpress~Infinite Scroll~Portfolio~Sound-Audio~GSAP~VideoJS|2026-03-09
+Elecctro|https://elecctro.com/|AH|Business & Corporate~Food & Drink~Technology~Animation~Clean~Colorful~GSAP~3D~Interaction Design~Footer Design~Webflow~Cinema 4D|2026-03-09
+REDSTONE SOFTWARE|https://redstone.software/|HM|Business & Corporate~Design Agencies~Web & Interactive~Animation~CSS~HTML5~Portfolio~Responsive Design~Bootstrap~Interaction Design~Photo & Video~UI design|2026-03-09
+Indicium AI|https://indicium.ai/|HM|Technology~Animation~Flat Design~Minimal~WebGL~Interaction Design~Webflow|2026-03-09
+Autajon|https://www.autajon.com/fr/|HM|Business & Corporate~Clean~Wordpress~Minimal~Parallax~Typography~Microinteractions~Figma|2026-03-09
+ON Energy|https://www.on.energy/|DEV+SOTD|Business & Corporate~Technology~WebGL~3D~Figma|2026-03-09
+Denny Tom Joseph - Portfolio|https://dny19.com|HM|Film & TV~Portfolio~Scrolling~WebGL~Photography~Interaction Design~Javascript~Canvas API|2026-03-08
+REALIZER®|https://www.realizer.ch/en|HM|Business & Corporate~Web & Interactive~Clean~WebGL~3D~Interaction Design~Figma~Cinema 4D|2026-03-08
+Avec|https://avec-paris.com|HM|Business & Corporate~Fashion~Clean~Wordpress~Portfolio~Unusual Navigation~Transitions~GSAP~Footer Design~Project Page~Luxury|2026-03-08
+VoidZero|https://voidzero.dev|HM|Technology~Animation~Clean~Typography~Data Visualization~Interaction Design~UI design~Vue.js~Figma|2026-03-08
+Modern Home of Students Gdańsk|https://allinnhomeofstudents.com/|HM|Business & Corporate~Promotional~Wordpress~Colorful~Scrolling~GSAP~Real Estate~Copy design~UI design|2026-03-08
+Springs|https://springs.estate/|DEV+SOTD|Architecture~Clean~Colorful~WebGL~Three.js~3D~Real Estate~AWS~Luxury|2026-03-08
+Highful Minds|https://highfulminds.com/|HM|Design Agencies~E-Commerce~Clean~GSAP~UI design~Webflow~Figma|2026-03-07
+Sitetrip|https://sitetrip.be/en|HM|Technology~Web & Interactive~Animation~Colorful~Drupal~Navigation Menu~Storytelling~GSAP~Microinteractions~Startups|2026-03-07
+Hutstuf|https://hutstuf.com|HM|Architecture~Hotel / Restaurant~Clean~Wordpress~Gallery~Responsive~Real Estate~Interaction Design~Photo & Video~UI design~Figma~Next.js|2026-03-07
+Waabi|https://waabi.ai|DEV+SOTD|Technology~Colorful~Typography~Storytelling~React~Interaction Design~Microinteractions~Startups~Motion~Next.js|2026-03-07
+ARCHIDOMO Architects|https://www.archidomo.fr/|HM|Architecture~Business & Corporate~Animation~Clean~CSS~SEO~GSAP~404 pages~Sanity|2026-03-06
+1001 Luxury|https://villas-tamarindo.com/|HM|Hotel / Restaurant~Animation~Wordpress~Colorful~Photographic~Illustration~Responsive~GSAP~Javascript|2026-03-06
+https://rileyadkisson.com/|https://rileyadkisson.com/|HM|Games & Entertainment~Web & Interactive~Animation~Colorful~CSS~Responsive Design~Retro~Experimental~Interaction Design~Microinteractions~Figma~Adobe Photoshop|2026-03-06
+Felix Nieto|https://www.felix-nieto.com/|HM|Architecture~Design Agencies~Photographic~Portfolio~Scrolling~Photography~Transitions~Gallery~GSAP~BARBA.js~Webflow|2026-03-06
+The Cosmic Stage|http://www.thecosmicstage.com|HM|Music & Sound~Web & Interactive~Animation~Fullscreen~Unusual Navigation~WebGL~360~Experimental~Storytelling~Three.js~3D~Vite|2026-03-06
+Griflan|https://griflan.com/|DEV+SOTD|Design Agencies~Animation~Portfolio~Typography~About Page~DatoCMS|2026-03-06
+gucduck|https://www.gucduck.com/|HM|Mobile & Apps~Web & Interactive~Portfolio~Experimental~Responsive~Content architecture~Interaction Design~About Page~Project Page~Vercel~Next.js~Tailwind|2026-03-05
+Function.ai|https://www.function.ai/|HM|Technology~Web & Interactive~Single page~WebGL~Transitions~Header Design~Startups~Webflow|2026-03-05
+AppyCamper|https://www.appycamper.com|HM|Mobile & Apps~Technology~Animation~Clean~Scrolling~Single page~GSAP~Startups~Webflow~Figma|2026-03-05
+FEED Agency|https://www.feedagency.co|HM|Film & TV~Animation~Colorful~Portfolio~Responsive Design~Photography~Transitions~Storytelling~GSAP~BARBA.js~Webflow|2026-03-05
+Barcoop Bevy|https://www.barcoopbevy.com/|HM|E-Commerce~Food & Drink~Animation~Colorful~Icons~Vector~Illustration~Transitions~GSAP~Shopify~Webflow|2026-03-05
+Victor Sin - 2026|https://www.victor-sin.com/|HM|Promotional~Web & Interactive~Animation~Portfolio~WebGL~Responsive~GSAP~Interaction Design~Project Page~next.js~Next.js|2026-03-05
+We Agency|https://www.weagency.com|HM|Culture & Education~Film & TV~Big Background Images~Clean~Portfolio~Transitions~Storytelling~GSAP~Highway.js~Javascript~Social responsibility|2026-03-05
+IMK Avocats|https://imk.ca/|HM|Business & Corporate~Institutions~Clean~Wordpress~Fullscreen~Minimal~Scrolling~Typography~Responsive~GSAP~Javascript|2026-03-05
+KS ARCHITECTES|https://ks-architectes.be/|HM|Architecture~Clean~Minimal~Typography~GSAP~Svelte~Directus|2026-02-22
+D2C Life Science|https://www.d2c-lifescience.com/|DEV+SOTD|Animation~Minimal~GSAP~Three.js~3D~Startups~Blender|2026-02-22
+Hark Capital|https://www.harkcap.com/|HM|Business & Corporate~Clean~jQuery~Data Visualization~GSAP~Javascript|2026-02-21
+Siempreric|https://siemprericc.com/|HM|Promotional~Web & Interactive~Photographic~Portfolio~Photography~Gallery~Responsive~GSAP~Interaction Design~Photo & Video~Figma~Astro|2026-02-21
+Valentine's day|https://alicek.design/valentines-day-2026/|HM|Art & Illustration~Events~Games & Entertainment~Big Background Images~Colorful~CSS~Fullscreen~Graphic design~HTML5~Illustration~UI design~Svelte|2026-02-21
+Reasonal|https://reasonal.co|HM|Culture & Education~Mobile & Apps~Clean~Colorful~Minimal~Parallax~Scrolling~GSAP~Microinteractions~Startups|2026-02-21
+Tab Kitchen|https://tabkitchenbakery.com/|HM|Food & Drink~Web & Interactive~Illustration~Experimental~Three.js~After Effects~Framer|2026-02-21
+Cheggout|https://www.cheggout.com/|HM|Business & Corporate~Technology~Web & Interactive~Animation~Parallax~Typography~Data Visualization~Interaction Design~UI design~Webflow~After Effects~Figma|2026-02-21
+Voku.Studio™|https://voku.studio/|DEV+SOTD|Design Agencies~Film & TV~Animation~Clean~Navigation Menu~Video~Experimental~Three.js~3D~UI design~11ty|2026-02-21
+Vibrant Wellness|https://vibrant.noomoagency.com/|DEV+SOTD|Events~Technology~Web & Interactive~Animation~Unusual Navigation~WebGL~Data Visualization~Storytelling~GSAP~Three.js~3D|2026-02-20
+Mousham Singh 3D Web|https://mousham.design|HM|Web & Interactive~Animation~Portfolio~Scrolling~WebGL~Experimental~GSAP~Three.js~3D~Gestures / Interaction|2026-02-19
+Outil|https://outil.org/|HM|Animation~Clean~Colorful~Craft CMS~Real Estate~Vue.js~Social responsibility|2026-02-19
+Melvin Winkeler|https://melvinwinkeler.com/|HM|Web & Interactive~Animation~Colorful~Infinite Scroll~Portfolio~Scrolling~Photography~Gallery~GSAP~Webflow~Swiper.js|2026-02-19
+JOSHUA'S Magazine|https://joshuas.io/|HM|Architecture~Magazine / Newspaper / Blog~Wordpress~Colorful~Responsive Design~Storytelling~Content architecture~UI design~Footer Design~Figma~Luxury|2026-02-19
+ABT|https://helloabt.com|HM|Art & Illustration~Business & Corporate~Graphic design~HTML5~Photographic~Portfolio|2026-02-19
+ium inc.|https://ium.jp/|HM|Design Agencies~Web & Interactive~Animation~Colorful~Minimal~Typography~WebGL~Transitions~GSAP~Three.js~404 pages|2026-02-19
+immersion|https://immersion-blush.vercel.app/|HM|Design Agencies~Web & Interactive~Minimal~Typography~Transitions~GSAP~Next.js|2026-02-19
+Directionless|https://directionless.webflow.io/|HM|Art & Illustration~Web & Interactive~Animation~Minimal~Scrolling~WebGL~Illustration~Experimental~Storytelling~GSAP~UI design~Webflow|2026-02-19
+Farm Minerals|https://www.farmminerals.com/promo|DEV+SOTD|E-Commerce~Technology~Animation~Colorful~WebGL~Data Visualization~GSAP~3D~Interaction Design~Startups~Webflow|2026-02-19
+8PM|https://8pm.it/?gad_source=1&gad_campaignid=23467627330&gbraid=0AAAABCXOIrGtuYHdrApFH0z9waz0r6gr6&gclid=Cj0KCQiAy6vMBhDCARIsAK8rOglCE6cHH1yk1sI_NYG0UPtN6tp9FipC8yZ9RlJhHAFe7e5oKwmY5AAaAoSPEALw_wcB|HM|E-Commerce~Fashion~Big Background Images~Clean~Minimal~GSAP~Shopify~Microinteractions~Figma|2026-02-18
+Aqui Lá Acolá|https://arthurpetrillo.photography/|HM|Photographic~Portfolio~Photography~Gallery~Storytelling~Photo & Video~Project Page~Figma~Readymag|2026-02-18
+Enumera Molecular|https://enumeramolecular.com|HM|Business & Corporate~Technology~Wordpress~Colorful~Parallax~Transitions~GSAP~Javascript|2026-02-18
+Indaco|https://www.indaco.com/|HM|Design Agencies~Film & TV~Web & Interactive~Colorful~Flat Design~Minimal~Portfolio~Typography~WebGL~Transitions~Figma|2026-02-18
+PayJustNow|https://payjustnow.com/business/|HM|Business & Corporate~Technology~Web & Interactive~Responsive Design~Scrolling~UI design~404 pages~Figma|2026-02-18
+Studio Dialect|https://studiodialect.com/|DEV+SOTD|Design Agencies~Web & Interactive~Gallery~Three.js~React~3D~Header Design~Contact Page~Microinteractions~Footer Design~Typescript|2026-02-18
+AdPanel|https://adpanel.io/|HM|E-Commerce~Fashion~Technology~React~Photo & Video~Next.js|2026-02-17
+Gourou Indian Food|https://www.gourouindianfood.fr/|HM|Food & Drink~Animation~Colorful~Unusual Navigation~UI design~404 pages~Webflow~After Effects~Figma|2026-02-17
+Bajgart Office|https://bajgartoffice.com/|HM|Design Agencies~Portfolio~Single page~Footer Design~Framer|2026-02-17
+Wonder Games|https://wondermakers.games|HM|Design Agencies~Games & Entertainment~Web & Interactive~Animation~Colorful~Graphic design~Portfolio~3D~UI design~Svelte|2026-02-17
+Nat Nu Design|https://natnu.design/|HM|Design Agencies~Other~Web & Interactive~Clean~Portfolio~UI design~Project Page~Vercel~Figma|2026-02-17
+QF Network|https://qfnetwork.xyz/|HM|Technology~Web & Interactive~Graphic design~Minimal~Scrolling~Vector~Responsive~Interaction Design~Startups~Figma~Adobe Illustrator|2026-02-17

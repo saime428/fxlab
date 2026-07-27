@@ -20,14 +20,20 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 const CSS_CAP = 8;              // 每站最多抓几个 CSS 文件
 const BYTE_CAP = 2_000_000;     // 每站 CSS 总量上限,防超大 bundle 拖死
 
-const get = async (url, ms = 15000) => {
-  const ac = new AbortController();
-  const t = setTimeout(() => ac.abort(), ms);
-  try {
-    const r = await fetch(url, { signal: ac.signal, redirect: 'follow', headers: { 'User-Agent': UA, 'Accept-Language': 'en' } });
-    return r.ok ? await r.text() : '';
-  } catch { return ''; }
-  finally { clearTimeout(t); }
+// 重试两次:实测同一批 124 站三轮分别拿到 113/116/87 —— 网络抖动会让统计口径
+// 跟着抖,同一个问题问两次得两个答案。退避 800ms 后成功率明显回升
+const get = async (url, ms = 15000, tries = 2) => {
+  for (let i = 0; i < tries; i++) {
+    const ac = new AbortController();
+    const t = setTimeout(() => ac.abort(), ms);
+    try {
+      const r = await fetch(url, { signal: ac.signal, redirect: 'follow', headers: { 'User-Agent': UA, 'Accept-Language': 'en' } });
+      if (r.ok) return await r.text();
+    } catch {}
+    finally { clearTimeout(t); }
+    if (i < tries - 1) await new Promise(r => setTimeout(r, 800));
+  }
+  return '';
 };
 
 /* ---------- 1. 列表 ----------
@@ -86,6 +92,23 @@ async function probe(site) {
   };
   const [curDecl, curUsed] = declVsUsed('cursor\\s*:\\s*none');
   const [blDecl, blUsed] = declVsUsed('mix-blend-mode\\s*:\\s*(?:difference|exclusion)');
+  // cursor: url(...) —— 字面意义上的"换掉光标"(贴图/SVG),和 cursor:none+跟随元素
+  // 是两条完全不同的路子。首轮只查了 none,把这一整类漏光了
+  const [urlDecl, urlUsed] = declVsUsed('cursor\\s*:[^;}]*url\\(');
+  const cursorUrlSamples = [...css.matchAll(/cursor\s*:\s*(url\([^;}]{0,70})/gi)]
+    .map(m => m[1].replace(/\s+/g, ' ')).slice(0, 3);
+  // JS 直接写 style.cursor 的(绕开 CSS,前面全查不到)
+  const jsSetsCursor = /style\s*\.\s*cursor\s*=|setProperty\(\s*["']cursor["']/.test(html);
+  // 第三条路子,也是最常见的一条:**不藏原生光标,只加一个跟随的圆点/圆环**。
+  // 前两轮只查 cursor:none,把这一整类整个漏掉了 —— 这就是"我看到好多站有自定义
+  // 光标,你却说只有 10 个"的原因。
+  // 信号:选择器名字像光标(.cursor / .custom-cursor / #cursor / .follower),
+  //       且该类真出现在 HTML 里,且页面监听了指针移动
+  const cursorishSel = [...new Set(
+    [...css.matchAll(/([.#][\w-]*(?:cursor|follower)[\w-]*)[^{]{0,80}\{/gi)].map(m => m[1])
+  )].filter(s => !/^\.cursor-(pointer|grab|grabbing|default|text|move|wait|help|not-allowed|zoom)/.test(s));
+  const followerSel = cursorishSel.filter(s => classUsed(s)).slice(0, 4);
+  const tracksPointer = /pointermove|mousemove/.test(html);
 
   const has = re => re.test(html) || re.test(css);
   return {
@@ -99,6 +122,8 @@ async function probe(site) {
     eases: top(eases, 5).map(([k, n]) => `${k} ×${n}`),
     radii: top(radii, 3).map(([k]) => k),
     cursorNoneDecl: curDecl, cursorNoneUsed: curUsed,    // 声明数 / 粗筛后疑似在用
+    cursorUrlDecl: urlDecl, cursorUrlUsed: urlUsed, cursorUrlSamples, jsSetsCursor,
+    followerSel, tracksPointer,
     blendDecl: blDecl, blendUsed: blUsed,
     libs: [
       has(/\bgsap\b/i) && 'GSAP', has(/three(\.min)?\.js|THREE\./) && 'Three',
@@ -125,7 +150,8 @@ const pool = async (items, n, fn) => {
 const sites = listSites();
 const res = await pool(sites, CONC, probe);
 mkdirSync('blends/scans', { recursive: true });
-writeFileSync('blends/scans/raw-2026-07.json', JSON.stringify(res, null, 1));
+const OUT = 'blends/scans/raw-' + LIST.split(/[\\/]/).pop().replace(/^awwwards-|\.txt$/g, '') + '.json';
+writeFileSync(OUT, JSON.stringify(res, null, 1));
 process.stderr.write('\n');
 
 const ok = res.filter(r => r && !r.err && r.cssBytes > 500);
@@ -153,6 +179,17 @@ console.log(`  有 CSS 变量体系(≥10 个 --var)  ${sitesWith('varCount', v 
 const cnt = k => ok.filter(r => r[k] > 0).length;
 console.log(`  cursor:none            声明 ${cnt('cursorNoneDecl')} 站 → 疑似在用 ${cnt('cursorNoneUsed')} 站`);
 console.log(`  ↳ ${ok.filter(r => r.cursorNoneUsed).map(r => r.title).join(', ') || '(无)'}`);
+console.log(`  cursor:url(...) 换图   声明 ${cnt('cursorUrlDecl')} 站 → 疑似在用 ${cnt('cursorUrlUsed')} 站`);
+console.log(`  ↳ ${ok.filter(r => r.cursorUrlUsed).map(r => r.title).join(', ') || '(无)'}`);
+for (const r of ok.filter(r => r.cursorUrlSamples?.length).slice(0, 8))
+  console.log(`     ${r.title}: ${r.cursorUrlSamples[0]}`);
+console.log(`  JS 直接写 style.cursor  ${ok.filter(r => r.jsSetsCursor).length} 站(CSS 侧查不到的那一类)`);
+const follower = ok.filter(r => r.followerSel?.length && r.tracksPointer);
+console.log(`  跟随元素(.cursor/.follower 类 + 监听指针) ${follower.length} 站  ← 最常见的一条路子`);
+console.log(`  ↳ ${follower.map(r => r.title).slice(0, 20).join(', ')}`);
+for (const r of follower.slice(0, 10)) console.log(`     ${r.title}: ${r.followerSel.join(' ')}`);
+const anyCursor = ok.filter(r => r.cursorNoneUsed || r.cursorUrlUsed || r.jsSetsCursor || (r.followerSel?.length && r.tracksPointer));
+console.log(`\n  ★ 换掉/加了光标的合计(任一路子) ${anyCursor.length}/${ok.length}(${Math.round(anyCursor.length / ok.length * 100)}%)`);
 console.log(`  mix-blend difference/exclusion  声明 ${cnt('blendDecl')} 站 → 疑似在用 ${cnt('blendUsed')} 站`);
 console.log(`  ↳ ${ok.filter(r => r.blendUsed).map(r => r.title).slice(0, 14).join(', ')}`);
 console.log('  (粗筛=选择器的类名出现在 HTML class 属性里;JS 运行时加的类会被低估)');
