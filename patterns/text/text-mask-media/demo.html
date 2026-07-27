@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文字挖空露媒体 Text Mask Media — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:56rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.45;
+        margin:3rem 0 .75rem; font-weight:600; }
+
+/* ============ 方案 A:background-clip: text ============
+   字重越粗效果越好 —— 细字里露不出多少内容,只剩一点杂色 */
+.mask-text{
+  margin:0; font-size:clamp(2.6rem,13vw,9rem); line-height:.88; font-weight:900;
+  letter-spacing:-.05em; text-transform:uppercase;
+  background-image:
+    radial-gradient(120% 140% at 15% 20%, #d2ff00 0, transparent 50%),
+    radial-gradient(100% 120% at 85% 30%, #7ee3ff 0, transparent 55%),
+    linear-gradient(110deg, #ff6b00 0%, #6d28d9 40%, #0f766e 75%, #ff6b00 100%);
+  background-size:220% 220%;              /* 大于文字,才有的可平移 */
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;    /* 某些 Safari 版本只认这个 */
+  animation:drift 14s linear infinite;    /* 静止的渐变看起来只是"彩色字" */
+}
+@keyframes drift{
+  0%{ background-position:0% 50% } 50%{ background-position:100% 50% } 100%{ background-position:0% 50% }
+}
+/* 强制高对比模式下 color:transparent 会让字彻底消失 */
+@media (forced-colors: active){
+  .mask-text{ color:CanvasText; -webkit-text-fill-color:CanvasText; background:none; }
+}
+@media (prefers-reduced-motion:reduce){ .mask-text{ animation:none } }
+@media print{ .mask-text{ color:#111; -webkit-text-fill-color:#111; background:none } }
+/* ====================================================== */
+
+/* ============ 方案 B:mask 挖穿盖层,露出底下的"媒体" ============
+   background-clip 吃不了 <video>。反过来做:媒体铺底,盖一层纯色,
+   用文字形状把盖层挖穿。SVG 遮罩里不继承页面 CSS、加载不到 webfont,
+   所以 <text> 必须写死 font-family/size/weight,或把字转成 <path> */
+.stage-b{ position:relative; height:clamp(9rem,26vw,17rem); border-radius:10px; overflow:hidden; }
+.media{
+  position:absolute; inset:0;
+  background:conic-gradient(from 0deg, #d2ff00, #7ee3ff, #6d28d9, #ff6b00, #d2ff00);
+  animation:spin 12s linear infinite;
+}
+@keyframes spin{ to{ rotate:360deg } }
+.cover{
+  position:absolute; inset:0; background:var(--bg);
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='260'%3E%3Crect width='800' height='260' fill='white'/%3E%3Ctext x='400' y='175' font-family='Helvetica,Arial,sans-serif' font-size='150' font-weight='900' letter-spacing='-6' text-anchor='middle' fill='black'%3EMEDIA%3C/text%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='260'%3E%3Crect width='800' height='260' fill='white'/%3E%3Ctext x='400' y='175' font-family='Helvetica,Arial,sans-serif' font-size='150' font-weight='900' letter-spacing='-6' text-anchor='middle' fill='black'%3EMEDIA%3C/text%3E%3C/svg%3E");
+  -webkit-mask-size:100% 100%; mask-size:100% 100%;
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+}
+@media (prefers-reduced-motion:reduce){ .media{ animation:none } }
+/* ============================================================== */
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+</style>
+</head>
+<body>
+
+<main>
+  <h2 class="lbl">方案 A · background-clip: text</h2>
+  <h1 class="mask-text">Kestrel<br>Works</h1>
+  <p style="margin-top:1.5rem">标题不是"有颜色的字",是<strong>一扇形状为文字的窗</strong>。
+     而且它仍然是真文字——可选中、可搜索、读屏能读,这是它比"放一张标题图"高级的关键。</p>
+
+  <h2 class="lbl">方案 B · mask 挖穿盖层(视频走这条)</h2>
+  <div class="stage-b" role="img" aria-label="标题 MEDIA,字内可见旋转的彩色渐变">
+    <div class="media"></div>
+    <div class="cover"></div>
+  </div>
+  <p style="margin-top:1.5rem"><code>background-clip</code> 吃不了 <code>&lt;video&gt;</code>。
+     反过来做:媒体铺底,上面盖一层纯色,<strong>用文字形状把盖层挖穿</strong>。
+     这里用旋转的 conic 渐变冒充视频,真项目里换成 <code>&lt;video muted playsinline&gt;</code> 即可。</p>
+
+  <p class="note">方案 B 的 SVG 遮罩里<strong>不继承页面 CSS、也加载不到 webfont</strong>,
+     <code>&lt;text&gt;</code> 必须写死字体;要彻底摆脱字体依赖就把标题转成 <code>&lt;path&gt;</code>
+     (代价:文字不可选中,得补 <code>aria-label</code>——上面这块就是这么做的)。<br>
+     <strong>对比度无法保证</strong>:文字颜色取决于背后的媒体,深色段落上可能读不清。
+     它是标题不是正文,别把关键信息只放这里。<br>
+     强制高对比模式下 <code>color:transparent</code> 会让字彻底消失,已用
+     <code>forced-colors</code> 兜底。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+</body>
+</html>

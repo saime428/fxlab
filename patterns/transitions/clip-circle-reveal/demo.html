@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>圆形揭开转场 Clip Circle Reveal — web-fx-lab</title>
+<style>
+:root{
+  --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+  --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1);
+  /* ===== KNOB =====
+     --dur-reveal  揭开时长。.6s 干脆 / .9s 有仪式感 / >1.2s 开始等得不耐烦 */
+  --dur-reveal:.9s;
+  --x:50%; --y:50%; --r:0px;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:52rem; margin:0 auto; padding:4rem 1.5rem 6rem; position:relative; z-index:1; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+.row{ display:flex; flex-wrap:wrap; gap:1rem; margin:2.5rem 0; }
+.btn{ font:inherit; color:inherit; cursor:pointer; border:1px solid rgba(244,244,237,.28);
+      background:transparent; padding:.85rem 1.5rem; border-radius:999px;
+      transition:border-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.btn:hover,.btn:focus-visible{ border-color:var(--accent); color:var(--accent); }
+.btn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+/* ============ 核心:三行 ============ */
+.veil{
+  position:fixed; inset:0; z-index:50;
+  clip-path:circle(0px at var(--x) var(--y));
+  transition:clip-path var(--dur-reveal) var(--ease-out);
+  pointer-events:none;
+  display:grid; place-content:center; text-align:center; padding:2rem;
+}
+.veil.on{ clip-path:circle(var(--r) at var(--x) var(--y)); pointer-events:auto; }
+/* ==================================== */
+
+.veil-dark { background:#0b0b0d; }
+.veil-brand{ background:var(--accent); color:#111112; }
+.veil h2{ margin:0 0 .5rem; font-size:clamp(1.8rem,6vw,3.4rem); font-weight:900; letter-spacing:-.035em; }
+.veil p{ margin:0 auto 1.4rem; opacity:.8; max-width:26rem; }
+.veil .btn{ border-color:currentColor; }
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+/* 这类"从一点扩张"的运动对前庭敏感人群不友好:直接切换,不做揭开 */
+@media (prefers-reduced-motion:reduce){
+  .veil{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>圆形揭开转场</h1>
+  <p>绝大多数转场是"一层东西盖过来"——它从哪来、为什么来,和你刚才干了什么没关系。</p>
+  <p>这个把两件事绑在一起:<strong>你点的那个点,就是新页面长出来的原点</strong>。
+     试试点屏幕不同位置的按钮,注意圆心跟着变。</p>
+
+  <div class="row">
+    <button class="btn js-open" data-veil="dark">从这里打开</button>
+    <button class="btn js-open" data-veil="brand">换个位置试试</button>
+  </div>
+
+  <p>半径公式别偷懒:用 <code>innerWidth</code> 或对角线的一半,都会在某些点击位置露出旧内容的边角。
+     要取"到四角的最大距离"。</p>
+
+  <p class="note">用 <code>transform</code> 做不到这个效果——缩放一个圆会把内容一起缩放,<strong>必须是 clip-path</strong>。<br>
+     键盘触发时没有坐标,这里取按钮自身的中心,不是默认的 (0,0)。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<div class="veil veil-dark" id="veil-dark" aria-hidden="true">
+  <h2>从指尖展开</h2>
+  <p>这一层是从你刚才点击的坐标长出来的。关掉时反向收回同一个点,形成开合闭环。</p>
+  <button class="btn js-close">收回去</button>
+</div>
+
+<div class="veil veil-brand" id="veil-brand" aria-hidden="true">
+  <h2>同一个机制</h2>
+  <p>换个颜色而已。暗色模式切换用的也是这一招:荡开一圈,整页换肤。</p>
+  <button class="btn js-close">收回去</button>
+</div>
+
+<script>
+const root = document.documentElement;
+
+// 半径必须够到最远的那个角,否则边缘会露出旧内容
+const radiusFrom = (x, y) =>
+  Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+function openVeil(veil, x, y) {
+  root.style.setProperty('--x', x + 'px');
+  root.style.setProperty('--y', y + 'px');
+  root.style.setProperty('--r', radiusFrom(x, y) + 'px');
+  veil.classList.add('on');
+  veil.setAttribute('aria-hidden', 'false');
+  // 焦点等揭开完成再移过去,别在动画中途改
+  veil.addEventListener('transitionend', () => veil.querySelector('.js-close').focus(), { once: true });
+}
+
+for (const b of document.querySelectorAll('.js-open')) {
+  b.addEventListener('click', e => {
+    const veil = document.getElementById('veil-' + b.dataset.veil);
+    // 键盘触发时 e.clientX/Y 是 0,取按钮中心兜底
+    const r = b.getBoundingClientRect();
+    const x = e.clientX || (r.left + r.width / 2);
+    const y = e.clientY || (r.top + r.height / 2);
+    openVeil(veil, x, y);
+  });
+}
+
+for (const b of document.querySelectorAll('.js-close')) {
+  b.addEventListener('click', () => {
+    const veil = b.closest('.veil');
+    veil.classList.remove('on');                 // 反向收回同一个圆心
+    veil.setAttribute('aria-hidden', 'true');
+    document.querySelector('.js-open').focus();
+  });
+}
+</script>
+</body>
+</html>
