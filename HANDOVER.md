@@ -21,13 +21,17 @@
 - 画廊首页 index.html **四切片全部完成 ✅**:1 fetch INDEX 渲染 21 卡+只读缩放 iframe 预览+点卡全屏+fetch 兜底+.nojekyll+修复根 404;2 筛选 chips+URL 状态(`?cat=`/`?level=`/`?set=` 互斥、再点取消、刷新回放);3 自动演示引擎(iframe load capture 探测 scrollHeight+scroll-snap 双查,余弦往复 scrollTo,只滚可见卡);4 狗粮化(canvas 氛围背景 opacity .55、hero 纯 CSS 自动播放行遮罩入场、卡片 scroll-reveal 仅 opacity 避 hover 冲突)。**注意**:内嵌浏览器 pane 冻结所有时间轴动画(rAF/CSS 动画/transition 全停,IO 报不相交),时间型效果只能靠垫片或读线上验证——真机/Pages 正常。
 - 样板间 `showcase/index.html` ✅:作品集套餐 5 个 pattern(entry-preloader/split-text/menu-stagger/scroll-marquee/image-displacement)拼装的完整 landing page,铁律 7 实装(token 阶梯 + KNOB 常量块 + 单 rAF 调度 + 一次 reduced-motion 判断);Enter 手势是全页动效的 t=0
 
+- 2026-07-26 新增 **`blends/` 层**(与 patterns 平行,不是替代):patterns 沉淀动效机制,blends 沉淀 pattern 铁律 6"抄机制不抄样式"扔掉的**设计本体**(色板/字号阶梯/间距/运动节奏)。取法是浏览器注入遍历 `document.styleSheets` 统计,产物写进 `cases/<站>/design-system.md`。**blend 不继承"零依赖单文件"铁律**——那条只管可移植的 pattern demo,blend 的产物是页面,页面本来就该带字体和材质。结论与方法见 [blends/README.md](blends/README.md)
+- 同日新增**批量扫描**:`scripts/scan-awwwards.mjs` 抓一批站的 HTML+CSS 做横截面统计(单站看不出来的行业口径,如缓动曲线分布)。首次结果 [blends/scans/2026-07-awwwards.md](blends/scans/2026-07-awwwards.md)(124 站/113 成功)。**node 直连 awwwards 被 Cloudflare 挡,名单必须靠浏览器注入取;目标站本身 node 能直连**
+
 ### 未完成(按优先级)
 
 1. ~~高门槛 ✅ 欠账~~ **全部清零**:shader-wipe ✅、particle-transition ✅、cel-shading 已降级为 Messenger case 的方法论笔记(复用性否决:前提是已有 3D 场景)
 2. ~~翻案候选~~ ✅ 全部完成:hover/drag-spring、scroll/scroll-snap-sections、hover/floating-stickers
 3. Messenger 还没做运行时深挖(方法见下)
-4. cursor/ 分类仍是空的——现有 10 个 case 都没有自定义光标,需要收新 case(建议找 Awwwards 上 cursor 出彩的站)
-5. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
+4. **cursor/ 分类仍是空的,但矿已经找到了**:2026-07-26 扫了 124 个获奖站,30 个用 `cursor:none`(见 [blends/scans/2026-07-awwwards.md](blends/scans/2026-07-awwwards.md) 第六节)。首选 6 个站(`cursor:none` ∩ `mix-blend-mode:difference`):Lama Lama / Depo Luxe / Sui / Indigo Laboratory / sakazuki / Longbow。**光标长什么样 CSS 侧取不到,做 pattern 前必须真开站看**
+5. 同一次扫描撞出两个新 pattern 候选:`mix-blend-mode: difference` 反色层(28% 的获奖站在用,本库零覆盖,和 cursor 是同一块矿)、Lenis 平滑滚动(60% 普及,是基础设施不是效果,至少该进 tech-radar 说明"项目已有 Lenis 时滚动类 pattern 怎么接")
+6. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)
 
