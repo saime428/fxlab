@@ -60,9 +60,9 @@
 
 | 事实 | 数字 | 意味着 |
 |---|---|---|
-| 有 CSS 变量体系(≥10 个 `--var`) | **102/113(90%)** | token 化是默认,不是加分项 |
-| CSS 里出现 `cursor: none` | 30/113(27%) | ⚠️ **不等于真在用**,见下方更正 |
-| 用 `mix-blend-mode: difference/exclusion` | **32/113(28%)** | **本库完全没有的手法** |
+| 有 CSS 变量体系(≥10 个 `--var`) | **~90%** | token 化是默认,不是加分项 |
+| `cursor: none` | 声明 30 站 → **疑似在用 10 站(9%)** | 见下方更正:声明 ≠ 使用 |
+| `mix-blend-mode: difference/exclusion` | 声明 33 站 → **疑似在用 24 站(21%)** | **本库原先完全没有的手法**,已提炼 |
 | 引入 Lenis(平滑滚动) | **68/113(60%)** | 比 GSAP(35)还普及,已是事实标准 |
 | 引入 GSAP | 35/113 | |
 | 有 `@keyframes` | 93/113 | |
@@ -98,7 +98,11 @@
 1. **Tailwind / 工具类框架会把没用上的类打进 CSS**,`cursor:none` 这种统计必须查计算样式,不能查规则存在性
 2. 即使真在用,**`cursor:none` 永远是段内作用域的**——扫到的每个站都挂在一个段落级 class 上,没有一个全局。这本身就是个设计结论:全局藏光标在表单和链接上是可用性灾难
 
-所以 `cursor:none` 的真实普及率**远低于 27%**,这个数字不能引用。已按实测做成 [cursor/hide-and-follow](../../patterns/cursor/hide-and-follow/)(sakazuki 的 Journey 段是唯一拿到完整实现细节的样本:84×33 标签、`opacity .3s` + `visibility 0s linear .3s`)。
+**脚本已修**:现在抓规则的选择器,查它的类名是否出现在 HTML 的 `class` 属性里,输出"声明 / 疑似在用"两个数。重跑结果 `cursor:none` **30 → 10**、`mix-blend` **33 → 24**,上面三个假阳性全部被正确剔除。
+
+粗筛的已知偏差(写在脚本注释里):**JS 运行时加的类会被低估**——sakazuki 就是这种,它确实在用,只是那个 CSS-module 类名不在初始 HTML 里。所以 10 站是下限,真值在 10–30 之间。要准数只能开浏览器查 `getComputedStyle`。
+
+已按实测做成 [cursor/hide-and-follow](../../patterns/cursor/hide-and-follow/)(sakazuki 的 Journey 段是唯一拿到完整实现细节的样本:84×33 标签、`opacity .3s` + `visibility 0s linear .3s`)。
 
 ### 1. 已提炼:`mix-blend-mode: difference` 覆盖层自动反色
 

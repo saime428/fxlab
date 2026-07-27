@@ -30,8 +30,9 @@
 2. ~~翻案候选~~ ✅ 全部完成:hover/drag-spring、scroll/scroll-snap-sections、hover/floating-stickers
 3. Messenger 还没做运行时深挖(方法见下)
 4. ~~cursor/ 分类是空的~~ ✅ **已开张**:[cursor/hide-and-follow](patterns/cursor/hide-and-follow/)(区域内隐藏光标 + 跟随标签,样本是 sakazuki 的 Journey 段)。同批还提了 [layout/blend-invert](patterns/layout/blend-invert/)(覆盖层自动反色,三站实测坐实)。**cursor 分类只有 1 个,还欠拖尾/磁性吸附这类**
-5. **Lenis 还没进 tech-radar**:扫描显示 60% 普及率(比 GSAP 的 31% 还高),它是基础设施不是效果——接管滚动后所有滚动驱动 pattern 的时间基准都变了,该写一节"项目已有 Lenis 时滚动类 pattern 怎么接"
-6. 扫描方法的已知盲区(下次扫之前先修):**CSS 规则存在 ≠ 真在用**。Tailwind 之类会把没用上的工具类打进 bundle,`cursor:none` 那条统计因此虚高(声明 30 站,实测 3 站全是 0)。要判使用必须开浏览器查计算样式
+5. ~~Lenis 没进 tech-radar~~ ✅ [docs/tech-radar.md](docs/tech-radar.md) 加了专节:逐条列了本库 7 个滚动相关 pattern 在 Lenis 项目里的接法,其中 **scroll-snap-sections 是硬冲突**(二选一),marquee / parallax-cards / section-narrative fixed 变体要并进 Lenis 的循环
+6. ~~扫描的"声明 ≠ 使用"盲区~~ ✅ 已修:脚本改成查选择器类名是否出现在 HTML `class` 属性里,输出"声明/疑似在用"两个数(`cursor:none` 30→10,`mix-blend` 33→24)。**残留偏差:JS 运行时加的类会被低估**(sakazuki 就是),要准数仍需开浏览器查计算样式
+7. cursor/ 只有 1 个 pattern。拖尾、磁性吸附还没有——**但别凭空造**:按 [docs/criteria.md](docs/criteria.md),pattern 要从 case 的效果清单里提,先扫到样本再动手
 6. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)

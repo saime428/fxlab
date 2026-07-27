@@ -68,8 +68,10 @@
    ".5rem",
    ".7rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -146,8 +148,10 @@
    "4px",
    "64px"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 5,
+  "blendUsed": 3,
   "libs": [
    "Lenis"
   ]
@@ -225,8 +229,10 @@
    "2px",
    "4px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -303,8 +309,10 @@
    "50%",
    "10px"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 6,
+  "blendUsed": 5,
   "libs": [
    "GSAP",
    "Lenis",
@@ -381,8 +389,10 @@
   "radii": [
    "4px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 2,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -454,8 +464,10 @@
    "10px",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -522,8 +534,10 @@
    "9999px",
    ".375rem"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 1,
   "libs": [
    "CSS-kf"
   ]
@@ -597,8 +611,10 @@
    "var(--radius--main)",
    "inherit"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 3,
+  "blendUsed": 2,
   "libs": [
    "GSAP",
    "Lenis",
@@ -670,8 +686,10 @@
    "0",
    "3.125vw"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -690,7 +708,61 @@
    "Blender"
   ],
   "date": "2026-07-17",
-  "err": "fetch failed"
+  "cssBytes": 32376,
+  "cssFiles": 2,
+  "vars": [
+   "--background: #fff",
+   "--foreground: #10100f",
+   "--muted: #10100fad",
+   "--line: #10100f24",
+   "--accent: #8f6200",
+   "--ui-gutter-x: clamp(14px, 2.6vw, 44px)",
+   "--ui-gutter-y: clamp(18px, 2.8vw, 40px)",
+   "--ui-edge-x: var(--ui-gutter-x)",
+   "--projects-grid-padding-x: var(--ui-edge-x)",
+   "--gallery-gap: clamp(14px, 2.1vw, 32px)",
+   "--gallery-gap: clamp(14px, 1.5vw, 26px)",
+   "--projects-grid-padding-x: 18px",
+   "--transition-content-blur: 0px",
+   "--transition-content-brightness: 1"
+  ],
+  "varCount": 14,
+  "colors": [
+   "#0b0b0a ×39",
+   "#fff ×12",
+   "#e9e6df ×3",
+   "#10100f ×1",
+   "#8f6200 ×1",
+   "#f7f5ef ×1",
+   "#000 ×1",
+   "#070707 ×1"
+  ],
+  "fonts": [
+   "helvetica-neue-lt-pro ×6",
+   "gazzetta-variable ×3",
+   "helvetica-neue-lt-pro-cond ×2"
+  ],
+  "durs": [
+   ".18s ×13",
+   ".52s ×2",
+   ".26s ×1",
+   "38s ×1",
+   ".22s ×1",
+   ".62s ×1"
+  ],
+  "eases": [
+   "cubic-bezier(.2,.8,.2,1) ×9"
+  ],
+  "radii": [
+   "999px"
+  ],
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
+  "libs": [
+   "CSS-kf"
+  ]
  },
  {
   "title": "CoffeeTech",
@@ -765,8 +837,10 @@
    "50%",
    "100vw"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 6,
+  "blendUsed": 2,
   "libs": [
    "GSAP",
    "CSS-kf"
@@ -830,8 +904,10 @@
    "0",
    "unset"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -908,8 +984,10 @@
    "50%",
    "var(--radius-full)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -977,8 +1055,10 @@
    "var(--framer-link-hover-",
    "10px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -1048,8 +1128,10 @@
    "0",
    "50%"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 1,
+  "blendDecl": 2,
+  "blendUsed": 2,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -1124,8 +1206,10 @@
    "24px",
    "100px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -1188,8 +1272,10 @@
    "10px 0 0",
    "50px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": []
  },
  {
@@ -1282,8 +1368,10 @@
    "0",
    "var(--_ui-styles---radiu"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -1361,8 +1449,10 @@
    "0",
    "var(--height)"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 3,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -1437,8 +1527,10 @@
    "var(--radius--round)",
    "100vw"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 4,
+  "blendUsed": 4,
   "libs": [
    "GSAP",
    "Three",
@@ -1521,8 +1613,10 @@
    "50%",
    "100vw"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -1606,8 +1700,10 @@
    ".5em",
    "1em"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -1711,8 +1807,10 @@
    "10px",
    "var(--border-radius,12px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -1789,8 +1887,10 @@
    "100px",
    "3rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -1853,8 +1953,10 @@
    "2rem",
    "1rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "Lottie",
@@ -1929,8 +2031,10 @@
    "0",
    "999px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -1995,8 +2099,10 @@
    "50%",
    "48px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -2071,8 +2177,10 @@
    "50px",
    "30px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -2141,8 +2249,10 @@
    "12px",
    "999px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -2218,8 +2328,10 @@
    "3px",
    "5px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Three",
@@ -2287,8 +2399,10 @@
    "inherit",
    "var(--framer-blockquote-"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": []
  },
  {
@@ -2385,8 +2499,10 @@
    "3.40282e38px",
    "var(--radius-md)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -2461,8 +2577,10 @@
    "10px",
    "100px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Three",
@@ -2537,8 +2655,10 @@
    "var(--radius-xl)",
    ".25rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -2603,8 +2723,10 @@
    "20px",
    ".75rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Three",
    "CSS-kf"
@@ -2627,62 +2749,63 @@
    "Gestures / Interaction"
   ],
   "date": "2026-06-26",
-  "cssBytes": 1129805,
-  "cssFiles": 4,
+  "cssBytes": 106172,
+  "cssFiles": 3,
   "vars": [
    "--tw-space-y-reverse: 0 ×7",
    "--tw-gradient-stops: var(--tw-gradient-via-stops,var(--tw-gradient-position),var( ×4",
    "--tw-ring-color: var(--destructive) ×4",
-   "--input-bd-focus: var(--mantine-primary-color-filled) ×4",
-   "--input-bd: transparent ×4",
-   "--tab-bg: transparent ×4",
-   "--tab-bg: var(--tab-hover-color) ×4",
    "--tw-gradient-to: #0000 ×3",
    "--tw-shadow: 0 0 #0000 ×3",
    "--tw-scale-x: 100% ×3",
    "--tw-leading: var(--leading-normal) ×3",
    "--tw-font-weight: var(--font-weight-medium) ×3",
    "--tw-outline-style: none ×3",
-   "--tab-border-bottom-color: var(--tab-border-color) ×3"
+   "--tw-content: \"\"",
+   "--tw-scale-x: 110%",
+   "--tw-scale-y: 110%",
+   "--tw-scale-z: 110%",
+   "--tw-leading: 110%"
   ],
-  "varCount": 1184,
+  "varCount": 387,
   "colors": [
    "#fafafa ×11",
-   "#fff ×9",
    "#171717 ×9",
-   "#000 ×8",
+   "#fff ×8",
+   "#000 ×7",
    "#0a0a0a ×5",
    "#f5f5f5 ×4",
    "#e5e5e5 ×4",
    "#262626 ×4"
   ],
   "fonts": [
-   "Inter ×12",
-   "var(--mantine-font-family-monospace) ×6",
+   "Inter ×8",
    "var(--font-nohemi) ×3",
-   "JetBrains Mono ×3",
-   "nohemi ×2"
+   "nohemi ×2",
+   "var(--font-mono) ×2",
+   "nohemi Fallback ×1"
   ],
   "durs": [
-   ".15s ×10",
-   ".2s ×5",
-   ".1s ×3",
+   ".2s ×4",
+   ".15s ×3",
    ".3s ×2",
    ".5s ×2",
-   "1.2s ×2"
+   ".6s ×1",
+   ".7s ×1"
   ],
   "eases": [
    "cubic-bezier(.4,0,.2,1) ×2",
-   "cubic-bezier(0,0,.2,1) ×1",
-   "cubic-bezier(0,.5,.5,1) ×1"
+   "cubic-bezier(0,0,.2,1) ×1"
   ],
   "radii": [
-   "0",
+   "calc(var(--radius) - 2px",
    "50%",
-   "calc(var(--radius) - 2px"
+   "0"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 1,
   "libs": [
    "CSS-kf"
   ]
@@ -2751,8 +2874,10 @@
    "3.40282e38px",
    "2px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 2,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -2823,8 +2948,10 @@
    "var(--mwg2-radius-m)",
    "25px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -2917,8 +3044,10 @@
    "3px",
    "12px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -2984,8 +3113,10 @@
    "0",
    "unset"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Three",
@@ -3059,8 +3190,10 @@
    "0",
    "6px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -3128,8 +3261,10 @@
    "inherit",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -3204,8 +3339,10 @@
    "var(--_ui-styles---radiu",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Three",
@@ -3282,8 +3419,10 @@
    "2rem",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Three",
@@ -3359,8 +3498,10 @@
    "50%",
    ".25em"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -3441,8 +3582,10 @@
    ".625rem",
    ".375rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -3516,8 +3659,10 @@
    "2em",
    "2.5em"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -3587,8 +3732,10 @@
    "3.40282e38px",
    "var(--radius-lg)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -3659,8 +3806,10 @@
    "50%",
    "var(--s3)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -3736,8 +3885,10 @@
    "0",
    "var(--cc-btn-border-radi"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 6,
+  "blendUsed": 4,
   "libs": [
    "CSS-kf"
   ]
@@ -3817,8 +3968,10 @@
    "50%",
    "0"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 3,
+  "cursorNoneUsed": 2,
+  "blendDecl": 2,
+  "blendUsed": 2,
   "libs": [
    "CSS-kf"
   ]
@@ -3899,8 +4052,10 @@
   "radii": [
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -3965,8 +4120,10 @@
    "var(--framer-blockquote-",
    "var(--framer-link-text-b"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 3,
+  "blendUsed": 3,
   "libs": []
  },
  {
@@ -4017,8 +4174,10 @@
    "cubic-bezier(0.25,0.46,0.45,0.94) ×1"
   ],
   "radii": [],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -4042,7 +4201,65 @@
    "Gallery"
   ],
   "date": "2026-06-24",
-  "err": "fetch failed"
+  "cssBytes": 135328,
+  "cssFiles": 2,
+  "vars": [
+   "--color-header: var(--c-black) ×4",
+   "--color-header: transparent ×4",
+   "--c-blue-light: #83c4ff",
+   "--c-blue: #4a68ff",
+   "--c-green: #27b763",
+   "--c-teal: #1ad3bd",
+   "--c-orange: #eb4b1f",
+   "--c-purple: #a378e2",
+   "--c-magenta: #d92479",
+   "--c-pink: #ff80b9",
+   "--c-yellow: #ef0",
+   "--c-black: #000",
+   "--c-white: #fff",
+   "--gradient-bfa4: linear-gradient(to bottom,var(--c-pink) 0%,var(--c-blue-ligh"
+  ],
+  "varCount": 89,
+  "colors": [
+   "#fff ×20",
+   "#000 ×16",
+   "#ef0 ×6",
+   "#f1f1f1 ×2",
+   "#21759b ×2",
+   "#83c4ff ×2",
+   "#4a68ff ×2",
+   "#27b763 ×2"
+  ],
+  "fonts": [
+   "var(--font-gamay) ×66",
+   "var(--font-gamay-narrow) ×64",
+   "var(--font-mongoose) ×8",
+   "gamay ×7",
+   "gamay-narrow ×7"
+  ],
+  "durs": [
+   ".3s ×36",
+   ".2s ×10",
+   ".4s ×6",
+   "2s ×2",
+   ".5s ×2",
+   ".6s ×2"
+  ],
+  "eases": [
+   "cubic-bezier(.18,.89,.32,1.28) ×4"
+  ],
+  "radii": [
+   "50%",
+   "0",
+   "3px"
+  ],
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
+  "libs": [
+   "CSS-kf"
+  ]
  },
  {
   "title": "Yoo Interior",
@@ -4115,8 +4332,10 @@
    "222px",
    "var(--radius)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -4194,8 +4413,10 @@
    "0",
    "var(--radius-2xl)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -4271,8 +4492,10 @@
    "100px",
    "30px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -4347,8 +4570,10 @@
    "9999px",
    "calc(var(--app-nav-heigh"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 1,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -4428,8 +4653,10 @@
    "0",
    "3.40282e38px"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 2,
   "libs": [
    "GSAP",
    "Lenis",
@@ -4509,8 +4736,10 @@
    "12px",
    "var(--40)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -4533,7 +4762,68 @@
    "Minimal"
   ],
   "date": "2026-06-23",
-  "err": "fetch failed"
+  "cssBytes": 138475,
+  "cssFiles": 1,
+  "vars": [
+   "--section-padding: 12.5rem",
+   "--cc-btn-primary-border-color: var(--cc-btn-primary-bg)",
+   "--cc-btn-primary-hover-border-color: var(--cc-btn-primary-hover-bg)",
+   "--cc-btn-secondary-color: var(--cc-primary-color)",
+   "--cc-btn-secondary-border-color: var(--cc-btn-secondary-bg)",
+   "--cc-toggle-on-bg: var(--cc-btn-primary-bg)",
+   "--cc-toggle-readonly-knob-icon-color: var(--cc-toggle-readonly-bg)",
+   "--cc-cookie-category-expanded-block-bg: transparent",
+   "--cc-overlay-bg: rgba(0,0,0,.65)",
+   "--cc-webkit-scrollbar-bg: var(--cc-section-category-border)",
+   "--cc-webkit-scrollbar-hover-bg: var(--cc-btn-primary-hover-bg)",
+   "--cc-footer-color: var(--cc-secondary-color)",
+   "--secondary: hover {\n  background: var(--cc-btn-secondary-hover-bg)",
+   "--cc-modal-transition-duration: .35s"
+  ],
+  "varCount": 128,
+  "colors": [
+   "#0c0c0c ×25",
+   "#fff ×10",
+   "#c6bfae ×9",
+   "#182d23 ×6",
+   "rgba(0, 0, 0, 0.5) ×4",
+   "rgba(0, 0, 0, 0) ×4",
+   "#000 ×4",
+   "#f0f4f7 ×3"
+  ],
+  "fonts": [
+   "Hatton ×12",
+   "Regola Pro ×8",
+   "inherit ×2",
+   "swiper-icons ×1",
+   "monospace ×1"
+  ],
+  "durs": [
+   "0.15s ×16",
+   "0.8s ×9",
+   "0.25s ×8",
+   "0.2s ×8",
+   "0.6s ×7",
+   "0.4s ×5"
+  ],
+  "eases": [
+   "cubic-bezier(0.23,1,0.32,1) ×21",
+   "cubic-bezier(0.19,1,0.22,1) ×7",
+   "cubic-bezier(0.165,0.84,0.44,1) ×1"
+  ],
+  "radii": [
+   "50%",
+   "var(--cc-btn-border-radi",
+   "0"
+  ],
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 10,
+  "blendUsed": 7,
+  "libs": [
+   "Lenis",
+   "CSS-kf"
+  ]
  },
  {
   "title": "Terry Ho",
@@ -4605,8 +4895,10 @@
    "var(--card-border-radius",
    "9999px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -4672,8 +4964,10 @@
    "50%",
    "12px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "Lottie",
@@ -4751,8 +5045,10 @@
    "6px",
    "0"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 8,
+  "blendUsed": 3,
   "libs": [
    "GSAP",
    "Lenis",
@@ -4832,8 +5128,10 @@
    "9999px",
    ".5rem"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -4905,8 +5203,10 @@
    "50%",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -4983,8 +5283,10 @@
    "var(--modalRadiusLarge-i",
    "10em"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -5064,8 +5366,10 @@
    "0",
    "8px"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 1,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -5133,8 +5437,10 @@
    "1000px",
    "3px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -5211,8 +5517,10 @@
    "14px",
    "20px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 4,
+  "cursorNoneUsed": 3,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -5293,8 +5601,10 @@
    "50%",
    "12px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "Locomotive",
@@ -5363,8 +5673,10 @@
    "var(--framer-link-hover-",
    "12px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -5437,8 +5749,10 @@
    "1.5rem",
    "inherit"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -5514,8 +5828,10 @@
    "12px",
    "10px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lottie",
    "CSS-kf"
@@ -5583,8 +5899,10 @@
    "var(--framer-blockquote-",
    "var(--framer-link-text-b"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 2,
   "libs": [
    "Lenis"
   ]
@@ -5675,8 +5993,10 @@
    "999rem",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -5754,8 +6074,10 @@
    "100px",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 3,
+  "blendUsed": 2,
   "libs": [
    "GSAP",
    "Lenis",
@@ -5836,8 +6158,10 @@
    ".5em",
    "1em"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -5913,8 +6237,10 @@
    "20px",
    "calc(var(--radius) * 1.8"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -5988,8 +6314,10 @@
    "999rem",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -6059,8 +6387,10 @@
    "var(--framer-link-hover-",
    "var(--framer-blockquote-"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -6154,8 +6484,10 @@
    "10px",
    "0.5em !important"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 2,
   "libs": [
    "GSAP",
    "Lenis",
@@ -6223,8 +6555,10 @@
    "12px",
    "999px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -6302,8 +6636,10 @@
    "3.40282e+38px",
    "var(--radius-xl)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "Locomotive",
@@ -6379,8 +6715,10 @@
    "var(--shopify-accelerate",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -6402,56 +6740,68 @@
    "Scrolling"
   ],
   "date": "2026-06-18",
-  "cssBytes": 29300,
-  "cssFiles": 0,
+  "cssBytes": 166020,
+  "cssFiles": 1,
   "vars": [
-   "--eas-1: cubic-bezier(0.17, 0.25, 0.30, 1.00)",
-   "--eas-2: cubic-bezier(0.00, 0.00, 0.00, 1.00)",
-   "--dur-1: 1s",
-   "--dur-2: 2s",
-   "--dur-3: 0.5s",
-   "--dur-btn: 0.3s",
-   "--dur-btn-fast: 0.15s",
-   "--stagger: 0.133s",
-   "--scale-big: 1.2",
-   "--scale-medium: 1.1",
-   "--scale-small: 0.8",
-   "--transition-duration: 250ms",
-   "--label-font-size: 0.875em",
-   "--label-line-height: 1.2"
+   "--_typography---font-family--primary: Suisse,Verdana,sans-serif ×3",
+   "--_typography---line-height--110: 110% ×3",
+   "--_typography---font-weight--regular: 400 ×3",
+   "--_typography---letter-spacing--2: -.02em ×3",
+   "--_typography---font-size--h2: 1.625rem ×3",
+   "--_typography---line-height--124: 124% ×3",
+   "--_typography---font-size--h3: 1.25rem ×3",
+   "--_typography---line-height--130: 130% ×3",
+   "--_typography---font-size--h4: 1.125rem ×3",
+   "--_typography---line-height--134: 134% ×3",
+   "--_typography---font-size--t1: 1rem ×3",
+   "--_typography---line-height--145: 145% ×3",
+   "--_typography---font-family--secondary: \"Suisse Mono\",Verdana,sans-serif ×3",
+   "--_layout---border-width--s: .03125rem ×3"
   ],
-  "varCount": 81,
+  "varCount": 171,
   "colors": [
-   "#c9cce5 ×4",
-   "#ffffff ×4",
-   "#ffa6a6 ×2",
-   "#cf2020 ×2",
-   "#4e5271 ×2",
-   "#1f49d4 ×2",
-   "#000 ×1",
-   "#faf4f4 ×1"
+   "#fff ×17",
+   "#ccc ×7",
+   "#333 ×6",
+   "#ddd ×6",
+   "#222 ×6",
+   "#fafafa ×5",
+   "#000 ×4",
+   "#c9cce5 ×4"
   ],
   "fonts": [
-   "inherit ×1"
+   "var(--_typography---font-family--primary) ×11",
+   "Arial ×2",
+   "Suisse ×2",
+   "inherit ×1",
+   "sans-serif ×1"
   ],
   "durs": [
+   ".333s ×12",
+   ".3s ×4",
    "9999s ×1",
    "250ms ×1",
-   "4s ×1"
+   "4s ×1",
+   ".1s ×1"
   ],
   "eases": [
+   "cubic-bezier(.17,.11,.36,1) ×11",
    "cubic-bezier(0.17,0.25,0.30,1.00) ×1",
    "cubic-bezier(0.00,0.00,0.00,1.00) ×1",
-   "cubic-bezier(0.17,0.11,0.36,1) ×1"
+   "cubic-bezier(0.17,0.11,0.36,1) ×1",
+   "cubic-bezier(.215,.61,.355,1) ×1"
   ],
   "radii": [
-   "0.25em",
-   "var(--input-border-radiu",
-   "var(--button-border-radi"
+   "var(--_layout---corner-r",
+   "0",
+   "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
+   "Lottie",
    "CSS-kf"
   ]
  },
@@ -6530,8 +6880,10 @@
    "0",
    "var(--inputs-radius)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -6608,8 +6960,10 @@
   "radii": [
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -6681,8 +7035,10 @@
    "cubic-bezier(.18,.12,0,1) ×1"
   ],
   "radii": [],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -6756,8 +7112,10 @@
    "2px",
    "50%"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 8,
+  "cursorNoneUsed": 2,
+  "blendDecl": 3,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -6827,8 +7185,10 @@
    "10px",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Barba",
    "CSS-kf"
@@ -6904,8 +7264,10 @@
   "radii": [
    "5px"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 2,
+  "blendDecl": 9,
+  "blendUsed": 8,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -6986,8 +7348,10 @@
    "50%",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -7064,8 +7428,10 @@
    "var(--radius--small)",
    "var(--radius--main)"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 2,
+  "blendUsed": 2,
   "libs": [
    "Lottie",
    "CSS-kf"
@@ -7154,8 +7520,10 @@
    ".25rem",
    "var(--radius-3xl)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": []
  },
  {
@@ -7230,8 +7598,10 @@
    "inherit",
    "50%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -7272,8 +7642,10 @@
   ],
   "eases": [],
   "radii": [],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -7332,8 +7704,10 @@
    "0.5rem",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -7408,8 +7782,10 @@
    ".25rem",
    "3px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "CSS-kf"
@@ -7488,8 +7864,10 @@
    "var(--radius-lg)",
    "var(--radius-2xl)"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -7553,8 +7931,10 @@
    "var(--framer-link-hover-",
    "10px"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 1,
   "libs": [
    "Lenis"
   ]
@@ -7631,8 +8011,10 @@
    ".25rem",
    "var(--radius-2xl)"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -7709,8 +8091,10 @@
    "1.5rem",
    "100%"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "CSS-kf"
@@ -7790,8 +8174,10 @@
    "0",
    "2px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -7863,8 +8249,10 @@
    "4px",
    ".5rem"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 1,
   "libs": [
    "GSAP",
    "Lenis",
@@ -7935,8 +8323,10 @@
    "0!important",
    "100%"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 2,
+  "cursorNoneUsed": 2,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -8004,8 +8394,10 @@
    "0",
    "var(--framer-link-hover-"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis"
   ]
@@ -8066,8 +8458,10 @@
    "50%",
    "42px"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -8142,8 +8536,10 @@
    "0",
    "var(--media-radius)"
   ],
-  "cursorNone": false,
-  "mixBlend": true,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 1,
+  "blendUsed": 1,
   "libs": [
    "CSS-kf"
   ]
@@ -8211,8 +8607,10 @@
    "16px",
    "var(--framer-blockquote-"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": []
  },
  {
@@ -8289,8 +8687,10 @@
    ".25rem",
    ".75em"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -8367,8 +8767,10 @@
    "0",
    ".25rem"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "CSS-kf"
   ]
@@ -8441,8 +8843,10 @@
    ".25rem",
    "0!important"
   ],
-  "cursorNone": true,
-  "mixBlend": true,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 0,
+  "blendDecl": 4,
+  "blendUsed": 4,
   "libs": [
    "Lenis",
    "CSS-kf"
@@ -8496,8 +8900,10 @@
    "none",
    "2px"
   ],
-  "cursorNone": true,
-  "mixBlend": false,
+  "cursorNoneDecl": 1,
+  "cursorNoneUsed": 1,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
@@ -8571,8 +8977,10 @@
    "50%",
    "0"
   ],
-  "cursorNone": false,
-  "mixBlend": false,
+  "cursorNoneDecl": 0,
+  "cursorNoneUsed": 0,
+  "blendDecl": 0,
+  "blendUsed": 0,
   "libs": [
    "GSAP",
    "Lenis",
