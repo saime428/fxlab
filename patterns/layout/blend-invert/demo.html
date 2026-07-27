@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>覆盖层自动反色 Blend Invert — web-fx-lab</title>
+<style>
+:root{
+  --ink:#111; --paper:#f4f4ed; --accent:#d2ff00;
+  --dur-s:.2s; --ease-out:cubic-bezier(.19,1,.22,1);   /* 扫描普查:获奖站第一名的缓动 */
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; font:16px/1.5 "Helvetica Neue",system-ui,sans-serif; color:var(--ink); background:var(--paper); }
+
+/* ============ 核心:三行 ============ */
+.bar{
+  position:fixed; inset:0 0 auto; z-index:10;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 1.5rem;
+  color:#fff;                       /* 必须纯白,difference 才得到完整反色 */
+  mix-blend-mode:difference;
+  pointer-events:none;              /* 覆盖层别挡点击 */
+  transform:translateZ(0);          /* Safari 上 fixed+blend 的渲染残留兜底 */
+}
+.bar a,.bar button{ pointer-events:auto; color:inherit; }
+body[data-mode="exclusion"] .bar{ mix-blend-mode:exclusion; }
+body[data-mode="off"]       .bar{ mix-blend-mode:normal; }
+/* ==================================== */
+
+.bar b{ font-weight:800; letter-spacing:.14em; text-transform:uppercase; font-size:.75rem; }
+.bar nav{ display:flex; gap:1.25rem; font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; }
+.bar svg{ width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; }
+
+section{ min-height:82vh; display:grid; place-content:center; padding:4rem 1.5rem; text-align:center; }
+section h2{ margin:0 0 .5rem; font-size:clamp(1.6rem,5vw,3rem); letter-spacing:-.02em; }
+section p{ margin:0; opacity:.75; max-width:34rem; }
+
+.s-paper{ background:var(--paper); }
+.s-dark { background:#111112; color:#f4f4ed; }
+.s-brand{ background:var(--accent); }
+/* 失效区:中灰。difference 在这里输出还是中灰 → 对比归零 */
+.s-gray { background:#808080; color:#fff; }
+.s-photo{
+  background:
+    radial-gradient(120% 90% at 20% 20%, #ffd9a0 0%, transparent 55%),
+    radial-gradient(90% 80% at 80% 70%, #6ba7ff 0%, transparent 60%),
+    linear-gradient(160deg,#2b2b34,#8d7f6a);
+  color:#fff;
+}
+.warn{ margin-top:1rem; font-size:.8rem; letter-spacing:.05em; border:1px solid currentColor; padding:.5rem .75rem; border-radius:4px; display:inline-block; }
+
+/* 行内强调词(Sui 用法):一个词压在渐变上自动反色 */
+.invert{ color:#fff; mix-blend-mode:difference; }
+
+/* 开关。注意它自己不能在混合层里,否则读不清 */
+.switch{
+  position:fixed; left:50%; bottom:1.25rem; transform:translateX(-50%); z-index:20;
+  display:flex; gap:.25rem; padding:.3rem; border-radius:999px;
+  background:rgba(20,20,20,.82); backdrop-filter:blur(8px);
+}
+.switch button{
+  border:0; cursor:pointer; font:inherit; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:.5rem .9rem; border-radius:999px; background:transparent; color:#f4f4ed;
+  transition:background var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out);
+}
+.switch button[aria-pressed="true"]{ background:var(--accent); color:#111; }
+.switch button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+/* 演示"父级切断混合":这一节故意给容器加 isolation */
+.s-isolated{ isolation:isolate; background:#111112; color:#f4f4ed; }
+</style>
+</head>
+<body data-mode="difference">
+
+<header class="bar">
+  <b>Blend Invert</b>
+  <nav>
+    <a href="#a">01 纸白</a><a href="#b">02 深色</a><a href="#c">03 品牌色</a><a href="#d">04 图像</a>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>
+  </nav>
+</header>
+
+<section class="s-paper" id="a">
+  <h2>往下滚,别管顶栏</h2>
+  <p>顶栏是<strong>同一个白色元素</strong>,从头到尾没有换过 class。背景变什么色,它自己反过来。</p>
+</section>
+
+<section class="s-dark" id="b">
+  <h2>深色区块</h2>
+  <p>白 × 黑底 = 保持白。常规做法要 JS 监听滚动加 <code>.is-dark</code>,这里零 JS。</p>
+</section>
+
+<section class="s-brand" id="c">
+  <h2>高饱和品牌色</h2>
+  <p>反色出来的是<strong>补色</strong>,不是黑——这是 difference 的正常行为,不是 bug。</p>
+</section>
+
+<section class="s-photo" id="d">
+  <h2>图像 / 渐变背景</h2>
+  <p>混合对象是下方<strong>所有</strong>内容,<span class="invert">视频和 canvas 一样算</span>。左边这个词用的是同一招的行内版。</p>
+</section>
+
+<section class="s-gray">
+  <h2>失效区:中灰</h2>
+  <p>背景 <code>#808080</code> 时 <code>|128−255| = 127</code>,输出还是中灰。</p>
+  <span class="warn">顶栏在这一屏基本看不见 —— 这是本效果不可回避的硬伤,灰底页面别用</span>
+</section>
+
+<section class="s-isolated">
+  <h2>不生效的最常见原因</h2>
+  <p>这一节的容器加了 <code>isolation: isolate</code>。顶栏被切出层叠上下文,退化成普通白色。<br>
+     父级带 <code>opacity&lt;1</code> / <code>transform</code> / <code>filter</code> 也是同样结果。</p>
+</section>
+
+<div class="switch" role="group" aria-label="混合模式">
+  <button data-m="difference" aria-pressed="true">difference</button>
+  <button data-m="exclusion"  aria-pressed="false">exclusion</button>
+  <button data-m="off"        aria-pressed="false">关闭</button>
+</div>
+
+<script>
+// 唯一的 JS 就是这个演示开关;效果本身零 JS
+const sw = document.querySelector('.switch');
+sw.addEventListener('click', e => {
+  const b = e.target.closest('button[data-m]');
+  if (!b) return;
+  document.body.dataset.mode = b.dataset.m;
+  for (const x of sw.querySelectorAll('button')) x.setAttribute('aria-pressed', String(x === b));
+});
+</script>
+</body>
+</html>

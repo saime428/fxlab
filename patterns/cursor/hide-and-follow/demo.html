@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>区域内隐藏光标 + 跟随标签 — web-fx-lab</title>
+<style>
+:root{
+  --ink:#f4f4ed; --bg:#141416; --card:#232327; --accent:#d2ff00;
+  --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1);  /* 扫描普查里的第一名缓动 */
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.5 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:60rem; margin:0 auto; padding:3rem 1.5rem 5rem; }
+h1{ font-size:clamp(1.5rem,4vw,2.25rem); letter-spacing:-.02em; margin:0 0 .5rem; }
+.lede{ margin:0 0 2.5rem; opacity:.7; max-width:40rem; }
+code{ background:#2a2a2f; padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+/* ============ 交互区:只在这里藏光标 ============ */
+.zone{ display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:1px;
+       background:#2e2e33; border:1px solid #2e2e33; border-radius:6px; overflow:hidden; }
+.card{
+  aspect-ratio:4/3; border:0; padding:0; margin:0; display:block; width:100%;
+  background:var(--card); position:relative; overflow:hidden; font:inherit; color:inherit;
+  cursor:pointer;                                  /* 触屏/无 hover 时的常规光标 */
+}
+.card i{ position:absolute; inset:0; display:block; transition:transform .6s var(--ease-out); }
+.card:hover i,.card:focus-visible i{ transform:scale(1.06); }
+.card span{ position:absolute; left:1rem; bottom:.85rem; font-size:.72rem;
+            letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
+/* 键盘用户拿不到 pointermove,焦点环是他们唯一的定位手段,必须留 */
+.card:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
+
+/* 四张"图":纯 CSS 渐变冒充,省得外链资源 */
+.p1{ background:linear-gradient(140deg,#3a5bd9,#9ad1ff); }
+.p2{ background:linear-gradient(140deg,#c2410c,#fde68a); }
+.p3{ background:linear-gradient(140deg,#0f766e,#a7f3d0); }
+.p4{ background:linear-gradient(140deg,#6d28d9,#f0abfc); }
+
+/* 跟随标签 */
+.follower{
+  position:fixed; top:0; left:0; z-index:50;
+  display:grid; place-content:center;
+  min-width:84px; height:33px; padding:0 .85rem;   /* sakazuki 实测尺寸 */
+  border-radius:999px; background:var(--accent); color:#111;
+  font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; font-weight:800;
+  pointer-events:none;                             /* 绝不能吃指针 */
+  opacity:0; visibility:hidden;
+  margin:-16px 0 0 -42px;                          /* 让标签中心对准指针 */
+  /* visibility 延迟切:淡出那 .3s 里元素还在画面上,淡完才移出无障碍树 */
+  transition:opacity var(--dur-s) var(--ease-out),
+             transform var(--dur-s) var(--ease-out),
+             visibility 0s linear var(--dur-s);
+}
+.follower.on{ opacity:1; visibility:visible; transition-delay:0s,0s,0s; }
+
+/* ---- 只有真的有 hover 的设备才启用:触屏上整个效果不存在 ---- */
+@media (hover: hover) and (pointer: fine){
+  .zone.armed .card{ cursor:none; }                /* 作用域化,绝不全局 */
+}
+/* ---- 铁律 2:降级到最保守的形态——原生光标留着,标签不出现 ---- */
+@media (prefers-reduced-motion: reduce){
+  .zone.armed .card{ cursor:pointer; }
+  .follower{ display:none; }
+  .card i{ transition:none; }
+}
+.note{ margin-top:2rem; font-size:.85rem; opacity:.6; }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>区域内隐藏光标 + 跟随标签</h1>
+  <p class="lede">指针进入下面的网格,原生光标消失,换成跟随的 <code>VIEW</code> 标签。
+     离开网格立刻恢复——<strong>作用域只在这一块</strong>,页面其他地方光标一切正常。
+     用 Tab 键走一遍会看到焦点环照常工作,标签不干预键盘用户。</p>
+
+  <div class="zone" id="zone">
+    <button class="card"><i class="p1"></i><span>Northfall</span></button>
+    <button class="card"><i class="p2"></i><span>Pellet</span></button>
+    <button class="card"><i class="p3"></i><span>Sable Bio</span></button>
+    <button class="card"><i class="p4"></i><span>Tidewheel</span></button>
+  </div>
+
+  <p class="note">触屏打开这一页时,<code>@media (hover: hover)</code> 会让整个效果不存在——
+     那不是遗憾,触屏本来就没有 hover 这个状态。</p>
+</main>
+
+<div class="follower" id="follower" aria-hidden="true">View</div>
+
+<script>
+/* ===== KNOB =========================================================
+   LERP  跟随的粘滞度。.08 很粘很奢侈 / .15 常见 / 1 是硬跟随(廉价感)
+         别低于 .06,和原生光标差太远会晕
+   ==================================================================== */
+const LERP = 0.15;
+
+const zone = document.getElementById('zone');
+const follower = document.getElementById('follower');
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (fine && !RM) {
+  zone.classList.add('armed');                     // CSS 靠这个 class 才藏光标
+
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+
+  const tick = () => {
+    x += (tx - x) * LERP; y += (ty - y) * LERP;
+    follower.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    raf = requestAnimationFrame(tick);
+  };
+
+  zone.addEventListener('pointerenter', e => {
+    // 第一帧瞬移到指针处,否则标签会从 (0,0) 一路飞过来
+    x = tx = e.clientX; y = ty = e.clientY;
+    follower.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    follower.classList.add('on');
+    if (!raf) raf = requestAnimationFrame(tick);
+  });
+
+  zone.addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; });
+
+  zone.addEventListener('pointerleave', () => {
+    follower.classList.remove('on');
+    cancelAnimationFrame(raf); raf = 0;            // 离区就停,别全程空转
+  });
+
+  // 悬停不同卡片换文案:光标本身就是 UI
+  for (const c of zone.querySelectorAll('.card'))
+    c.addEventListener('pointerenter', () => { follower.textContent = c.querySelector('span').textContent; });
+  zone.addEventListener('pointerleave', () => { follower.textContent = 'View'; });
+}
+</script>
+</body>
+</html>
