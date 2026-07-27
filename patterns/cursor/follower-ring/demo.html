@@ -30,8 +30,12 @@ a.btn:hover,button.btn:hover,a.btn:focus-visible,button.btn:focus-visible{
 .ring{
   position:fixed; top:0; left:0; z-index:60;
   width:32px; height:32px; margin:-16px 0 0 -16px;   /* 圆心对准指针,比每帧减 16 省 */
-  border:1px solid var(--ink); border-radius:50%;
+  border:1.5px solid #fff; border-radius:50%;
   background:transparent;
+  /* 混合模式**不可动画**,只会瞬间跳变 —— 所以必须两个状态都开着。
+     只在 .hot 上写 difference 的话,hover 那一刻颜色会硬翻一下,
+     观感就是"原来那个被删掉了、另一个飞进来" */
+  mix-blend-mode:difference;
   pointer-events:none; opacity:0;
   /* 只过渡尺寸/颜色/透明度;位置靠 transform 每帧写,不能有 transition */
   transition:opacity var(--dur-s) var(--ease-out),
@@ -40,16 +44,17 @@ a.btn:hover,button.btn:hover,a.btn:focus-visible,button.btn:focus-visible{
              border-color var(--dur-s) var(--ease-out);
 }
 .ring.on{ opacity:.9; }
-/* hover 可交互元素:不是放大一点点,是**炸开到盖满视口**。
-   --burst 由 JS 按视口对角线算,保证从任意位置都能盖满(见脚本)。
-   盖满后填纯白 + difference,整页反相 —— 文字仍然可读,不是糊一层色块。
-   移开就缩回 1 倍,全靠 CSS transition,不写一行动画代码。 */
+/* hover 可交互元素:圆环**原地放大**到盖满视口,移开原地缩回。
+   两件事让它读起来是"放大"而不是"换了个东西":
+   1. difference 常开(见上),没有颜色跳变
+   2. 展开期间 JS 停止写 transform(见脚本)—— 不锚住的话,巨大的圆会
+      跟着指针平移,看着就是"从外面飞过来"
+   --burst 由 JS 按视口对角线算,保证从任意位置都能盖满。 */
 .ring.hot{
   scale:var(--burst,120);
   opacity:1;
   background:#fff;
-  border-color:transparent;
-  mix-blend-mode:difference;
+  border-color:#fff;
 }
 /* ============================== */
 
@@ -114,7 +119,10 @@ if (fine && !RM) {
 
   const tick = () => {
     x += (tx - x) * LERP; y += (ty - y) * LERP;
-    ring.style.transform = `translate3d(${x}px,${y}px,0)`;
+    // 展开期间锚住不动:一个盖满屏幕的圆再跟着指针平移,观感是"从外面飞过来"
+    // 而不是"原地放大"。缩回后位置会自己追上,不用补偿
+    if (!ring.classList.contains('hot'))
+      ring.style.transform = `translate3d(${x}px,${y}px,0)`;
     if (running) raf = requestAnimationFrame(tick);
   };
   raf = requestAnimationFrame(tick);

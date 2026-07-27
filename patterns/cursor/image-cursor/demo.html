@@ -20,7 +20,8 @@ code{ background:#2a2a2f; padding:.1em .35em; border-radius:3px; font-size:.88em
 .cell{ background:#232327; padding:2.5rem 1.5rem; min-height:11rem;
        display:flex; flex-direction:column; justify-content:flex-end; }
 .cell b{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); }
-.cell span{ display:block; margin-top:.4rem; font-size:.85rem; opacity:.6; }
+.cell span{ display:block; margin-top:.4rem; font-size:.85rem; opacity:.6; line-height:1.5; }
+.cell code{ font-size:.9em; }
 
 /* ============ 核心:一行 CSS,零 JS ============
    末尾的 auto 是必需兜底 —— 图挂了就回落系统光标,不写整条声明作废。
@@ -60,9 +61,12 @@ code{ background:#2a2a2f; padding:.1em .35em; border-radius:3px; font-size:.88em
     <div class="cell c-dot"><b>实心圆点</b><span>热点 16 16,圆心对准指针</span></div>
     <div class="cell c-cross"><b>十字</b><span>兜底写 crosshair,不是 auto</span></div>
     <div class="cell c-arrow"><b>箭头(40px)</b><span>兜底 pointer,提示可点</span></div>
-    <div class="cell c-bad"><b>热点写错</b><span>留默认 0 0 → 圆心偏到指针右下</span></div>
-    <div class="cell c-toobig"><b>超尺寸 200px</b><span>超过 128px 上限 → 整条失效,回落系统光标</span></div>
-    <div class="cell"><b>不设置</b><span>系统默认,作对照</span></div>
+    <div class="cell c-bad"><b>热点写错</b><span>留默认 <code>0 0</code> → 圆心偏到指针右下,不在指尖上</span></div>
+    <div class="cell c-toobig"><b>失效对照:图 200px</b>
+      <span>这一格<strong>看到的是系统箭头</strong>,和右边那格一模一样——
+      因为图超过浏览器 128px 上限,<strong>整条 <code>cursor</code> 声明被丢弃</strong>,
+      悄无声息地回落到兜底值。<br>这是最容易踩、最难查的一个坑:代码没报错,效果没了。</span></div>
+    <div class="cell"><b>不设置</b><span>系统默认。拿它和左边那格对比,就知道"失效"长什么样</span></div>
   </div>
 
   <p>全部用内联 <code>data:image/svg+xml</code>:不多一次请求、不会"闪一下才出现"、颜色直接写在里面
