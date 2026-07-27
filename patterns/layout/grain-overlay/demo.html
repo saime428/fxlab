@@ -12,7 +12,7 @@
      --grain-op    颗粒不透明度。.03–.08 是"质感",>.1 就从质感掉进"脏"
      --grain-freq  颗粒粗细。.6 粗(胶片) / .85 常用 / 1.2 细(雪花)
      ==================================================================== */
-  --grain-op:.055;
+  --grain-op:.10;
 }
 *,*::before,*::after{ box-sizing:border-box; }
 body{ margin:0; color:var(--ink); font:16px/1.6 "Helvetica Neue",system-ui,sans-serif;
@@ -37,7 +37,10 @@ body::after{
   content:""; position:fixed; inset:0; z-index:9999;
   pointer-events:none;                     /* 不写整页点不动 */
   opacity:var(--grain-op);
-  mix-blend-mode:overlay;                  /* 深色底上更自然;浅色底可去掉 */
+  /* ⚠ 别在深色底上用 mix-blend-mode:overlay —— overlay 对暗背景的结果约等于
+     2×backdrop×blend,暗的还是暗,叠上去几乎是空操作,再配 .05 的透明度
+     就是"完全看不出差别"。深色底用普通 alpha 叠加(不写 blend)才看得见;
+     overlay/soft-light 是给**浅色底**用的 */
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   /* 电影颗粒是逐帧跳变的,连续平移会看到噪声在"流" —— 必须 steps() */
   animation:grain 8s steps(10) infinite;
@@ -50,7 +53,7 @@ body::after{
   80%{ background-position:3% 35% }  90%{ background-position:-10% 10% }
 }
 body[data-grain="off"]::after{ display:none; }
-body[data-grain="loud"]{ --grain-op:.16; }   /* 故意做过头,给你看"脏"的边界 */
+body[data-grain="loud"]{ --grain-op:.34; }   /* 故意做过头,给你看"脏"的边界 */
 /* 静态颗粒本身没有运动问题,只停动画,别整个去掉 */
 @media (prefers-reduced-motion:reduce){ body::after{ animation:none } }
 @media print{ body::after{ display:none } }
@@ -91,8 +94,8 @@ body[data-grain="loud"]{ --grain-op:.16; }   /* 故意做过头,给你看"脏"�
 </main>
 
 <div class="switch" role="group" aria-label="颗粒强度">
-  <button data-g="on" aria-pressed="true">默认 .055</button>
-  <button data-g="loud" aria-pressed="false">过量 .16</button>
+  <button data-g="on" aria-pressed="true">默认 .10</button>
+  <button data-g="loud" aria-pressed="false">过量 .34</button>
   <button data-g="off" aria-pressed="false">关闭</button>
 </div>
 

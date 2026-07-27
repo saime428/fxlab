@@ -28,7 +28,19 @@ h1{
 
 **B. `mask-image` + SVG 文字**(视频/canvas 用这条)
 
-`background-clip` 吃不了 `<video>`。做法反过来:视频铺底,上面盖一层纯色遮罩层,**用文字形状把遮罩挖穿**:
+`background-clip` 吃不了 `<video>`。做法反过来:视频铺底,上面盖一层纯色遮罩层,**用文字形状把遮罩挖穿**。
+
+> ⚠ **最容易踩的坑**:CSS `mask-image` 默认按 **alpha 通道**判定,不是亮度。
+> 直接写"白矩形 + 黑文字"两者 alpha 都是 1 → 盖层整块留下 → **一个纯黑方块,什么都看不到**。
+> 必须在 SVG **内部**先用 `<mask>` 把字从矩形里扣掉,让最终图形在文字处 `alpha=0`:
+>
+> ```svg
+> <defs><mask id="m">
+>   <rect width="800" height="260" fill="white"/>
+>   <text … fill="black">MEDIA</text>
+> </mask></defs>
+> <rect width="800" height="260" fill="black" mask="url(#m)"/>
+> ```
 
 ```css
 .cover{
