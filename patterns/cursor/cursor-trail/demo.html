@@ -86,9 +86,15 @@ if (fine && !RM) {
 
   addEventListener('pointermove', e => {
     mx = e.clientX; my = e.clientY;
-    if (!primed) {                                     // 全部点先落到指针处,
-      primed = true;                                   // 否则会看到一条从 (0,0) 甩来的鞭子
-      for (const p of pts) { p.x = mx; p.y = my; }
+    if (!primed) {
+      primed = true;
+      // 光标从哪进页面,尾巴就从哪开始。
+      // 只改 p.x/p.y 不够 —— transform 要等下一个 rAF 才写,那一帧里元素还在
+      // (0,0),淡入已经开始,于是能看到一串点从左上角甩过来。**必须同步写一次**。
+      for (const p of pts) {
+        p.x = mx; p.y = my;
+        p.el.style.transform = `translate3d(${mx}px,${my}px,0)`;
+      }
       wrap.classList.add('on');
     }
   }, { passive: true });
