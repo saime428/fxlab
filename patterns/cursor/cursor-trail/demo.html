@@ -62,10 +62,14 @@ body[data-blend="on"] .trail i{ mix-blend-mode:difference; background:#fff; }
 
 <script>
 /* ===== KNOB ==========================================================
-   N     点数 = 尾巴长度。8 克制 / 14 常见 / >25 只有开销没有增量
-   LERP  链条松紧。.3 紧跟 / .18 松散拖曳 / <.1 尾巴甩不回来
+   N     点数 = 尾巴长度。**4-6 是甜点区**。
+         链式 lerp 是一串串联的一阶滤波器,每多一节延迟就叠一层:
+         N=14 时最后几个点的收敛时间长到肉眼看就是"钉在原地不动",
+         尾端于是永远挂在页面上某处 —— 不是 bug,是点数太多的必然结果。
+         点少反而对:尾端跟着鼠标走,只是滞后一点,那才是"尾巴"
+   LERP  链条松紧。.32 跟手 / .2 松散拖曳 / <.12 尾巴甩不回来
    ==================================================================== */
-const N = 14, LERP = 0.28;
+const N = 5, LERP = 0.32;
 
 const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
 const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
