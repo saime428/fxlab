@@ -43,3 +43,10 @@ blobs.forEach(b => {
 - 圆斑颜色接品牌色变量,主题切换时背景跟着换气质
 - 鼠标位置作为其中一个圆斑的目标点(lerp 跟随)= 低配版交互光标光晕
 - 升级路线:同样的圆斑逻辑搬进 fragment shader(smoothstep 距离场),就是 WebGL 版
+
+## 实战笔记
+
+- **首帧同步画,不要交给 rAF**:`requestAnimationFrame(loop)` 的第一帧在 rAF 被冻结/节流时永远不来,画布就是一块空白 —— 氛围背景退化成纯色底,页面直接"简陋"。在启动循环前先同步 `draw(performance.now())` 一次,成本一帧,收益是最坏情况下还有静态色斑
+- 同理适用于任何"用 canvas 铺底"的效果:静态首帧是保底画面,动画是增量
+
+> 来源:[blends/hashgraph-x-lando](../../../blends/hashgraph-x-lando/) 糅合 pilot,2026-07-26

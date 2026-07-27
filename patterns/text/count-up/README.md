@@ -42,3 +42,11 @@ new IntersectionObserver(([e]) => e.isIntersecting && start(), { threshold: .6 }
 - 加前后缀("$"、"+"、"%")时只滚数字部分
 - 老虎机式逐位翻滚(每位一个纵向条带)是重装版,成本高一档
 - CSS 也能做:`@property --n` + `counter()`,但兼容性和格式化不如 JS 省心
+
+## 实战笔记
+
+- **rAF 被冻结时数字会永远停在 0**:元素进视口时若标签在后台/系统低电量/页面被内嵌预览,rAF 不跑;而"只播一次"的 `done` 标记已经置位,回到前台也不会重跑。真机可复现,不是环境怪癖
+- 兜底用**另一个时钟源**:`setTimeout(() => { if (!landed) render(to) }, dur + 500)`。setTimeout 在后台只被节流不被停,能保证终值一定落地。别用第二个 rAF 兜底 —— 同一个时钟停了就都停了
+- 推论:凡是"只播一次 + 用 rAF 推进"的效果,都要问一句"rAF 不跑时停在哪一帧",停在错误状态的就得兜底
+
+> 来源:[blends/hashgraph-x-lando](../../../blends/hashgraph-x-lando/) 糅合 pilot,2026-07-26

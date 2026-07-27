@@ -45,3 +45,14 @@
 - 遮罩内加轻微 rotate(3deg→0)更有"翻起"感(Lando 用法)
 - 逐字 + [stagger-grid](../stagger-grid/) 的距离思路 = 从鼠标处扩散的文字波
 - 库方案: SplitType(免费)/ GSAP SplitText,自动处理 resize 重拆
+
+## 实战笔记
+
+- **中文不能按词拆**:`/\S+/` 这类按空白分词的写法,中文整句没有空白 → 全句变成一个 token,行数恒为 1,入场退化成整块位移。中文必须逐字拆,正则用 `/[A-Za-z0-9][A-Za-z0-9'’.\-]*|\s+|[\s\S]/g`(拉丁整词、空白原样、其余逐字)
+- **行遮罩换成 token 遮罩**:遮罩做在每个 token 上、延迟按 `offsetTop` 归出的行号给,观感等同行遮罩,但对中文和行内 `<em>` 都免疫,且不用重建 innerHTML(元素结构原样保留)。重建 innerHTML 的写法会把 `<em>标签</em>` 当成文本吃掉
+- **逐字拆之后每个字都成了可断点**,中文词会被拦腰断行(实测 `风口` 断成两行,`<em>` 的强调色跟着断)。强调词加 `white-space: nowrap` 兜住;要保护任意词就得引入分词,通常不值当
+- token 用 `inline-block + overflow:hidden` 会裁掉降部,配 `padding-bottom:.12em; margin-bottom:-.12em` 补空间
+- 只改文本节点(`TreeWalker` + `SHOW_TEXT`),别动元素结构 —— 行内 `<em>/<a>/<br>` 都能原样活下来
+- 初始隐藏态挂在 `html.js` 下(`<script>documentElement.classList.add('js')</script>` 放 head),JS 没跑时页面是完整终态,不会白屏
+
+> 来源:[blends/hashgraph-x-lando](../../../blends/hashgraph-x-lando/) 糅合 pilot,2026-07-26
