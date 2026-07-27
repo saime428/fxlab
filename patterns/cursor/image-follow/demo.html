@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>光标跟随预览图 Image Follow — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-s:.35s; --dur-m:.6s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:58rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.5rem,4vw,2.2rem); letter-spacing:-.02em; margin:0 0 .4rem; }
+.lede{ opacity:.7; max-width:36rem; margin:0 0 3rem; }
+code{ background:#2a2a2f; padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+.list{ list-style:none; margin:0; padding:0; border-top:1px solid rgba(244,244,237,.14); }
+.list li{ border-bottom:1px solid rgba(244,244,237,.14); }
+.list a{
+  display:flex; align-items:baseline; gap:1rem; padding:1.5rem .25rem;
+  color:inherit; text-decoration:none;
+  font-size:clamp(1.4rem,4.2vw,2.6rem); font-weight:800; letter-spacing:-.03em;
+  transition:padding-left var(--dur-m) var(--ease-out), color var(--dur-m) var(--ease-out);
+}
+/* 图片是奖励,不是唯一反馈 —— 列表项自己也得有 hover 反应 */
+.list a:hover,.list a:focus-visible{ padding-left:1.25rem; color:var(--accent); }
+.list a:focus-visible{ outline:2px solid var(--accent); outline-offset:-2px; }
+.list em{ font-style:normal; font-size:.7rem; letter-spacing:.16em; opacity:.45;
+          font-weight:600; margin-left:auto; }
+
+/* ============ 跟随的图片容器:全列表共用一个 ============ */
+.peek{
+  position:fixed; top:0; left:0; z-index:50;
+  width:min(22rem,34vw); aspect-ratio:4/3; margin:-9rem 0 0 -11rem;
+  border-radius:6px; overflow:hidden;
+  pointer-events:none;                    /* 不吃指针,否则挡住列表项自己的 hover */
+  opacity:0; scale:.94;
+  transition:opacity var(--dur-s) var(--ease-out), scale var(--dur-s) var(--ease-out);
+}
+.peek.on{ opacity:1; scale:1; }
+.peek i{ position:absolute; inset:0; display:block; }
+/* 用 CSS 渐变冒充图片,省得外链资源;真项目里是 <img> */
+.p1{ background:linear-gradient(140deg,#3a5bd9,#9ad1ff); }
+.p2{ background:linear-gradient(140deg,#c2410c,#fde68a); }
+.p3{ background:linear-gradient(140deg,#0f766e,#a7f3d0); }
+.p4{ background:linear-gradient(140deg,#6d28d9,#f0abfc); }
+.p5{ background:linear-gradient(140deg,#111827,#9ca3af); }
+/* ======================================================= */
+
+/* 键盘用户:焦点时静态显示在列表右侧,不跟着跑 */
+.peek.kb{ position:absolute; margin:0; transform:none !important; }
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+@media not all and (hover:hover){
+  .peek{ display:none; }                  /* 触屏没有这个交互 */
+  .list a{ flex-direction:column; align-items:flex-start; }
+  .list a::after{ content:""; display:block; width:100%; aspect-ratio:16/6;
+                  margin-top:.9rem; border-radius:6px;
+                  background:linear-gradient(140deg,#3a5bd9,#9ad1ff); }
+}
+@media (prefers-reduced-motion:reduce){
+  .peek{ transition:opacity .001ms; }
+  .list a{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>光标跟随预览图</h1>
+  <p class="lede">一列纯文字的项目名。hover 哪一条,那条的预览图跟着光标浮出来——
+     <strong>图片只在被问到的时候才出现</strong>。倾斜角来自滞后量本身,追得越急摆得越狠。</p>
+
+  <ul class="list" id="list">
+    <li><a href="#" data-img="p1">Northfall<em>2018 — 基础设施</em></a></li>
+    <li><a href="#" data-img="p2">Pellet<em>2019 — 开发工具</em></a></li>
+    <li><a href="#" data-img="p3">Sable Bio<em>2020 — 生命科学</em></a></li>
+    <li><a href="#" data-img="p4">Tidewheel<em>2017 — 能源</em></a></li>
+    <li><a href="#" data-img="p5">Kestrel Works<em>2016 — 自有品牌</em></a></li>
+  </ul>
+
+  <p class="note">全列表共用<strong>一个</strong>图片容器,换的是内容不是元素——N 个项目不该下载 N 张图。<br>
+     触屏上这个交互不存在,列表改成自带缩略图的排布;键盘用户 Tab 过去时图静态显示,不跟着跑。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<div class="peek" id="peek" aria-hidden="true"><i id="peekImg"></i></div>
+
+<script>
+/* ===== KNOB ==========================================================
+   LERP  跟随滞后。.14 有拖曳感 / .3 跟手 / 1 = 硬跟随(没有摆动了)
+   TILT  倾斜系数:角度 = 滞后量 × 它。0 = 不倾斜
+   MAX_T 倾斜上限(度)。不夹的话快速划过列表会转成风车
+   ==================================================================== */
+const LERP = 0.14, TILT = 0.18, MAX_T = 12;
+
+const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const list = document.getElementById('list');
+const peek = document.getElementById('peek');
+const img = document.getElementById('peekImg');
+
+if (fine) {
+  let tx = 0, ty = 0, x = 0, y = 0, primed = false, running = true, raf = 0;
+
+  list.addEventListener('pointermove', e => {
+    tx = e.clientX; ty = e.clientY;
+    if (!primed) {                        // 从指针进入列表的位置开始,不从 (0,0) 飞来
+      primed = true; x = tx; y = ty;
+      peek.style.transform = `translate3d(${x}px,${y}px,0)`;
+    }
+  }, { passive: true });
+
+  for (const a of list.querySelectorAll('a')) {
+    a.addEventListener('pointerenter', () => {
+      img.className = a.dataset.img;      // 换内容,不换元素
+      peek.classList.add('on');
+    });
+    // 键盘:静态显示,不跟随
+    a.addEventListener('focus', () => { img.className = a.dataset.img; peek.classList.add('on', 'kb'); });
+    a.addEventListener('blur', () => peek.classList.remove('on', 'kb'));
+  }
+  list.addEventListener('pointerleave', () => peek.classList.remove('on'));
+
+  if (!RM) {
+    const tick = () => {
+      const dx = tx - x, dy = ty - y;
+      x += dx * LERP; y += dy * LERP;
+      const t = Math.max(-MAX_T, Math.min(MAX_T, dx * TILT));   // 倾斜=滞后量,不用另测速度
+      if (!peek.classList.contains('kb'))
+        peek.style.transform = `translate3d(${x}px,${y}px,0) rotate(${t.toFixed(2)}deg)`;
+      if (running) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    document.addEventListener('visibilitychange', () => {
+      running = !document.hidden;
+      if (running) raf = requestAnimationFrame(tick); else cancelAnimationFrame(raf);
+    });
+  }
+}
+</script>
+</body>
+</html>

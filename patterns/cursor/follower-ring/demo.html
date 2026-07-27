@@ -6,7 +6,7 @@
 <title>跟随圆环 Follower Ring — web-fx-lab</title>
 <style>
 :root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
-       --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+       --dur-s:.3s; --dur-l:.9s; --ease-out:cubic-bezier(.19,1,.22,1); }
 *,*::before,*::after{ box-sizing:border-box; }
 body{ margin:0; background:var(--bg); color:var(--ink);
       font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
@@ -31,14 +31,26 @@ a.btn:hover,button.btn:hover,a.btn:focus-visible,button.btn:focus-visible{
   position:fixed; top:0; left:0; z-index:60;
   width:32px; height:32px; margin:-16px 0 0 -16px;   /* 圆心对准指针,比每帧减 16 省 */
   border:1px solid var(--ink); border-radius:50%;
+  background:transparent;
   pointer-events:none; opacity:0;
-  /* 只过渡尺寸和透明度;位置靠 transform 每帧写,不能有 transition */
+  /* 只过渡尺寸/颜色/透明度;位置靠 transform 每帧写,不能有 transition */
   transition:opacity var(--dur-s) var(--ease-out),
-             scale var(--dur-s) var(--ease-out),
+             scale var(--dur-l) var(--ease-out),
+             background-color var(--dur-l) var(--ease-out),
              border-color var(--dur-s) var(--ease-out);
 }
 .ring.on{ opacity:.9; }
-.ring.hot{ scale:1.9; opacity:.5; border-color:var(--accent); }  /* hover 可交互元素 */
+/* hover 可交互元素:不是放大一点点,是**炸开到盖满视口**。
+   --burst 由 JS 按视口对角线算,保证从任意位置都能盖满(见脚本)。
+   盖满后填纯白 + difference,整页反相 —— 文字仍然可读,不是糊一层色块。
+   移开就缩回 1 倍,全靠 CSS transition,不写一行动画代码。 */
+.ring.hot{
+  scale:var(--burst,120);
+  opacity:1;
+  background:#fff;
+  border-color:transparent;
+  mix-blend-mode:difference;
+}
 /* ============================== */
 
 @media (hover:hover) and (pointer:fine){ .hint-touch{ display:none; } }
@@ -53,7 +65,9 @@ a.btn:hover,button.btn:hover,a.btn:focus-visible,button.btn:focus-visible{
 <main>
   <h1>跟随圆环</h1>
   <p class="hint-fine">原生光标<strong>没有被藏起来</strong>——它还在,该有的 text / pointer 语义提示一个不少。
-     圆环只是追不上它,追赶的过程就是质感。滑到按钮上圆环会放大。</p>
+     圆环只是追不上它,追赶的过程就是质感。<br>
+     <strong>滑到按钮上,圆环会炸开到盖满整屏并把页面反相</strong>;移开就缩回去。
+     两个状态之间全靠一条 CSS transition,没写一行动画代码。</p>
   <p class="hint-touch">这是触屏设备,整个效果按 <code>@media (hover:hover)</code> 关掉了——触屏没有指针位置这回事。</p>
 
   <div class="row">
@@ -83,6 +97,11 @@ const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
 if (fine && !RM) {
   const ring = document.getElementById('ring');
   let tx = 0, ty = 0, x = 0, y = 0, primed = false, raf = 0, running = true;
+
+  // 炸开倍率:圆环 32px,要从视口任意一点盖满,直径得 ≥ 2×对角线
+  const sizeBurst = () => document.documentElement.style.setProperty(
+    '--burst', Math.ceil(2 * Math.hypot(innerWidth, innerHeight) / 32));
+  sizeBurst(); addEventListener('resize', sizeBurst);
 
   addEventListener('pointermove', e => {
     tx = e.clientX; ty = e.clientY;

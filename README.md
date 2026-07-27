@@ -66,6 +66,8 @@
 | [反色光标点 Blend Dot](patterns/cursor/blend-dot/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/blend-dot/demo.html) |
 | [磁性吸附 Magnetic Pull](patterns/cursor/magnetic-pull/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/magnetic-pull/demo.html) |
 | [光标拖尾 Cursor Trail](patterns/cursor/cursor-trail/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/cursor-trail/demo.html) |
+| [光标手电筒 Spotlight Mask](patterns/cursor/spotlight-mask/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/spotlight-mask/demo.html) |
+| [光标跟随预览图 Image Follow](patterns/cursor/image-follow/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/image-follow/demo.html) |
 
 ## Case 索引
 

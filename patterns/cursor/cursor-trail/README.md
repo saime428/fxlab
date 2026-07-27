@@ -35,7 +35,7 @@ const tick = () => {
 - **单 rAF**。N 个点共用一个循环,别每个点一个
 - 页面隐藏时停 rAF(`visibilitychange`),否则后台空转 20 个 transform
 - 点要 `pointer-events:none`,而且挂在 `body` 直属子级(想配 `mix-blend-mode` 的话必须,见 [blend-dot](../blend-dot/))
-- 初始化时把所有点放到第一次指针位置,否则会看到一条从 `(0,0)` 甩过来的鞭子
+- **光标从哪进页面,尾巴就从哪开始**。只把 `p.x/p.y` 设成指针位置**不够**——`transform` 要等下一个 rAF 才写,那一帧里元素还在 `(0,0)` 而淡入已经开始,于是能看到一串点从左上角甩过来。首次 `pointermove` 里**必须同步写一次 `transform`**,别交给 rAF
 
 ## 代价与注意
 

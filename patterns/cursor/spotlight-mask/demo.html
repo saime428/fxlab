@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>光标手电筒 Spotlight Mask — web-fx-lab</title>
+<style>
+:root{ --accent:#d2ff00; --dur-s:.35s; --ease-out:cubic-bezier(.19,1,.22,1);
+       --mx:50%; --my:50%; --r:170px; }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; background:#0e0e10; color:#f4f4ed; }
+
+.stage{ position:relative; min-height:100svh; overflow:hidden; }
+.layer{ position:absolute; inset:0; display:grid; place-content:center; padding:2rem; text-align:center; }
+.layer h2{ margin:0 0 .6rem; font-size:clamp(2rem,7vw,5rem); line-height:.95;
+           letter-spacing:-.04em; text-transform:uppercase; font-weight:900; }
+.layer p{ margin:0 auto; max-width:32rem; opacity:.8; }
+
+/* 下层:藏起来的那一层 */
+.under{ background:var(--accent); color:#111112; }
+.under h2{ color:#111112; }
+
+/* ============ 核心:上层被跟着光标走的径向遮罩挖洞 ============ */
+.over{
+  background:#0e0e10;
+  -webkit-mask-image:radial-gradient(circle var(--r) at var(--mx) var(--my),
+                                     transparent 55%, #000 100%);
+          mask-image:radial-gradient(circle var(--r) at var(--mx) var(--my),
+                                     transparent 55%, #000 100%);
+}
+/* 无 JS / 触屏 / reduced-motion:不能留一个什么都看不见的页面,直接给静态终态 */
+.no-fx .over{ -webkit-mask-image:none; mask-image:none; opacity:.06; }
+/* ============================================================ */
+
+.hint{ position:fixed; left:50%; bottom:1.4rem; transform:translateX(-50%);
+       font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.5; z-index:5; }
+.a11y{ position:fixed; right:1rem; top:1rem; z-index:6; }
+.a11y button{ font:inherit; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
+  padding:.5rem .9rem; border-radius:999px; cursor:pointer;
+  background:rgba(20,20,20,.85); color:#f4f4ed; border:1px solid rgba(244,244,237,.3); }
+.a11y button:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+  <!-- 下层:必读信息不能只放这里,读屏能读到但低视力/触屏用户可能永远看不见 -->
+  <div class="layer under">
+    <h2>藏在下面的<br>那一层</h2>
+    <p>光标照到哪,这里就露出来。两层都是真实内容,光标决定你看见哪一层。</p>
+  </div>
+  <div class="layer over">
+    <h2>光标手电筒</h2>
+    <p>别的光标是加了个装饰物,这个是<strong>光标本身成了内容的一部分</strong>。
+       机制只有一条:<code>mask-image: radial-gradient(… at var(--mx) var(--my))</code>。</p>
+  </div>
+</div>
+
+<div class="a11y"><button id="toggle">显示全部</button></div>
+<p class="hint" id="hint">移动鼠标</p>
+
+<script>
+/* ===== KNOB ==========================================================
+   LERP    光斑滞后。1 = 硬跟随(跟手但机械)/ .18 有拖曳感
+   R_IDLE  静止时的光斑半径(px)
+   R_MOVE  移动时放大到的半径。差值制造"呼吸"
+   ==================================================================== */
+const LERP = 0.18, R_IDLE = 150, R_MOVE = 230;
+
+const stage = document.getElementById('stage');
+const root = document.documentElement;
+const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+if (!fine || RM) {
+  // 触屏 / reduced-motion:给静态终态,不留一个什么都看不见的页面
+  document.body.classList.add('no-fx');
+  document.getElementById('hint').textContent = fine ? '已按 reduced-motion 降级' : '触屏:直接展示两层';
+} else {
+  let tx = innerWidth / 2, ty = innerHeight / 2, x = tx, y = ty, r = R_IDLE, tr = R_IDLE;
+  let primed = false, running = true, raf = 0;
+
+  addEventListener('pointermove', e => {
+    tx = e.clientX; ty = e.clientY; tr = R_MOVE;
+    if (!primed) {                       // 光标从哪进页面,光斑就从哪开始
+      primed = true; x = tx; y = ty;
+      root.style.setProperty('--mx', x + 'px');
+      root.style.setProperty('--my', y + 'px');
+    }
+  }, { passive: true });
+
+  const tick = () => {
+    x += (tx - x) * LERP; y += (ty - y) * LERP;
+    tr += (R_IDLE - tr) * 0.03;          // 不动就慢慢收回静息半径
+    r += (tr - r) * 0.12;
+    root.style.setProperty('--mx', x.toFixed(1) + 'px');
+    root.style.setProperty('--my', y.toFixed(1) + 'px');
+    root.style.setProperty('--r', r.toFixed(1) + 'px');
+    if (running) raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  document.addEventListener('visibilitychange', () => {
+    running = !document.hidden;
+    if (running) raf = requestAnimationFrame(tick); else cancelAnimationFrame(raf);
+  });
+}
+
+// 键盘/低视力用户的出口:必读信息不能只靠光标才能看到
+document.getElementById('toggle').addEventListener('click', e => {
+  const on = document.body.classList.toggle('no-fx');
+  e.target.textContent = on ? '回到手电筒' : '显示全部';
+});
+</script>
+</body>
+</html>

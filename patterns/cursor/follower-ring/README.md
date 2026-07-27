@@ -34,7 +34,19 @@ const tick=()=>{ x+=(tx-x)*LERP; y+=(ty-y)*LERP;
 
 - **首帧瞬移**:第一次 `pointermove` 时把 `x,y` 直接设成指针位置,否则圆环从 `(0,0)` 飞过来
 - 圆环用 `border` 不用 `background`,中间要透,不然挡住原生光标
-- hover 可交互元素时放大 + 降透明度:`document.querySelectorAll('a,button')` 上挂 `pointerenter/leave` 切一个 class 就够,别对每个元素单独算
+- **hover 态别只放大一点点**——那会让圆环看起来像"挂在页面上没跟上"。要么不动,要么**炸开到盖满视口**:
+
+  ```css
+  .ring.hot{ scale:var(--burst); background:#fff; border-color:transparent;
+             mix-blend-mode:difference; }
+  ```
+  ```js
+  // 圆环 32px,从视口任意一点盖满需要直径 ≥ 2×对角线
+  root.style.setProperty('--burst', Math.ceil(2 * Math.hypot(innerWidth, innerHeight) / 32));
+  ```
+
+  盖满后填纯白 + `difference` 让整页反相,**文字仍然可读**,不是糊一层色块。移开自动缩回,两个状态之间只有一条 CSS transition,零动画代码。倍率必须按视口算并在 `resize` 时更新,写死的数字在超宽屏上会露边
+- hover 目标用 `document.querySelectorAll('a,button')` 一次性挂 `pointerenter/leave` 切 class,别对每个元素单独算
 - 只动 `transform`,`margin` 负值做居中(比每帧算 `-16` 省)
 - 触屏用 `@media (hover:hover) and (pointer:fine)` 整个关掉
 

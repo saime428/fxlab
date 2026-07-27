@@ -40,6 +40,8 @@
 | [cursor/blend-dot](patterns/cursor/blend-dot/) | 反色光标点 | ★★ | 跟随点 + mix-blend-mode:difference | 深浅背景混排的站,光标永远可见 |
 | [cursor/magnetic-pull](patterns/cursor/magnetic-pull/) | 磁性吸附 | ★★ | 按钮朝指针位移,松开靠 transition 弹回 | 主 CTA / logo,不改光标所以可与任意光标叠加 |
 | [cursor/cursor-trail](patterns/cursor/cursor-trail/) | 光标拖尾 | ★★ | 链式 lerp:第 n 点追第 n−1 点 | 体验型站/作品集的纯装饰,B 端别用 |
+| [cursor/spotlight-mask](patterns/cursor/spotlight-mask/) | 光标手电筒 | ★★ | mask-image 径向渐变跟着光标挖洞 | hero 记忆点,光标本身成为内容的一部分 |
+| [cursor/image-follow](patterns/cursor/image-follow/) | 光标跟随预览图 | ★★ | 共用一个图容器 lerp 跟随,倾斜角=滞后量 | 作品集/代理商的项目列表,文字排版保持克制 |
 
 ## 气质套餐(场景 → 组合)
 
