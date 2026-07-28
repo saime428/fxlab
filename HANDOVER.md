@@ -30,7 +30,9 @@
 1. ~~高门槛 ✅ 欠账~~ **全部清零**:shader-wipe ✅、particle-transition ✅、cel-shading 已降级为 Messenger case 的方法论笔记(复用性否决:前提是已有 3D 场景)
 2. ~~翻案候选~~ ✅ 全部完成:hover/drag-spring、scroll/scroll-snap-sections、hover/floating-stickers
 3. Messenger 还没做运行时深挖(方法见下)
-4. ~~cursor/ 分类空缺~~ ✅ **已开张,而且是两个会话并行补的**(2026-07-26 合并):一路是 cuberto/dennis-snellenberg 两 case → `custom-cursor`/`magnetic-button`;另一路是 773 站扫描 → `image-cursor`/`follower-ring`/`blend-dot`/`magnetic-pull`/`cursor-trail`/`hide-and-follow`/`spotlight-mask`/`image-follow`。**合并后有三组语义重合,已在 [patterns/cursor/README.md](patterns/cursor/README.md) 顶部标注**,待办:整理成同一 pattern 的多个变体
+4. ~~cursor/ 分类空缺~~ ✅ **已开张,两个会话并行补的,合并后已去重**(2026-07-26):一路是 cuberto/dennis-snellenberg 两 case → `custom-cursor`/`magnetic-button`;另一路是 773 站扫描 → `image-cursor`/`blend-dot`/`cursor-trail`/`hide-and-follow`/`spotlight-mask`/`image-follow`。
+   **去重结论(四组同机制,删 4 留 4)**:`flow-border`→`conic-border-spin`、`magnetic-pull`→`hover/magnetic-button`、`follower-ring`→`custom-cursor`、`clip-circle-reveal`→`clip-shape-wipe`。被删的都是从扫描普查来的那一路,保留的都有 case 支撑(符合 criteria 第 1 条);独有内容全部并进保留者的"并入…补充"一节,没有丢内容。
+   **教训**:两个会话平行开工前先 `git fetch` 看远端,或分支隔离——否则同一天两路都会去补同一个空分类
 5. 遗留 ✅:弧形章节边缘(dennis,rounded-div 随滚动绷平)
 6. ~~Lenis 没进 tech-radar~~ ✅ [docs/tech-radar.md](docs/tech-radar.md) 加了专节:逐条列了本库 7 个滚动相关 pattern 在 Lenis 项目里的接法,其中 **scroll-snap-sections 是硬冲突**(二选一),marquee / parallax-cards / section-narrative fixed 变体要并进 Lenis 的循环
 7. ~~扫描的"声明 ≠ 使用"盲区~~ ✅ 已修:脚本改成查选择器类名是否出现在 HTML `class` 属性里,输出"声明/疑似在用"两个数(`cursor:none` 30→10,`mix-blend` 33→24)。**残留偏差:JS 运行时加的类会被低估**,要准数仍需开浏览器查计算样式

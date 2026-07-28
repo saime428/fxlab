@@ -36,7 +36,7 @@ el.style.setProperty('--my', y + 'px');
 
 - **只写两个 CSS 变量,不动 DOM 结构**。位置更新走 `--mx/--my`,不是改 `mask-position`——后者会触发遮罩重算,前者在合成层就能处理
 - `mask-image` 必须**同时写 `-webkit-` 前缀**,Safari 到现在仍需要
-- 直接在 `pointermove` 里赋值就能用;**要顺滑就上 rAF + lerp**,让光斑滞后于指针(和 [follower-ring](../follower-ring/) 同一套滞后手法)
+- 直接在 `pointermove` 里赋值就能用;**要顺滑就上 rAF + lerp**,让光斑滞后于指针(和 [custom-cursor](../custom-cursor/) 同一套滞后手法)
 - 光斑半径 `--r` 做成可变的:静止时收小、移动时放大,一行插值就有"呼吸"
 - 下层内容**必须在无 JS / 无 hover 时也能被看到**——否则触屏和键盘用户永远读不到它。做法:触屏下把上层整个隐藏,或给一个"全部显示"的切换
 

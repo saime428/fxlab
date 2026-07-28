@@ -49,3 +49,29 @@ addEventListener('mouseover', e => {        // 委托:别给每个元素绑 list
 - 媒体预览态(Cuberto 玩法):光标盒里塞 `<img>/<video>`,hover 作品项时展开——机制仍是"状态机 + 容器变形"
 - 拖尾:N 个层递减 lerp 系数,就是彗星
 - 与 [magnetic-button](../../hover/magnetic-button/) 联动:进磁场时光标被一起吸向按钮中心,手感闭环
+
+## 并入 follower-ring 的补充(2026-07-26 去重)
+
+原 `cursor/follower-ring`(单层圆环,不藏原生光标)是本 pattern 的子集,已删除并入。它多记的几条:
+
+- **不藏原生光标是可用性代价最小的一条路**。扫描实测 33 站这么做,比 `cursor:none` 那条更常见:系统光标还在,text/pointer 语义提示一个不少,圆环只负责质感。**全站常驻优先选这个模式**,`cursor:none` 留给作用域化的交互区
+- **圆环用 `border` 不用 `background`**,中间要透,否则挡住原生光标
+
+### 炸场变体:hover 时炸开盖满视口
+
+hover 可交互元素时,别只放大一点点——那会让圆环看起来"没跟上、挂在页面上"。要么不动,要么做满:
+
+```css
+.ring{ mix-blend-mode:difference; }            /* ← 常开,不能只写在 hover 态 */
+.ring.hot{ scale:var(--burst); background:#fff; border-color:#fff; }
+```
+```js
+// 圆环 32px,要从视口任意一点盖满,直径得 ≥ 2×对角线
+root.style.setProperty('--burst', Math.ceil(2 * Math.hypot(innerWidth, innerHeight) / 32));
+```
+
+盖满后填纯白 + `difference` 让整页反相,**文字仍然可读**,不是糊一层色块。两个坑:
+
+- **`mix-blend-mode` 不可动画**,只会瞬间跳变。只写在 hover 态上,进出时颜色会硬翻一次,观感是"原来那个被删掉了、另一个飞进来"——必须两个状态都常开
+- **展开期间要停止写 `transform`**。一个盖满屏幕的圆再跟着指针平移,观感同样是"从外面飞进来"而不是"原地放大";锚住即可,缩回后位置自己追上
+- 倍率必须按视口算并在 `resize` 时更新,写死的数字在超宽屏上会露边

@@ -10,7 +10,7 @@
 
 **一行 CSS 换掉光标图形**,零 JS、零 rAF、零跟随延迟——因为它就是系统光标,由合成器画,永远不掉帧。
 
-跟随类光标([follower-ring](../follower-ring/)、[hide-and-follow](../hide-and-follow/))再顺滑也有滞后;这条路子没有滞后的概念。代价是**不能动画、不能有状态过渡**——想要放大/变形就得换另一条路。
+跟随类光标([custom-cursor](../custom-cursor/)、[hide-and-follow](../hide-and-follow/))再顺滑也有滞后;这条路子没有滞后的概念。代价是**不能动画、不能有状态过渡**——想要放大/变形就得换另一条路。
 
 ## 核心机制
 
@@ -30,7 +30,7 @@
 
 ## 代价与注意
 
-- **不能动画**。光标图是静态的,没有过渡、没有 hover 放大。要这些就换 [follower-ring](../follower-ring/)
+- **不能动画**。光标图是静态的,没有过渡、没有 hover 放大。要这些就换 [custom-cursor](../custom-cursor/)
 - **触屏完全无效**(没有指针),但也无害——不用像跟随类那样特意 `@media` 关掉
 - 换掉箭头会丢失系统的 text / resize / not-allowed 等语义提示。**只在内容区换**,表单和链接留给系统
 - 高分屏:提供 2× 图并用 `image-set()`,否则光标发虚

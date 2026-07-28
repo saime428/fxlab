@@ -43,3 +43,17 @@ vx += -K * x; vx *= DAMP; x += vx;
 - 与 [custom-cursor](../../cursor/custom-cursor/) 联动:进磁场时光标一起被吸向按钮中心,手感闭环
 - 强度为负 = "躲避按钮"(愚人节玩具,别上生产)
 - GSAP 等价一行:`gsap.to(btn, { x, y, ease: 'elastic.out(1, 0.3)' })`(回位)
+
+## 并入 magnetic-pull 的补充(2026-07-26 去重)
+
+原 `cursor/magnetic-pull` 与本 pattern 是同一机制,回位方式不同(CSS transition vs 欧拉弹簧),已删除并入这里。
+
+**两种回位怎么选**:要"稳"(干脆到位、不过冲)用 CSS transition——`pointerleave` 时清空 `transform`,让 transition 自己送回去,零 JS 状态;要"弹"(有过冲、更有玩具感)用本文的欧拉弹簧。**按钮不是玩具,B 端场景优先选前者。**
+
+CSS transition 版的关键:**吸附期间必须关掉位移过渡**(加一个 `.is-pulling` 类只保留颜色过渡),否则跟手会肉一拍;`pointerleave` 移除该类,transition 才接管回位。
+
+另外两条实现细节:
+
+- **位移要夹上限**:`dx * PULL` 在大按钮上会拉得太远,用按钮高度的 1/3 左右做 clamp
+- 按钮多(>20)时把 `pointermove` 改成容器上事件委托 + `e.target.closest()`,别每个按钮一个监听器
+- **一页别到处都是**:全站按钮都会动 = 没有一个是特别的,留给主 CTA 和 logo

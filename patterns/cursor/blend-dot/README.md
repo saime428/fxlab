@@ -2,7 +2,7 @@
 
 - **分类**: 鼠标跟随
 - **难度**: ★★
-- **见于**: 是 [cursor/follower-ring](../follower-ring/) 与 [layout/blend-invert](../../layout/blend-invert/) 的交集用法;扫描里 147 站用 `mix-blend-mode: difference`,33 站有跟随元素,重合的那批就是这一类
+- **见于**: 是 [cursor/custom-cursor](../custom-cursor/) 与 [layout/blend-invert](../../layout/blend-invert/) 的交集用法;扫描里 147 站用 `mix-blend-mode: difference`,33 站有跟随元素,重合的那批就是这一类
 - **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/blend-dot/demo.html)
 
 ## 设计意图
@@ -35,7 +35,7 @@
 ## 代价与注意
 
 - 继承 [blend-invert](../../layout/blend-invert/) 的全部代价:中灰失效、层叠上下文敏感、部分截图路径不支持
-- 继承 [follower-ring](../follower-ring/) 的全部代价:`prefers-reduced-motion` 必须关掉、后台停 rAF、触屏整个关掉
+- 继承 [custom-cursor](../custom-cursor/) 的全部代价:`prefers-reduced-motion` 必须关掉、后台停 rAF、触屏整个关掉
 - Safari 上 `position:fixed` + `mix-blend-mode` 有渲染残留,加 `transform:translateZ(0)` 一般能绕过——但光标本来就在写 `transform`,天然满足
 
 ## 变体与延伸

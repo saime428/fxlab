@@ -8,7 +8,6 @@
 | [可拖拽 + 弹簧回弹](drag-spring/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html) |
 | [漂浮贴纸物理 Hover](floating-stickers/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html) |
 | [液态融合 Goo](goo-merge/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/goo-merge/demo.html) |
-| [流光边框](flow-border/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flow-border/demo.html) |
 | [卡片翻转](flip-card/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flip-card/demo.html) |
 | [旋转渐变描边](conic-border-spin/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/conic-border-spin/demo.html) |
 | [精灵图 Hover 预览](sprite-preview/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/sprite-preview/demo.html) |

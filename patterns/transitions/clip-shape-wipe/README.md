@@ -47,3 +47,24 @@ wipe.addEventListener('transitionend', () => {
 - 点阵版(dot transition):网格 N×M 个圆各自 scale 0→1,delay = 到波心距离——就是 [stagger-grid](../../text/stagger-grid/) 的距离公式,盖满后同款三拍
 - 形状换菱形/斜条纹:改 clip-path polygon,机制不动
 - 要"形状边缘发光/扭曲"的质感 → 升级到 [shader-wipe](../shader-wipe/)(这是两者的分界线)
+
+## 并入 clip-circle-reveal 的补充(2026-07-26 去重)
+
+原 `transitions/clip-circle-reveal` 与本 pattern 是同一机制,已删除并入。
+
+**设计意图上多说一句**:绝大多数转场是"一层东西盖过来",它从哪来、为什么来,和用户刚才干了什么没关系。圆形擦除把两件事绑在一起——**你点的那个点,就是新视图长出来的原点**。这条因果链是它比淡入淡出高级的全部原因,成本却只有一个 `clip-path` 过渡。
+
+**关于半径**:本文用 `circle(150% at var(--x) var(--y))` 是更省的写法——百分比按元素尺寸算,150% 保证从任意点都能覆盖。如果改用像素半径,**必须取"到四角的最大距离"**:
+
+```js
+const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+```
+
+用 `innerWidth` 或对角线的一半都会在某些点击位置露出旧内容的边角。
+
+另外三条:
+
+- **键盘触发时没有坐标**:`e.clientX/Y` 是 0,要取按钮自身中心 `getBoundingClientRect()` 兜底,别默认 `(0,0)`
+- **`transform` 做不到这个效果**:缩放一个圆会把内容一起缩放,必须是 `clip-path`
+- 焦点在转场期间留在触发元素上,**结束后**再移到新内容,别在动画中途改
+- 同一个机制也是暗色模式切换最讨喜的做法:新层放的不是新页面,而是同一页面的另一套 CSS 变量,荡开一圈完成换肤

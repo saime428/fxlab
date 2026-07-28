@@ -67,7 +67,7 @@
 
 ## 变体与延伸
 
-- 圆形徽章 + 匀速旋转 = 常驻角落的品牌印记,配 [cursor/magnetic-pull](../../cursor/magnetic-pull/) 让它被指针吸引
+- 圆形徽章 + 匀速旋转 = 常驻角落的品牌印记,配 [hover/magnetic-button](../../hover/magnetic-button/) 让它被指针吸引
 - `offset-distance` 绑滚动进度(配 [scroll/css-scroll-scrub](../../scroll/css-scroll-scrub/)),文字随滚动沿路径前进
 - 路径用 [text/svg-line-draw](../svg-line-draw/) 的 `stroke-dashoffset` 同时画出来,字跟着线一起长
 - 每个字再叠一点 `--i` 相关的延迟,就是沿路径的 stagger 入场(见 [text/split-text-reveal](../split-text-reveal/))

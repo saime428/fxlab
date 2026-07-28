@@ -36,16 +36,12 @@
 | [layout/blend-invert](patterns/layout/blend-invert/) | 覆盖层自动反色 | ★ | mix-blend-mode:difference,白色层自动反相 | 固定 header/logo 压在明暗不定的内容上,零 JS |
 | [cursor/hide-and-follow](patterns/cursor/hide-and-follow/) | 区域内隐藏光标 + 跟随标签 | ★★ | 区域 cursor:none + rAF lerp 跟随元素 | 作品网格/画廊,把光标变成说明 UI |
 | [cursor/image-cursor](patterns/cursor/image-cursor/) | 图片光标 | ★ | cursor:url(data-URI) + 热点坐标,零 JS | 只想换图标形状,全库成本最低的自定义光标 |
-| [cursor/follower-ring](patterns/cursor/follower-ring/) | 跟随圆环 | ★ | 不藏原生光标,叠一个 lerp 滞后的圆环 | 全站常驻质感,自定义光标里可用性代价最小 |
 | [cursor/blend-dot](patterns/cursor/blend-dot/) | 反色光标点 | ★★ | 跟随点 + mix-blend-mode:difference | 深浅背景混排的站,光标永远可见 |
-| [cursor/magnetic-pull](patterns/cursor/magnetic-pull/) | 磁性吸附 | ★★ | 按钮朝指针位移,松开靠 transition 弹回 | 主 CTA / logo,不改光标所以可与任意光标叠加 |
 | [cursor/cursor-trail](patterns/cursor/cursor-trail/) | 光标拖尾 | ★★ | 链式 lerp:第 n 点追第 n−1 点 | 体验型站/作品集的纯装饰,B 端别用 |
 | [cursor/spotlight-mask](patterns/cursor/spotlight-mask/) | 光标手电筒 | ★★ | mask-image 径向渐变跟着光标挖洞 | hero 记忆点,光标本身成为内容的一部分 |
 | [cursor/image-follow](patterns/cursor/image-follow/) | 光标跟随预览图 | ★★ | 共用一个图容器 lerp 跟随,倾斜角=滞后量 | 作品集/代理商的项目列表,文字排版保持克制 |
 | [layout/grain-overlay](patterns/layout/grain-overlay/) | 噪点颗粒层 | ★ | feTurbulence 生成噪声铺满,压到 .055 | 全站质感地板,"看起来贵"最短的一条路 |
 | [hover/goo-merge](patterns/hover/goo-merge/) | 液态融合 | ★★ | 高斯模糊 + alpha 压回硬边,重叠处连成一体 | 展开菜单/加载点,打破 DOM 的方块感 |
-| [hover/flow-border](patterns/hover/flow-border/) | 流光边框 | ★★ | @property 让 conic 角度可动画 | 主 CTA/当前选中项,一页一次 |
-| [transitions/clip-circle-reveal](patterns/transitions/clip-circle-reveal/) | 圆形揭开转场 | ★ | clip-path circle 从点击处扩张 | 换页/换肤,让转场和点击有因果关系 |
 | [text/text-mask-media](patterns/text/text-mask-media/) | 文字挖空露媒体 | ★★ | background-clip:text 或 mask 挖穿盖层 | 超大标题里流着视频/渐变,一屏立记忆点 |
 | [text/outline-type](patterns/text/outline-type/) | 描边字 | ★ | -webkit-text-stroke + text-fill-color 过渡 | 超大空心标题,占位置但不抢注意力 |
 | [text/text-on-path](patterns/text/text-on-path/) | 文字沿路径 | ★★ | SVG textPath(静态)/ CSS offset-path(逐字动画) | 圆形徽章、弧线标题,跳出网页默认观感 |
