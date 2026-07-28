@@ -40,11 +40,13 @@ h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacit
 /* ⚠ offset-distance 在**开放路径**上钳制到 100%,只有**闭合路径**才环绕。
    这条弧线是开放的,所以做不了无限流动 —— 硬做的话后半个周期所有字都堆在末端。
    开放路径正确的用法是**一次性入场**:各字从起点滑到自己的位置。 */
-/* 只写 from,不写 to —— 隐式终点就是基础规则里的值。
-   fill-mode 用 backwards(延迟期间套用 from),不能用 both:
-   both 会在动画结束后继续钉住 to,动画没跑时就等于钉在起点 */
-.rail .ch{ animation:enter .9s var(--ease-out) backwards; animation-delay:calc(var(--i) * 45ms); }
-@keyframes enter{ from{ offset-distance:0%; opacity:0 } }
+/* ⚠ 入场**不要动画 offset-distance**。
+   每个字时长相同但 travel 距离不同(第 n 个要走 n/N 的路径),
+   同样时间 = 后面的字速度快 n 倍,半路就会超过前面的字 —— 过程中乱序。
+   正确做法:字始终待在自己的路径位置上,只做透明度/位移入场。
+   offset-path 先算出位置,transform 再叠在它上面,两者不冲突。 */
+.rail .ch{ animation:enter .7s var(--ease-out) backwards; animation-delay:calc(var(--i) * 55ms); }
+@keyframes enter{ from{ opacity:0; transform:translateY(16px) scale(.86) } }
 /* 老环境降级成普通横排 */
 @supports not (offset-path: path("M0,0")){
   .rail{ height:auto; text-align:center; }
@@ -98,7 +100,11 @@ h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacit
      每个字 <code>aria-hidden</code>,不然等于把这段内容从读屏用户那里删掉。</p>
   <p><strong>这里不能做无限流动</strong>:<code>offset-distance</code> 在<strong>开放路径</strong>上
      钳制到 100%,只有<strong>闭合路径</strong>才环绕。硬做的话后半个周期所有字都堆在末端。
-     开放路径就该用一次性入场,想要无限循环得用闭合路径——就是下面这个徽章。</p>
+     想要无限循环得用闭合路径——就是下面这个徽章。</p>
+  <p><strong>入场也不要动画 <code>offset-distance</code></strong>:每个字时长相同、
+     travel 距离不同(第 n 个要走 n/N 的路径),等于后面的字速度快 n 倍,
+     <strong>半路就会超过前面的字,过程中读起来是乱序的</strong>。
+     正确做法是字始终待在自己的位置上,只做透明度/位移入场。</p>
 
   <h2 class="lbl">圆形徽章</h2>
   <div class="badge" id="badge" aria-label="徽章:KESTREL WORKS 自二〇一七年"><b>K</b></div>
