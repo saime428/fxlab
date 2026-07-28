@@ -29,19 +29,22 @@ h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacit
 .rail{ position:relative; width:100%; max-width:700px; height:200px; margin:0 auto; }
 .rail .ch{
   position:absolute; top:0; left:0;
-  font-weight:900; font-size:34px; color:var(--ink);
-  offset-path:path("M 20,150 C 200,20 500,20 680,150");
+  font-weight:900; font-size:30px; color:var(--ink);
+  offset-path:path("M 30,148 C 230,78 470,78 670,148");
+  /* ⚠ 终态写在**基础规则**里,不能只写在 @keyframes 的 to{} 里。
+     否则动画一旦没跑(低电量节流、载入时祖先 display:none、被冻结…),
+     所有字会永远堆在路径起点 —— 排版不该依赖动画运行 */
   offset-distance:calc(var(--i) * 100% / var(--n));
   offset-rotate:auto;                       /* 跟着切线转向 */
 }
 /* ⚠ offset-distance 在**开放路径**上钳制到 100%,只有**闭合路径**才环绕。
    这条弧线是开放的,所以做不了无限流动 —— 硬做的话后半个周期所有字都堆在末端。
    开放路径正确的用法是**一次性入场**:各字从起点滑到自己的位置。 */
-.rail .ch{ animation:enter .9s var(--ease-out) both; animation-delay:calc(var(--i) * 45ms); }
-@keyframes enter{
-  from{ offset-distance:0%; opacity:0 }
-  to  { offset-distance:calc(var(--i) * 100% / var(--n)); opacity:1 }
-}
+/* 只写 from,不写 to —— 隐式终点就是基础规则里的值。
+   fill-mode 用 backwards(延迟期间套用 from),不能用 both:
+   both 会在动画结束后继续钉住 to,动画没跑时就等于钉在起点 */
+.rail .ch{ animation:enter .9s var(--ease-out) backwards; animation-delay:calc(var(--i) * 45ms); }
+@keyframes enter{ from{ offset-distance:0%; opacity:0 } }
 /* 老环境降级成普通横排 */
 @supports not (offset-path: path("M0,0")){
   .rail{ height:auto; text-align:center; }
@@ -82,14 +85,14 @@ h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacit
 
   <h2 class="lbl">方案 A · SVG textPath(静态排布用这条)</h2>
   <svg class="arc" viewBox="0 0 700 200" role="img" aria-label="标题:耐心不是美德,是杠杆">
-    <path id="arc1" d="M 20,150 C 200,20 500,20 680,150" fill="none"/>
+    <path id="arc1" d="M 30,148 C 230,78 470,78 670,148" fill="none"/>
     <text><textPath href="#arc1" startOffset="50%" text-anchor="middle">耐心不是美德,是杠杆</textPath></text>
   </svg>
   <p style="margin-top:1rem">这一行<strong>仍是一段完整文本</strong>——可以用鼠标选中它、可以 Ctrl+F 搜到、
      读屏正常朗读。静态沿路径排版,这条就够了。</p>
 
   <h2 class="lbl">方案 B · CSS offset-path(需要逐字动画时)</h2>
-  <div class="rail" id="rail" aria-label="沿路径入场的文字:不投风口,投把风口做出来的人"></div>
+  <div class="rail" id="rail" aria-label="沿路径入场的文字:耐心不是美德,是杠杆"></div>
   <p style="margin-top:1rem">各字从起点沿弧线滑到自己的位置,并跟着切线转向。
      <strong>代价是每个字必须是独立元素</strong>,文本被拆碎——所以容器补了 <code>aria-label</code>、
      每个字 <code>aria-hidden</code>,不然等于把这段内容从读屏用户那里删掉。</p>
@@ -124,7 +127,9 @@ function layout(el, text) {
   }
 }
 
-layout(document.getElementById('rail'), '不投风口 · 投把风口做出来的人 · ');
+// 字数要配得上路径长度:这条弧约 700px,30px 的字放 10 个刚好。
+// 塞 20 个字就会挤在一起,而且两端陡峭处 offset-rotate 会把字转得东倒西歪
+layout(document.getElementById('rail'), '耐心不是美德,是杠杆');
 layout(document.getElementById('badge'), 'KESTREL WORKS · EST. 2017 · ');
 </script>
 </body>
