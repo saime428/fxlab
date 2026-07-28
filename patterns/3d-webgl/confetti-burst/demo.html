@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confetti Burst — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  :root { --accent: #8b7cf6; --c2: #47d8ff; --c3: #ff7c5c; --c4: #e8ff47; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  p { color: #77778a; margin-bottom: 2.4rem; }
+  canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9; }
+  button { background: linear-gradient(120deg, var(--accent), var(--c2)); border: 0; color: #101014; font-weight: 700; padding: .9em 2.2em; border-radius: 2em; font: inherit; cursor: pointer; }
+  button:focus-visible { outline: 2px solid #ecebf2; outline-offset: 3px; }
+  #done { min-height: 1.6em; margin-top: 1.2rem; font-size: 1.2rem; }
+</style>
+</head>
+<body>
+  <canvas id="cv" aria-hidden="true"></canvas>
+  <div>
+    <h1>纸屑爆发</h1>
+    <p>点按钮庆祝——粒子落完,rAF 自停</p>
+    <button id="go">完成订单 🎉</button>
+    <p id="done" role="status"></p>
+  </div>
+<script>
+  // ===== 旋钮 =====
+  const FX = {
+    COUNT: 110,     // 每次爆发片数,80~150
+    SPEED: 11,      // 初速度,8~15
+    LIFT: 7,        // 向上抬升,4~10(抛物线的"喷力")
+    GRAVITY: .32,   // 重力,.2~.5
+    DRAG: .985,     // 空气阻力,.97~.99
+    SPREAD: .9,     // 扇形半角(弧度),.6~1.2
+  };
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+  const css = getComputedStyle(document.documentElement);
+  const COLORS = ['--accent','--c2','--c3','--c4'].map(v => css.getPropertyValue(v).trim());
+  const dpr = Math.min(devicePixelRatio || 1, 1.5);
+  function resize() { cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; }
+  resize(); addEventListener('resize', resize);
+
+  const particles = [];
+  let raf = 0;
+  function burst(x, y) {
+    for (let i = 0; i < FX.COUNT; i++) {
+      const angle = -Math.PI / 2 + (Math.random() - .5) * 2 * FX.SPREAD;   // 以正上方为轴的扇形
+      const speed = FX.SPEED * (.5 + Math.random() * .7);
+      particles.push({
+        x: x * dpr, y: y * dpr,
+        vx: Math.cos(angle) * speed * dpr, vy: (Math.sin(angle) * speed - FX.LIFT) * dpr,
+        rot: Math.random() * 7, vr: (Math.random() - .5) * .3,
+        w: (6 + Math.random() * 5) * dpr, h: (4 + Math.random() * 3) * dpr,
+        color: COLORS[i % COLORS.length],
+      });
+    }
+    if (!raf) raf = requestAnimationFrame(tick);          // 连点=追加粒子,不新开循环
+  }
+  function tick() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.vy += FX.GRAVITY * dpr; p.vx *= FX.DRAG; p.vy *= FX.DRAG;
+      p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+      if (p.y > cv.height + 20) { particles.splice(i, 1); continue; }
+      ctx.save();
+      ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);         // 自旋矩形:翻面 3D 错觉免费
+      ctx.restore();
+    }
+    raf = particles.length ? requestAnimationFrame(tick) : 0;   // 清零即自停
+    if (!raf) ctx.clearRect(0, 0, cv.width, cv.height);
+  }
+
+  const done = document.getElementById('done');
+  document.getElementById('go').addEventListener('click', e => {
+    done.textContent = '🎉 已完成';                        // 语义反馈:动效可选,庆祝必达
+    if (reduced) return;                                   // 降级:只留文字
+    const r = e.target.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top);
+  });
+</script>
+</body>
+</html>

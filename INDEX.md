@@ -52,6 +52,14 @@
 | [hover/flip-card](patterns/hover/flip-card/) | 卡片翻转 | ★★ | perspective 在祖先 + preserve-3d + backface | 列表保持克制,细节藏背面 |
 | [layout/duotone-blend](patterns/layout/duotone-blend/) | 双色调 | ★★ | 去色 + lighten 抬黑 + multiply 压白 | 把来源不一的图统进一套品牌色 |
 | [transitions/pixelate-transition](patterns/transitions/pixelate-transition/) | 像素化过渡 | ★★ | canvas 降采样 + 关插值放大,最低点换图 | 要"利落不互溶"的切换,中间帧不糊 |
+| [transitions/clip-shape-wipe](patterns/transitions/clip-shape-wipe/) | 形状擦除过渡 | ★ | clip-path/条纹错峰:盖住→换内容→揭开 | 章节/视图切换的零门槛擦除,shader-wipe 的 CSS 平替 |
+| [text/elastic-text](patterns/text/elastic-text/) | 弹性文字入场 | ★ | JS 采样弹簧曲线喂给 CSS linear() 缓动 | 活泼/年轻向标题入场,ease-out 之外的性格档 |
+| [3d-webgl/confetti-burst](patterns/3d-webgl/confetti-burst/) | 纸屑爆发 | ★★ | canvas 粒子:重力+阻力+自旋,burst 后自停 | 成功/完成时刻的庆祝反馈,SaaS 标配 |
+| [hover/conic-border-spin](patterns/hover/conic-border-spin/) | 旋转渐变描边 | ★ | @property 注册 <angle> + conic 起始角动画 | 主 CTA/卡片的"通电"描边,AI 产品站标配 |
+| [hover/sprite-preview](patterns/hover/sprite-preview/) | 精灵图 Hover 预览 | ★ | steps(N-1, jump-none) 步进 background-position | 画廊卡片的零 video 动图预览,4~12 帧甜区 |
+| [layout/fake-ui-demo](patterns/layout/fake-ui-demo/) | 假 UI 自演示 | ★★ | JS 状态机切累加类,编排全在 CSS | 产品落地页让界面自己演,替代录屏,体积≈0 |
+| [cursor/custom-cursor](patterns/cursor/custom-cursor/) | 自定义光标 | ★★ | lerp 双层跟随 + data-cursor 委托状态机 | 品牌感光标,四态(点/放大/文字/媒体);触屏必须 no-op |
+| [hover/magnetic-button](patterns/hover/magnetic-button/) | 磁性按钮 | ★★ | 磁场偏移×强度 + 欧拉弹簧回位,文字二级视差 | "手感"类代表作,CTA/圆按钮;触屏 no-op |
 
 ## 气质套餐(场景 → 组合)
 

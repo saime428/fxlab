@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Cursor — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; gap: 2rem; }
+  body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }   /* 自定义层就绪后才藏系统光标 */
+  h1 { margin-bottom: .4rem; }
+  .hint { color: #77778a; }
+  .zone { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; }
+  .zone a, .zone button { color: #ecebf2; background: #1b1b22; border: 1px solid #2b2b35; padding: 1em 1.8em; border-radius: 12px; font: inherit; text-decoration: none; }
+  .zone a:focus-visible, .zone button:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 3px; }
+  .invert-strip { padding: 1.6rem; border-radius: 14px; background: #ecebf2; color: #101014; font-weight: 700; }
+  .touch-note { display: none; color: #77778a; font-size: .85rem; }
+  @media (pointer: coarse) { .touch-note { display: block; } }
+  /* —— 光标层:小点 1× + 大环 0.65×(拖尾),纯白 + difference = 任何背景可读 —— */
+  .fx-cursor { position: fixed; top: 0; left: 0; z-index: 999; pointer-events: none; mix-blend-mode: difference; }
+  .fx-cursor .dot, .fx-cursor .ring { position: fixed; top: 0; left: 0; border-radius: 50%; translate: -50% -50%; }
+  .fx-cursor .dot { width: 10px; height: 10px; background: #fff; transition: scale .25s cubic-bezier(.22,1,.36,1); display: grid; place-content: center; }
+  .fx-cursor .ring { width: 36px; height: 36px; border: 1.5px solid #fff; transition: scale .25s, opacity .25s; }
+  .fx-cursor .cursor-label { font-size: 3px; color: #000; font-weight: 700; letter-spacing: .04em; opacity: 0; transition: opacity .2s; }
+  .fx-cursor[data-state="grow"] .dot { scale: 3.5; }
+  .fx-cursor[data-state="grow"] .ring { scale: .5; opacity: 0; }
+  .fx-cursor[data-state="text"] .dot { scale: 14; background: #8b7cf6; }
+  .fx-cursor[data-state="text"] .ring { opacity: 0; }
+  .fx-cursor[data-state="text"] .cursor-label { opacity: 1; }
+  .fx-cursor.is-out .dot, .fx-cursor.is-out .ring { scale: 0; }
+  @media (prefers-reduced-motion: reduce) { .fx-cursor .dot, .fx-cursor .ring { transition: none; } }
+</style>
+</head>
+<body>
+  <div>
+    <h1>自定义光标</h1>
+    <p class="hint">移动鼠标:小点贴手,大环拖尾——hover 下面的元素看状态机</p>
+    <p class="touch-note">触屏设备:自定义光标整机不启用(正确行为,不是缺失)</p>
+  </div>
+  <div class="zone">
+    <a href="#" data-cursor="grow">链接:放大态</a>
+    <button data-cursor="text" data-cursor-text="查看">卡片:文字态</button>
+    <button>普通元素:默认态</button>
+  </div>
+  <div class="invert-strip">亮色区域——difference 反色让光标依然可读</div>
+<script>
+  // ===== 旋钮 =====
+  const FX = {
+    DOT_EASE: .28,   // 小点跟手度,.2~.4
+    RING_EASE: .16,  // 大环滞后,.1~.2(差值=拖尾感)
+  };
+  // 触屏整机 no-op:没有精确指针就不初始化(铁律)
+  if (matchMedia('(pointer: fine)').matches) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cursor = document.createElement('div');
+    cursor.className = 'fx-cursor is-out';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.innerHTML = '<div class="ring"></div><div class="dot"><span class="cursor-label"></span></div>';
+    document.body.appendChild(cursor);
+    document.body.classList.add('has-cursor');            // 层就绪才藏系统光标
+    const dot = cursor.querySelector('.dot'), ring = cursor.querySelector('.ring');
+    const label = cursor.querySelector('.cursor-label');
+    let mx = innerWidth / 2, my = innerHeight / 2, dx = mx, dy = my, rx = mx, ry = my;
+    addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.classList.remove('is-out'); });
+    document.documentElement.addEventListener('mouseleave', () => cursor.classList.add('is-out'));
+    // 状态机:事件委托读 data-cursor,不给每个元素绑 listener
+    addEventListener('mouseover', e => {
+      const t = e.target.closest('[data-cursor]');
+      cursor.dataset.state = t ? t.dataset.cursor : '';
+      label.textContent = (t && t.dataset.cursorText) || '';
+    });
+    (function tick() {
+      if (reduced) { dx = rx = mx; dy = ry = my; }        // 减动:直接贴指针,不玩滞后
+      else {
+        dx += (mx - dx) * FX.DOT_EASE; dy += (my - dy) * FX.DOT_EASE;
+        rx += (mx - rx) * FX.RING_EASE; ry += (my - ry) * FX.RING_EASE;
+      }
+      dot.style.transform = `translate(${dx}px, ${dy}px)`;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      requestAnimationFrame(tick);
+    })();
+  }
+  document.querySelector('a[data-cursor]').addEventListener('click', e => e.preventDefault());
+</script>
+</body>
+</html>

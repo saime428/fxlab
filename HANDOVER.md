@@ -14,7 +14,7 @@
 ## 二、当前状态(2026-07-16)
 
 - 10 个 case(见 README 索引),其中 Igloo、Active Theory、Lando、Shopify、Hashgraph、Robin 做过运行时实测(结论在各自 analysis.md 的"运行时实测"一节)
-- 26 个 pattern,全部零依赖、过了 node --check 和链接检查(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
+- 34 个 pattern,全部零依赖、过了 node --check 和链接检查;八分类全部开张(cursor/ 由 custom-cursor 补上,2026-07-22);motionpotion 6 个 ✅ 已全部提炼(验证脚本思路:抽 `<script>` 内容 node --check + md 相对链接/Pages 链接映射回本地存在性)
 - 已推 GitHub 并开通 Pages
 - 2026-07-16 口径调整:可复现性放宽为"保住核心机制的简化版即可",新增分类覆盖度排序项(见 docs/criteria.md)
 - 消费层已建:INDEX.md(AI 选型索引,含中文名列,新增/改 pattern 时**必须同步更新**,画廊自动跟上)+ TASTE.md(口味档案/甲方画像:用户未明说的决策以它为准;口味判词回写它,技术坑回写 pattern README)+ skills/web-fx-lab/SKILL.md(Claude Code skill,装在 ~/.claude/skills/web-fx-lab/,改了记得重新复制过去)
@@ -30,14 +30,12 @@
 1. ~~高门槛 ✅ 欠账~~ **全部清零**:shader-wipe ✅、particle-transition ✅、cel-shading 已降级为 Messenger case 的方法论笔记(复用性否决:前提是已有 3D 场景)
 2. ~~翻案候选~~ ✅ 全部完成:hover/drag-spring、scroll/scroll-snap-sections、hover/floating-stickers
 3. Messenger 还没做运行时深挖(方法见下)
-4. ~~cursor/ 分类是空的~~ ✅ **已开张**:[cursor/hide-and-follow](patterns/cursor/hide-and-follow/)(区域内隐藏光标 + 跟随标签,样本是 sakazuki 的 Journey 段)。同批还提了 [layout/blend-invert](patterns/layout/blend-invert/)(覆盖层自动反色,三站实测坐实)。**cursor 分类只有 1 个,还欠拖尾/磁性吸附这类**
-5. ~~Lenis 没进 tech-radar~~ ✅ [docs/tech-radar.md](docs/tech-radar.md) 加了专节:逐条列了本库 7 个滚动相关 pattern 在 Lenis 项目里的接法,其中 **scroll-snap-sections 是硬冲突**(二选一),marquee / parallax-cards / section-narrative fixed 变体要并进 Lenis 的循环
-6. ~~扫描的"声明 ≠ 使用"盲区~~ ✅ 已修:脚本改成查选择器类名是否出现在 HTML `class` 属性里,输出"声明/疑似在用"两个数(`cursor:none` 30→10,`mix-blend` 33→24)。**残留偏差:JS 运行时加的类会被低估**(sakazuki 就是),要准数仍需开浏览器查计算样式
-7. cursor/ 只有 1 个 pattern,只覆盖了四条路子里的一条(藏光标+跟随,67 站)。**样本已经有了,直接开站就能做**:
-   - 「只加跟随元素不藏原生光标」35 站 —— Lemaire `.silhouette-cursor`、Salo Creative `.Cursor__name` `.HomeHero__ambientCursor`、Juan Mora `.cursor-jm-icon` `.text-jm-cursor`、Blit Studio `#cursor`
-   - 「`cursor:url()` 换图」16 站 —— Object & Archive(内联 data-URI)、Grain & Mortar(外链 SVG)。成本最低的一条,一行 CSS
-   - 拖尾、磁性吸附仍无样本,别凭空造(见 [docs/criteria.md](docs/criteria.md))
-6. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
+4. ~~cursor/ 分类空缺~~ ✅ **已开张,而且是两个会话并行补的**(2026-07-26 合并):一路是 cuberto/dennis-snellenberg 两 case → `custom-cursor`/`magnetic-button`;另一路是 773 站扫描 → `image-cursor`/`follower-ring`/`blend-dot`/`magnetic-pull`/`cursor-trail`/`hide-and-follow`/`spotlight-mask`/`image-follow`。**合并后有三组语义重合,已在 [patterns/cursor/README.md](patterns/cursor/README.md) 顶部标注**,待办:整理成同一 pattern 的多个变体
+5. 遗留 ✅:弧形章节边缘(dennis,rounded-div 随滚动绷平)
+6. ~~Lenis 没进 tech-radar~~ ✅ [docs/tech-radar.md](docs/tech-radar.md) 加了专节:逐条列了本库 7 个滚动相关 pattern 在 Lenis 项目里的接法,其中 **scroll-snap-sections 是硬冲突**(二选一),marquee / parallax-cards / section-narrative fixed 变体要并进 Lenis 的循环
+7. ~~扫描的"声明 ≠ 使用"盲区~~ ✅ 已修:脚本改成查选择器类名是否出现在 HTML `class` 属性里,输出"声明/疑似在用"两个数(`cursor:none` 30→10,`mix-blend` 33→24)。**残留偏差:JS 运行时加的类会被低估**,要准数仍需开浏览器查计算样式
+8. **B 档 30 个主库效果只做完 10 个**(A 档全部)。剩下按 [docs/criteria.md](docs/criteria.md) 新口径(冲击力第一)排:毛玻璃(299 站)/ 焦点虚化(295)/ 边缘渐隐(158)/ 可变字重变形(233)/ 斜切分区(88)/ `:has()` 联动(236)/ oklch 单色生成主题(179)…完整清单见会话记录
+9. ~~cases/_example 占位可删;根目录 testfile 是空文件可删~~ ✅ 已删
 
 ## 三、工作流(新网站进来时)
 
@@ -46,6 +44,7 @@
    - 全局变量试探:`window.THREE / gsap / Hydra / anime`
    - `performance.getEntriesByType('resource')` 看资源清单(chunk 名、纹理格式、体积)
    - fetch 主 bundle 后正则数特征:`WebGLRenderer`、`void main(` 计数、`Lenis` 等
+   - **样式表全量普查(必做,别只做上面三条)**:枚举全部 `@keyframes`(名字+动的属性)、`CSSPropertyRule`(@property 注册)、`:hover` 规则数——手写站的动效大头是**交互触发**的,静止时"谁在动"的 census 和类名 grep 都探不到(教训:MotionPotion 28 个 keyframes 静止时只有 4 个元素在动,第一轮误判为"没料",2026-07-22)
 3. 搜 Awwwards/FWA/Codrops 拿制作方、官方 case study、开源仓库地址
 4. 按 `docs/templates/case-analysis.md` 写入 `cases/`,效果清单逐条按 `docs/criteria.md` 四条标准标 ✅/☐
 5. ✅ 项按 `docs/templates/pattern.md` 做成 pattern(README + demo)
