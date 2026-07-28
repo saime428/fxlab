@@ -3,317 +3,994 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>样板间 — fxlab 作品集套餐</title>
+<meta name="description" content="fxlab 样板间 — 多 pattern 拼装的炫酷 landing 实装参考">
+<title>fxlab · SHOWROOM</title>
 <style>
-  /* ===== 动效 token(铁律7):全站唯一的时长阶梯 + 缓动族 ===== */
+  /* ===== 动效 token（铁律 7：全站唯一时长阶梯 + 缓动族）===== */
   :root {
-    --dur-s: .3s; --dur-m: .6s; --dur-l: 1s;
-    --ease-out: cubic-bezier(.22, 1, .36, 1);
+    --dur-s: .3s; --dur-m: .65s; --dur-l: 1.05s;
+    --ease: cubic-bezier(.22, 1, .36, 1);
     --ease-inout: cubic-bezier(.65, 0, .35, 1);
-    --bg: #0e0e13; --fg: #ecebf2; --muted: #77778a; --accent: #c5f542; --line: #26262e;
+    --bg: #07070b; --fg: #f2f1f7; --muted: #7a7a8c;
+    --accent: #c5f542; --violet: #8b7cf6; --cyan: #47d8ff;
+    --line: #23232d; --panel: #111118;
   }
   * { margin: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: -apple-system, "PingFang SC", sans-serif; background: var(--bg); color: var(--fg); }
-  body.locked { overflow: hidden; }
-  section { padding: 18vh 6vw; max-width: 1100px; margin: 0 auto; }
-  .kicker { font-family: ui-monospace, monospace; color: var(--accent); letter-spacing: .2em; margin-bottom: 1.2rem; }
-  .muted { color: var(--muted); }
+  body {
+    font-family: "Segoe UI", -apple-system, "PingFang SC", "Noto Sans SC", sans-serif;
+    background: var(--bg); color: var(--fg); overflow-x: hidden;
+  }
+  body.locked { overflow: hidden; height: 100vh; }
+  body.has-trail, body.has-trail a, body.has-trail button { cursor: none; }
+  @media (pointer: coarse) {
+    body.has-trail, body.has-trail a, body.has-trail button { cursor: auto; }
+  }
 
-  /* ===== ① entry-preloader:幕布 + 进度 + Enter 门 ===== */
-  .curtain { position: fixed; inset: 0; background: #08080b; display: grid; place-content: center; text-align: center; z-index: 30; transition: clip-path var(--dur-l) var(--ease-inout); clip-path: inset(0); }
-  .curtain.open { clip-path: inset(0 0 100% 0); }
-  .pct { font-size: clamp(4rem, 16vw, 10rem); font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; line-height: 1; }
-  .bar { width: min(50vw, 320px); height: 2px; background: var(--line); margin: 2rem auto 0; }
-  .bar i { display: block; height: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
-  .enter { margin-top: 2.5rem; opacity: 0; pointer-events: none; transition: opacity var(--dur-m); background: none; border: 1px solid var(--accent); color: var(--accent); padding: .8em 2.6em; border-radius: 99px; font: inherit; letter-spacing: .25em; cursor: pointer; }
-  .enter.ready { opacity: 1; pointer-events: auto; }
-  .enter:hover, .enter:focus-visible { background: var(--accent); color: #08080b; outline: none; }
+  /* grain */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 50; pointer-events: none;
+    opacity: .045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+  }
 
-  /* ===== 顶栏 + ② menu-stagger-reveal ===== */
-  header { position: fixed; top: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; mix-blend-mode: difference; }
-  .logo { font-family: ui-monospace, monospace; letter-spacing: .1em; color: var(--fg); text-decoration: none; }
-  .burger { background: none; border: 1px solid var(--muted); color: var(--fg); padding: .5em 1.4em; border-radius: 2em; font: inherit; cursor: pointer; }
-  .burger:hover, .burger:focus-visible { border-color: var(--accent); outline: none; }
-  .menu { position: fixed; inset: 0; z-index: 20; background: var(--accent); color: #14170a; display: grid; place-content: center; gap: .3em; clip-path: inset(0 0 100% 0); transition: clip-path var(--dur-m) var(--ease-out); }
+  .mono { font-family: ui-monospace, "SF Mono", Consolas, monospace; }
+  .kicker {
+    font-family: ui-monospace, monospace; color: var(--accent);
+    letter-spacing: .22em; font-size: .78rem; margin-bottom: 1.1rem;
+  }
+  .muted { color: var(--muted); line-height: 1.7; }
+  a { color: inherit; }
+
+  /* ===== ① entry-preloader ===== */
+  .curtain {
+    position: fixed; inset: 0; z-index: 100; background: #040406;
+    display: grid; place-content: center; text-align: center;
+    transition: clip-path var(--dur-l) var(--ease-inout);
+    clip-path: inset(0);
+  }
+  .curtain.open { clip-path: inset(0 0 100% 0); pointer-events: none; }
+  .curtain .brand {
+    font-family: ui-monospace, monospace; letter-spacing: .35em;
+    color: var(--muted); font-size: .75rem; margin-bottom: 1.5rem;
+  }
+  .pct {
+    font-size: clamp(5rem, 18vw, 12rem); font-weight: 800;
+    letter-spacing: -.06em; line-height: .9;
+    background: linear-gradient(180deg, #fff 20%, var(--accent));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .bar { width: min(52vw, 340px); height: 2px; background: #1c1c24; margin: 2rem auto 0; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--violet), var(--accent)); transform-origin: left; transform: scaleX(0); }
+  .enter {
+    margin-top: 2.6rem; opacity: 0; pointer-events: none;
+    transition: opacity var(--dur-m), transform var(--dur-m) var(--ease), background var(--dur-s), color var(--dur-s);
+    background: transparent; border: 1px solid var(--accent); color: var(--accent);
+    padding: .95em 3em; border-radius: 999px; font: inherit; font-weight: 600;
+    letter-spacing: .28em; cursor: pointer; transform: translateY(12px);
+  }
+  .enter.ready { opacity: 1; pointer-events: auto; transform: none; }
+  .enter:hover, .enter:focus-visible { background: var(--accent); color: #0a0a0c; outline: none; }
+
+  /* ===== header + ② menu ===== */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 22px; mix-blend-mode: difference; color: #fff;
+  }
+  .logo {
+    font-family: ui-monospace, monospace; letter-spacing: .12em;
+    text-decoration: none; font-weight: 700; font-size: .95rem;
+  }
+  .logo em { font-style: normal; color: var(--accent); mix-blend-mode: normal; }
+  .burger {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.35);
+    color: #fff; padding: .55em 1.35em; border-radius: 999px; font: inherit; cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+  .burger:hover, .burger:focus-visible { border-color: #fff; outline: none; }
+  .menu {
+    position: fixed; inset: 0; z-index: 45; background: var(--accent); color: #10140a;
+    display: grid; place-content: center; gap: .15em;
+    clip-path: inset(0 0 100% 0); transition: clip-path var(--dur-m) var(--ease);
+  }
   .menu.open { clip-path: inset(0); }
-  .menu a { display: block; font-size: clamp(2.2rem, 8vw, 4.2rem); font-weight: 800; color: inherit; text-decoration: none; opacity: 0; transform: translateY(40px); }
-  .menu.open a { opacity: 1; transform: none; transition: opacity var(--dur-m), transform var(--dur-m) var(--ease-out); }
-  .menu a:hover, .menu a:focus-visible { text-decoration: underline; text-underline-offset: .15em; outline: none; }
+  .menu a {
+    display: block; font-size: clamp(2.4rem, 9vw, 5rem); font-weight: 900;
+    text-decoration: none; letter-spacing: -.02em;
+    opacity: 0; transform: translateY(48px);
+  }
+  .menu.open a {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-m), transform var(--dur-m) var(--ease);
+  }
+  .menu a:hover, .menu a:focus-visible { text-decoration: underline; text-underline-offset: .12em; outline: none; }
+  .menu .sub { margin-top: 1.8rem; font-size: .85rem; letter-spacing: .2em; opacity: .55; font-family: ui-monospace, monospace; }
 
-  /* ===== ③ split-text-reveal:行遮罩,.show 触发 ===== */
-  .lines { font-size: clamp(2.4rem, 7.5vw, 5.2rem); font-weight: 800; line-height: 1.18; letter-spacing: -.01em; }
+  /* ===== cursor trail ===== */
+  .trail i {
+    position: fixed; top: 0; left: 0; z-index: 60; width: 12px; height: 12px;
+    margin: -6px 0 0 -6px; border-radius: 50%; background: #fff;
+    pointer-events: none; opacity: 0; mix-blend-mode: difference;
+    transition: opacity .35s var(--ease);
+  }
+  .trail.on i { opacity: 1; }
+  @media (pointer: coarse), (prefers-reduced-motion: reduce) {
+    .trail { display: none !important; }
+  }
+
+  /* ===== hero ===== */
+  .hero {
+    position: relative; min-height: 100vh; min-height: 100dvh;
+    display: grid; place-content: center; padding: 12vh 6vw 10vh;
+    overflow: hidden;
+  }
+  #bgfx {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block; z-index: 0; pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 1100px; width: 100%; }
+  .lines {
+    font-size: clamp(2.6rem, 8.2vw, 6.4rem); font-weight: 900;
+    line-height: 1.05; letter-spacing: -.035em;
+  }
   .line { display: block; overflow: hidden; }
-  .line > span { display: block; transform: translateY(115%) rotate(2deg); }
-  .show .line > span { transform: none; transition: transform calc(var(--dur-l) * .9) var(--ease-out); }
-  .hero { min-height: 100vh; display: grid; place-content: center; }
-  .hero .muted { margin-top: 1.6rem; max-width: 34em; }
-  .hero .scrollhint { margin-top: 4rem; font-family: ui-monospace, monospace; letter-spacing: .2em; color: var(--muted); }
+  .line > span {
+    display: block; transform: translateY(118%) rotate(3deg);
+    will-change: transform;
+  }
+  .show .line > span {
+    transform: none;
+    transition: transform calc(var(--dur-l) * .95) var(--ease);
+  }
+  .hero .lede {
+    margin-top: 1.8rem; max-width: 36em; font-size: clamp(1rem, 1.6vw, 1.15rem);
+    opacity: 0; transform: translateY(18px);
+  }
+  .show .lede {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
+    transition-delay: .35s;
+  }
+  .hero-cta {
+    display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+    margin-top: 2.6rem; opacity: 0; transform: translateY(16px);
+  }
+  .show .hero-cta {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
+    transition-delay: .5s;
+  }
+  .field { padding: 28px; display: inline-block; }
+  .mag {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    min-width: 148px; height: 56px; padding: 0 1.6em; border-radius: 999px;
+    border: 0; font: inherit; font-weight: 700; cursor: pointer; text-decoration: none;
+    background: var(--accent); color: #10140a;
+    translate: var(--x, 0px) var(--y, 0px);
+    will-change: transform;
+  }
+  .mag > span { display: inline-block; translate: var(--tx, 0px) var(--ty, 0px); }
+  .mag.ghost {
+    background: transparent; color: var(--fg);
+    border: 1px solid rgba(255,255,255,.28);
+  }
+  .mag:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .scrollhint {
+    position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%);
+    z-index: 1; letter-spacing: .28em; font-size: .72rem; color: var(--muted);
+    opacity: 0; animation: bob 2.2s var(--ease) infinite;
+  }
+  .show ~ .scrollhint, .hero.show .scrollhint { opacity: 1; transition: opacity 1s .9s; }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
 
-  /* ===== ④ scroll-marquee(铁律5:一页一条) ===== */
-  .marquee { overflow: hidden; white-space: nowrap; padding: 1.4rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  /* ===== marquee ===== */
+  .marquee {
+    overflow: hidden; white-space: nowrap;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    background: #0a0a10; padding: 1.1rem 0;
+  }
   .track { display: inline-block; will-change: transform; }
-  .track b { font-size: clamp(2rem, 6vw, 4rem); font-weight: 800; letter-spacing: .04em; padding-right: 1em; color: var(--fg); }
-  .track b:nth-child(even) { -webkit-text-stroke: 1.5px var(--fg); color: transparent; }
+  .track b {
+    font-size: clamp(2.2rem, 6.5vw, 4.6rem); font-weight: 900;
+    letter-spacing: .02em; padding-right: .55em;
+  }
+  .track b:nth-child(even) {
+    -webkit-text-stroke: 1.5px rgba(242,241,247,.75); color: transparent;
+  }
+  .track b.accent { color: var(--accent); -webkit-text-stroke: 0; }
 
-  /* ===== ⑤ image-displacement:作品画布 ===== */
-  .work { display: grid; gap: 2rem; }
-  canvas { width: 100%; max-width: 720px; aspect-ratio: 16/10; border-radius: 14px; cursor: pointer; }
-  canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-  footer { padding: 12vh 6vw; text-align: center; border-top: 1px solid var(--line); }
-  footer a { color: var(--accent); }
+  /* ===== stats ===== */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    background: var(--bg); padding: 4.5rem 1.5rem; text-align: center;
+  }
+  .stat .n {
+    font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 900;
+    letter-spacing: -.04em; font-variant-numeric: tabular-nums;
+    color: var(--fg);
+  }
+  .stat .n em { font-style: normal; color: var(--accent); font-size: .55em; vertical-align: super; }
+  .stat .l { margin-top: .5rem; color: var(--muted); font-size: .88rem; letter-spacing: .08em; }
+
+  /* ===== sections ===== */
+  .section { padding: 14vh 6vw; max-width: 1200px; margin: 0 auto; }
+  .section.wide { max-width: none; padding-left: 0; padding-right: 0; }
+  .section h2.lines { font-size: clamp(2rem, 5.5vw, 3.8rem); margin-bottom: 1.2rem; }
+
+  /* sticky horizontal gallery */
+  .hpin { height: 280vh; position: relative; }
+  .hpin-sticky {
+    position: sticky; top: 0; height: 100vh; height: 100dvh;
+    overflow: hidden; display: flex; flex-direction: column; justify-content: center;
+    background: radial-gradient(ellipse at 20% 30%, rgba(139,124,246,.14), transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(197,245,66,.08), transparent 45%),
+                var(--bg);
+  }
+  .hpin-head { padding: 0 6vw 2rem; max-width: 1200px; }
+  .hrail {
+    display: flex; gap: 1.4rem; padding: 0 6vw 2rem;
+    will-change: transform; width: max-content;
+  }
+  .hcard {
+    width: min(72vw, 420px); aspect-ratio: 4/5; border-radius: 22px;
+    position: relative; overflow: hidden; background: var(--panel);
+    border: 1px solid var(--line); flex: 0 0 auto;
+    transform: translateY(24px); opacity: 0;
+  }
+  .show-rail .hcard {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
+  }
+  .hcard canvas {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block; cursor: pointer;
+  }
+  .hcard .meta {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 1.4rem 1.3rem 1.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,.78));
+  }
+  .hcard .meta b { display: block; font-size: 1.25rem; margin-bottom: .25rem; }
+  .hcard .meta span { color: rgba(255,255,255,.65); font-size: .85rem; letter-spacing: .06em; }
+  .hcard:hover { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+
+  /* feature bento */
+  .bento {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  @media (max-width: 860px) {
+    .bento { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+  }
+  .tile {
+    border: 1px solid var(--line); border-radius: 20px; padding: 1.8rem;
+    background: linear-gradient(160deg, rgba(255,255,255,.03), transparent 50%), var(--panel);
+    min-height: 200px; position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(28px);
+  }
+  .show-bento .tile {
+    opacity: 1; transform: none;
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease), border-color var(--dur-s);
+  }
+  .tile:hover { border-color: color-mix(in srgb, var(--violet) 55%, var(--line)); }
+  .tile.big { grid-row: span 2; min-height: 420px; }
+  .tile .tag {
+    font-family: ui-monospace, monospace; font-size: .72rem; letter-spacing: .16em;
+    color: var(--violet); margin-bottom: 1rem;
+  }
+  .tile h3 { font-size: clamp(1.4rem, 2.5vw, 1.85rem); letter-spacing: -.02em; margin-bottom: .7rem; }
+  .tile p { color: var(--muted); max-width: 28em; }
+  .tile .orb {
+    position: absolute; right: -20%; bottom: -30%; width: 70%; aspect-ratio: 1;
+    border-radius: 50%; filter: blur(8px); opacity: .55; pointer-events: none;
+    background: radial-gradient(circle, var(--violet), transparent 65%);
+  }
+  .tile.big .orb { background: radial-gradient(circle, var(--accent), transparent 65%); opacity: .35; }
+
+  /* theme shift block */
+  .theme {
+    margin-top: 8vh; padding: 12vh 6vw;
+    background: #0c0a14;
+    transition: background var(--dur-l) var(--ease), color var(--dur-l) var(--ease);
+  }
+  .theme.on {
+    background: var(--accent); color: #10140a;
+  }
+  .theme.on .kicker { color: #3a480f; }
+  .theme.on .muted { color: rgba(16,20,10,.62); }
+  .theme .inner { max-width: 1100px; margin: 0 auto; display: grid; gap: 2rem; grid-template-columns: 1.2fr .8fr; align-items: end; }
+  @media (max-width: 800px) { .theme .inner { grid-template-columns: 1fr; } }
+  .theme h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; letter-spacing: -.03em; line-height: 1.08; }
+
+  /* final CTA */
+  .finale {
+    text-align: center; padding: 18vh 6vw 10vh;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(139,124,246,.18), transparent 50%),
+      var(--bg);
+  }
+  .finale h2 {
+    font-size: clamp(2.4rem, 6vw, 4.4rem); font-weight: 900;
+    letter-spacing: -.035em; line-height: 1.08; margin-bottom: 1rem;
+  }
+  .finale .actions { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.2rem; }
+
+  /* used patterns */
+  .used {
+    max-width: 1100px; margin: 0 auto; padding: 0 6vw 12vh;
+  }
+  .used h3 {
+    font-family: ui-monospace, monospace; letter-spacing: .18em;
+    color: var(--muted); font-size: .78rem; font-weight: 500; margin-bottom: 1.2rem;
+  }
+  .used-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .7rem;
+  }
+  .used-grid a {
+    display: block; padding: .9rem 1rem; border-radius: 12px;
+    border: 1px solid var(--line); background: var(--panel);
+    text-decoration: none; font-size: .92rem;
+    transition: border-color var(--dur-s), transform var(--dur-s) var(--ease);
+  }
+  .used-grid a:hover {
+    border-color: var(--violet); transform: translateY(-2px);
+  }
+  .used-grid a small { display: block; color: var(--muted); margin-top: .25rem; font-size: .78rem; }
+  .used .back { margin-top: 1.6rem; color: var(--muted); }
+  .used .back a { color: var(--accent); }
+
+  footer.site {
+    border-top: 1px solid var(--line); padding: 2rem 6vw 3rem;
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+    color: var(--muted); font-size: .9rem;
+  }
+  footer.site a { color: var(--accent); text-decoration: none; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .curtain { transition: opacity var(--dur-s); }
-    .curtain.open { opacity: 0; clip-path: none; pointer-events: none; }
-    .menu, .menu.open a { transition: none; }
-    .menu a { transition-delay: 0ms !important; }
-    .line > span { transform: none !important; transition: none !important; }
+    .curtain.open { opacity: 0; clip-path: none; }
+    .menu, .menu.open a, .line > span, .tile, .hcard, .lede, .hero-cta { transition: none !important; }
+    .line > span { transform: none !important; }
+    .scrollhint { animation: none; }
     .marquee { overflow-x: auto; }
   }
 </style>
 </head>
 <body class="locked">
 
-  <!-- ① 加载序章 -->
-  <div class="curtain" id="curtain">
+  <!-- ① preloader -->
+  <div class="curtain" id="curtain" role="dialog" aria-label="加载">
     <div>
+      <div class="brand">FXLAB · SHOWROOM</div>
       <div class="pct" id="pct">0</div>
       <div class="bar"><i id="barfill"></i></div>
-      <button class="enter" id="enter">ENTER</button>
+      <button class="enter" id="enter" type="button">ENTER</button>
     </div>
   </div>
 
-  <header>
-    <a class="logo" href="https://github.com/saime428/fxlab">WEB-FX-LAB / 样板间</a>
-    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Menu</button>
+  <header class="topbar">
+    <a class="logo" href="https://github.com/saime428/fxlab">fx<em>lab</em> / showroom</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
   </header>
 
-  <!-- ② 全屏菜单 -->
+  <!-- ② menu -->
   <nav class="menu" id="menu" inert>
     <a href="#hero">首页</a>
-    <a href="#works">作品</a>
-    <a href="#about">关于</a>
-    <a href="https://saime428.github.io/fxlab/">效果画廊</a>
+    <a href="#works">作品廊</a>
+    <a href="#craft">手法</a>
+    <a href="#taste">口味</a>
+    <a href="../">效果画廊</a>
+    <p class="sub">ESC TO CLOSE</p>
   </nav>
 
-  <!-- ③ hero:split-text,Enter 之后才入场 -->
+  <!-- cursor trail -->
+  <div class="trail" id="trail" aria-hidden="true"></div>
+
+  <!-- ③ hero + ambient webgl -->
   <section class="hero" id="hero">
-    <p class="kicker">// SHOWROOM</p>
-    <h1 class="lines" id="heroLines" aria-label="效果不是装饰,是语言。">
-      <span class="line"><span>效果不是装饰,</span></span>
-      <span class="line"><span>是语言。</span></span>
-    </h1>
-    <p class="muted">这一页由 fxlab 的 5 个 pattern 拼装:加载序章、全屏菜单、拆行入场、滚动字幕、displacement 图片过渡。零依赖,单文件,所有节奏出自同一套动效 token。</p>
-    <p class="scrollhint">SCROLL ↓</p>
+    <canvas id="bgfx" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="kicker">// SHOWROOM · ZERO DEPS</p>
+      <h1 class="lines" id="heroLines" aria-label="别做又一个会动的网页。做让人停住的那一下。">
+        <span class="line"><span>别做又一个</span></span>
+        <span class="line"><span>会动的网页。</span></span>
+        <span class="line"><span style="color:var(--accent)">做让人停住</span></span>
+        <span class="line"><span style="color:var(--accent)">的那一下。</span></span>
+      </h1>
+      <p class="muted lede">这一页是 fxlab 的验收现场：序章、全屏菜单、拆行入场、光标拖尾、滚动字幕、横向画廊、液态图片过渡、磁性按钮、主题突变——同一套 token，像一个人做的。</p>
+      <div class="hero-cta">
+        <div class="field">
+          <a class="mag" href="#works"><span>进入作品廊 →</span></a>
+        </div>
+        <div class="field">
+          <a class="mag ghost" href="https://github.com/saime428/fxlab"><span>GitHub</span></a>
+        </div>
+      </div>
+    </div>
+    <p class="scrollhint mono">SCROLL ↓</p>
   </section>
 
-  <!-- ④ 滚动字幕 -->
+  <!-- ④ marquee -->
   <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
 
-  <!-- ⑤ 作品:displacement -->
-  <section id="works">
-    <p class="kicker">// 01 WORKS</p>
-    <h2 class="lines reveal" aria-label="悬停,让像素流动。"><span class="line"><span>悬停,让像素流动。</span></span></h2>
-    <div class="work">
-      <p class="muted">悬停/点击/Enter 切换两张"作品封面"——程序化噪声决定每个像素何时被推过去。</p>
-      <canvas id="gl" tabindex="0" role="button" aria-label="切换作品图"></canvas>
+  <!-- stats count-up -->
+  <div class="stats" id="stats">
+    <div class="stat"><div class="n" data-count="40" data-suffix="+">0</div><div class="l mono">PATTERNS</div></div>
+    <div class="stat"><div class="n" data-count="8" data-suffix="">0</div><div class="l mono">FEATURED</div></div>
+    <div class="stat"><div class="n" data-count="0" data-suffix="" data-label="deps">0</div><div class="l mono">DEPENDENCIES</div></div>
+  </div>
+
+  <!-- ⑤ horizontal gallery + displacement cards -->
+  <div class="hpin" id="works">
+    <div class="hpin-sticky">
+      <div class="hpin-head">
+        <p class="kicker">// 01 WORKS</p>
+        <h2 class="lines reveal" aria-label="悬停，像素开始流动。">
+          <span class="line"><span>悬停，像素开始流动。</span></span>
+        </h2>
+        <p class="muted" style="max-width:36em;margin-top:.8rem">横向画廊 = sticky + 纵向滚动映射。每张卡是独立的 displacement 画布——点一下，封面互相推过去。</p>
+      </div>
+      <div class="hrail" id="hrail">
+        <article class="hcard" data-a="0" data-b="1"><canvas></canvas><div class="meta"><b>Shader Wipe</b><span>TRANSITIONS · ★★★</span></div></article>
+        <article class="hcard" data-a="1" data-b="2"><canvas></canvas><div class="meta"><b>Particle Field</b><span>GPU · ★★★</span></div></article>
+        <article class="hcard" data-a="2" data-b="3"><canvas></canvas><div class="meta"><b>Split Type</b><span>TEXT · ★</span></div></article>
+        <article class="hcard" data-a="3" data-b="0"><canvas></canvas><div class="meta"><b>Spring Drag</b><span>HOVER · ★★</span></div></article>
+        <article class="hcard" data-a="0" data-b="2"><canvas></canvas><div class="meta"><b>View Morph</b><span>NATIVE · ★★</span></div></article>
+      </div>
+    </div>
+  </div>
+
+  <!-- craft bento -->
+  <section class="section" id="craft">
+    <p class="kicker">// 02 CRAFT</p>
+    <h2 class="lines reveal" aria-label="炫是手段，编排才是品味。">
+      <span class="line"><span>炫是手段，</span></span>
+      <span class="line"><span>编排才是品味。</span></span>
+    </h2>
+    <div class="bento" id="bento">
+      <div class="tile big">
+        <div class="orb"></div>
+        <div class="tag">// MEMORY POINT</div>
+        <h3>一页只留一个强注意效果</h3>
+        <p>displacement、粒子、超长 marquee 这种「会抢走视线」的东西，全站挑 1–2 处记忆点。其它区块用同频入场托住节奏，而不是处处炸场。</p>
+      </div>
+      <div class="tile">
+        <div class="tag">// TOKEN</div>
+        <h3>旋钮收口</h3>
+        <p>--dur-s / m / l + 一个缓动族。改「整体快一点」只动一行。</p>
+      </div>
+      <div class="tile">
+        <div class="tag">// AGENT</div>
+        <h3>INDEX + TASTE</h3>
+        <p>给人抄 demo，给 AI 选型。Claude skill 装上就能说「要有质感」。</p>
+      </div>
+      <div class="tile">
+        <div class="tag">// A11Y</div>
+        <h3>reduced-motion</h3>
+        <p>全页一次判断。拖尾、横向 pin、噪声过渡全部有干净降级。</p>
+      </div>
     </div>
   </section>
 
-  <!-- 关于 -->
-  <section id="about">
-    <p class="kicker">// 02 ABOUT</p>
-    <h2 class="lines reveal" aria-label="像一个人做的。"><span class="line"><span>像一个人做的。</span></span></h2>
-    <p class="muted" style="margin-top:1.4rem; max-width:38em">五个效果,一套时长阶梯(--dur-s/m/l)、一个缓动族、一处 reduced-motion 判断、一个 rAF 调度。调"全站快一点"只改一行 token——这就是铁律 7(旋钮收口)的样子。</p>
+  <!-- theme shift -->
+  <section class="theme" id="taste">
+    <div class="inner">
+      <div>
+        <p class="kicker">// 03 TASTE</p>
+        <h2 class="lines reveal" aria-label="利落大于互溶。像一个人做的。">
+          <span class="line"><span>利落大于互溶。</span></span>
+          <span class="line"><span>像一个人做的。</span></span>
+        </h2>
+        <p class="muted" style="margin-top:1.2rem;max-width:34em">滚到这里时，整段背景切到荧光绿——章节主题突变不是换皮肤滤镜，是用状态告诉你：叙事进了下一章。</p>
+      </div>
+      <div>
+        <p class="muted mono" style="font-size:.85rem;letter-spacing:.08em">THEME-SHIFT · ON SCROLL<br>ACCENT = #c5f542<br>EASE = .22 1 .36 1</p>
+      </div>
+    </div>
   </section>
 
-  <footer>
-    <p class="muted">样板间 = 库的验收现场 · <a href="https://github.com/saime428/fxlab">仓库</a> · <a href="https://saime428.github.io/fxlab/">全部 23 个效果</a></p>
+  <!-- finale -->
+  <section class="finale" id="finale">
+    <p class="kicker" style="justify-self:center">// OPEN SOURCE</p>
+    <h2 class="lines reveal" aria-label="把这一页拆走。">
+      <span class="line"><span>把这一页拆走。</span></span>
+    </h2>
+    <p class="muted" style="max-width:32em;margin:0 auto">每个效果都能在仓库里找到独立 demo 与原理 README。样板间只负责证明：拼在一起时，仍然干净。</p>
+    <div class="actions">
+      <div class="field"><a class="mag" href="../"><span>浏览全部 pattern</span></a></div>
+      <div class="field"><a class="mag ghost" href="https://github.com/saime428/fxlab"><span>Star on GitHub</span></a></div>
+    </div>
+  </section>
+
+  <div class="used" id="patterns">
+    <h3>// THIS PAGE USES</h3>
+    <div class="used-grid">
+      <a href="../patterns/loading/entry-preloader/demo.html">entry-preloader <small>加载序章</small></a>
+      <a href="../patterns/transitions/menu-stagger-reveal/demo.html">menu-stagger-reveal <small>全屏菜单</small></a>
+      <a href="../patterns/text/split-text-reveal/demo.html">split-text-reveal <small>拆行入场</small></a>
+      <a href="../patterns/3d-webgl/canvas-ambient-bg/demo.html">canvas-ambient-bg <small>氛围背景</small></a>
+      <a href="../patterns/cursor/cursor-trail/demo.html">cursor-trail <small>光标拖尾</small></a>
+      <a href="../patterns/text/scroll-marquee/demo.html">scroll-marquee <small>滚动字幕</small></a>
+      <a href="../patterns/text/count-up/demo.html">count-up <small>数字滚动</small></a>
+      <a href="../patterns/scroll/horizontal-gallery/demo.html">horizontal-gallery <small>横向画廊</small></a>
+      <a href="../patterns/transitions/image-displacement/demo.html">image-displacement <small>液态图过渡</small></a>
+      <a href="../patterns/hover/magnetic-button/demo.html">magnetic-button <small>磁性按钮</small></a>
+      <a href="../patterns/transitions/theme-shift/demo.html">theme-shift <small>章节主题突变</small></a>
+      <a href="../patterns/layout/grain-overlay/demo.html">grain-overlay <small>噪点层</small></a>
+    </div>
+    <p class="back"><a href="../">← 返回 pattern 实验室</a> · <a href="https://github.com/saime428/fxlab">GitHub</a></p>
+  </div>
+
+  <footer class="site">
+    <span class="mono">fxlab showroom · MIT</span>
+    <span><a href="https://saime428.github.io/fxlab/">saime428.github.io/fxlab</a></span>
   </footer>
 
 <script>
-  // ===== 旋钮收口(铁律7):本页全部可调参数,只住在这里 =====
+(() => {
+  // ===== KNOB：本页全部可调强度，只住这里 =====
   const KNOB = {
-    LOAD_ASSETS: 6,       // 模拟资源数(真实项目换成贴图/字体加载)
-    STAGGER_LINE: 110,    // ms/行,60~150:行入场错峰
-    STAGGER_MENU: 70,     // ms/项:菜单项错落
-    MARQUEE_BASE: .7,     // px/帧:字幕基础爬行速度
-    MARQUEE_GAIN: .22,    // 0~.3:滚动速度增益
-    DISP_INTENSITY: .5,   // .2~.5:位移强度
-    DISP_BAND: .25,       // .1~.4:液态边界,窄=利落,宽=互溶
-    DISP_LERP: .09        // 过渡进度的追赶系数
+    LOAD_ASSETS: 7,
+    STAGGER_LINE: 95,
+    STAGGER_MENU: 68,
+    STAGGER_TILE: 80,
+    MARQUEE_BASE: 0.85,
+    MARQUEE_GAIN: 0.2,
+    DISP_I: 0.48,
+    DISP_BAND: 0.22,
+    DISP_LERP: 0.1,
+    MAG_PULL: 0.38,
+    MAG_TEXT: 0.48,
+    MAG_K: 0.13,
+    MAG_DAMP: 0.82,
+    TRAIL_N: 14,
+    TRAIL_LERP: 0.28,
+    HRAIL_EASE: 0.12,
+    COUNT_MS: 1400,
   };
-  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;  // 全页仅此一次
-  const cssMs = n => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n)) * 1000;
 
-  // ===== ① entry-preloader:进度 lerp → 停一拍 → Enter =====
-  const pct = document.getElementById('pct'), barfill = document.getElementById('barfill'),
-        enter = document.getElementById('enter'), curtain = document.getElementById('curtain');
+  const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FINE = matchMedia('(pointer: fine)').matches;
+  const cssMs = n => parseFloat(getComputedStyle(document.documentElement).getPropertyValue(n)) * 1000 || 1000;
+
+  // ===== ① preloader =====
+  const pct = document.getElementById('pct');
+  const barfill = document.getElementById('barfill');
+  const enter = document.getElementById('enter');
+  const curtain = document.getElementById('curtain');
   let real = 0, shown = 0;
-  for (let i = 0; i < KNOB.LOAD_ASSETS; i++) setTimeout(() => real++, 200 + Math.random() * 1400);
+  for (let i = 0; i < KNOB.LOAD_ASSETS; i++) setTimeout(() => real++, 160 + Math.random() * 1200);
   (function load() {
-    shown += (real / KNOB.LOAD_ASSETS * 100 - shown) * .06;
-    if (REDUCED || shown > 99.5) shown = 100;
-    pct.textContent = Math.round(shown);
+    shown += (real / KNOB.LOAD_ASSETS * 100 - shown) * 0.07;
+    if (REDUCED || shown > 99.6) shown = 100;
+    pct.textContent = String(Math.round(shown));
     barfill.style.transform = `scaleX(${shown / 100})`;
-    if (shown === 100) setTimeout(() => enter.classList.add('ready'), 300);
+    if (shown === 100) setTimeout(() => enter.classList.add('ready'), 280);
     else requestAnimationFrame(load);
   })();
 
-  // ===== ③ split-text:行延迟按索引;hero 挂在 Enter 手势上(组合的 t=0) =====
-  document.querySelectorAll('.lines').forEach(h =>
-    h.querySelectorAll('.line > span').forEach((el, i) => el.style.transitionDelay = `${i * KNOB.STAGGER_LINE}ms`));
-  enter.addEventListener('click', () => {
-    curtain.classList.add('open');
-    document.body.classList.remove('locked');
-    document.getElementById('hero').classList.add('show');           // Enter = 全页动效的 t=0
-    setTimeout(() => curtain.remove(), cssMs('--dur-l'));
-    startLoop();
+  // ===== split text delays =====
+  document.querySelectorAll('.lines').forEach(h => {
+    h.querySelectorAll('.line > span').forEach((el, i) => {
+      el.style.transitionDelay = `${i * KNOB.STAGGER_LINE}ms`;
+    });
   });
-  // 滚动到场的标题:进视口才播
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.closest('section').classList.add('show'); io.unobserve(e.target); }
-  }), { threshold: .4 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // ===== ② menu-stagger-reveal:打开有 stagger,关闭 0 延迟;inert + 焦点管理 =====
-  const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  // ===== ② menu =====
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
   const links = [...menu.querySelectorAll('a')];
   function toggleMenu(open) {
-    links.forEach((a, i) => a.style.transitionDelay = open ? `${150 + i * KNOB.STAGGER_MENU}ms` : '0ms');
+    links.forEach((a, i) => {
+      a.style.transitionDelay = open ? `${140 + i * KNOB.STAGGER_MENU}ms` : '0ms';
+    });
     menu.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-expanded', String(open));
     burger.textContent = open ? 'Close' : 'Menu';
     open ? menu.removeAttribute('inert') : menu.setAttribute('inert', '');
     document.body.style.overflow = open ? 'hidden' : '';
-    (open ? links[0] : burger).focus();
+    (open ? links[0] : burger).focus({ preventScroll: true });
   }
   burger.addEventListener('click', () => toggleMenu(!menu.classList.contains('open')));
-  addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('open')) toggleMenu(false); });
-  links.forEach(a => a.addEventListener('click', () => a.hash && toggleMenu(false)));
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) toggleMenu(false);
+  });
+  links.forEach(a => a.addEventListener('click', () => { if (a.hash) toggleMenu(false); }));
 
-  // ===== ④ scroll-marquee:内容两份接龙取模 =====
+  // ===== cursor trail =====
+  const trail = document.getElementById('trail');
+  const dots = [];
+  if (FINE && !REDUCED) {
+    for (let i = 0; i < KNOB.TRAIL_N; i++) {
+      const d = document.createElement('i');
+      const s = 1 - i / KNOB.TRAIL_N;
+      d.style.width = d.style.height = `${6 + s * 10}px`;
+      d.style.margin = `${-(3 + s * 5)}px 0 0 ${-(3 + s * 5)}px`;
+      d.style.opacity = '0';
+      trail.appendChild(d);
+      dots.push({ el: d, x: innerWidth / 2, y: innerHeight / 2 });
+    }
+    document.body.classList.add('has-trail');
+    trail.classList.add('on');
+  }
+  let mx = innerWidth / 2, my = innerHeight / 2, pointerIn = false;
+  addEventListener('pointermove', e => {
+    mx = e.clientX; my = e.clientY; pointerIn = true;
+  }, { passive: true });
+  addEventListener('pointerleave', () => { pointerIn = false; });
+
+  // ===== hero ambient webgl (soft blobs + scroll pulse) =====
+  const bgfx = document.getElementById('bgfx');
+  let drawBg = () => {};
+  let scrollP = 0, scrollPt = 0;
+  {
+    const gl = bgfx.getContext('webgl', { alpha: false, antialias: false });
+    if (gl) {
+      const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+      const fs = `
+precision highp float;
+uniform vec2 uR; uniform float uT; uniform float uP;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
+void main(){
+  vec2 uv=gl_FragCoord.xy/uR;
+  vec2 p=(gl_FragCoord.xy*2.-uR)/min(uR.x,uR.y);
+  float n=noise(p*1.8+uT*.04)*.55+noise(p*4.2-uT*.03)*.25;
+  float pulse=mix(.35,.85,uP);
+  float r=length(p+vec2(sin(uT*.2)*.1,cos(uT*.17)*.08));
+  float m=smoothstep(pulse+n*.25, pulse*.2, r);
+  vec3 deep=vec3(.03,.03,.06);
+  vec3 a=vec3(.55,.48,.96);
+  vec3 b=vec3(.77,.96,.26);
+  vec3 c=vec3(.28,.85,1.);
+  vec3 col=deep;
+  col+=a*exp(-r*r*1.8)*(.45+n*.3);
+  col+=b*exp(-length(p-vec2(.55,-.2))*length(p-vec2(.55,-.2))*2.2)*.35;
+  col+=c*exp(-length(p+vec2(.5,.35))*length(p+vec2(.5,.35))*2.6)*.25;
+  col=mix(col, col*1.35+b*.08, m*uP);
+  col+=pow(max(0.,1.-abs(r-pulse)*8.),2.)*a*.15;
+  // vignette
+  col*=smoothstep(1.35,.2,length(uv-.5));
+  gl_FragColor=vec4(col,1.);
+}`;
+      const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
+      const prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog); gl.useProgram(prog);
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const uR = gl.getUniformLocation(prog, 'uR');
+      const uT = gl.getUniformLocation(prog, 'uT');
+      const uP = gl.getUniformLocation(prog, 'uP');
+      const resizeBg = () => {
+        const d = Math.min(devicePixelRatio || 1, 1.75);
+        bgfx.width = Math.floor(innerWidth * d);
+        bgfx.height = Math.floor(innerHeight * d);
+        gl.viewport(0, 0, bgfx.width, bgfx.height);
+      };
+      resizeBg();
+      addEventListener('resize', resizeBg);
+      drawBg = (t) => {
+        gl.uniform2f(uR, bgfx.width, bgfx.height);
+        gl.uniform1f(uT, t * 0.001);
+        gl.uniform1f(uP, scrollP);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      };
+      drawBg(0);
+    } else {
+      bgfx.style.background = 'radial-gradient(ellipse at 30% 20%, rgba(139,124,246,.35), transparent 50%), #07070b';
+    }
+  }
+
+  // ===== marquee content =====
   const track = document.getElementById('track');
-  track.innerHTML = ('<b>' + 'WEB FX LAB · SHOWROOM · '.repeat(3) + '</b>').repeat(2);
-  let half = 0, mx = 0, vel = 0, target = 0, lastY = scrollY;
-  const measure = () => half = track.scrollWidth / 2;
+  const words = ['FXLAB', 'SHOWROOM', 'ZERO DEPS', 'TASTE', 'MOTION', 'FEATURED', 'CLAUDE SKILL'];
+  track.innerHTML = (words.map((w, i) => `<b class="${i % 3 === 0 ? 'accent' : ''}">${w}</b>`).join('') +
+    words.map((w, i) => `<b class="${i % 3 === 0 ? 'accent' : ''}">${w}</b>`).join(''));
+  let half = 0, marX = 0, marVel = 0, marTarget = 0, lastY = scrollY;
+  const measure = () => { half = track.scrollWidth / 2; };
   measure(); addEventListener('resize', measure);
-  addEventListener('scroll', () => { target += scrollY - lastY; lastY = scrollY; });
 
-  // ===== ⑤ image-displacement:程序化噪声逐像素阈值(修正版机制) =====
-  function makeCover(bg1, bg2, fg, label) {
-    const c = document.createElement('canvas'); c.width = 640; c.height = 400;
+  // ===== displacement cards =====
+  const PAL = [
+    ['#1a2210', '#c5f542', '#8b7cf6', 'WIPE'],
+    ['#14101f', '#8b7cf6', '#47d8ff', 'FLOW'],
+    ['#101820', '#47d8ff', '#c5f542', 'TYPE'],
+    ['#1a1018', '#ff7c5c', '#8b7cf6', 'SPRING'],
+  ];
+  function makeCover(i) {
+    const [bg1, bg2, fg, label] = PAL[i % PAL.length];
+    const c = document.createElement('canvas'); c.width = 640; c.height = 800;
     const x = c.getContext('2d');
-    const g = x.createLinearGradient(0, 0, 640, 400); g.addColorStop(0, bg1); g.addColorStop(1, bg2);
-    x.fillStyle = g; x.fillRect(0, 0, 640, 400);
+    const g = x.createLinearGradient(0, 0, 640, 800);
+    g.addColorStop(0, bg1); g.addColorStop(1, bg2);
+    x.fillStyle = g; x.fillRect(0, 0, 640, 800);
     x.fillStyle = fg;
-    for (let i = 0; i < 5; i++) { x.beginPath(); x.arc(80 + i * 120, 200 + Math.sin(i * 2.1) * 90, 34, 0, 7); x.fill(); }
-    x.fillStyle = '#fff'; x.font = '800 56px sans-serif'; x.textAlign = 'center'; x.fillText(label, 320, 216);
+    for (let k = 0; k < 8; k++) {
+      x.beginPath();
+      x.arc(80 + (k % 4) * 150, 180 + Math.floor(k / 4) * 220 + Math.sin(k * 1.7) * 40, 48 + k * 3, 0, 7);
+      x.globalAlpha = 0.55; x.fill();
+    }
+    x.globalAlpha = 1;
+    x.fillStyle = '#fff'; x.font = '800 72px system-ui,sans-serif';
+    x.textAlign = 'center'; x.fillText(label, 320, 420);
+    x.font = '600 22px ui-monospace,monospace';
+    x.fillStyle = 'rgba(255,255,255,.55)';
+    x.fillText('FXLAB · ' + String(i + 1).padStart(2, '0'), 320, 470);
     return c;
   }
-  const cv = document.getElementById('gl');
-  cv.width = 640; cv.height = 400;
-  const gl = cv.getContext('webgl');
-  let drawDisp = () => {};
-  let p = 0, pTarget = 0, pActive = false;
-  if (gl) {
-    const VS = 'attribute vec2 aPos; varying vec2 vUv; void main(){ vUv = aPos*.5+.5; vUv.y = 1.-vUv.y; gl_Position = vec4(aPos,0.,1.); }';
-    const FS = `precision mediump float; varying vec2 vUv;
-      uniform sampler2D uTexA, uTexB; uniform float uP, uI, uBand;
-      float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-      float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.-2.*f);
-        return mix(mix(hash(i), hash(i+vec2(1.,0.)), f.x), mix(hash(i+vec2(0.,1.)), hash(i+vec2(1.,1.)), f.x), f.y); }
+  const covers = PAL.map((_, i) => makeCover(i));
+  const cards = [...document.querySelectorAll('.hcard')].map((card, idx) => {
+    const cv = card.querySelector('canvas');
+    const gl = cv.getContext('webgl', { antialias: false, preserveDrawingBuffer: true });
+    const state = { card, cv, gl, p: 0, pT: 0, active: false, draw: () => {} };
+    if (!gl) {
+      const ctx = cv.getContext('2d');
+      cv.width = 640; cv.height = 800;
+      state.draw = (v) => {
+        ctx.drawImage(covers[Number(card.dataset.a)], 0, 0);
+        if (v > 0.01) {
+          ctx.globalAlpha = v;
+          ctx.drawImage(covers[Number(card.dataset.b)], 0, 0);
+          ctx.globalAlpha = 1;
+        }
+      };
+      state.draw(0);
+      return state;
+    }
+    cv.width = 640; cv.height = 800;
+    const VS = 'attribute vec2 a; varying vec2 v; void main(){ v=a*.5+.5; v.y=1.-v.y; gl_Position=vec4(a,0.,1.); }';
+    const FS = `precision mediump float; varying vec2 v;
+      uniform sampler2D uA,uB; uniform float uP,uI,uBand;
+      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+        return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
       void main(){
-        float d = noise(vUv*4.)*.65 + noise(vUv*9.)*.35;
-        float m = smoothstep(0., uBand, uP * (1. + uBand) - d);
-        vec2 uvA = vUv + vec2(d * uI * uP, 0.);
-        vec2 uvB = vUv - vec2(d * uI * (1. - uP), 0.);
-        gl_FragColor = mix(texture2D(uTexA, uvA), texture2D(uTexB, uvB), m);
+        float d=noise(v*3.5)*.6+noise(v*8.)*.4;
+        float m=smoothstep(0.,uBand,uP*(1.+uBand)-d);
+        vec2 a=v+vec2(d*uI*uP, d*uI*uP*.15);
+        vec2 b=v-vec2(d*uI*(1.-uP),0.);
+        gl_FragColor=mix(texture2D(uA,a),texture2D(uB,b),m);
       }`;
-    const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o);
-      if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(o)); return o; };
+    const sh = (t, s) => { const o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; };
     const prog = gl.createProgram();
     gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
     gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
     gl.linkProgram(prog); gl.useProgram(prog);
     gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, 'aPos');
-    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const al = gl.getAttribLocation(prog, 'a');
+    gl.enableVertexAttribArray(al); gl.vertexAttribPointer(al, 2, gl.FLOAT, false, 0, 0);
     const tex = (unit, src) => {
       gl.activeTexture(gl.TEXTURE0 + unit);
       gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, src);
-      ['WRAP_S','WRAP_T'].forEach(w => gl.texParameteri(gl.TEXTURE_2D, gl['TEXTURE_'+w], gl.CLAMP_TO_EDGE));
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     };
-    tex(0, makeCover('#1c2410','#c5f542','#8b7cf6','WIPE'));
-    tex(1, makeCover('#14101f','#8b7cf6','#c5f542','FLOW'));
-    ['uTexA','uTexB'].forEach((n, i) => gl.uniform1i(gl.getUniformLocation(prog, n), i));
-    gl.uniform1f(gl.getUniformLocation(prog, 'uI'), KNOB.DISP_INTENSITY);
+    tex(0, covers[Number(card.dataset.a)]);
+    tex(1, covers[Number(card.dataset.b)]);
+    gl.uniform1i(gl.getUniformLocation(prog, 'uA'), 0);
+    gl.uniform1i(gl.getUniformLocation(prog, 'uB'), 1);
+    gl.uniform1f(gl.getUniformLocation(prog, 'uI'), KNOB.DISP_I);
     gl.uniform1f(gl.getUniformLocation(prog, 'uBand'), KNOB.DISP_BAND);
     const uP = gl.getUniformLocation(prog, 'uP');
-    drawDisp = v => { gl.uniform1f(uP, v); gl.drawArrays(gl.TRIANGLES, 0, 3); };
-    drawDisp(0);
-  }
-  const goDisp = t => {
-    pTarget = t;
-    if (REDUCED || !gl) { p = t; drawDisp(t); return; }   // 降级 = 普通切换
-    pActive = true;
-  };
-  cv.addEventListener('pointerenter', () => goDisp(1));
-  cv.addEventListener('pointerleave', () => goDisp(0));
-  cv.addEventListener('click', () => goDisp(pTarget ? 0 : 1));
-  cv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goDisp(pTarget ? 0 : 1); } });
+    state.draw = (v) => {
+      gl.viewport(0, 0, cv.width, cv.height);
+      gl.uniform1f(uP, v);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+    state.draw(0);
+    const go = t => {
+      state.pT = t;
+      if (REDUCED) { state.p = t; state.draw(t); return; }
+      state.active = true;
+    };
+    card.addEventListener('pointerenter', () => go(1));
+    card.addEventListener('pointerleave', () => go(0));
+    card.addEventListener('click', () => go(state.pT ? 0 : 1));
+    return state;
+  });
 
-  // ===== 共享 rAF 调度(铁律7):marquee + displacement 同一个循环 =====
-  let running = false, started = false;
-  function tick() {
-    vel += (target - vel) * .08; target *= .9;
-    mx = (mx + KNOB.MARQUEE_BASE + vel * KNOB.MARQUEE_GAIN) % half;
-    if (mx < 0) mx += half;
-    track.style.transform = `translate3d(${-mx}px,0,0)`;
-    if (pActive) {
-      p += (pTarget - p) * KNOB.DISP_LERP;
-      if (Math.abs(pTarget - p) < .001) { p = pTarget; pActive = false; }
-      drawDisp(p);
+  // ===== magnetic buttons =====
+  const mags = [];
+  if (FINE && !REDUCED) {
+    document.querySelectorAll('.field').forEach(field => {
+      const btn = field.querySelector('.mag');
+      if (!btn) return;
+      const m = { field, btn, x: 0, y: 0, tx: 0, ty: 0, vx: 0, vy: 0, mode: 'idle' };
+      mags.push(m);
+      field.addEventListener('mousemove', e => {
+        const r = field.getBoundingClientRect();
+        m.tx = (e.clientX - r.left - r.width / 2) * KNOB.MAG_PULL;
+        m.ty = (e.clientY - r.top - r.height / 2) * KNOB.MAG_PULL;
+        m.mode = 'pull';
+      });
+      field.addEventListener('mouseleave', () => { m.mode = 'spring'; });
+    });
+  }
+
+  // ===== count-up =====
+  let counted = false;
+  function runCount() {
+    if (counted) return;
+    counted = true;
+    document.querySelectorAll('.stat .n').forEach(el => {
+      const end = Number(el.dataset.count || 0);
+      const suffix = el.dataset.suffix || '';
+      if (REDUCED) { el.textContent = end + suffix; return; }
+      const t0 = performance.now();
+      (function step(now) {
+        const t = Math.min(1, (now - t0) / KNOB.COUNT_MS);
+        const e = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(end * e) + suffix;
+        if (t < 1) requestAnimationFrame(step);
+      })(t0);
+    });
+  }
+
+  // ===== horizontal rail =====
+  const hpin = document.getElementById('works');
+  const hrail = document.getElementById('hrail');
+  let railX = 0, railT = 0, railShown = false;
+
+  // ===== theme shift =====
+  const theme = document.getElementById('taste');
+
+  // ===== IO reveals =====
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const sec = e.target.closest('section, .hpin-sticky, .theme, .finale') || e.target;
+      sec.classList.add('show');
+      if (e.target.closest('#bento') || e.target.id === 'bento') {
+        document.getElementById('bento').classList.add('show-bento');
+        document.querySelectorAll('#bento .tile').forEach((tile, i) => {
+          tile.style.transitionDelay = `${i * KNOB.STAGGER_TILE}ms`;
+        });
+      }
+      if (e.target.closest('#stats') || e.target.id === 'stats') runCount();
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.reveal, #bento, #stats').forEach(el => io.observe(el));
+
+  const railIO = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting && !railShown) {
+        railShown = true;
+        hrail.classList.add('show-rail');
+        [...hrail.children].forEach((c, i) => { c.style.transitionDelay = `${i * 90}ms`; });
+      }
+    });
+  }, { threshold: 0.2 });
+  railIO.observe(hrail);
+
+  // ===== enter =====
+  let started = false, running = false;
+  enter.addEventListener('click', () => {
+    curtain.classList.add('open');
+    document.body.classList.remove('locked');
+    document.getElementById('hero').classList.add('show');
+    setTimeout(() => curtain.remove(), cssMs('--dur-l') + 80);
+    started = true;
+    if (!REDUCED) { running = true; requestAnimationFrame(loop); }
+    else {
+      scrollP = 1;
+      document.querySelectorAll('.lines, #bento, .hrail').forEach(el => el.classList.add('show', 'show-bento', 'show-rail'));
+      runCount();
+      theme.classList.add('on');
     }
-    if (running) requestAnimationFrame(tick);
+  });
+
+  // ===== shared rAF =====
+  function loop(t) {
+    // scroll metrics
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    scrollPt = Math.min(1, scrollY / (innerHeight * 1.2));
+    scrollP += (scrollPt - scrollP) * 0.08;
+
+    // marquee
+    marTarget += scrollY - lastY;
+    lastY = scrollY;
+    marVel += (marTarget - marVel) * 0.08;
+    marTarget *= 0.9;
+    if (half > 0) {
+      marX = (marX + KNOB.MARQUEE_BASE + marVel * KNOB.MARQUEE_GAIN) % half;
+      if (marX < 0) marX += half;
+      track.style.transform = `translate3d(${-marX}px,0,0)`;
+    }
+
+    // horizontal gallery
+    const rect = hpin.getBoundingClientRect();
+    const pinH = hpin.offsetHeight - innerHeight;
+    let prog = 0;
+    if (rect.top <= 0 && rect.bottom >= innerHeight) {
+      prog = Math.min(1, Math.max(0, -rect.top / pinH));
+    } else if (rect.top < 0) prog = 1;
+    const maxX = Math.max(0, hrail.scrollWidth - innerWidth + 48);
+    railT = prog * maxX;
+    railX += (railT - railX) * (REDUCED ? 1 : KNOB.HRAIL_EASE);
+    hrail.style.transform = `translate3d(${-railX}px,0,0)`;
+
+    // theme
+    const tr = theme.getBoundingClientRect();
+    const mid = tr.top + tr.height * 0.35;
+    theme.classList.toggle('on', mid < innerHeight * 0.55 && tr.bottom > innerHeight * 0.2);
+
+    // trail
+    if (dots.length) {
+      let px = mx, py = my;
+      dots.forEach((d, i) => {
+        const l = i === 0 ? 1 : KNOB.TRAIL_LERP;
+        d.x += (px - d.x) * l;
+        d.y += (py - d.y) * l;
+        d.el.style.transform = `translate3d(${d.x}px,${d.y}px,0)`;
+        d.el.style.opacity = pointerIn ? String(0.25 + (1 - i / dots.length) * 0.75) : '0';
+        px = d.x; py = d.y;
+      });
+    }
+
+    // mag buttons
+    mags.forEach(m => {
+      if (m.mode === 'pull') {
+        const sx = (m.tx - m.x) * 0.35, sy = (m.ty - m.y) * 0.35;
+        m.x += sx; m.y += sy; m.vx = sx; m.vy = sy;
+      } else if (m.mode === 'spring') {
+        m.vx += -KNOB.MAG_K * m.x; m.vy += -KNOB.MAG_K * m.y;
+        m.vx *= KNOB.MAG_DAMP; m.vy *= KNOB.MAG_DAMP;
+        m.x += m.vx; m.y += m.vy;
+        if (Math.hypot(m.x, m.y) < 0.3 && Math.hypot(m.vx, m.vy) < 0.3) {
+          m.x = m.y = m.vx = m.vy = 0; m.mode = 'idle';
+        }
+      }
+      m.btn.style.setProperty('--x', `${m.x}px`);
+      m.btn.style.setProperty('--y', `${m.y}px`);
+      m.btn.style.setProperty('--tx', `${m.x * KNOB.MAG_TEXT}px`);
+      m.btn.style.setProperty('--ty', `${m.y * KNOB.MAG_TEXT}px`);
+    });
+
+    // displacement
+    cards.forEach(s => {
+      if (!s.active) return;
+      s.p += (s.pT - s.p) * KNOB.DISP_LERP;
+      if (Math.abs(s.pT - s.p) < 0.001) { s.p = s.pT; s.active = false; }
+      s.draw(s.p);
+    });
+
+    // bg
+    drawBg(t);
+
+    if (running) requestAnimationFrame(loop);
   }
-  function startLoop() {
-    if (REDUCED || running) return;                       // reduced:无常驻动画
-    started = running = true; requestAnimationFrame(tick);
-  }
+
   document.addEventListener('visibilitychange', () => {
-    const next = started && !document.hidden && !REDUCED; // 后台不空转,Enter 前不抢跑
-    if (next && !running) requestAnimationFrame(tick);
+    const next = started && !document.hidden && !REDUCED;
+    if (next && !running) requestAnimationFrame(loop);
     running = next;
   });
+
+  addEventListener('scroll', () => {
+    // wake count when near stats without IO race
+    const sr = document.getElementById('stats').getBoundingClientRect();
+    if (sr.top < innerHeight * 0.85) runCount();
+  }, { passive: true });
+})();
 </script>
-
-  <section id="used-patterns" class="used-patterns">
-    <h2>本页用了哪些 pattern</h2>
-    <ul>
-      <li><a href="../patterns/loading/entry-preloader/demo.html">entry-preloader</a> — 加载序章</li>
-      <li><a href="../patterns/transitions/menu-stagger-reveal/demo.html">menu-stagger-reveal</a> — 全屏菜单</li>
-      <li><a href="../patterns/text/split-text-reveal/demo.html">split-text-reveal</a> — 标题入场</li>
-      <li><a href="../patterns/text/scroll-marquee/demo.html">scroll-marquee</a> — 滚动字幕</li>
-      <li><a href="../patterns/transitions/image-displacement/demo.html">image-displacement</a> — 图片过渡</li>
-    </ul>
-    <p><a href="../">← 返回 pattern 实验室</a> · <a href="https://github.com/saime428/fxlab">GitHub</a></p>
-  </section>
-  <style>
-    .used-patterns {
-      max-width: 52rem; margin: 3rem auto 4rem; padding: 0 4vw;
-      color: #9a9aaf; font: 500 0.95rem/1.7 system-ui, -apple-system, sans-serif;
-    }
-    .used-patterns h2 { color: #ecebf2; font-size: 1.15rem; margin-bottom: .6rem; }
-    .used-patterns ul { padding-left: 1.2rem; }
-    .used-patterns a { color: #8b7cf6; }
-    .used-patterns p { margin-top: 1rem; }
-  </style>
-
 </body>
 </html>
