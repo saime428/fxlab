@@ -14,7 +14,10 @@
   .bar i { display: block; height: 100%; background: #c5f542; transform-origin: left; transform: scaleX(0); }
   .enter { margin-top: 2.5rem; opacity: 0; pointer-events: none; transition: opacity .6s; background: none; border: 1px solid #c5f542; color: #c5f542; padding: .8em 2.6em; border-radius: 99px; font-size: 1rem; letter-spacing: .25em; cursor: pointer; }
   .enter.ready { opacity: 1; pointer-events: auto; }
-  .enter:hover { background: #c5f542; color: #060606; }
+  .enter:hover, .enter:focus-visible { background: #c5f542; color: #060606; }
+  /* 铁律 3:ENTER 是整个 pattern 的核心交互(声音解锁手势),
+     键盘用户必须看得到焦点在哪。原来只有 :hover,Tab 过去没有任何反馈 */
+  .enter:focus-visible { outline: 2px solid #c5f542; outline-offset: 4px; }
   main { height: 100vh; display: grid; place-content: center; text-align: center; }
   h1 { font-size: clamp(2rem, 6vw, 4.5rem); }
   main p { color: #888; margin-top: 1rem; }
@@ -34,7 +37,11 @@
   const pctEl = document.querySelector('.pct'), bar = document.querySelector('.bar i'),
         enter = document.querySelector('.enter'), curtain = document.querySelector('.curtain');
   // 模拟异步资源加载:8 个资源在随机时间点完成(真实项目替换为贴图/模型/字体加载)
-  let real = 0, shown = 0; const TOTAL = 8;
+  let real = 0, shown = 0;
+  /* ===== KNOB =====
+     TOTAL  模拟的资源件数。真项目里换成实际待加载数,
+            件数越少进度条跳得越粗,<5 会显得假 */
+  const TOTAL = 8;
   for (let i = 0; i < TOTAL; i++) setTimeout(() => real++, 300 + Math.random() * 2200);
   (function loop() {
     shown += (real / TOTAL * 100 - shown) * 0.06;          // 显示值缓动追真实值
@@ -49,5 +56,7 @@
     setTimeout(() => curtain.remove(), 1100);
   });
 </script>
+<!-- 库规范铁律 6 常驻声明(自身就是 layout/blend-invert 的用法:difference 混合,任何背景都可读) -->
+<p style="position:fixed;left:0;right:0;bottom:0;z-index:99999;margin:0;padding:.3rem .75rem;text-align:center;font:11px/1.4 system-ui,sans-serif;letter-spacing:.04em;color:#fff;mix-blend-mode:difference;pointer-events:none">demo 的配色排版是占位 —— 抄机制,不抄样式(库规范铁律 6)</p>
 </body>
 </html>
