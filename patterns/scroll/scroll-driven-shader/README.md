@@ -3,7 +3,7 @@
 - **分类**: 滚动动效 / 3D-WebGL
 - **难度**: ★★★
 - **见于**: [Igloo Inc.](../../../cases/igloo-inc/analysis.md)(冰晶生长)、几乎所有 WebGL 叙事站
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-driven-shader/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/scroll/scroll-driven-shader/demo.html)
 
 ## 设计意图
 

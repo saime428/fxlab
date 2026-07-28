@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="web-fx-lab: 炫酷可抄的网页动效实验室。40+ 零依赖 pattern · live 预览 · Claude skill · Featured 8。">
-<title>web-fx-lab — 网页效果画廊</title>
+<meta name="description" content="fxlab: 炫酷可抄的网页动效实验室。40+ 零依赖 pattern · live 预览 · Claude skill · Featured 8。">
+<title>fxlab — 网页效果画廊</title>
 <style>
   * { margin: 0; box-sizing: border-box; }
   :root { --bg: #101014; --panel: #1b1b22; --line: #2b2b35; --dim: #77778a; --fg: #ecebf2; --accent: #8b7cf6; }
@@ -75,15 +75,22 @@
   <canvas id="bg" aria-hidden="true"></canvas>
   <div class="wrap">
     <header>
-      <h1 class="reveal"><span>web-fx-<em>lab</em></span></h1>
-      <p class="sub reveal-fade">炫酷网页效果沉淀库:把获奖网站拆解成可复用的设计方法 + 零依赖单文件 demo。预览是活的;点卡片进全屏试玩。<a href="https://github.com/saime428/web-fx-lab">GitHub ↗</a></p>
+      <h1 class="reveal"><span>fx<em>lab</em></span></h1>
+      <p class="sub reveal-fade">炫酷可抄 · 零依赖 demo · AI 会选型。预览是活的；点卡片全屏试玩。<a href="https://github.com/saime428/fxlab">GitHub ↗</a></p>
+      <p class="cta-row reveal-fade">
+        <a class="cta primary" href="showcase/">样板间 Showcase</a>
+        <a class="cta" href="https://github.com/saime428/fxlab#给-agent--claude-code-用">安装 Claude skill</a>
+        <a class="cta" href="https://github.com/saime428/fxlab#镇馆-8-式先看这些">镇馆 8 式</a>
+      </p>
     </header>
     <div class="filters" id="filters" role="group" aria-label="筛选"></div>
     <p class="hintbar" id="count"></p>
     <div class="grid" id="grid"></div>
     <footer>
-      灵感源:<a href="https://github.com/saime428/web-fx-lab/tree/main/cases">10 个获奖站拆解(含运行时实测)→ cases/</a><br>
-      选型给 AI 看:<a href="https://github.com/saime428/web-fx-lab/blob/main/INDEX.md">INDEX.md</a> · 交接:<a href="https://github.com/saime428/web-fx-lab/blob/main/HANDOVER.md">HANDOVER.md</a> · MIT License
+      开源: <a href="https://github.com/saime428/fxlab">github.com/saime428/fxlab</a> ·
+      样板间: <a href="showcase/">showcase/</a> ·
+      选型给 AI 读: <a href="https://github.com/saime428/fxlab/blob/main/INDEX.md">INDEX.md</a> ·
+      贡献: <a href="https://github.com/saime428/fxlab/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> · MIT
     </footer>
   </div>
 <script>
@@ -128,7 +135,7 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 (async () => {
   const grid = document.getElementById('grid'), count = document.getElementById('count');
   const fail = () => {
-    grid.innerHTML = '<div class="fallback">索引加载失败(本地 file:// 打开属预期)。<br><a href="https://github.com/saime428/web-fx-lab#pattern-索引">去 GitHub 看列表 ↗</a></div>';
+    grid.innerHTML = '<div class="fallback">索引加载失败(本地 file:// 打开属预期)。<br><a href="https://github.com/saime428/fxlab#pattern-索引">去 GitHub 看列表 ↗</a></div>';
   };
   try {
     const md = await (await fetch('INDEX.md')).text();

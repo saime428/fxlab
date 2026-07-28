@@ -1,6 +1,6 @@
 # 贡献指南 · Contributing
 
-谢谢你愿意给 web-fx-lab 加一块砖。目标不是「动画越多越好」，而是 **可抄、有品味、能给人和 AI 选型**。
+谢谢你愿意给 fxlab 加一块砖。目标不是「动画越多越好」，而是 **可抄、有品味、能给人和 AI 选型**。
 
 [English summary below](#english)
 
@@ -15,7 +15,7 @@
 | 文档 / 翻译 | README、INDEX、TASTE 的澄清与英文补全 |
 | 传播素材 | `docs/promo/` 下 GIF / 短视频说明 |
 
-先开 [Issue](https://github.com/saime428/web-fx-lab/issues)（`pattern request` 或说明意图）再大改，避免撞车。
+先开 [Issue](https://github.com/saime428/fxlab/issues)（`pattern request` 或说明意图）再大改，避免撞车。
 
 ## 新增一个 Pattern（清单）
 
@@ -94,5 +94,5 @@ npx --yes serve .
 4. Register in `INDEX.md` and the full table in `README.md`.  
 5. Design intent in the README (“why it looks good”), not only how.
 
-Taste defaults: **TASTE.md**. Agent install path: **skills/web-fx-lab/**.  
+Taste defaults: **TASTE.md**. Agent install path: **skills/fxlab/**.  
 Open an issue before large redesigns.

@@ -3,7 +3,7 @@
 - **分类**: 滚动动效
 - **难度**: ★
 - **见于**: [Shopify Editions W26](../../../cases/shopify-editions-winter-26/analysis.md)(`cloud-card-parallax`,更新卡片以不同速率漂浮)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/scroll/parallax-cards/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/scroll/parallax-cards/demo.html)
 
 ## 设计意图
 

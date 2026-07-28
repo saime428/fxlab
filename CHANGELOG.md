@@ -2,6 +2,9 @@
 
 ## [0.1.0] — 2026-07-28
 
+Public product repo: **[fxlab](https://github.com/saime428/fxlab)**  
+(Pattern library lineage continues from private iteration history; the original `web-fx-lab` repo is left untouched as the source sandbox.)
+
 ### Packaging / discoverability
 
 - Restructure README: one-liner, 30s start, **Featured 8**, agent skill install, full catalog demoted below fold  
@@ -14,7 +17,7 @@
 ### Library (baseline snapshot)
 
 - 40+ zero-deps motion patterns under `patterns/`  
-- Live index: https://saime428.github.io/web-fx-lab/  
-- Showcase multi-pattern landing: https://saime428.github.io/web-fx-lab/showcase/  
-- AI selection: `INDEX.md` + `TASTE.md` + `skills/web-fx-lab/`  
+- Live index: https://saime428.github.io/fxlab/  
+- Showcase multi-pattern landing: https://saime428.github.io/fxlab/showcase/  
+- AI selection: `INDEX.md` + `TASTE.md` + `skills/fxlab/`  
 - Site teardowns under `cases/`  

@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★★
 - **见于**: [Cuberto](../../../cases/cuberto/analysis.md)(`.cb-cursor` 四态状态机,行业原型)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/custom-cursor/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/custom-cursor/demo.html)
 
 ## 设计意图
 

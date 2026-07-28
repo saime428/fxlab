@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★★
 - **见于**: Awwwards 上体验型/作品集站的常见装饰;CSS 侧探测不到(轨迹全在 JS/canvas 里),**来源等级低于其他 cursor pattern**——机制是通用做法,不是从某一站实测提炼
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/cursor-trail/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/cursor-trail/demo.html)
 
 ## 设计意图
 

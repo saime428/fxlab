@@ -3,7 +3,7 @@
 - **分类**: 滚动动效
 - **难度**: ★
 - **见于**: [Anime.js 官网](../../../cases/animejs/analysis.md)(`onScroll({ sync: true })` 的同款体验);taxonomy 滚动类点名 `animation-timeline: scroll()`
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/scroll/css-scroll-scrub/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/scroll/css-scroll-scrub/demo.html)
 
 ## 设计意图
 

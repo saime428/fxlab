@@ -3,7 +3,7 @@
 - **分类**: 布局手法 / 滚动动效
 - **难度**: ★
 - **见于**: [Hashgraph Ventures](../../../cases/hashgraph-ventures/analysis.md)(//01 Manifesto)、机构/品牌宣言站
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/section-narrative/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/section-narrative/demo.html)
 
 ## 设计意图
 

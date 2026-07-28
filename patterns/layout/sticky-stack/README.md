@@ -3,7 +3,7 @@
 - **分类**: 布局手法
 - **难度**: ★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md)(`sticky-track` / `sticky-item`,含滚动到位换主题的变体)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/sticky-stack/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/sticky-stack/demo.html)
 
 ## 设计意图
 

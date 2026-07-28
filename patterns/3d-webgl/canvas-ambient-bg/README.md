@@ -3,7 +3,7 @@
 - **分类**: 3D / WebGL(canvas 渲染)
 - **难度**: ★★
 - **见于**: [Hashgraph Ventures](../../../cases/hashgraph-ventures/analysis.md)(实测:主视觉是全屏 2D canvas,不是 WebGL)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/3d-webgl/canvas-ambient-bg/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/3d-webgl/canvas-ambient-bg/demo.html)
 
 ## 设计意图
 

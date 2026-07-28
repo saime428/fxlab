@@ -3,7 +3,7 @@
 - **分类**: 页面切换 / 悬停交互
 - **难度**: ★★★
 - **见于**: [Robin Payot](../../../cases/robin-payot/analysis.md)(项目画廊 3D 过渡);Codrops 时代经典,获奖站图片画廊的默认语言
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/image-displacement/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/image-displacement/demo.html)
 
 ## 设计意图
 

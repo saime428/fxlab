@@ -3,7 +3,7 @@
 - **分类**: 悬停交互
 - **难度**: ★★
 - **见于**: [Shopify Editions W26](../../../cases/shopify-editions-winter-26/analysis.md)(可交互漂浮元素:气泡/贴纸)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/floating-stickers/demo.html)
 
 ## 设计意图
 

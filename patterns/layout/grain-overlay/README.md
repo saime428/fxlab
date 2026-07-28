@@ -3,7 +3,7 @@
 - **分类**: 布局手法 / 质感层
 - **难度**: ★
 - **冲击力**: A(炸场)——单看是"加了层灰",但**它是"看起来贵"和"看起来像模板"之间最短的一条路**
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/grain-overlay/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/grain-overlay/demo.html)
 - **来源**: `feTurbulence` 在 [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md)的 CSS 侧只探到 4 站——**因为绝大多数站是贴一张噪点 PNG**,不是用滤镜生成。这里给的是零资源版
 
 ## 设计意图

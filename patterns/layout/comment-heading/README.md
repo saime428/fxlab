@@ -3,7 +3,7 @@
 - **分类**: 布局手法(排版)
 - **难度**: ★
 - **见于**: [infinite imaginations](../../../cases/infinite-imaginations/analysis.md)(`// about`)、[Hashgraph Ventures](../../../cases/hashgraph-ventures/analysis.md)(`//01 Manifesto` 编号变体)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/comment-heading/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/comment-heading/demo.html)
 
 ## 设计意图
 

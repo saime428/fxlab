@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★★
 - **见于**: 是 [cursor/custom-cursor](../custom-cursor/) 与 [layout/blend-invert](../../layout/blend-invert/) 的交集用法;扫描里 147 站用 `mix-blend-mode: difference`,33 站有跟随元素,重合的那批就是这一类
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/blend-dot/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/blend-dot/demo.html)
 
 ## 设计意图
 

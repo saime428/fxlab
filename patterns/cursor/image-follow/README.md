@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★★
 - **见于**: 代理商/作品集站的项目列表通杀做法(Awwwards 上 Portfolio / Design Agencies 分类的高频手法);机制在 JS 里,CSS 侧探测不到
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/image-follow/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/image-follow/demo.html)
 
 ## 设计意图
 

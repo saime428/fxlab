@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="web-fx-lab">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="fxlab">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0c0c12"/>
@@ -34,7 +34,7 @@
   <rect width="1280" height="640" fill="url(#g2)"/>
   <rect width="1280" height="640" fill="url(#g3)"/>
 
-  <text x="72" y="150" class="title">web-fx-<tspan class="em">lab</tspan></text>
+  <text x="72" y="150" class="title">fx<tspan class="em">lab</tspan></text>
   <text x="72" y="210" class="sub">Copy-paste motion · live demos · AI skill</text>
 
   <g transform="translate(72 250)">
@@ -84,5 +84,5 @@
     <text class="dim" x="16" y="168">★ · landing default</text>
   </g>
 
-  <text x="72" y="580" class="dim">saime428.github.io/web-fx-lab · github.com/saime428/web-fx-lab</text>
+  <text x="72" y="580" class="dim">saime428.github.io/fxlab · github.com/saime428/fxlab</text>
 </svg>

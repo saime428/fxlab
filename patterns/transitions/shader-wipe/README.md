@@ -3,7 +3,7 @@
 - **分类**: 页面切换
 - **难度**: ★★★
 - **见于**: [Igloo Inc.](../../../cases/igloo-inc/analysis.md)(shader 驱动的 UI 过渡);[Active Theory](../../../cases/active-theory/analysis.md) 的页面转场是它的全 GL 上限版
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/shader-wipe/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/shader-wipe/demo.html)
 
 ## 设计意图
 

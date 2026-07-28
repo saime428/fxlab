@@ -3,7 +3,7 @@
 - **分类**: 文字动效 / 排版
 - **难度**: ★★
 - **冲击力**: A(炸场)——文字脱离横平竖直的基线,是网页排版里最少见、也最像"平面设计"的一步
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/text-on-path/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/text-on-path/demo.html)
 - **来源**: 通用做法,非从某一站实测提炼。机制侧 [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md)未单独统计 offset-path。**来源等级低于有 case 支撑的 pattern**
 
 ## 设计意图

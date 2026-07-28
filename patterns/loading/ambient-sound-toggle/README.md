@@ -3,7 +3,7 @@
 - **分类**: 加载动画 / 体验层
 - **难度**: ★★
 - **见于**: [Hashgraph Ventures](../../../cases/hashgraph-ventures/analysis.md)(SOUND ON/OFF)、[Robin Payot](../../../cases/robin-payot/analysis.md)(Enter 即授权)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/loading/ambient-sound-toggle/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/loading/ambient-sound-toggle/demo.html)
 
 ## 设计意图
 

@@ -6,13 +6,13 @@
 
 | 效果 | 难度 | 路子 | Demo |
 |---|---|---|---|
-| [图片光标](image-cursor/) | ★ | `cursor:url()` 换图,零 JS | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/image-cursor/demo.html) |
-| [反色光标点](blend-dot/) | ★★ | 跟随 + `mix-blend-mode` | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/blend-dot/demo.html) |
-| [区域内隐藏光标 + 跟随标签](hide-and-follow/) | ★★ | 藏原生光标,光标变 UI | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/hide-and-follow/demo.html) |
-| [自定义光标](custom-cursor/) | ★★ | 双层跟随 + `data-cursor` 委托的四态状态机 | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/custom-cursor/demo.html) |
-| [光标拖尾](cursor-trail/) | ★★ | 纯装饰,链式滞后 | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/cursor-trail/demo.html) |
-| [光标跟随预览图](image-follow/) | ★★ | 文字列表 hover 出图,图跟着光标 | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/image-follow/demo.html) |
-| [光标手电筒](spotlight-mask/) | ★★ | 遮罩挖洞,光标决定你看见哪一层 | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/spotlight-mask/demo.html) |
+| [图片光标](image-cursor/) | ★ | `cursor:url()` 换图,零 JS | [demo](https://saime428.github.io/fxlab/patterns/cursor/image-cursor/demo.html) |
+| [反色光标点](blend-dot/) | ★★ | 跟随 + `mix-blend-mode` | [demo](https://saime428.github.io/fxlab/patterns/cursor/blend-dot/demo.html) |
+| [区域内隐藏光标 + 跟随标签](hide-and-follow/) | ★★ | 藏原生光标,光标变 UI | [demo](https://saime428.github.io/fxlab/patterns/cursor/hide-and-follow/demo.html) |
+| [自定义光标](custom-cursor/) | ★★ | 双层跟随 + `data-cursor` 委托的四态状态机 | [demo](https://saime428.github.io/fxlab/patterns/cursor/custom-cursor/demo.html) |
+| [光标拖尾](cursor-trail/) | ★★ | 纯装饰,链式滞后 | [demo](https://saime428.github.io/fxlab/patterns/cursor/cursor-trail/demo.html) |
+| [光标跟随预览图](image-follow/) | ★★ | 文字列表 hover 出图,图跟着光标 | [demo](https://saime428.github.io/fxlab/patterns/cursor/image-follow/demo.html) |
+| [光标手电筒](spotlight-mask/) | ★★ | 遮罩挖洞,光标决定你看见哪一层 | [demo](https://saime428.github.io/fxlab/patterns/cursor/spotlight-mask/demo.html) |
 
 **选型口径**:只想换个图标形状 → `image-cursor`(一行 CSS,零 JS);想要质感/品牌感 → `custom-cursor`(双层跟随 + 四态状态机,不藏原生光标那一版可用性代价最小);深浅背景通吃 → `blend-dot`;光标要带文案、且要藏掉原生光标 → `hide-and-follow`;列表 hover 出图 → `image-follow`;纯装饰、内容不密集 → `cursor-trail`;要"光标决定看见哪一层" → `spotlight-mask`。
 

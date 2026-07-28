@@ -4,11 +4,11 @@
 
 | 效果 | 难度 | Demo |
 |---|---|---|
-| [Hover 双图切换](image-swap/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/image-swap/demo.html) |
-| [可拖拽 + 弹簧回弹](drag-spring/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html) |
-| [漂浮贴纸物理 Hover](floating-stickers/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/floating-stickers/demo.html) |
-| [液态融合 Goo](goo-merge/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/goo-merge/demo.html) |
-| [卡片翻转](flip-card/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flip-card/demo.html) |
-| [旋转渐变描边](conic-border-spin/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/conic-border-spin/demo.html) |
-| [精灵图 Hover 预览](sprite-preview/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/sprite-preview/demo.html) |
-| [磁性按钮](magnetic-button/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/magnetic-button/demo.html) |
+| [Hover 双图切换](image-swap/) | ★ | [demo](https://saime428.github.io/fxlab/patterns/hover/image-swap/demo.html) |
+| [可拖拽 + 弹簧回弹](drag-spring/) | ★★ | [demo](https://saime428.github.io/fxlab/patterns/hover/drag-spring/demo.html) |
+| [漂浮贴纸物理 Hover](floating-stickers/) | ★★ | [demo](https://saime428.github.io/fxlab/patterns/hover/floating-stickers/demo.html) |
+| [液态融合 Goo](goo-merge/) | ★★ | [demo](https://saime428.github.io/fxlab/patterns/hover/goo-merge/demo.html) |
+| [卡片翻转](flip-card/) | ★★ | [demo](https://saime428.github.io/fxlab/patterns/hover/flip-card/demo.html) |
+| [旋转渐变描边](conic-border-spin/) | ★ | [demo](https://saime428.github.io/fxlab/patterns/hover/conic-border-spin/demo.html) |
+| [精灵图 Hover 预览](sprite-preview/) | ★ | [demo](https://saime428.github.io/fxlab/patterns/hover/sprite-preview/demo.html) |
+| [磁性按钮](magnetic-button/) | ★★ | [demo](https://saime428.github.io/fxlab/patterns/hover/magnetic-button/demo.html) |

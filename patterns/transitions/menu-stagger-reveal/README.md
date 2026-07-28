@@ -3,7 +3,7 @@
 - **分类**: 页面切换
 - **难度**: ★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md)(菜单展开多图错位入场)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/menu-stagger-reveal/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/menu-stagger-reveal/demo.html)
 
 ## 设计意图
 

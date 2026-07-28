@@ -3,7 +3,7 @@
 - **分类**:滚动动效
 - **难度**:★
 - **见于**:几乎所有 Awwwards 获奖站
-- **Demo**:[demo.html](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-reveal/demo.html)
+- **Demo**:[demo.html](https://saime428.github.io/fxlab/patterns/scroll/scroll-reveal/demo.html)
 
 ## 设计意图
 

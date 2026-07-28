@@ -3,7 +3,7 @@
 - **分类**: 页面切换
 - **难度**: ★
 - **见于**: [MotionPotion](../../../cases/motionpotion/analysis.md)(词汇表:wobbly/half circles、3 stripes、dot transition 一整族视频转场)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-shape-wipe/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/clip-shape-wipe/demo.html)
 
 ## 设计意图
 

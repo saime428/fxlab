@@ -3,7 +3,7 @@
 - **分类**: 布局手法 / 图层合成
 - **难度**: ★
 - **见于**: [sakazuki](https://sakazuki.io/)(fixed header + bottomBar + 飞行 logo)、[Lama Lama](https://lamalama.com/)(hero section + 压在视频上的图标按钮,用 exclusion)、[Sui](https://www.sui.io/)(标题里的强调词 `.custom-span.invert`)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/blend-invert/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/blend-invert/demo.html)
 - **来源**: [2026-07 Awwwards 横截面扫描](../../../blends/scans/2026-07-awwwards.md),**130/629 站在用(21%)**
 
 ## 设计意图

@@ -3,7 +3,7 @@
 - **分类**: 页面切换 / 滚动动效
 - **难度**: ★
 - **见于**: [Shopify Editions](../../../cases/shopify-editions-winter-26/analysis.md)(章节换装)、大量长页叙事站
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/theme-shift/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/theme-shift/demo.html)
 
 ## 设计意图
 

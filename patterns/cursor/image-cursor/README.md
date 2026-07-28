@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★(全库成本最低的自定义光标)
 - **见于**: Apechain(`url(/cursor/default.svg) 16 16`)、Object & Archive(内联 data-URI)、Raw House(`url(/images/cursor.webp), auto`)、Grain & Mortar(`url(../img/arrow-right-orange.svg), auto`)、NVRMND Studio
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/image-cursor/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/image-cursor/demo.html)
 - **来源**: [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md),21/691 站
 
 ## 设计意图

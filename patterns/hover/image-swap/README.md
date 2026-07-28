@@ -3,7 +3,7 @@
 - **分类**: 悬停交互
 - **难度**: ★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md) 头盔画廊(每个头盔 base/hover 两张 webp)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/image-swap/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/image-swap/demo.html)
 
 ## 设计意图
 
