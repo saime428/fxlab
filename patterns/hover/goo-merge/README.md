@@ -48,7 +48,7 @@
 
 ## 变体与延伸
 
-- 球跟着指针走(见 [cursor/follower-ring](../../cursor/follower-ring/) 的 lerp),和静止的球融合 = "光标是一滴水"
+- 球跟着指针走(见 [cursor/custom-cursor](../../cursor/custom-cursor/) 的 lerp),和静止的球融合 = "光标是一滴水"
 - 展开菜单:主按钮点击后子按钮从里面"挤"出来,拉丝断裂的一瞬间最有戏
 - 加载指示:3 个球做正弦相位差运动,不断分合
 - 想要真流体(会流动、有惯性)得上 shader 的 metaball,那是 [3d-webgl](../../3d-webgl/) 的量级;这里的版本是**形状融合,不是物理**

@@ -44,7 +44,7 @@ const tick = () => {
 - **触屏无效**,`@media (hover:hover) and (pointer:fine)` 里才启用
 - 不传达信息 = 纯装饰。**它和页面上任何"要读的东西"抢注意力**,内容密集的页面别用
 - N 一大就适得其反(见上):尾端不再跟随,变成一个挂在页面上的静止点
-- 和 [follower-ring](../follower-ring/) / [hide-and-follow](../hide-and-follow/) 二选一,叠加就是一团乱
+- 和 [custom-cursor](../custom-cursor/) / [hide-and-follow](../hide-and-follow/) 二选一,叠加就是一团乱
 
 ## 变体与延伸
 

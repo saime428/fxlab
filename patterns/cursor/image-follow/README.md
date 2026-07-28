@@ -52,4 +52,4 @@ const tick = () => {
 - 图片换成**视频**(`<video muted playsinline>`),hover 才 `play()`,离开 `pause()` —— 代理商站最常见的升级版
 - 同时显示 2-3 张错位堆叠的图,滞后量依次加大 = "一叠照片被拖着走"
 - 配 [layout/blend-invert](../../layout/blend-invert/):图上叠一层 difference 的项目编号,压在任何图上都可读
-- 列表项配 [cursor/magnetic-pull](../magnetic-pull/) 的吸附,hover 时文字迎上来
+- 列表项配 [hover/magnetic-button](../../hover/magnetic-button/) 的吸附,hover 时文字迎上来

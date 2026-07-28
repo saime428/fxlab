@@ -45,3 +45,15 @@ CSS 变量默认不可插值(动画会离散跳变),`@property` 注册成 `<angl
 - 转速慢到 20s+ = "微光流动",快到 1s = "充能中",同一机制两种情绪
 - 双层反向转(::before 顺 ::after 逆)更华丽,吵一倍,慎用
 - 同一个 `--angle` 还能转 `background` 光斑、`box-shadow` 色相——@property 让任何"角度类"属性可动画化
+
+## 并入 flow-border 的补充(2026-07-26 去重)
+
+原 `hover/flow-border` 与本 pattern 是同一机制(逐行几乎相同),已删除并入这里。它多记的几条:
+
+- **扫描数据**:`@property` 在 [773 站扫描](../../../blends/scans/2026-07-awwwards.md)里 **133/691 站在用、总出现 7523 次**,是新特性里普及最快的一个
+- **`inherits: false` 不是可选**:不写的话每个子元素都继承 `--angle` 并各自跑一遍动画,白白多算
+- **`@property` 必须在样式表顶层**,不能嵌在 `@media` 或选择器里
+- **hover 才转的写法**:切 `animation-play-state`(`paused` ↔ `running`)比切整个 `animation` 属性平滑
+- **降级要主动设计**:不支持 `@property` 时 `--angle` 是普通字符串,动画不跑、渐变停在初始角——**所以初始角要选一个静止也好看的位置**
+- Safari 需要 `-webkit-mask-composite: xor`(标准写法是 `mask-composite: exclude`)
+- **强注意力效果,一页一次**:一个持续运行的动画就是一个持续的合成层,列表里每项都加会拖垮页面

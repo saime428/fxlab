@@ -49,4 +49,4 @@
 - 沿 X 轴翻(`rotateX`)= 翻页而不是翻卡,配合垂直列表更自然
 - 翻转到一半时切换内容(`transitionrun` 中点),可以做"三面"效果
 - 只做倾斜不做翻转 = 卡片 3D 倾斜(tilt):`rotateX/rotateY` 由指针位置插值,幅度 ≤10°,比翻转克制得多,适合作品集网格
-- 配 [cursor/magnetic-pull](../../cursor/magnetic-pull/):卡片既迎向指针又轻微倾斜,两个都调到很小才不油腻
+- 配 [hover/magnetic-button](../../hover/magnetic-button/):卡片既迎向指针又轻微倾斜,两个都调到很小才不油腻
