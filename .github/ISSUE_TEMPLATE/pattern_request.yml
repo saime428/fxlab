@@ -1,0 +1,38 @@
+name: Pattern request
+description: Suggest a new motion pattern or scene package
+title: "[pattern] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: scene
+    attributes:
+      label: Scene / use case
+      description: Where would this show up? (landing hero, product gallery, route change…)
+      placeholder: Portfolio project grid hover → detail transition
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Sites, videos, or CodePens (links)
+    validations:
+      required: false
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Expected difficulty
+      options:
+        - "★ easy"
+        - "★★ medium"
+        - "★★★ advanced"
+        - Not sure
+    validations:
+      required: false
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it belongs in the lab
+      description: Design intent — not only “looks cool”
+    validations:
+      required: true

@@ -1,0 +1,37 @@
+name: Demo / docs bug
+description: Broken demo, wrong link, a11y or mobile issue
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: input
+    id: path
+    attributes:
+      label: Pattern path or URL
+      placeholder: patterns/transitions/image-displacement/demo.html
+    validations:
+      required: true
+  - type: dropdown
+    id: env
+    attributes:
+      label: Environment
+      options:
+        - GitHub Pages
+        - Local static server
+        - file://
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / OS
+      placeholder: Chrome 131 / Windows 11
+    validations:
+      required: false
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Expected vs actual
+    validations:
+      required: true

@@ -1,5 +1,9 @@
 # Pattern 选型索引(机器友好)
 
+> **镇馆 8（传播 / 首选）**: `scroll-driven-shader` · `image-displacement` · `particle-transition` · `shader-wipe` · `split-text-reveal` · `horizontal-gallery` · `view-transitions` · `drag-spring`  
+> 完整表见下；人类 README 精选表见 [README.md](README.md#镇馆-8-式先看这些)。
+
+
 > 给 AI/自动化用的单文件决策索引。人类请看 [README.md](README.md)。
 > 每行:路径 | 名称 | 难度 | 一句话机制 | 适用场景。选中后读该 pattern 的 README(规格)+ demo.html(参考实现)。
 

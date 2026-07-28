@@ -1,38 +1,130 @@
 # web-fx-lab 🧪
 
-> 炫酷网页效果沉淀库:把看到的好网站拆解成可复用的设计方法 + 可运行 Demo。
->
-> 🔗 **在线 Demo**: https://saime428.github.io/web-fx-lab/ (所有 demo 链接均可直接点开试玩)
-> 🏠 **样板间**: https://saime428.github.io/web-fx-lab/showcase/ (作品集套餐 5 个 pattern 拼装的完整 landing page,铁律 7 token 收口的实装参考)
+<p align="center">
+  <img src="docs/promo/social-card.svg" alt="web-fx-lab — copy-paste web motion patterns" width="100%" />
+</p>
 
-## 这个仓库怎么用
+> **炫酷可抄 · 零依赖 demo · AI 会选型**  
+> 把获奖站级网页动效拆成可复用 pattern：原理 README + 双击能跑的 `demo.html`，并附 AI 选型索引与 Claude skill。
 
-两个维度沉淀,互相交叉引用:
+[English](README.en.md) · [在线 Demo](https://saime428.github.io/web-fx-lab/) · [样板间 Showcase](https://saime428.github.io/web-fx-lab/showcase/) · [完整索引 INDEX](INDEX.md) · [口味铁律 TASTE](TASTE.md)
 
-- **`cases/` 按网站**:每收藏一个好网站,写一篇拆解(它用了哪些效果、什么技术、为什么好看),并链接到对应 pattern。
-- **`patterns/` 按效果**:核心资产。每个效果一个文件夹,包含原理文档 `README.md` + 零依赖可直接打开的 `demo.html`。
+```text
+Copy-paste web motion patterns with live demos.
+Not another CodePen dump — curated patterns, taste rules, agent-ready INDEX.
+```
 
-工作流:发现好网站 → 在 `cases/` 建拆解 → 把其中值得复用的效果抽成 `patterns/` 条目 → 双向链接。
+---
 
-## 效果分类
+## 30 秒上手
+
+| 你是… | 怎么用 |
+|--------|--------|
+| **前端 / 设计师** | 打开 [Live demos](https://saime428.github.io/web-fx-lab/) → 点卡片全屏试玩 → 读 pattern README 抄结构 |
+| **要整页参考** | 打开 [Showcase](https://saime428.github.io/web-fx-lab/showcase/)（多 pattern 拼成的 landing） |
+| **Claude / Agent** | 安装 skill（见下）→ 说「给这个 landing 加有质感的动效，贴合现有设计」 |
+
+---
+
+## 镇馆 8 式（先看这些）
+
+对外传播与选型时优先这 8 个；其余在下方完整目录。
+
+| Pattern | 一句话 | 难度 | Demo |
+|---------|--------|------|------|
+| [滚动驱动 Shader](patterns/scroll/scroll-driven-shader/) | 滚动驱动 shader uniform，一眼「贵」 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-driven-shader/demo.html) |
+| [Displacement 图片过渡](patterns/transitions/image-displacement/) | 位移图扭曲切换，高冲击作品集感 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/image-displacement/demo.html) |
+| [GPU 粒子过渡](patterns/transitions/particle-transition/) | 粒子化状态切换，技术向吸睛 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/particle-transition/demo.html) |
+| [Shader 遮罩擦除](patterns/transitions/shader-wipe/) | 全屏 shader 擦除，章节/路由高级切换 | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/shader-wipe/demo.html) |
+| [Split Text 拆分入场](patterns/text/split-text-reveal/) | 逐行/逐字入场，落地页刚需 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/split-text-reveal/demo.html) |
+| [横向滚动画廊](patterns/scroll/horizontal-gallery/) | sticky + 横移映射，产品叙事常用 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/horizontal-gallery/demo.html) |
+| [View Transitions](patterns/transitions/view-transitions/) | 浏览器原生共享元素过渡 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/view-transitions/demo.html) |
+| [拖拽 + 弹簧回弹](patterns/hover/drag-spring/) | 物理弹簧手感，3 秒 GIF 成立 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html) |
+
+> 想看「拼装后的完整页」而不是散装效果 → **[Showcase 样板间](https://saime428.github.io/web-fx-lab/showcase/)**
+
+---
+
+## 这和 CodePen / 动画收藏夹有什么不同？
+
+| 常见形态 | web-fx-lab |
+|----------|------------|
+| 零散 snippet | **有分类、难度、场景、禁忌** 的 pattern 条目 |
+| 只有灵感截图 | **可运行 demo** + 原理 + 实现要点 |
+| 让 AI 乱加动效 | **INDEX 选型 + TASTE 口味铁律**，默认 2–4 个效果而不是堆 8 个 |
+| 教程站绑定某一库 | demo **零依赖可开**；上项目可再换成 GSAP 等 |
+
+---
+
+## 给 Agent / Claude Code 用
+
+1. 复制 skill 目录到本机 Claude skills：
+
+```bash
+# 任选其一
+cp -r skills/web-fx-lab ~/.claude/skills/web-fx-lab
+
+# 或 degit（无需整仓 clone）
+npx --yes degit saime428/web-fx-lab/skills/web-fx-lab ~/.claude/skills/web-fx-lab
+```
+
+Windows (PowerShell):
+
+```powershell
+Copy-Item -Recurse skills\web-fx-lab $env:USERPROFILE\.claude\skills\web-fx-lab
+```
+
+2. 新会话里说：
+
+> 给这个 landing 加有质感的动效，贴合现有设计，不要堆满动画。
+
+3. Agent 会读：
+
+| 文件 | 用途 |
+|------|------|
+| [`INDEX.md`](INDEX.md) | 全量 pattern 一览 + 场景套餐 |
+| [`TASTE.md`](TASTE.md) | 颜色 / 密度 / 缓动等「用户没说也要遵守」的口味 |
+| 各 pattern `README.md` | 原理与实现要点 |
+| [`skills/web-fx-lab/SKILL.md`](skills/web-fx-lab/SKILL.md) | 选型流程（新建页 vs 存量站改造） |
+
+远程直读（无本地 clone 时）：
+
+- https://raw.githubusercontent.com/saime428/web-fx-lab/main/INDEX.md  
+- https://raw.githubusercontent.com/saime428/web-fx-lab/main/TASTE.md  
+
+---
+
+## 仓库怎么用（人）
+
+两个维度沉淀，互相交叉引用：
+
+- **`cases/` 按网站**：拆解好站用了哪些效果、为什么好看，并链到 pattern  
+- **`patterns/` 按效果**：核心资产；每条 = `README.md` + `demo.html`  
+
+工作流：发现好站 → `cases/` 拆解 → 值得复用的抽到 `patterns/` → 双向链接。  
+存量站只加动效、不推翻设计：见 skill 里的 **模式 B**，以及 [`retrofits/`](retrofits/)。
+
+### 效果分类
 
 | 分类 | 目录 | 说明 |
-|---|---|---|
+|------|------|------|
 | 页面切换 | [`patterns/transitions/`](patterns/transitions/) | 路由过渡、View Transitions、遮罩擦除 |
-| 滚动动效 | [`patterns/scroll/`](patterns/scroll/) | 滚动驱动动画、视差、pin/scrub、平滑滚动 |
-| 悬停交互 | [`patterns/hover/`](patterns/hover/) | 磁性按钮、图片扭曲、卡片翻转 |
-| 文字动效 | [`patterns/text/`](patterns/text/) | 逐字入场、乱码解码、滚动文字带 |
-| 3D / WebGL | [`patterns/3d-webgl/`](patterns/3d-webgl/) | Three.js 场景、shader 特效、粒子 |
-| 鼠标跟随 | [`patterns/cursor/`](patterns/cursor/) | 自定义光标、拖尾、跟随元素 |
-| 加载动画 | [`patterns/loading/`](patterns/loading/) | 进度序章、骨架屏、开场动画 |
-| 布局手法 | [`patterns/layout/`](patterns/layout/) | 横向滚动、瀑布流、粘性分层 |
+| 滚动动效 | [`patterns/scroll/`](patterns/scroll/) | 滚动驱动、视差、pin/scrub |
+| 悬停交互 | [`patterns/hover/`](patterns/hover/) | 磁性按钮、拖拽弹簧、贴纸 |
+| 文字动效 | [`patterns/text/`](patterns/text/) | 拆分入场、跑马灯、数字滚动 |
+| 3D / WebGL | [`patterns/3d-webgl/`](patterns/3d-webgl/) | Canvas 氛围、粒子、confetti |
+| 鼠标跟随 | [`patterns/cursor/`](patterns/cursor/) | 自定义光标、拖尾、手电筒 |
+| 加载动画 | [`patterns/loading/`](patterns/loading/) | 序章、氛围音 |
+| 布局手法 | [`patterns/layout/`](patterns/layout/) | 粘性堆叠、章节叙事、噪点层 |
 
-完整分类和判断标准见 [`docs/taxonomy.md`](docs/taxonomy.md)。
+判断标准见 [`docs/taxonomy.md`](docs/taxonomy.md)。
 
-## Pattern 索引
+---
+
+## 完整 Pattern 目录
 
 | 效果 | 分类 | 难度 | Demo |
-|---|---|---|---|
+|------|------|------|------|
 | [滚动渐显 Scroll Reveal](patterns/scroll/scroll-reveal/) | 滚动动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-reveal/demo.html) |
 | [横向滚动画廊 Horizontal Gallery](patterns/scroll/horizontal-gallery/) | 滚动动效 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/scroll/horizontal-gallery/demo.html) |
 | [Hover 双图切换 Image Swap](patterns/hover/image-swap/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/image-swap/demo.html) |
@@ -83,10 +175,14 @@
 | [自定义光标 Custom Cursor](patterns/cursor/custom-cursor/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/custom-cursor/demo.html) |
 | [磁性按钮 Magnetic Button](patterns/hover/magnetic-button/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/magnetic-button/demo.html) |
 
+AI 友好的单文件总表（含场景套餐）：[`INDEX.md`](INDEX.md)。
+
+---
+
 ## Case 索引
 
 | 网站 | 亮点 | 开源 | 拆解 |
-|---|---|---|---|
+|------|------|------|------|
 | [Bruno Simon 2019](https://2019.bruno-simon.com/) | 物理小车探索式导航 | ✅ [源码](https://github.com/brunosimon/folio-2019) | [拆解](cases/bruno-simon-2019/analysis.md) |
 | [Igloo Inc.](https://www.igloo.inc/) | 滚动雕刻冰晶,shader 驱动 UI | 官方 case study | [拆解](cases/igloo-inc/analysis.md) |
 | [Messenger](https://messenger.abeto.co/) | 5.7MB 多人小星球游戏 | — | [拆解](cases/messenger/analysis.md) |
@@ -98,28 +194,39 @@
 | [Hashgraph Ventures](https://hashgraphvc.com/) | 章节宣言叙事+氛围音 | — | [拆解](cases/hashgraph-ventures/analysis.md) |
 | [infinite imaginations](https://oninross.github.io/infinite-imaginations/) | TweenMax 时代考古 | ✅ [源码](https://github.com/oninross/infinite-imaginations) | [拆解](cases/infinite-imaginations/analysis.md) |
 | [MotionPotion](https://motionpotion.co/) | 纯 CSS 交互动效密度天花板,假 UI 自演示 | — | [拆解](cases/motionpotion/analysis.md) |
-| [Cuberto](https://cuberto.com/) | 光标状态机的行业原型 | — | [拆解](cases/cuberto/analysis.md) |
-| [Dennis Snellenberg](https://dennissnellenberg.com/) | 磁性按钮标杆,SOTD"手感"标本 | — | [拆解](cases/dennis-snellenberg/analysis.md) |
+| [Cuberto](https://cuberto.com/) | 光标状态机、商业原型 | — | [拆解](cases/cuberto/analysis.md) |
+| [Dennis Snellenberg](https://dennissnellenberg.com/) | 磁性按钮极致,SOTD「节制」样本 | — | [拆解](cases/dennis-snellenberg/analysis.md) |
 
-## 怎么在项目里用
+---
 
-- **AI 选型入口**:[`INDEX.md`](INDEX.md) 是机器友好的单文件决策索引(全部 pattern 一览 + 场景套餐 + 使用铁律)
-- **Claude Code skill**:[`skills/web-fx-lab/SKILL.md`](skills/web-fx-lab/SKILL.md),安装 = 复制到 `~/.claude/skills/web-fx-lab/`,之后任何会话说"做个有质感的官网"会自动翻本库选料
-- 原则:抄机制不抄样式;真实项目踩坑回写进 pattern 的"实战笔记"
+## 贡献
 
-## 模板与规范
+欢迎 PR 新 pattern、修 demo、补「实战笔记」。流程与模板见 **[CONTRIBUTING.md](CONTRIBUTING.md)**。
 
-- 网站拆解:[`docs/templates/case-analysis.md`](docs/templates/case-analysis.md)
-- 效果条目:[`docs/templates/pattern.md`](docs/templates/pattern.md)
-- 常用技术雷达:[`docs/tech-radar.md`](docs/tech-radar.md)
-- 提炼与收录标准:[`docs/criteria.md`](docs/criteria.md)
+- 网站拆解模板：[`docs/templates/case-analysis.md`](docs/templates/case-analysis.md)  
+- 效果条目模板：[`docs/templates/pattern.md`](docs/templates/pattern.md)  
+- 收录标准：[`docs/criteria.md`](docs/criteria.md)  
 
-## 收录标准
+传播物料与 social 图：[`docs/promo/`](docs/promo/)。
 
-1. 效果必须能说清"为什么好看"(设计意图),不只是"看着炫"。
-2. Demo 尽量零依赖、单文件、双击可打开;确需库时在文档中注明版本。
-3. 每个 pattern 标注:核心技术、性能注意点、可访问性影响(如 `prefers-reduced-motion`)。
+---
+
+## 收录标准（摘要）
+
+1. 效果条目要说清「为什么好看」（设计意图），不只「怎么做」。  
+2. Demo 零依赖、单文件双击可开；确需库时在文档注明版本。  
+3. 标注：性能注意点、可访问性（含 `prefers-reduced-motion`）、移动端。  
+
+---
 
 ## License
 
-MIT
+[MIT](LICENSE)
+
+---
+
+<p align="center">
+  <a href="https://saime428.github.io/web-fx-lab/">Live demos</a> ·
+  <a href="https://saime428.github.io/web-fx-lab/showcase/">Showcase</a> ·
+  <a href="https://github.com/saime428/web-fx-lab">GitHub</a>
+</p>

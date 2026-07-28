@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="web-fx-lab:炫酷网页效果沉淀库。21+ 个零依赖动效 pattern,live 预览,直接试玩。">
+<meta name="description" content="web-fx-lab: 炫酷可抄的网页动效实验室。40+ 零依赖 pattern · live 预览 · Claude skill · Featured 8。">
 <title>web-fx-lab — 网页效果画廊</title>
 <style>
   * { margin: 0; box-sizing: border-box; }
@@ -43,6 +43,23 @@
   .chip:hover, .chip:focus-visible { border-color: var(--accent); color: var(--fg); outline: none; }
   .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #14101f; }
   .card[hidden] { display: none; }
+  .card.featured { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+  .badge-featured {
+    position: absolute; top: 10px; left: 10px; z-index: 2;
+    font-size: .72rem; letter-spacing: .06em; font-weight: 700;
+    padding: .28em .7em; border-radius: 999px;
+    background: var(--accent); color: #14101f;
+    pointer-events: none;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
+  .cta {
+    display: inline-flex; align-items: center; gap: .4em;
+    padding: .55em 1.1em; border-radius: 999px; font-size: .92rem; font-weight: 600;
+    text-decoration: none; border: 1px solid var(--line); color: var(--fg);
+    transition: border-color .2s, background .2s, color .2s;
+  }
+  .cta:hover, .cta:focus-visible { border-color: var(--accent); outline: none; }
+  .cta.primary { background: var(--accent); border-color: var(--accent); color: #14101f; }
   /* 兜底与 footer */
   .fallback { border: 1px solid var(--line); border-radius: 16px; padding: 3rem; text-align: center; color: var(--dim); }
   .fallback a { color: var(--accent); }
@@ -122,6 +139,10 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const cols = lines[head].split('|').map(s => s.trim());
     const col = name => cols.indexOf(name);
     const [cPat, cName, cLv, cMech] = [col('Pattern'), col('名称'), col('难度'), col('一句话机制')];
+    const FEATURED = new Set([
+      'scroll-driven-shader','image-displacement','particle-transition','shader-wipe',
+      'split-text-reveal','horizontal-gallery','view-transitions','drag-spring'
+    ]);
     const items = [];
     for (let i = head + 2; i < lines.length && lines[i].trim().startsWith('|'); i++) {
       const c = lines[i].split('|').map(s => s.trim());
@@ -130,12 +151,16 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
       items.push({ path: link[2], id: link[1], name: c[cName], lv: c[cLv], mech: c[cMech], cat: link[1].split('/')[0] });
     }
     if (!items.length) return fail();
-    grid.innerHTML = items.map(p => `
-      <a class="card" href="${p.path}demo.html" target="_blank" rel="noopener" title="${p.mech}"
-         data-cat="${p.cat}" data-lv="${p.lv}" data-id="${p.id.split('/')[1]}">
-        <div class="view"><iframe src="${p.path}demo.html" loading="lazy" title="${p.name} 预览" tabindex="-1"></iframe></div>
+    grid.innerHTML = items.map(p => {
+      const fid = p.id.split('/')[1];
+      const isF = FEATURED.has(fid);
+      return `
+      <a class="card${isF ? ' featured' : ''}" href="${p.path}demo.html" target="_blank" rel="noopener" title="${p.mech}"
+         data-cat="${p.cat}" data-lv="${p.lv}" data-id="${fid}" data-featured="${isF ? '1' : '0'}">
+        <div class="view">${isF ? '<span class="badge-featured">FEATURED</span>' : ''}<iframe src="${p.path}demo.html" loading="lazy" title="${p.name} 预览" tabindex="-1"></iframe></div>
         <div class="meta"><b>${p.name}</b><span class="cat">${p.cat}</span><span class="lv">${p.lv}</span></div>
-      </a>`).join('');
+      </a>`;
+    }).join('');
 
     // —— 切片2:筛选 + URL 状态 ——
     // 套餐表解析(短名 → 卡片 data-id)
@@ -146,10 +171,10 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
       sets.push({ label: (c[1] || '').split('/')[0].trim(), ids: (c[2] || '').split('+').map(s => s.trim()) });
     }
     const cats = [...new Set(items.map(p => p.cat))];
-    const state = { cat: '', level: '', set: '' };            // set 与 cat/level 互斥
+    const state = { cat: '', level: '', set: '', featured: '' };            // set 与 cat/level 互斥
     const bar = document.getElementById('filters');
     const chip = (label, key, val) => `<button class="chip" data-key="${key}" data-val="${val}" aria-pressed="false">${label}</button>`;
-    bar.innerHTML = chip('全部', '', '')
+    bar.innerHTML = chip('全部', '', '') + chip('镇馆 8', 'featured', '1')
       + cats.map(c => chip(c, 'cat', c)).join('')
       + '<span class="sep">|</span>' + ['★','★★','★★★'].map((s, i) => chip(s, 'level', i + 1)).join('')
       + '<span class="sep">|</span>' + sets.map((s, i) => chip('套餐·' + s.label, 'set', i + 1)).join('');
@@ -159,25 +184,28 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
       let shown = 0;
       cards.forEach(el => {                                   // 只切显隐,不重建 iframe
         const ok = setIds ? setIds.includes(el.dataset.id)
-          : (!state.cat || el.dataset.cat === state.cat) && (!state.level || el.dataset.lv.length === +state.level);
+          : (!state.cat || el.dataset.cat === state.cat)
+            && (!state.level || el.dataset.lv.length === +state.level)
+            && (!state.featured || el.dataset.featured === '1');
         el.hidden = !ok; if (ok) shown++;
       });
       count.textContent = `${shown} / ${items.length} 个 pattern · 预览只读,点卡片全屏试玩`;
       bar.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed',
-        b.dataset.key === '' ? String(!state.cat && !state.level && !state.set) : String(state[b.dataset.key] == b.dataset.val)));
+        b.dataset.key === '' ? String(!state.cat && !state.level && !state.set && !state.featured) : String(state[b.dataset.key] == b.dataset.val)));
       const q = new URLSearchParams(Object.entries(state).filter(([, v]) => v));
       history.replaceState(null, '', q.size ? '?' + q : location.pathname);
     }
     bar.addEventListener('click', e => {
       const b = e.target.closest('.chip'); if (!b) return;
       const { key, val } = b.dataset;
-      if (!key) Object.assign(state, { cat: '', level: '', set: '' });
-      else if (key === 'set') Object.assign(state, { cat: '', level: '', set: state.set == val ? '' : val });
-      else { state.set = ''; state[key] = state[key] == val ? '' : val; }   // 再点一次取消
+      if (!key) Object.assign(state, { cat: '', level: '', set: '', featured: '' });
+      else if (key === 'set') Object.assign(state, { cat: '', level: '', featured: '', set: state.set == val ? '' : val });
+      else if (key === 'featured') Object.assign(state, { cat: '', level: '', set: '', featured: state.featured == val ? '' : val });
+      else { state.set = ''; state.featured = ''; state[key] = state[key] == val ? '' : val; }   // 再点一次取消
       apply();
     });
     const q = new URLSearchParams(location.search);           // 回放 URL 状态
-    ['cat', 'level', 'set'].forEach(k => state[k] = q.get(k) || '');
+    ['cat', 'level', 'set', 'featured'].forEach(k => state[k] = q.get(k) || '');
     apply();
 
     // —— 狗粮:卡片 scroll-reveal 入场(patterns/scroll/scroll-reveal 机制) ——
