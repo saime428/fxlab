@@ -12,3 +12,4 @@
 | [GPU 粒子过渡](particle-transition/) | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/particle-transition/demo.html) |
 | [圆形揭开转场](clip-circle-reveal/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-circle-reveal/demo.html) |
 | [像素化过渡](pixelate-transition/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/pixelate-transition/demo.html) |
+| [形状擦除过渡](clip-shape-wipe/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-shape-wipe/demo.html) |

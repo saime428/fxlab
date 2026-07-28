@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprite Preview — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  .hint { color: #77778a; margin-bottom: 2.4rem; }
+  .card {
+    display: inline-block; width: min(80vw, 360px); border: 1px solid #2b2b35; border-radius: 16px;
+    overflow: hidden; background: #1b1b22; cursor: pointer; padding: 0; font: inherit; color: inherit;
+  }
+  .card:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 4px; }
+  /* 精灵层:6 帧横排,背景 600%,静止 = 第 1 帧(海报就是首帧,省一张图) */
+  .sprite {
+    aspect-ratio: 16/10;
+    background-image: var(--sprite);
+    background-repeat: no-repeat;
+    background-size: 600% 100%;            /* KNOB: 帧数 ×100%,与 steps()/生成器帧数联动 */
+    background-position-x: 0%;
+  }
+  .card:hover .sprite, .card:focus-visible .sprite, .card.playing .sprite {
+    animation: play .9s steps(5, jump-none) infinite;   /* 6 帧 = 5 步,jump-none 首尾帧都出现 */
+  }
+  @keyframes play { to { background-position-x: 100%; } }
+  .meta { padding: .9rem 1.1rem; text-align: left; }
+  .meta b { display: block; }
+  .meta small { color: #77778a; }
+  @media (prefers-reduced-motion: reduce) { .card .sprite { animation: none !important; } }
+</style>
+</head>
+<body>
+  <div>
+    <h1>精灵图 Hover 预览</h1>
+    <p class="hint">hover / 聚焦 / 点击(触屏)——海报播成 6 帧动画,零 video 零依赖</p>
+    <button class="card" id="card" aria-pressed="false" aria-label="弹跳小球动画预览,点击播放或暂停">
+      <div class="sprite" aria-hidden="true"></div>
+      <div class="meta"><b>Bouncing Ball</b><small>6 帧精灵图 · steps(5, jump-none)</small></div>
+    </button>
+  </div>
+<script>
+  // 零依赖:6 帧精灵图运行时生成(真实项目换成一张横排 webp,--sprite 指过去即可)
+  const F = 6, W = 320, H = 200;
+  const c = document.createElement('canvas'); c.width = W * F; c.height = H;
+  const x = c.getContext('2d');
+  for (let i = 0; i < F; i++) {
+    const ox = i * W, t = i / (F - 1);
+    const g = x.createLinearGradient(ox, 0, ox, H); g.addColorStop(0, '#1d1830'); g.addColorStop(1, '#2b2244');
+    x.fillStyle = g; x.fillRect(ox, 0, W, H);
+    // 弹跳小球:抛物线 + 落地压扁(经典 squash)
+    const by = 40 + Math.abs(Math.sin(t * Math.PI)) * 110;
+    const squash = by > 140 ? 1.35 : 1;
+    x.fillStyle = '#8b7cf6';
+    x.beginPath(); x.ellipse(ox + W / 2, Math.min(by, 150), 26 * squash, 26 / squash, 0, 0, 7); x.fill();
+    x.fillStyle = 'rgba(0,0,0,.35)';
+    x.beginPath(); x.ellipse(ox + W / 2, 168, 30 * squash, 6, 0, 0, 7); x.fill();
+  }
+  document.querySelector('.sprite').style.setProperty('--sprite', `url(${c.toDataURL()})`);
+  // 触屏 toggle:无 hover 的等价物
+  const card = document.getElementById('card');
+  card.addEventListener('click', () => {
+    const on = card.classList.toggle('playing');
+    card.setAttribute('aria-pressed', String(on));
+  });
+</script>
+</body>
+</html>

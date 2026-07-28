@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clip Shape Wipe — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  :root { --dur-l: .55s; --ease-out: cubic-bezier(.22,1,.36,1); }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  .hint { color: #77778a; margin-bottom: 1.6rem; }
+  .mode { display: flex; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
+  .mode button { background: none; border: 1px solid #3a3a46; color: #77778a; padding: .4em 1.2em; border-radius: 2em; font: inherit; cursor: pointer; }
+  .mode button[aria-pressed="true"] { border-color: #8b7cf6; color: #ecebf2; }
+  .mode button:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 2px; }
+  /* 舞台:两个场景之一 + 擦除层 */
+  .stage { position: relative; width: min(84vw, 560px); aspect-ratio: 16/10; border-radius: 16px; overflow: hidden; cursor: pointer; border: 0; padding: 0; font: inherit; }
+  .stage:focus-visible { outline: 2px solid #8b7cf6; outline-offset: 4px; }
+  .scene { position: absolute; inset: 0; display: grid; place-content: center; font-size: 3rem; font-weight: 800; color: #101014; }
+  /* ① 圆形擦除层:clip-path 从交互点涨满 */
+  .wipe-circle { position: absolute; inset: 0; z-index: 2; background: #101014; clip-path: circle(0% at var(--x, 50%) var(--y, 50%)); transition: clip-path var(--dur-l) var(--ease-out); pointer-events: none; }
+  .wipe-circle.cover { clip-path: circle(150% at var(--x, 50%) var(--y, 50%)); }
+  /* ② 条纹擦除层:N 条色带索引错峰落下/滑出 */
+  .wipe-stripes { position: absolute; inset: 0; z-index: 2; display: flex; pointer-events: none; }
+  .wipe-stripes i { flex: 1; background: #101014; translate: 0 -101%; transition: translate .4s var(--ease-out); }
+  .wipe-stripes.cover i { translate: 0 0; }
+  .wipe-stripes.leave i { translate: 0 101%; }
+  @media (prefers-reduced-motion: reduce) {
+    .wipe-circle, .wipe-stripes i { transition: none; }
+  }
+</style>
+</head>
+<body>
+  <div>
+    <h1>形状擦除过渡</h1>
+    <p class="hint">选一种形状,点击画面切换场景——盖住 → 换内容 → 退场</p>
+    <div class="mode" role="group" aria-label="擦除形状">
+      <button aria-pressed="true" data-mode="circle">圆形</button>
+      <button aria-pressed="false" data-mode="stripes">条纹</button>
+    </div>
+    <button class="stage" id="stage" aria-label="切换场景">
+      <div class="scene" id="scene"></div>
+      <div class="wipe-circle" id="wc" aria-hidden="true"></div>
+      <div class="wipe-stripes" id="ws" aria-hidden="true"><i></i><i></i><i></i></div>
+    </button>
+  </div>
+<script>
+  // ===== 旋钮 =====
+  const STRIPE_STAGGER = 70;   // 条纹错峰 ms,60~100
+  const SCENES = [
+    { bg: 'linear-gradient(120deg,#8b7cf6,#47d8ff)', label: 'ONE' },
+    { bg: 'linear-gradient(120deg,#ff7c5c,#e8ff47)', label: 'TWO' },
+  ];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stage = document.getElementById('stage'), scene = document.getElementById('scene');
+  const wc = document.getElementById('wc'), ws = document.getElementById('ws');
+  const stripes = [...ws.children];
+  let index = 0, mode = 'circle', busy = false;
+
+  function paint() {
+    scene.style.background = SCENES[index].bg;
+    scene.textContent = SCENES[index].label;
+  }
+  paint();
+
+  document.querySelector('.mode').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    mode = b.dataset.mode;
+    document.querySelectorAll('.mode button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  });
+
+  stage.addEventListener('click', e => {
+    if (busy) return;
+    const next = () => { index = (index + 1) % SCENES.length; paint(); };
+    if (reduced) { next(); return; }                       // 降级:直接换
+    busy = true;
+    if (mode === 'circle') {
+      const r = stage.getBoundingClientRect();             // 圆心 = 你按的地方
+      wc.style.setProperty('--x', `${((e.clientX - r.left) / r.width * 100).toFixed(1)}%`);
+      wc.style.setProperty('--y', `${((e.clientY - r.top) / r.height * 100).toFixed(1)}%`);
+      wc.classList.add('cover');
+      wc.addEventListener('transitionend', () => {         // ② 盖满的瞬间换内容
+        next();
+        wc.classList.remove('cover');                      // ③ 退场
+        wc.addEventListener('transitionend', () => busy = false, { once: true });
+      }, { once: true });
+    } else {
+      stripes.forEach((s, i) => s.style.transitionDelay = `${i * STRIPE_STAGGER}ms`);
+      ws.classList.add('cover');
+      stripes.at(-1).addEventListener('transitionend', () => {
+        next();
+        ws.classList.add('leave');                         // 继续向下滑出(同方向 = 扫过)
+        stripes.at(-1).addEventListener('transitionend', () => {
+          ws.classList.remove('cover', 'leave');
+          stripes.forEach(s => s.style.transitionDelay = '0ms');
+          busy = false;
+        }, { once: true });
+      }, { once: true });
+    }
+  });
+</script>
+</body>
+</html>

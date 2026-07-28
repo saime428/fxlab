@@ -10,3 +10,4 @@
 | [覆盖层自动反色](blend-invert/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/blend-invert/demo.html) |
 | [噪点颗粒层](grain-overlay/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/grain-overlay/demo.html) |
 | [双色调](duotone-blend/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/duotone-blend/demo.html) |
+| [假 UI 自演示](fake-ui-demo/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/fake-ui-demo/demo.html) |

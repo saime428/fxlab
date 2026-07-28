@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conic Border Spin — web-fx-lab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  :root { --spin-dur: 3s; /* KNOB: 转速 1s(充能)~20s(微光) */ }
+  @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; background: #101014; color: #ecebf2; min-height: 100vh; display: grid; place-content: center; text-align: center; padding: 6vh 4vw; }
+  h1 { margin-bottom: .4rem; }
+  .hint { color: #77778a; margin-bottom: 2.6rem; }
+  .row { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    position: relative; isolation: isolate;
+    background: #1b1b22; border: 0; color: #ecebf2;
+    padding: 1em 2.2em; border-radius: 14px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .btn:focus-visible { outline: 2px solid #ecebf2; outline-offset: 4px; }
+  .btn::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    padding: 2px;                                   /* 环的厚度 */
+    background: conic-gradient(from var(--angle), #8b7cf6, #47d8ff, #e8ff47, #ff7c5c, #8b7cf6);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;                        /* 挖空中间,只剩环 */
+    animation: spin var(--spin-dur) linear infinite;
+  }
+  @keyframes spin { to { --angle: 360deg; } }
+  /* 变体②:hover 才转(列表场景省绘制) */
+  .btn.on-hover::after { animation-play-state: paused; }
+  .btn.on-hover:hover::after, .btn.on-hover:focus-visible::after { animation-play-state: running; }
+  .label { display: block; margin-top: .8rem; color: #55555f; font-size: .8rem; }
+  @media (prefers-reduced-motion: reduce) { .btn::after { animation: none; } /* 停转,静态渐变边框仍在 */ }
+</style>
+</head>
+<body>
+  <div>
+    <h1>旋转渐变描边</h1>
+    <p class="hint">@property 注册 &lt;angle&gt; → CSS 变量可插值 → conic 起始角转起来</p>
+    <div class="row">
+      <span><button class="btn">常转 · 主 CTA</button><span class="label">自己在呼吸</span></span>
+      <span><button class="btn on-hover">hover 才转</button><span class="label">列表场景省绘制</span></span>
+    </div>
+  </div>
+  <!-- 无 JS:不支持 @property 的浏览器动画跳变/不动 = 天然降级为静态渐变边框 -->
+</body>
+</html>

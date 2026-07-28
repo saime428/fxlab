@@ -17,7 +17,7 @@
 | 1 | 全页滚动驱动章节叙事 | scroll | 滚动进度编排 + 章节 pin | ✅ |
 | 2 | 可交互漂浮元素(气泡/贴纸) | hover | 物理感 hover + 拖拽 | ✅ |
 | 3 | 章节主题切换(配色/风格突变) | transitions | 滚动触发主题变量切换 | ✅ |
-| 4 | 内嵌产品 UI 动画演示 | layout | 12 个 video(实测确认) | ☐ |
+| 4 | 内嵌产品 UI 动画演示 | layout | 12 个 video(实测确认) | ✅(DOM/CSS 版可行,见 [MotionPotion](../motionpotion/analysis.md) 假 UI 自演示) |
 | 5 | 视差漂浮卡片 | scroll | 不同滚动速率 translate | ✅ |
 | 6 | 数字滚动 counter | text | IntersectionObserver + rAF | ✅ |
 

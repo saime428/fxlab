@@ -78,6 +78,14 @@
 | [卡片翻转 Flip Card](patterns/hover/flip-card/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flip-card/demo.html) |
 | [双色调 Duotone](patterns/layout/duotone-blend/) | 布局手法 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/duotone-blend/demo.html) |
 | [像素化过渡 Pixelate](patterns/transitions/pixelate-transition/) | 页面切换 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/pixelate-transition/demo.html) |
+| [形状擦除过渡 Clip Shape Wipe](patterns/transitions/clip-shape-wipe/) | 页面切换 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-shape-wipe/demo.html) |
+| [弹性文字入场 Elastic Text](patterns/text/elastic-text/) | 文字动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/elastic-text/demo.html) |
+| [纸屑爆发 Confetti Burst](patterns/3d-webgl/confetti-burst/) | 3D/WebGL | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/3d-webgl/confetti-burst/demo.html) |
+| [旋转渐变描边 Conic Border](patterns/hover/conic-border-spin/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/conic-border-spin/demo.html) |
+| [精灵图 Hover 预览 Sprite](patterns/hover/sprite-preview/) | 悬停交互 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/sprite-preview/demo.html) |
+| [假 UI 自演示 Fake UI Demo](patterns/layout/fake-ui-demo/) | 布局手法 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/fake-ui-demo/demo.html) |
+| [自定义光标 Custom Cursor](patterns/cursor/custom-cursor/) | 鼠标跟随 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/cursor/custom-cursor/demo.html) |
+| [磁性按钮 Magnetic Button](patterns/hover/magnetic-button/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/magnetic-button/demo.html) |
 
 ## Case 索引
 
@@ -93,6 +101,9 @@
 | [Shopify Editions W26](https://www.shopify.com/editions/winter2026) | 发布说明做成滚动叙事 | — | [拆解](cases/shopify-editions-winter-26/analysis.md) |
 | [Hashgraph Ventures](https://hashgraphvc.com/) | 章节宣言叙事+氛围音 | — | [拆解](cases/hashgraph-ventures/analysis.md) |
 | [infinite imaginations](https://oninross.github.io/infinite-imaginations/) | TweenMax 时代考古 | ✅ [源码](https://github.com/oninross/infinite-imaginations) | [拆解](cases/infinite-imaginations/analysis.md) |
+| [MotionPotion](https://motionpotion.co/) | 纯 CSS 交互动效密度天花板,假 UI 自演示 | — | [拆解](cases/motionpotion/analysis.md) |
+| [Cuberto](https://cuberto.com/) | 光标状态机的行业原型 | — | [拆解](cases/cuberto/analysis.md) |
+| [Dennis Snellenberg](https://dennissnellenberg.com/) | 磁性按钮标杆,SOTD"手感"标本 | — | [拆解](cases/dennis-snellenberg/analysis.md) |
 
 ## 怎么在项目里用
 
