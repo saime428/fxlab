@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>像素化过渡 Pixelate Transition — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-s:.3s; --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:52rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+.stage{ position:relative; margin:2.5rem 0 1rem; border-radius:10px; overflow:hidden;
+        aspect-ratio:16/9; background:#0b0b0d; }
+canvas{ display:block; width:100%; height:100%; }
+.row{ display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+.btn{ font:inherit; color:inherit; cursor:pointer; border:1px solid rgba(244,244,237,.28);
+      background:transparent; padding:.7rem 1.3rem; border-radius:999px;
+      transition:border-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out); }
+.btn:hover,.btn:focus-visible{ border-color:var(--accent); color:var(--accent); }
+.btn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.step{ font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; opacity:.55; }
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>像素化过渡</h1>
+  <p>淡入淡出的中间态是<strong>两张图糊在一起的泥色</strong>。像素化换了个思路:
+     中间态不是"两张图的平均",而是<strong>同一张图的低分辨率版本</strong>——
+     每一帧都是自洽的画面,没有叠影。</p>
+
+  <div class="stage"><canvas id="cv" role="img" aria-label="像素化过渡演示画面"></canvas></div>
+  <div class="row">
+    <button class="btn" id="go">切换下一张</button>
+    <span class="step" id="step">分辨率 100%</span>
+  </div>
+
+  <p style="margin-top:2rem">在<strong>最低分辨率那一帧换源图</strong>,不是中途换——
+     低分辨率时人眼分辨不出内容,切换就被藏住了。</p>
+
+  <p class="note"><code>imageSmoothingEnabled = false</code> 是这个效果的全部,忘了它就是普通模糊、
+     一点马赛克感都没有;而且<strong>每次 drawImage 前都要设</strong>,某些浏览器在 canvas 尺寸变化后会重置。<br>
+     <code>r</code> 走离散档位而不是线性插值,连续变化看起来像缩放而不是降分辨率。<br>
+     canvas 会丢掉一切语义,真实项目里它只当过渡层盖在真实内容之上,过渡完撤掉。<br>
+     <strong>故障/闪烁类效果对光敏感人群风险更高</strong>,<code>prefers-reduced-motion</code> 下直接换图不做过程。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<script>
+/* ===== KNOB ==========================================================
+   STEPS   分辨率档位。离散跳变才是"降分辨率",线性插值看着像缩放
+   HOLD    每档停留帧数。越大越顿挫,越小越顺滑
+   ==================================================================== */
+const STEPS = [1, .55, .3, .16, .085, .045, .025];
+const HOLD = 3;
+
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const stepLabel = document.getElementById('step');
+const RM = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+// 画布像素尺寸不必等于 CSS 尺寸 —— 马赛克本来就不需要高分辨率
+const W = 800, H = 450;
+cv.width = W; cv.height = H;
+
+const tmp = document.createElement('canvas');
+const tctx = tmp.getContext('2d');
+
+/* 三张"图":程序化画出来,不外链资源 */
+const SCENES = [
+  { a:'#3a5bd9', b:'#9ad1ff', t:'NORTHFALL' },
+  { a:'#c2410c', b:'#fde68a', t:'PELLET' },
+  { a:'#0f766e', b:'#a7f3d0', t:'TIDEWHEEL' },
+];
+const src = document.createElement('canvas');
+src.width = W; src.height = H;
+const sctx = src.getContext('2d');
+
+function paintSource(i) {
+  const s = SCENES[i];
+  const g = sctx.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, s.a); g.addColorStop(1, s.b);
+  sctx.fillStyle = g; sctx.fillRect(0, 0, W, H);
+  sctx.fillStyle = 'rgba(0,0,0,.35)';
+  sctx.beginPath(); sctx.arc(W * .72, H * .34, 120, 0, Math.PI * 2); sctx.fill();
+  sctx.fillStyle = '#fff';
+  sctx.font = '900 78px Helvetica, Arial, sans-serif';
+  sctx.textBaseline = 'middle';
+  sctx.fillText(s.t, 48, H * .72);
+}
+
+// 核心:降采样 → 关插值放大
+function draw(r) {
+  tmp.width = Math.max(1, Math.round(W * r));    // 降到 0 会抛异常
+  tmp.height = Math.max(1, Math.round(H * r));
+  tctx.imageSmoothingEnabled = false;
+  tctx.drawImage(src, 0, 0, tmp.width, tmp.height);
+  ctx.imageSmoothingEnabled = false;             // 每次都要设,尺寸变化后可能被重置
+  ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(tmp, 0, 0, W, H);
+  stepLabel.textContent = '分辨率 ' + Math.round(r * 100) + '%';
+}
+
+let cur = 0, busy = false;
+paintSource(cur); draw(1);
+
+function run() {
+  if (busy) return;
+  if (RM) {                                      // 光敏感风险:直接换,不做过程
+    cur = (cur + 1) % SCENES.length; paintSource(cur); draw(1); return;
+  }
+  busy = true;
+  const down = STEPS.slice(1);                   // 1 → 最低
+  const up = [...down].reverse().slice(1).concat(1);
+  const seq = [...down, 'SWAP', ...up];
+  let i = 0, hold = 0;
+
+  const tick = () => {
+    if (hold++ < HOLD) return requestAnimationFrame(tick);
+    hold = 0;
+    const s = seq[i++];
+    if (s === undefined) { busy = false; return; }
+    if (s === 'SWAP') {                          // 最低分辨率那一帧换源图
+      cur = (cur + 1) % SCENES.length;
+      paintSource(cur);
+      draw(STEPS[STEPS.length - 1]);
+    } else draw(s);
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+document.getElementById('go').addEventListener('click', run);
+</script>
+</body>
+</html>

@@ -47,6 +47,11 @@
 | [hover/flow-border](patterns/hover/flow-border/) | 流光边框 | ★★ | @property 让 conic 角度可动画 | 主 CTA/当前选中项,一页一次 |
 | [transitions/clip-circle-reveal](patterns/transitions/clip-circle-reveal/) | 圆形揭开转场 | ★ | clip-path circle 从点击处扩张 | 换页/换肤,让转场和点击有因果关系 |
 | [text/text-mask-media](patterns/text/text-mask-media/) | 文字挖空露媒体 | ★★ | background-clip:text 或 mask 挖穿盖层 | 超大标题里流着视频/渐变,一屏立记忆点 |
+| [text/outline-type](patterns/text/outline-type/) | 描边字 | ★ | -webkit-text-stroke + text-fill-color 过渡 | 超大空心标题,占位置但不抢注意力 |
+| [text/text-on-path](patterns/text/text-on-path/) | 文字沿路径 | ★★ | SVG textPath(静态)/ CSS offset-path(逐字动画) | 圆形徽章、弧线标题,跳出网页默认观感 |
+| [hover/flip-card](patterns/hover/flip-card/) | 卡片翻转 | ★★ | perspective 在祖先 + preserve-3d + backface | 列表保持克制,细节藏背面 |
+| [layout/duotone-blend](patterns/layout/duotone-blend/) | 双色调 | ★★ | 去色 + lighten 抬黑 + multiply 压白 | 把来源不一的图统进一套品牌色 |
+| [transitions/pixelate-transition](patterns/transitions/pixelate-transition/) | 像素化过渡 | ★★ | canvas 降采样 + 关插值放大,最低点换图 | 要"利落不互溶"的切换,中间帧不糊 |
 
 ## 气质套餐(场景 → 组合)
 

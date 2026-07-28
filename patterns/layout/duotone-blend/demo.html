@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>双色调 Duotone — web-fx-lab</title>
+<style>
+:root{
+  --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+  --dur-m:.6s; --ease-out:cubic-bezier(.19,1,.22,1);
+  /* ===== KNOB =========================================================
+     --shadow / --highlight  两个色的**明度差要够大**,同明度做不出双色调
+     --contrast              去色后影调发灰,1.1–1.3 拉开双色分离感
+     ==================================================================== */
+  --shadow:#101d3d; --highlight:#d2ff00; --contrast:1.2;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:58rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.45;
+        margin:3rem 0 .75rem; font-weight:600; }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:1rem; }
+
+/* 用 CSS 渐变冒充"来自不同摄影师、色温各异"的四张图 */
+.shot{ aspect-ratio:4/5; border-radius:8px; overflow:hidden; position:relative; }
+.px1{ background:linear-gradient(155deg,#ff9d5c 0%,#7a2d00 45%,#2b0f00 100%); }
+.px2{ background:linear-gradient(155deg,#9ad1ff 0%,#1c3f8f 50%,#050d22 100%); }
+.px3{ background:linear-gradient(155deg,#d9f99d 0%,#3f6212 45%,#0b1400 100%); }
+.px4{ background:linear-gradient(155deg,#f0abfc 0%,#6d28d9 50%,#160b2b 100%); }
+
+/* ============ 核心:三步,顺序不能乱 ============ */
+.duo{ isolation:isolate; }          /* ← 不写这行,染色层会和页面背景混合,颜色完全不对 */
+.duo .px{ position:absolute; inset:0;
+          filter:grayscale(1) contrast(var(--contrast)); }   /* 1. 先去色 */
+.duo::before,.duo::after{ content:""; position:absolute; inset:0; pointer-events:none;
+                          transition:opacity var(--dur-m) var(--ease-out); }
+.duo::before{ background:var(--shadow);    mix-blend-mode:lighten; }   /* 2. 抬黑 */
+.duo::after { background:var(--highlight); mix-blend-mode:multiply; }  /* 3. 压白 */
+/* ================================================ */
+
+/* hover 恢复原色:比换第二张图省得多 */
+.duo:hover .px,.duo:focus-within .px{ filter:none; }
+.duo:hover::before,.duo:hover::after,
+.duo:focus-within::before,.duo:focus-within::after{ opacity:0; }
+.duo .px{ transition:filter var(--dur-m) var(--ease-out); }
+
+/* 反面对照:少了 isolation,染色层跟页面背景混,结果完全不对 */
+.no-iso{ isolation:auto; }
+/* 反面对照:不去色,残留色相和染色层混出脏的第三种颜色 */
+.no-gray .px{ filter:none; }
+
+.cap{ margin:.6rem 0 0; font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; opacity:.5; }
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+@media (prefers-reduced-motion:reduce){
+  .duo .px,.duo::before,.duo::after{ transition:none; }
+}
+@media print{ .duo::before,.duo::after{ display:none } }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>双色调</h1>
+  <p>下面四张"图"色温、影调完全不一样(冒充来自不同摄影师)。双色调把它们压成
+     <strong>同一套两色映射</strong>——图还是那张图,但整页突然是一套体系了。
+     <strong>悬停任意一张恢复原色</strong>。</p>
+
+  <h2 class="lbl">应用后</h2>
+  <div class="grid">
+    <div class="shot duo" tabindex="0"><div class="px px1"></div></div>
+    <div class="shot duo" tabindex="0"><div class="px px2"></div></div>
+    <div class="shot duo" tabindex="0"><div class="px px3"></div></div>
+    <div class="shot duo" tabindex="0"><div class="px px4"></div></div>
+  </div>
+
+  <h2 class="lbl">原图(未处理)</h2>
+  <div class="grid">
+    <div class="shot"><div class="px px1" style="position:absolute;inset:0"></div></div>
+    <div class="shot"><div class="px px2" style="position:absolute;inset:0"></div></div>
+    <div class="shot"><div class="px px3" style="position:absolute;inset:0"></div></div>
+    <div class="shot"><div class="px px4" style="position:absolute;inset:0"></div></div>
+  </div>
+  <p class="cap">拼在一起像剪贴板 —— 这就是双色调要解决的问题</p>
+
+  <h2 class="lbl">两个最常见的翻车点</h2>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(13rem,1fr))">
+    <div>
+      <div class="shot duo no-iso"><div class="px px2"></div></div>
+      <p class="cap">少了 isolation:isolate</p>
+    </div>
+    <div>
+      <div class="shot duo no-gray"><div class="px px2"></div></div>
+      <p class="cap">少了 grayscale —— 混出脏的第三色</p>
+    </div>
+    <div>
+      <div class="shot duo" style="--shadow:#8a8f7a;--highlight:#9aa088"><div class="px px2"></div></div>
+      <p class="cap">两色明度差不够 —— 糊成一团</p>
+    </div>
+    <div>
+      <div class="shot duo" style="--shadow:#2b0f3d;--highlight:#ff9d5c"><div class="px px2"></div></div>
+      <p class="cap">换一套色,同一张图换个气质</p>
+    </div>
+  </div>
+
+  <p class="note"><strong>图片信息会丢失</strong>——产品图、人像、任何"细节即内容"的图别用,
+     双色调是给氛围图和背景图的。<br>
+     两个混合层 = 两个合成层,长列表里每张图都用会明显吃性能;列表用预处理好的图,
+     双色调留给 hero。<br>
+     要更精确的映射(能控中间调)用 SVG <code>feComponentTransfer</code>,CSS 混合版是快而糙的那条。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+</body>
+</html>

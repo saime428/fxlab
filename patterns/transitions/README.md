@@ -11,3 +11,4 @@
 | [Shader 遮罩擦除过渡](shader-wipe/) | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/shader-wipe/demo.html) |
 | [GPU 粒子过渡](particle-transition/) | ★★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/particle-transition/demo.html) |
 | [圆形揭开转场](clip-circle-reveal/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-circle-reveal/demo.html) |
+| [像素化过渡](pixelate-transition/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/pixelate-transition/demo.html) |

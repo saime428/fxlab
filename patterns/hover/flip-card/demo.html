@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卡片翻转 Flip Card — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-l:.8s; --ease-out:cubic-bezier(.19,1,.22,1);
+       /* ===== KNOB =====
+          --persp  透视距离。600px 强烈(近大远小明显)/ 1000px 常用 / 2000px 接近正交 */
+       --persp:1000px; }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:56rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(14rem,1fr)); gap:1.25rem; margin:2.5rem 0; }
+
+/* ============ 三层各司其职 ============ */
+.scene{ perspective:var(--persp); }        /* 透视在**祖先**上,写在翻转元素自己身上会变成平的 */
+.card{
+  position:relative; aspect-ratio:3/4;     /* 两面都 absolute,容器必须自己撑开高度 */
+  transform-style:preserve-3d;             /* 让子元素活在 3D 空间里 */
+  transition:transform var(--dur-l) var(--ease-out);
+  cursor:pointer;
+}
+.scene:hover .card,.card.flipped{ transform:rotateY(180deg); }
+.face{
+  position:absolute; inset:0; border-radius:10px; overflow:hidden;
+  backface-visibility:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end; padding:1.25rem;
+  /* Safari 上 backface 剔除与嵌套 3D 有历史 bug:把两面在 Z 轴错开一点更稳 */
+  transform:translateZ(.1px);
+}
+.back{ transform:rotateY(180deg) translateZ(.1px); }  /* 背面先转过去,翻过来才是正的 */
+/* ====================================== */
+
+.front{ background:linear-gradient(150deg,#3a5bd9,#9ad1ff); color:#0e1220; }
+.f2 .front{ background:linear-gradient(150deg,#c2410c,#fde68a); }
+.f3 .front{ background:linear-gradient(150deg,#0f766e,#a7f3d0); }
+.back{ background:#1c1c20; border:1px solid rgba(244,244,237,.16); justify-content:space-between; }
+.face h3{ margin:0; font-size:1.15rem; letter-spacing:-.01em; }
+.face .tag{ font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; opacity:.7; }
+.back p{ margin:0; font-size:.85rem; opacity:.7; }
+.back .yr{ font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+
+.card:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+.hint{ font-size:.8rem; opacity:.5; margin-top:-.5rem; }
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+
+/* 旋转类运动对前庭敏感人群不友好:改成淡入淡出换面 */
+@media (prefers-reduced-motion:reduce){
+  .card{ transition:none; }
+  .scene:hover .card,.card.flipped{ transform:none; }
+  .face{ transition:opacity .001ms; }
+  .back{ transform:none; opacity:0; }
+  .scene:hover .back,.card.flipped .back{ opacity:1; }
+  .scene:hover .front,.card.flipped .front{ opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>卡片翻转</h1>
+  <p>正面只放最少的东西,细节藏在背面——列表保持克制,信息一个没少。
+     比"hover 展开"高级的地方在于<strong>它有物理意义</strong>:纸有两面,不需要学习。</p>
+  <p class="hint">鼠标悬停翻转;也可以用 Tab 聚焦后按空格/回车(触屏只能点击)。</p>
+
+  <div class="grid" id="grid">
+    <div class="scene">
+      <div class="card" tabindex="0" role="button" aria-pressed="false">
+        <div class="face front"><span class="tag">基础设施</span><h3>Northfall</h3></div>
+        <div class="face back"><span class="yr">2018 — 至今</span>
+          <p>边缘节点调度层。种子轮进,至今没换过 CTO。第四年才有第一个付费客户。</p></div>
+      </div>
+    </div>
+    <div class="scene f2">
+      <div class="card" tabindex="0" role="button" aria-pressed="false">
+        <div class="face front"><span class="tag">开发工具</span><h3>Pellet</h3></div>
+        <div class="face back"><span class="yr">2019 — 至今</span>
+          <p>给六人团队用的构建缓存。两次砍掉全部管线重来。</p></div>
+      </div>
+    </div>
+    <div class="scene f3">
+      <div class="card" tabindex="0" role="button" aria-pressed="false">
+        <div class="face front"><span class="tag">能源</span><h3>Tidewheel</h3></div>
+        <div class="face back"><span class="yr">2017 — 至今</span>
+          <p>潮汐储能并网控制。等了七年才等到电价机制改革。</p></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="note"><strong>触屏没有 hover</strong>,所以必须提供点击翻转——否则背面内容在手机上永远看不到,
+     那是内容丢失,不是效果降级。<br>
+     两个面都在 DOM 里,读屏会把背面一起念、Tab 会跳进看不见的那面。
+     这里用 <code>inert</code> 把当前不可见的面关掉,翻转后再换过来。<br>
+     <code>perspective</code> 必须写在<strong>祖先</strong>上;写在翻转元素自己身上,每个面各自算透视,
+     翻起来是平的、没有近大远小。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<script>
+// 可访问性:当前看不见的那一面必须 inert,否则读屏念得到、Tab 进得去
+function sync(card) {
+  const flipped = card.classList.contains('flipped') || card.matches(':hover');
+  card.querySelector('.front').toggleAttribute('inert', flipped);
+  card.querySelector('.back').toggleAttribute('inert', !flipped);
+  card.setAttribute('aria-pressed', String(flipped));
+}
+
+for (const card of document.querySelectorAll('.card')) {
+  sync(card);
+  const toggle = () => { card.classList.toggle('flipped'); sync(card); };
+  card.addEventListener('click', toggle);
+  card.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+  });
+  // hover 翻转由 CSS 负责,这里只同步无障碍状态
+  card.closest('.scene').addEventListener('pointerenter', () => sync(card));
+  card.closest('.scene').addEventListener('pointerleave', () => sync(card));
+}
+</script>
+</body>
+</html>
