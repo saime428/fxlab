@@ -416,7 +416,7 @@
         <span class="line"><span style="color:var(--accent)">做让人停住</span></span>
         <span class="line"><span style="color:var(--accent)">的那一下。</span></span>
       </h1>
-      <p class="muted lede">这一页是 fxlab 的验收现场：序章、全屏菜单、拆行入场、光标拖尾、滚动字幕、横向画廊、液态图片过渡、磁性按钮、主题突变——同一套 token，像一个人做的。</p>
+      <p class="muted lede">这一页是 fxlab 的验收现场：序章、全屏菜单、拆行入场、光标拖尾、滚动字幕、五种封面语言的横向画廊、液态图片过渡、磁性按钮、主题突变——同一套 token，像一个人做的。</p>
       <div class="hero-cta">
         <div class="field">
           <a class="mag" href="#works"><span>进入作品廊 →</span></a>
@@ -447,14 +447,14 @@
         <h2 class="lines reveal" aria-label="悬停，像素开始流动。">
           <span class="line"><span>悬停，像素开始流动。</span></span>
         </h2>
-        <p class="muted" style="max-width:36em;margin-top:.8rem">横向画廊 = sticky + 纵向滚动映射。每张卡是独立的 displacement 画布——点一下，封面互相推过去。</p>
+        <p class="muted" style="max-width:36em;margin-top:.8rem">横向画廊 = sticky + 纵滚映射。五张卡是五种完全不同的封面语言（硬切 / 粒子 / 大字 / 弹簧 / 变形）；悬停或点击时，再用 displacement 过渡到另一套封面。</p>
       </div>
       <div class="hrail" id="hrail">
-        <article class="hcard" data-a="0" data-b="1"><canvas></canvas><div class="meta"><b>Shader Wipe</b><span>TRANSITIONS · ★★★</span></div></article>
-        <article class="hcard" data-a="1" data-b="2"><canvas></canvas><div class="meta"><b>Particle Field</b><span>GPU · ★★★</span></div></article>
-        <article class="hcard" data-a="2" data-b="3"><canvas></canvas><div class="meta"><b>Split Type</b><span>TEXT · ★</span></div></article>
-        <article class="hcard" data-a="3" data-b="0"><canvas></canvas><div class="meta"><b>Spring Drag</b><span>HOVER · ★★</span></div></article>
-        <article class="hcard" data-a="0" data-b="2"><canvas></canvas><div class="meta"><b>View Morph</b><span>NATIVE · ★★</span></div></article>
+        <article class="hcard" data-a="0" data-b="1"><canvas></canvas><div class="meta"><b>Shader Wipe</b><span>硬切边缘 · TRANSITIONS</span></div></article>
+        <article class="hcard" data-a="1" data-b="2"><canvas></canvas><div class="meta"><b>Particle Field</b><span>星尘粒子 · GPU</span></div></article>
+        <article class="hcard" data-a="2" data-b="3"><canvas></canvas><div class="meta"><b>Split Type</b><span>大字拆行 · TEXT</span></div></article>
+        <article class="hcard" data-a="3" data-b="4"><canvas></canvas><div class="meta"><b>Spring Drag</b><span>磁吸弹簧 · HOVER</span></div></article>
+        <article class="hcard" data-a="4" data-b="0"><canvas></canvas><div class="meta"><b>View Morph</b><span>双态变形 · NATIVE</span></div></article>
       </div>
     </div>
   </div>
@@ -481,7 +481,7 @@
       <div class="tile">
         <div class="tag">// AGENT</div>
         <h3>INDEX + TASTE</h3>
-        <p>给人抄 demo，给 AI 选型。Claude skill 装上就能说「要有质感」。</p>
+        <p>给人抄 demo，给 Agent 选型。装上 skill 后，任意支持 skill 的 Agent 都能说「要有质感」。</p>
       </div>
       <div class="tile">
         <div class="tag">// A11Y</div>
@@ -714,34 +714,139 @@ void main(){
   measure(); addEventListener('resize', measure);
 
   // ===== displacement cards =====
-  const PAL = [
-    ['#1a2210', '#c5f542', '#8b7cf6', 'WIPE'],
-    ['#14101f', '#8b7cf6', '#47d8ff', 'FLOW'],
-    ['#101820', '#47d8ff', '#c5f542', 'TYPE'],
-    ['#1a1018', '#ff7c5c', '#8b7cf6', 'SPRING'],
+  // 五张封面：构图/色板/图形语言刻意不同，避免“五个一样的圆”
+  const COVERS = [
+    { id: 0, label: 'WIPE', sub: 'SHADER EDGE' },
+    { id: 1, label: 'FIELD', sub: 'PARTICLE DUST' },
+    { id: 2, label: 'TYPE', sub: 'SPLIT REVEAL' },
+    { id: 3, label: 'SPRING', sub: 'MAGNETIC PULL' },
+    { id: 4, label: 'MORPH', sub: 'VIEW TRANSIT' },
   ];
   function makeCover(i) {
-    const [bg1, bg2, fg, label] = PAL[i % PAL.length];
     const c = document.createElement('canvas'); c.width = 640; c.height = 800;
     const x = c.getContext('2d');
-    const g = x.createLinearGradient(0, 0, 640, 800);
-    g.addColorStop(0, bg1); g.addColorStop(1, bg2);
-    x.fillStyle = g; x.fillRect(0, 0, 640, 800);
-    x.fillStyle = fg;
-    for (let k = 0; k < 8; k++) {
-      x.beginPath();
-      x.arc(80 + (k % 4) * 150, 180 + Math.floor(k / 4) * 220 + Math.sin(k * 1.7) * 40, 48 + k * 3, 0, 7);
-      x.globalAlpha = 0.55; x.fill();
+    const w = 640, h = 800;
+    const stamp = (label, sub, y = 640) => {
+      x.textAlign = 'left';
+      x.fillStyle = 'rgba(255,255,255,.92)';
+      x.font = '800 56px system-ui,sans-serif';
+      x.fillText(label, 40, y);
+      x.font = '600 16px ui-monospace,monospace';
+      x.fillStyle = 'rgba(255,255,255,.55)';
+      x.fillText(sub, 42, y + 32);
+      x.fillText('0' + (i + 1) + ' / FXLAB', 42, y + 56);
+    };
+    // style 0: diagonal hard wipe / crystal shards
+    if (i === 0) {
+      const g = x.createLinearGradient(0, 0, w, h);
+      g.addColorStop(0, '#0c1208'); g.addColorStop(1, '#1f2a10');
+      x.fillStyle = g; x.fillRect(0, 0, w, h);
+      x.fillStyle = '#c5f542';
+      x.beginPath(); x.moveTo(0, 120); x.lineTo(w * .55, 0); x.lineTo(w, 0); x.lineTo(w, 280); x.closePath(); x.fill();
+      x.globalAlpha = .9; x.fillStyle = '#8b7cf6';
+      x.beginPath(); x.moveTo(0, h); x.lineTo(0, 420); x.lineTo(w * .7, h); x.closePath(); x.fill();
+      x.globalAlpha = 1;
+      for (let k = 0; k < 6; k++) {
+        x.strokeStyle = 'rgba(197,245,66,.45)'; x.lineWidth = 2;
+        x.beginPath(); x.moveTo(40 + k * 90, 200); x.lineTo(120 + k * 90, 520); x.stroke();
+      }
+      stamp('WIPE', 'SHADER EDGE');
+      return c;
     }
-    x.globalAlpha = 1;
-    x.fillStyle = '#fff'; x.font = '800 72px system-ui,sans-serif';
-    x.textAlign = 'center'; x.fillText(label, 320, 420);
-    x.font = '600 22px ui-monospace,monospace';
-    x.fillStyle = 'rgba(255,255,255,.55)';
-    x.fillText('FXLAB · ' + String(i + 1).padStart(2, '0'), 320, 470);
-    return c;
+    // style 1: particle field / constellation
+    if (i === 1) {
+      x.fillStyle = '#0a0814'; x.fillRect(0, 0, w, h);
+      const rg = x.createRadialGradient(w * .5, h * .35, 20, w * .5, h * .4, 420);
+      rg.addColorStop(0, 'rgba(139,124,246,.55)'); rg.addColorStop(1, 'transparent');
+      x.fillStyle = rg; x.fillRect(0, 0, w, h);
+      for (let k = 0; k < 160; k++) {
+        const px = (Math.sin(k * 12.9898) * 43758.5453) % 1;
+        const py = (Math.sin(k * 78.233) * 12345.678) % 1;
+        const r = 1 + (k % 5);
+        x.fillStyle = k % 7 === 0 ? '#47d8ff' : k % 5 === 0 ? '#c5f542' : 'rgba(255,255,255,.75)';
+        x.beginPath(); x.arc(Math.abs(px) * w, Math.abs(py) * h * .85, r, 0, 7); x.fill();
+      }
+      // a few connecting lines
+      x.strokeStyle = 'rgba(71,216,255,.25)'; x.lineWidth = 1;
+      for (let k = 0; k < 12; k++) {
+        x.beginPath();
+        x.moveTo((k * 53) % w, (k * 97) % (h * .7));
+        x.lineTo((k * 91 + 120) % w, (k * 41 + 80) % (h * .7));
+        x.stroke();
+      }
+      stamp('FIELD', 'PARTICLE DUST');
+      return c;
+    }
+    // style 2: big type slabs
+    if (i === 2) {
+      x.fillStyle = '#0e141c'; x.fillRect(0, 0, w, h);
+      x.fillStyle = '#47d8ff'; x.fillRect(0, 0, w, 18);
+      x.fillStyle = 'rgba(197,245,66,.15)'; x.fillRect(0, 180, w, 120);
+      x.fillStyle = '#f2f1f7';
+      x.font = '900 120px system-ui,sans-serif';
+      x.textAlign = 'left';
+      x.fillText('Aa', 36, 280);
+      x.font = '800 64px system-ui,sans-serif';
+      x.fillStyle = '#47d8ff'; x.fillText('SPLIT', 40, 400);
+      x.fillStyle = 'rgba(242,241,247,.2)';
+      x.font = '900 96px system-ui,sans-serif';
+      x.fillText('文字', 40, 520);
+      // rising bars like line masks
+      for (let k = 0; k < 5; k++) {
+        x.fillStyle = k % 2 ? 'rgba(71,216,255,.35)' : 'rgba(242,241,247,.12)';
+        x.fillRect(40, 560 + k * 28, 200 + k * 40, 14);
+      }
+      stamp('TYPE', 'SPLIT REVEAL', 720);
+      return c;
+    }
+    // style 3: spring / orbital rings + magnet blob
+    if (i === 3) {
+      const g = x.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#1a0e12'); g.addColorStop(1, '#2a1218');
+      x.fillStyle = g; x.fillRect(0, 0, w, h);
+      x.strokeStyle = 'rgba(255,124,92,.55)'; x.lineWidth = 3;
+      for (let k = 1; k <= 5; k++) {
+        x.beginPath(); x.ellipse(w * .5, h * .38, 40 + k * 42, 28 + k * 36, -0.4, 0, 7); x.stroke();
+      }
+      x.fillStyle = '#ff7c5c';
+      x.beginPath(); x.arc(w * .55, h * .4, 54, 0, 7); x.fill();
+      x.fillStyle = '#8b7cf6';
+      x.beginPath(); x.arc(w * .38, h * .48, 28, 0, 7); x.fill();
+      // spring coil simplified
+      x.strokeStyle = '#c5f542'; x.lineWidth = 4; x.beginPath();
+      for (let t = 0; t < 12; t++) {
+        const xx = 80 + t * 40, yy = 620 + Math.sin(t * 1.2) * 28;
+        t ? x.lineTo(xx, yy) : x.moveTo(xx, yy);
+      }
+      x.stroke();
+      stamp('SPRING', 'MAGNETIC PULL', 720);
+      return c;
+    }
+    // style 4: morph / soft shapes dual state
+    {
+      x.fillStyle = '#100e18'; x.fillRect(0, 0, w, h);
+      // left blob
+      x.fillStyle = '#8b7cf6';
+      x.beginPath(); x.moveTo(80, 200);
+      x.bezierCurveTo(40, 360, 180, 520, 260, 480);
+      x.bezierCurveTo(340, 440, 300, 180, 80, 200); x.fill();
+      // right blob
+      x.fillStyle = '#c5f542';
+      x.beginPath(); x.moveTo(360, 240);
+      x.bezierCurveTo(520, 160, 600, 400, 520, 520);
+      x.bezierCurveTo(440, 640, 280, 560, 360, 240); x.fill();
+      x.globalAlpha = .5; x.fillStyle = '#47d8ff';
+      x.beginPath(); x.arc(320, 380, 90, 0, 7); x.fill();
+      x.globalAlpha = 1;
+      x.strokeStyle = 'rgba(255,255,255,.35)'; x.lineWidth = 2;
+      x.setLineDash([8, 10]);
+      x.strokeRect(48, 140, w - 96, h - 320);
+      x.setLineDash([]);
+      stamp('MORPH', 'VIEW TRANSIT', 700);
+      return c;
+    }
   }
-  const covers = PAL.map((_, i) => makeCover(i));
+  const covers = COVERS.map((_, i) => makeCover(i));
   const cards = [...document.querySelectorAll('.hcard')].map((card, idx) => {
     const cv = card.querySelector('canvas');
     const gl = cv.getContext('webgl', { antialias: false, preserveDrawingBuffer: true });

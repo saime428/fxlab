@@ -40,7 +40,7 @@
 ```text
 做了个可抄的网页动效实验室 fxlab：
 • 每个效果双击就能跑的 demo（零依赖向）
-• INDEX 给 AI 选型，附 Claude Code skill
+• INDEX 给 AI 选型，附通用 Agent skill
 • Showcase 是整页拼装，不是散装 CodePen
 
 在线试：https://saime428.github.io/fxlab/
@@ -52,7 +52,7 @@
 ```text
 fxlab: copy-paste motion patterns with live demos.
 
-Zero-deps demos · AI-readable INDEX · Claude skill
+Zero-deps demos · AI-readable INDEX · agent skill
 for landings that should feel expensive (not animation spam).
 
 Demo → https://saime428.github.io/fxlab/

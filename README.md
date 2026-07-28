@@ -5,7 +5,7 @@
 </p>
 
 > **炫酷可抄 · 零依赖 demo · AI 会选型**  
-> 把获奖站级网页动效拆成可复用 pattern：原理 README + 双击能跑的 `demo.html`，并附 AI 选型索引与 Claude skill。
+> 把获奖站级网页动效拆成可复用 pattern：原理 README + 双击能跑的 `demo.html`，并附 AI 选型索引与通用 Agent skill。
 
 [English](README.en.md) · [在线 Demo](https://saime428.github.io/fxlab/) · [样板间 Showcase](https://saime428.github.io/fxlab/showcase/) · [完整索引 INDEX](INDEX.md) · [口味铁律 TASTE](TASTE.md)
 
@@ -22,7 +22,7 @@ Not another CodePen dump — curated patterns, taste rules, agent-ready INDEX.
 |--------|--------|
 | **前端 / 设计师** | 打开 [Live demos](https://saime428.github.io/fxlab/) → 点卡片全屏试玩 → 读 pattern README 抄结构 |
 | **要整页参考** | 打开 [Showcase](https://saime428.github.io/fxlab/showcase/)（多 pattern 拼成的 landing） |
-| **Claude / Agent** | 安装 skill（见下）→ 说「给这个 landing 加有质感的动效，贴合现有设计」 |
+| **任意 Agent** | 安装 skill（见下）→ 说「给这个 landing 加有质感的动效，贴合现有设计」 |
 
 ---
 
@@ -56,29 +56,36 @@ Not another CodePen dump — curated patterns, taste rules, agent-ready INDEX.
 
 ---
 
-## 给 Agent / Claude Code 用
+## 给 Agent 用
 
-1. 复制 skill 目录到本机 Claude skills：
+`skills/fxlab/` 是一份标准 skill 包（`SKILL.md` + 仓库内 INDEX/TASTE）。**不绑定某一家 Agent**：只要你的工具支持 skill / 规则文件 / 可粘贴系统提示，都可以装。
+
+### 安装（按你的 Agent 选路径）
 
 ```bash
-# 任选其一
+# 通用：clone 后把 skills/fxlab 拷到该 Agent 的 skills 目录
+# Claude Code 示例
 cp -r skills/fxlab ~/.claude/skills/fxlab
 
-# 或 degit（无需整仓 clone）
+# 或 degit（无需整仓）
 npx --yes degit saime428/fxlab/skills/fxlab ~/.claude/skills/fxlab
 ```
 
-Windows (PowerShell):
+Windows (PowerShell，Claude Code 路径示例):
 
 ```powershell
 Copy-Item -Recurse skills\fxlab $env:USERPROFILE\.claude\skills\fxlab
 ```
 
-2. 新会话里说：
+其他 Agent：把同一目录放到其文档要求的 skills / rules 位置；或直接让 Agent 读取仓库根的 `INDEX.md` + `TASTE.md` + `skills/fxlab/SKILL.md`。
+
+### 怎么用
+
+新会话里说：
 
 > 给这个 landing 加有质感的动效，贴合现有设计，不要堆满动画。
 
-3. Agent 会读：
+Agent 会读：
 
 | 文件 | 用途 |
 |------|------|

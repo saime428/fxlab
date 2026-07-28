@@ -6,7 +6,7 @@
 [中文 README](README.md) · [Live demos](https://saime428.github.io/fxlab/) · [Showcase](https://saime428.github.io/fxlab/showcase/) · [INDEX](INDEX.md) · [TASTE](TASTE.md)
 
 ```text
-Curated motion patterns with live demos, taste rules, and a Claude/agent skill.
+Curated motion patterns with live demos, taste rules, and an agent-agnostic skill pack.
 ```
 
 ## 30-second start
@@ -15,7 +15,7 @@ Curated motion patterns with live demos, taste rules, and a Claude/agent skill.
 |----------|---------|
 | **Dev / designer** | Open [Live demos](https://saime428.github.io/fxlab/) → click a card → read the pattern README |
 | **Need a full page** | Open [Showcase](https://saime428.github.io/fxlab/showcase/) |
-| **Claude / agent** | Install the skill (below) → ask for tasteful motion that matches existing design |
+| **Any agent** | Install the skill (below) → ask for tasteful motion that matches existing design |
 
 ## Featured 8
 
@@ -41,13 +41,18 @@ Full catalog (Chinese table + links): **[README.md](README.md#完整-pattern-目
 | AI spam-animates | INDEX + **TASTE.md** → 2–4 effects max by default |
 | Library-locked tutorials | Demos stay openable with zero deps |
 
-## Use with Claude Code / agents
+## Use with any agent
+
+`skills/fxlab/` is a portable skill pack (`SKILL.md` + INDEX/TASTE). Not tied to one vendor.
 
 ```bash
+# Example path for Claude Code — use your agent's skills dir for others
 cp -r skills/fxlab ~/.claude/skills/fxlab
 # or
 npx --yes degit saime428/fxlab/skills/fxlab ~/.claude/skills/fxlab
 ```
+
+Or point any agent at `INDEX.md`, `TASTE.md`, and `skills/fxlab/SKILL.md` in the repo.
 
 Then:
 
