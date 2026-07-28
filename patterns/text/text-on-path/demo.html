@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文字沿路径 Text on Path — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --ease-out:cubic-bezier(.19,1,.22,1); }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:56rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+h1{ font-size:clamp(1.6rem,4.5vw,2.4rem); letter-spacing:-.025em; margin:0 0 .5rem; font-weight:900; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.45;
+        margin:3rem 0 .75rem; font-weight:600; }
+
+/* ============ 方案 A:SVG textPath —— 静态排布的正解 ============
+   文字仍是一段完整文本:可选中、可搜索、读屏正常 */
+.arc{ width:100%; height:auto; overflow:visible; }
+.arc text{ font:900 46px/1 "Helvetica Neue",system-ui,sans-serif; fill:var(--accent);
+           letter-spacing:2px; }
+/* ============================================================= */
+
+/* ============ 方案 B:CSS offset-path —— 需要逐字动画时 ============
+   坐标原点是元素自身的盒位置,所以所有字都 absolute 到容器左上角 */
+.rail{ position:relative; width:100%; max-width:700px; height:200px; margin:0 auto; }
+.rail .ch{
+  position:absolute; top:0; left:0;
+  font-weight:900; font-size:34px; color:var(--ink);
+  offset-path:path("M 20,150 C 200,20 500,20 680,150");
+  offset-distance:calc(var(--i) * 100% / var(--n));
+  offset-rotate:auto;                       /* 跟着切线转向 */
+}
+/* ⚠ offset-distance 在**开放路径**上钳制到 100%,只有**闭合路径**才环绕。
+   这条弧线是开放的,所以做不了无限流动 —— 硬做的话后半个周期所有字都堆在末端。
+   开放路径正确的用法是**一次性入场**:各字从起点滑到自己的位置。 */
+.rail .ch{ animation:enter .9s var(--ease-out) both; animation-delay:calc(var(--i) * 45ms); }
+@keyframes enter{
+  from{ offset-distance:0%; opacity:0 }
+  to  { offset-distance:calc(var(--i) * 100% / var(--n)); opacity:1 }
+}
+/* 老环境降级成普通横排 */
+@supports not (offset-path: path("M0,0")){
+  .rail{ height:auto; text-align:center; }
+  .rail .ch{ position:static; offset-path:none; display:inline-block; }
+}
+/* ================================================================ */
+
+/* 圆形徽章:路径**必须闭合**(结尾的 Z),offset-distance 才会环绕而不是钳制。
+   别用 rotate 转整个容器 —— 那样每个字的朝向是错的,只有整体在转 */
+.badge{ position:relative; width:190px; height:190px; margin:0 auto; }
+.badge .ch{
+  position:absolute; top:0; left:0; font-weight:800; font-size:15px;
+  letter-spacing:.08em; color:var(--accent);
+  offset-path:path("M 95,15 A 80,80 0 1,1 94.99,15 Z");   /* ← Z 是关键 */
+  offset-distance:calc(var(--i) * 100% / var(--n));
+  offset-rotate:auto;
+  animation:spin 16s linear infinite;
+}
+@keyframes spin{ to{ offset-distance:calc(var(--i) * 100% / var(--n) + 100%) } }
+.badge b{ position:absolute; inset:0; display:grid; place-content:center;
+          font-size:2rem; font-weight:900; }
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+/* 停流动,保留静态的沿路径排布 */
+@media (prefers-reduced-motion:reduce){
+  .badge .ch{ animation:none; }
+  /* 入场保留终态,不做过程 */
+  .rail .ch{ animation:none; offset-distance:calc(var(--i) * 100% / var(--n)); }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <h1>文字沿路径</h1>
+  <p>网页上的字永远躺在一条水平线上。让它绕着圆、沿着弧跑,
+     <strong>一眼就跳出"网页"的默认观感</strong>。</p>
+
+  <h2 class="lbl">方案 A · SVG textPath(静态排布用这条)</h2>
+  <svg class="arc" viewBox="0 0 700 200" role="img" aria-label="标题:耐心不是美德,是杠杆">
+    <path id="arc1" d="M 20,150 C 200,20 500,20 680,150" fill="none"/>
+    <text><textPath href="#arc1" startOffset="50%" text-anchor="middle">耐心不是美德,是杠杆</textPath></text>
+  </svg>
+  <p style="margin-top:1rem">这一行<strong>仍是一段完整文本</strong>——可以用鼠标选中它、可以 Ctrl+F 搜到、
+     读屏正常朗读。静态沿路径排版,这条就够了。</p>
+
+  <h2 class="lbl">方案 B · CSS offset-path(需要逐字动画时)</h2>
+  <div class="rail" id="rail" aria-label="沿路径入场的文字:不投风口,投把风口做出来的人"></div>
+  <p style="margin-top:1rem">各字从起点沿弧线滑到自己的位置,并跟着切线转向。
+     <strong>代价是每个字必须是独立元素</strong>,文本被拆碎——所以容器补了 <code>aria-label</code>、
+     每个字 <code>aria-hidden</code>,不然等于把这段内容从读屏用户那里删掉。</p>
+  <p><strong>这里不能做无限流动</strong>:<code>offset-distance</code> 在<strong>开放路径</strong>上
+     钳制到 100%,只有<strong>闭合路径</strong>才环绕。硬做的话后半个周期所有字都堆在末端。
+     开放路径就该用一次性入场,想要无限循环得用闭合路径——就是下面这个徽章。</p>
+
+  <h2 class="lbl">圆形徽章</h2>
+  <div class="badge" id="badge" aria-label="徽章:KESTREL WORKS 自二〇一七年"><b>K</b></div>
+  <p style="margin-top:1rem">整圆路径 + 匀速前进。<strong>别用 <code>rotate</code> 转整个容器</strong>——
+     那样每个字的朝向是错的,只有整体在转。</p>
+
+  <p class="note">拆字 = N 个绝对定位元素 + N 个 <code>offset-path</code> 计算。
+     一句话十几个字没问题,<strong>别拿它排段落</strong>。<br>
+     弧度大的路径上字距会被压缩/拉开,均分不一定好看,需要手工调分布。<br>
+     不支持 <code>offset-path</code> 的老环境已降级成普通横排。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+<script>
+// 拆字:每个字一个元素,带索引;原文留在容器的 aria-label 上
+function layout(el, text) {
+  const chars = [...text];
+  el.style.setProperty('--n', chars.length);
+  for (const [i, c] of chars.entries()) {
+    const s = document.createElement('span');
+    s.className = 'ch';
+    s.style.setProperty('--i', i);
+    s.setAttribute('aria-hidden', 'true');   // 文本已在容器 aria-label 里
+    s.textContent = c;
+    el.append(s);
+  }
+}
+
+layout(document.getElementById('rail'), '不投风口 · 投把风口做出来的人 · ');
+layout(document.getElementById('badge'), 'KESTREL WORKS · EST. 2017 · ');
+</script>
+</body>
+</html>

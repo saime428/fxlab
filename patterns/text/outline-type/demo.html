@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>描边字 Outline Type — web-fx-lab</title>
+<style>
+:root{ --ink:#f4f4ed; --bg:#141416; --accent:#d2ff00;
+       --dur-m:.6s; --ease-out:cubic-bezier(.19,1,.22,1);
+       /* ===== KNOB =====
+          --stroke  描边宽度。大字 1.5–2px;中文笔画密,别超过 2px */
+       --stroke:2px; }
+*,*::before,*::after{ box-sizing:border-box; }
+body{ margin:0; background:var(--bg); color:var(--ink);
+      font:16px/1.6 "Helvetica Neue",system-ui,sans-serif; }
+main{ max-width:56rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+p{ opacity:.76; max-width:38rem; }
+code{ background:rgba(244,244,237,.1); padding:.1em .35em; border-radius:3px; font-size:.9em; }
+h2.lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; opacity:.45;
+        margin:3rem 0 .75rem; font-weight:600; }
+
+/* ============ 核心 ============ */
+.outline{
+  -webkit-text-stroke:var(--stroke) currentColor;   /* 至今没有无前缀版本 */
+  -webkit-text-fill-color:transparent;              /* 用它而不是 color:透明,因为它可过渡 */
+  transition:-webkit-text-fill-color var(--dur-m) var(--ease-out);
+}
+.outline:hover,.outline:focus-visible{ -webkit-text-fill-color:var(--accent); }
+/* ============================== */
+
+.big{ margin:0; font-size:clamp(2.6rem,12vw,8rem); line-height:.9; font-weight:900;
+      letter-spacing:-.045em; text-transform:uppercase; }
+.echo{ margin:0; font-size:clamp(2rem,9vw,6rem); line-height:.92; font-weight:900;
+       letter-spacing:-.04em; text-transform:uppercase; }
+.echo span{ display:block; }
+.echo .solid{ color:var(--accent); }
+
+/* 尺寸对照:同样 2px 描边,小字会糊成一团 —— 描边骑在字形轮廓上,
+   一半在里一半在外,里面那一半吃掉字腔 */
+.sizes{ display:flex; flex-wrap:wrap; gap:1.5rem 2.5rem; align-items:baseline; margin:1rem 0 0; }
+.sizes b{ font-weight:900; }
+.s72{ font-size:72px } .s40{ font-size:40px } .s24{ font-size:24px } .s16{ font-size:16px }
+
+.cn{ font-size:clamp(2rem,8vw,5rem); font-weight:900; letter-spacing:.02em; margin:0; }
+
+.note{ margin-top:3rem; font-size:.85rem; opacity:.55; }
+/* color:transparent 在强制高对比模式下会让字彻底消失 */
+@media (forced-colors: active){
+  .outline{ -webkit-text-fill-color:CanvasText; -webkit-text-stroke:0; }
+}
+@media print{ .outline{ -webkit-text-fill-color:#111; -webkit-text-stroke:0 } }
+@media (prefers-reduced-motion:reduce){ .outline{ transition:none } }
+</style>
+</head>
+<body>
+
+<main>
+  <h2 class="lbl">悬停填充(<code>-webkit-text-fill-color</code> 可过渡,<code>color</code> 不行)</h2>
+  <h1 class="big outline" tabindex="0">Kestrel</h1>
+
+  <p style="margin-top:1.5rem">空心字<strong>占着大字号的位置,却不抢版面的注意力</strong>——
+     所以它能做超大标题而不压垮其他内容。</p>
+
+  <h2 class="lbl">实心 + 空心交替 = "回声"</h2>
+  <div class="echo">
+    <span class="outline">Patient</span>
+    <span class="outline">Patient</span>
+    <span class="solid">Patient</span>
+  </div>
+
+  <h2 class="lbl">尺寸对照:同样 2px 描边</h2>
+  <div class="sizes">
+    <b class="outline s72">Aa72</b>
+    <b class="outline s40">Aa40</b>
+    <b class="outline s24">Aa24</b>
+    <b class="outline s16">Aa16</b>
+  </div>
+  <p style="margin-top:1.2rem">描边是<strong>骑在字形轮廓上</strong>的,一半在里一半在外。
+     里面那一半会吃掉字腔——<strong>字号越小越糊</strong>。这个效果只适合 ≥48px 和粗字重。</p>
+
+  <h2 class="lbl">中文更吃亏</h2>
+  <p class="cn outline">耐心不是美德</p>
+  <p style="margin-top:1.2rem">笔画多、字腔小,同样宽度的描边在中文上糊得更快,
+     大字也别超过 2px。</p>
+
+  <p class="note"><strong>正文永远不要用</strong>:空心字可读性远低于实心字,细描边在浅色背景上几乎消失。<br>
+     想要"只在外侧描边"不吃字腔,CSS 做不到,得用 SVG 的 <code>paint-order: stroke fill</code>。<br>
+     别用多层 <code>text-shadow</code> 模拟描边——四个方向的阴影在圆角处会露缺口,性能也更差。<br>
+     配色排版是占位。进项目要跟项目的设计体系走(库规范铁律 6)。</p>
+</main>
+
+</body>
+</html>

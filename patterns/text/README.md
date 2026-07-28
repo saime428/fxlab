@@ -10,3 +10,5 @@
 | [滚动响应字幕](scroll-marquee/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/scroll-marquee/demo.html) |
 | [数字滚动](count-up/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/count-up/demo.html) |
 | [文字挖空露媒体](text-mask-media/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/text-mask-media/demo.html) |
+| [描边字](outline-type/) | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/outline-type/demo.html) |
+| [文字沿路径](text-on-path/) | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/text-on-path/demo.html) |

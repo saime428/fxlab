@@ -73,6 +73,11 @@
 | [流光边框 Flow Border](patterns/hover/flow-border/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flow-border/demo.html) |
 | [圆形揭开转场 Clip Circle Reveal](patterns/transitions/clip-circle-reveal/) | 页面切换 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/clip-circle-reveal/demo.html) |
 | [文字挖空露媒体 Text Mask Media](patterns/text/text-mask-media/) | 文字动效 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/text-mask-media/demo.html) |
+| [描边字 Outline Type](patterns/text/outline-type/) | 文字动效 | ★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/outline-type/demo.html) |
+| [文字沿路径 Text on Path](patterns/text/text-on-path/) | 文字动效 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/text/text-on-path/demo.html) |
+| [卡片翻转 Flip Card](patterns/hover/flip-card/) | 悬停交互 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/hover/flip-card/demo.html) |
+| [双色调 Duotone](patterns/layout/duotone-blend/) | 布局手法 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/layout/duotone-blend/demo.html) |
+| [像素化过渡 Pixelate](patterns/transitions/pixelate-transition/) | 页面切换 | ★★ | [demo](https://saime428.github.io/web-fx-lab/patterns/transitions/pixelate-transition/demo.html) |
 
 ## Case 索引
 
