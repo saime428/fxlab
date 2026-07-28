@@ -51,7 +51,15 @@
 4. 按 `docs/templates/case-analysis.md` 写入 `cases/`,效果清单逐条按 `docs/criteria.md` 四条标准标 ✅/☐
 5. ✅ 项按 `docs/templates/pattern.md` 做成 pattern(README + demo)
 6. 更新三处索引:根 README 两张表 + 对应分类 `patterns/<分类>/README.md`
-7. 验证(JS 语法 + 相对链接存在性)→ commit → push
+7. **验证:`node scripts/audit.mjs`**(必须 0 ERR)→ commit → push
+
+### 体检脚本 `scripts/audit.mjs`
+
+把踩过的坑变成可重复运行的检查,覆盖 HANDOVER 硬性规范 + INDEX 使用铁律:零依赖、JS 语法、reduced-motion(**只在有位移类动画时要求**,纯 color 过渡不算)、触屏降级(**拖拽类豁免**,它们本来就支持触屏)、键盘等价物(**只查可交互元素上的 hover**)、铁律 6 占位声明、KNOB 说明块(**只认赋数值的大写常量**,内容数组不算)、rAF 常驻空转、README 必答三问 + 见于/来源、索引一致性、全仓死链。
+
+- **误报是这类检查的头号敌人**:噪音一多整份报告就没人看。上面括号里的每一条收紧,都是因为初版把正常写法误判成了问题
+- **逃生口**:demo 里写 `<!-- audit-ok: 关键词 | 理由 -->` 跳过该项。**理由必须写**——需要解释的例外比没人看的噪音强
+- **它查不到动画过程中的问题**(入场乱序、中途堆叠)。那类要开浏览器 `el.getAnimations()[0].currentTime = t` 逐帧采样;**只验静止终态会漏**,本会话已在 text-on-path 上栽过一次
 
 ## 四、硬性规范
 

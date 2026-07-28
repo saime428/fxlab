@@ -15,6 +15,13 @@
   h2 { font-size: clamp(2rem, 6vw, 4.2rem); letter-spacing: -.02em; line-height: 1.05; }
   p { color: #9a968c; max-width: 32em; line-height: 1.9; margin-top: 1.4rem; }
   @media (max-width: 720px) { nav { display: none; } }
+  /* 铁律 2:letter-spacing 过渡是排版位移(不只是变色),前庭敏感人群要关掉;
+     smooth 滚动同理 —— 导航点击的平滑滚动是本 pattern 的主要运动来源 */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    nav a { transition: color .3s; }
+    nav a.active { letter-spacing: .15em; }
+  }
 </style>
 </head>
 <body>
@@ -41,5 +48,7 @@
     document.querySelector(l.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
   }));
 </script>
+<!-- 库规范铁律 6 常驻声明(自身就是 layout/blend-invert 的用法:difference 混合,任何背景都可读) -->
+<p style="position:fixed;left:0;right:0;bottom:0;z-index:99999;margin:0;padding:.3rem .75rem;text-align:center;font:11px/1.4 system-ui,sans-serif;letter-spacing:.04em;color:#fff;mix-blend-mode:difference;pointer-events:none">demo 的配色排版是占位 —— 抄机制,不抄样式(库规范铁律 6)</p>
 </body>
 </html>

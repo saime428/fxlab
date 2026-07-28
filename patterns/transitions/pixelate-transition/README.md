@@ -4,6 +4,7 @@
 - **难度**: ★★
 - **冲击力**: A(炸场)——两张图之间"碎成马赛克再重组",是数字感最强的一种切换
 - **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/pixelate-transition/demo.html)
+- **来源**: 通用做法,非从某一站实测提炼——[2026-07 扫描](../../../blends/scans/2026-07-awwwards.md)里 image-rendering:pixelated 仅 7/691 站,因为多数站用 canvas 实现探不到。**来源等级低于有 case 支撑的 pattern**
 
 ## 设计意图
 

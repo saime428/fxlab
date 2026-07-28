@@ -30,6 +30,7 @@ canvas{ display:block; width:100%; height:100%; }
 </head>
 <body>
 
+<!-- audit-ok: rAF 常驻 | 这个循环走完 seq 就 return 自停,不是常驻渲染循环 -->
 <main>
   <h1>像素化过渡</h1>
   <p>淡入淡出的中间态是<strong>两张图糊在一起的泥色</strong>。像素化换了个思路:
