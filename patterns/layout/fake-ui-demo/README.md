@@ -3,7 +3,7 @@
 - **分类**: 布局手法(产品叙事)
 - **难度**: ★★
 - **见于**: [MotionPotion](../../../cases/motionpotion/analysis.md)(假 AE 时间线自己"导入图层、长出滑块、蹦出关键帧");[Shopify Editions](../../../cases/shopify-editions-winter-26/analysis.md) 同需求用了 12 个 video——本 pattern 就是那笔账的 DOM/CSS 解法
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/fake-ui-demo/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/fake-ui-demo/demo.html)
 
 ## 设计意图
 

@@ -3,7 +3,7 @@
 - **分类**: 文字动效
 - **难度**: ★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md)(实测 110 个 marquee 元素,`data-marquee-scroll-speed` 滚动速度反馈)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/scroll-marquee/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/scroll-marquee/demo.html)
 
 ## 设计意图
 

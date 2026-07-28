@@ -3,7 +3,7 @@
 - **分类**: 悬停交互
 - **难度**: ★
 - **见于**: [MotionPotion](../../../cases/motionpotion/analysis.md)(`.spell-sprite`:模板卡 hover 即播,600% 背景 + steps(6))
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/sprite-preview/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/sprite-preview/demo.html)
 
 ## 设计意图
 

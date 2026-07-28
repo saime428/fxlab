@@ -3,7 +3,7 @@
 - **分类**: 文字动效 / 加载动画
 - **难度**: ★★
 - **见于**: [Anime.js 官网](../../../cases/animejs/analysis.md)(赛道绘制)、无数签名/logo 入场
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/svg-line-draw/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/svg-line-draw/demo.html)
 
 ## 设计意图
 

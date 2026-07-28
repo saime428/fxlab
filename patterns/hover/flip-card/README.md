@@ -3,7 +3,7 @@
 - **分类**: 悬停交互 / 3D
 - **难度**: ★★
 - **冲击力**: A(炸场)——页面上第一次出现"厚度",而且是纯 CSS
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/flip-card/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/flip-card/demo.html)
 - **来源**: [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md),`preserve-3d` **82/691 站**、`perspective` 47 站
 
 ## 设计意图

@@ -3,7 +3,7 @@
 - **分类**: 悬停交互(按钮/卡片装饰)
 - **难度**: ★
 - **见于**: [MotionPotion](../../../cases/motionpotion/analysis.md)(`.btn::after` + `@property --mp-angle`);当下 AI 产品站的事实标配
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/conic-border-spin/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/conic-border-spin/demo.html)
 
 ## 设计意图
 

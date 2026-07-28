@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★★
 - **见于**: [sakazuki](https://sakazuki.io/)(Journey 段:`cursor:none` 挂在 `.stepHideCursor`,配一个 84×33 的 `viewDetailCursorButton` 跟随)、[PP Neue Montreal](https://neuemontreal.com/)、[Dragonfly Redux](https://www.dragonfly.xyz/)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/hide-and-follow/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/hide-and-follow/demo.html)
 - **来源**: [2026-07 Awwwards 横截面扫描](../../../blends/scans/2026-07-awwwards.md)
 
 ## 设计意图

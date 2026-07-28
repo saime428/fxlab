@@ -3,7 +3,7 @@
 - **分类**: 悬停交互
 - **难度**: ★★
 - **见于**: [Anime.js](../../../cases/animejs/analysis.md)(`createDraggable` + spring);获奖站的贴纸/卡片/浮动装饰常客
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/drag-spring/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/drag-spring/demo.html)
 
 ## 设计意图
 

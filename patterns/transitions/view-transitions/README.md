@@ -3,7 +3,7 @@
 - **分类**: 页面切换
 - **难度**: ★★
 - **见于**: [infinite imaginations](../../../cases/infinite-imaginations/analysis.md)(hash 路由过渡的 2026 原生等价物);taxonomy 页面切换类点名技术
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/view-transitions/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/view-transitions/demo.html)
 
 ## 设计意图
 

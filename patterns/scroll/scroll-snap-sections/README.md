@@ -3,7 +3,7 @@
 - **分类**: 滚动动效 / 布局手法
 - **难度**: ★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md)("tap to lock" 滚动锁定的 CSS 简化版);全屏叙事站的标准骨架
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/scroll/scroll-snap-sections/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/scroll/scroll-snap-sections/demo.html)
 
 ## 设计意图
 

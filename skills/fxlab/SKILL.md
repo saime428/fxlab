@@ -1,11 +1,11 @@
 ---
-name: web-fx-lab
-description: 网页动效/炫酷效果选型库。当要给网站、landing page、作品集、官网做动效,给**现成的网站/页面加动效改造**(贴合原设计),或用户提到"要炫/有质感/有动效/高级感/获奖站风格"时使用;也在用户直接提到 web-fx-lab 时使用。提供 40+ 个零依赖 pattern(README 规格 + 单文件 demo)、按场景的组合套餐、存量站改造流程。
+name: fxlab
+description: 网页动效/炫酷效果选型库。当要给网站、landing page、作品集、官网做动效,给**现成的网站/页面加动效改造**(贴合原设计),或用户提到"要炫/有质感/有动效/高级感/获奖站风格"时使用;也在用户直接提到 fxlab 时使用。提供 40+ 个零依赖 pattern(README 规格 + 单文件 demo)、按场景的组合套餐、存量站改造流程。
 ---
 
-# web-fx-lab 效果选型
+# fxlab 效果选型
 
-网页动效选型库。源码 https://github.com/saime428/web-fx-lab · 在线 Demo https://saime428.github.io/web-fx-lab/ · 本地以 clone 后的仓库根目录为准。
+网页动效选型库。源码 https://github.com/saime428/fxlab · 在线 Demo https://saime428.github.io/fxlab/ · 本地以 clone 后的仓库根目录为准。
 
 ## 模式 B:给现有网站加动效(设计已定,只加动效)
 
@@ -20,7 +20,7 @@ description: 网页动效/炫酷效果选型库。当要给网站、landing page
 
 ## 模式 A:从零做页面(默认流程)
 
-1. **读仓库根 INDEX.md + TASTE.md（无本地仓时用 https://raw.githubusercontent.com/saime428/web-fx-lab/main/INDEX.md 与 .../TASTE.md）。INDEX 管「选什么效果」;TASTE 是口味铁律——颜色/缓动/密度等**用户没说的默认一律以 TASTE 为准**,冲突时用户明确要求优先。INDEX 管"选什么效果";TASTE 是甲方画像——配色、节奏、密度、黑名单等**用户没明说的决策一律以 TASTE 为准**,冲突时用户当次要求最大。
+1. **读仓库根 `INDEX.md` + `TASTE.md`**（无本地仓时用 https://raw.githubusercontent.com/saime428/fxlab/main/INDEX.md 与 .../TASTE.md）。INDEX 管「选什么效果」；TASTE 是口味铁律（配色/缓动/密度/黑名单等）——**用户没说的默认一律以 TASTE 为准**，冲突时用户当次要求优先。
 2. **按场景选,不按炫度选**:先判断项目气质(B 端克制 / 作品集仪式感 / 营销叙事 / 图片型 / 3D 体验),用 INDEX 里的"气质套餐"作起点,再增删。宁少勿多:2-4 个效果 + 1 个记忆点,好过 8 个效果打架。
 3. **读选中 pattern 的规格**:`patterns/<分类>/<效果名>/README.md` 的四节就是决策书——设计意图(该不该用)、核心机制(怎么实现)、实现要点(坑)、代价与注意(性能/可访问性/移动端)。
 4. **抄机制不抄样式**:demo.html 是参考实现,配色排版是占位。把核心机制移植进项目的技术栈和设计体系;库是零依赖写法,项目里若已有 GSAP/anime.js,用库内 README"变体与延伸"一节给出的等价 API。

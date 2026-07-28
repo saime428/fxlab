@@ -3,7 +3,7 @@
 - **分类**: 文字动效 / 排版
 - **难度**: ★
 - **冲击力**: A(炸场)——空心巨字是"这是个设计过的页面"最省的一个信号
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/outline-type/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/outline-type/demo.html)
 - **来源**: [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md),**84/691 站在用** `-webkit-text-stroke`
 
 ## 设计意图

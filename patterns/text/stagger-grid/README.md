@@ -3,7 +3,7 @@
 - **分类**: 文字动效 / 通用编排
 - **难度**: ★
 - **见于**: [Anime.js 官网](../../../cases/animejs/analysis.md)(13×13 网格 from center)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/stagger-grid/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/stagger-grid/demo.html)
 
 ## 设计意图
 

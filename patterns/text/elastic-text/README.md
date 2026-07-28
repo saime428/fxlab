@@ -3,7 +3,7 @@
 - **分类**: 文字动效
 - **难度**: ★
 - **见于**: [MotionPotion](../../../cases/motionpotion/analysis.md)(词汇表:elastic text / pop up text 模板)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/elastic-text/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/elastic-text/demo.html)
 
 ## 设计意图
 

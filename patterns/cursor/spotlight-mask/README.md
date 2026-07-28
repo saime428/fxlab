@@ -3,7 +3,7 @@
 - **分类**: 鼠标跟随
 - **难度**: ★★
 - **见于**: 体验型站与作品集的"揭示"交互;机制基于 `mask-image`,[2026-07 扫描](../../../blends/scans/2026-07-awwwards.md)里 158/691 站在用 `mask-image`(不限于光标场景)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/cursor/spotlight-mask/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/cursor/spotlight-mask/demo.html)
 
 ## 设计意图
 

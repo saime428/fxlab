@@ -3,7 +3,7 @@
 - **分类**: 滚动动效 / 布局手法
 - **难度**: ★★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md)(照片长廊)、大量 Awwwards 站
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/scroll/horizontal-gallery/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/scroll/horizontal-gallery/demo.html)
 
 ## 设计意图
 

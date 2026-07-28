@@ -3,7 +3,7 @@
 - **分类**: 文字动效
 - **难度**: ★
 - **见于**: [Shopify Editions W26](../../../cases/shopify-editions-winter-26/analysis.md)(`counter`,统计数字进场即滚)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/count-up/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/count-up/demo.html)
 
 ## 设计意图
 

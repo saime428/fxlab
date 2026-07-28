@@ -17,7 +17,7 @@
 
 | 文件名 | 内容 | 规格 |
 |--------|------|------|
-| `hero-showcase.gif` | [Showcase](https://saime428.github.io/web-fx-lab/showcase/) 滚动 5–8s | ≤3MB |
+| `hero-showcase.gif` | [Showcase](https://saime428.github.io/fxlab/showcase/) 滚动 5–8s | ≤3MB |
 | `p0-displacement.gif` | displacement 切换循环 3–5s | ≤2MB |
 | `p0-shader.gif` | scroll-driven-shader 滚动 3–5s | ≤2MB |
 
@@ -31,29 +31,29 @@
 
 ## 发帖短链
 
-- 主链（推荐）：https://saime428.github.io/web-fx-lab/showcase/  
-- 全库：https://saime428.github.io/web-fx-lab/  
-- 仓库：https://github.com/saime428/web-fx-lab  
+- 主链（推荐）：https://saime428.github.io/fxlab/showcase/  
+- 全库：https://saime428.github.io/fxlab/  
+- 仓库：https://github.com/saime428/fxlab  
 
 ## 中文帖模板
 
 ```text
-做了个可抄的网页动效实验室 web-fx-lab：
+做了个可抄的网页动效实验室 fxlab：
 • 每个效果双击就能跑的 demo（零依赖向）
 • INDEX 给 AI 选型，附 Claude Code skill
 • Showcase 是整页拼装，不是散装 CodePen
 
-在线试：https://saime428.github.io/web-fx-lab/
-仓库：https://github.com/saime428/web-fx-lab
+在线试：https://saime428.github.io/fxlab/
+仓库：https://github.com/saime428/fxlab
 ```
 
 ## English blurb
 
 ```text
-web-fx-lab: copy-paste motion patterns with live demos.
+fxlab: copy-paste motion patterns with live demos.
 
 Zero-deps demos · AI-readable INDEX · Claude skill
 for landings that should feel expensive (not animation spam).
 
-Demo → https://saime428.github.io/web-fx-lab/
+Demo → https://saime428.github.io/fxlab/
 ```

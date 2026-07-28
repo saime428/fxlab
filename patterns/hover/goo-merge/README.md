@@ -3,7 +3,7 @@
 - **分类**: 悬停交互 / 质感层
 - **难度**: ★★
 - **冲击力**: A(炸场)——两个圆靠近时像水银一样"拉丝"合并,是纯 CSS/SVG 能做出的最不像 CSS 的效果
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/goo-merge/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/goo-merge/demo.html)
 - **来源**: 通用做法,非从某一站实测提炼——[2026-07 扫描](../../../blends/scans/2026-07-awwwards.md)的 CSS 侧探不到它(SVG 滤镜 id 不进普查表)。**来源等级低于有 case 支撑的 pattern**
 
 ## 设计意图

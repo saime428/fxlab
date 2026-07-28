@@ -3,7 +3,7 @@
 - **分类**: 文字动效
 - **难度**: ★
 - **见于**: [Lando Norris](../../../cases/lando-norris/analysis.md)(`high-line-reveal` 逐行 clip)、[Hashgraph Ventures](../../../cases/hashgraph-ventures/analysis.md)(`text-splitter`)、[Robin Payot](../../../cases/robin-payot/analysis.md)(`split-text__letter` 逐字)——三站实测撞车,行业通用语言
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/split-text-reveal/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/split-text-reveal/demo.html)
 
 ## 设计意图
 

@@ -3,7 +3,7 @@
 - **分类**: 加载动画
 - **难度**: ★★
 - **见于**: [Bruno Simon 2019](../../../cases/bruno-simon-2019/analysis.md)、[Robin Payot](../../../cases/robin-payot/analysis.md)(Enter 门)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/loading/entry-preloader/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/loading/entry-preloader/demo.html)
 
 ## 设计意图
 

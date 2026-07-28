@@ -3,7 +3,7 @@
 - **分类**: 页面切换
 - **难度**: ★★★
 - **见于**: [Active Theory](../../../cases/active-theory/analysis.md)(GPU 粒子过渡,本 pattern 是其无状态简化版)
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/transitions/particle-transition/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/transitions/particle-transition/demo.html)
 
 ## 设计意图
 

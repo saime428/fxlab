@@ -3,7 +3,7 @@
 - **分类**: 布局手法 / 质感层
 - **难度**: ★★
 - **冲击力**: A(炸场)——把一堆来源不一的图片强行统进一套品牌色,是"整站气质统一"最快的一招
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/layout/duotone-blend/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/layout/duotone-blend/demo.html)
 - **来源**: [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md),`multiply/screen/overlay` 混合 **55/691 站**
 
 ## 设计意图

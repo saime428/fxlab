@@ -3,7 +3,7 @@
 - **分类**: 文字动效 / 布局手法
 - **难度**: ★★
 - **冲击力**: A(炸场)——超大标题里流着视频/渐变,一屏就能立住记忆点
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/text/text-mask-media/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/text/text-mask-media/demo.html)
 - **来源**: `background-clip: text` 在 [2026-07 扫描](../../../blends/scans/2026-07-awwwards.md)里 **78/691 站在用**
 
 ## 设计意图

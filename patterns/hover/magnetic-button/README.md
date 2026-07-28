@@ -3,7 +3,7 @@
 - **分类**: 悬停交互
 - **难度**: ★★
 - **见于**: [Dennis Snellenberg](../../../cases/dennis-snellenberg/analysis.md)(`.magnetic`,被复刻最多的一颗);taxonomy 点名多年的欠账
-- **Demo**: [demo.html](https://saime428.github.io/web-fx-lab/patterns/hover/magnetic-button/demo.html)
+- **Demo**: [demo.html](https://saime428.github.io/fxlab/patterns/hover/magnetic-button/demo.html)
 
 ## 设计意图
 
