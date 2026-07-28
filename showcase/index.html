@@ -22,7 +22,16 @@
     background: var(--bg); color: var(--fg); overflow-x: hidden;
   }
   body.locked { overflow: hidden; height: 100vh; }
-  body.has-trail, body.has-trail a, body.has-trail button { cursor: none; }
+  /* 光标拖尾：仅在 Enter 之后、且 body 已解锁时隐藏系统光标。
+     加载序章阶段必须保留默认指针，否则点不到 ENTER。 */
+  body.has-trail:not(.locked),
+  body.has-trail:not(.locked) a,
+  body.has-trail:not(.locked) button { cursor: none; }
+  body.has-trail:not(.locked) .enter,
+  body.locked,
+  body.locked a,
+  body.locked button { cursor: auto; }
+  body.locked .enter { cursor: pointer; }
   @media (pointer: coarse) {
     body.has-trail, body.has-trail a, body.has-trail button { cursor: auto; }
   }
@@ -610,6 +619,7 @@
   // ===== cursor trail =====
   const trail = document.getElementById('trail');
   const dots = [];
+  // 拖尾 DOM 可先建好，但 has-trail / 隐藏系统光标要等 Enter 之后
   if (FINE && !REDUCED) {
     for (let i = 0; i < KNOB.TRAIL_N; i++) {
       const d = document.createElement('i');
@@ -620,8 +630,6 @@
       trail.appendChild(d);
       dots.push({ el: d, x: innerWidth / 2, y: innerHeight / 2 });
     }
-    document.body.classList.add('has-trail');
-    trail.classList.add('on');
   }
   let mx = innerWidth / 2, my = innerHeight / 2, pointerIn = false;
   addEventListener('pointermove', e => {
@@ -887,6 +895,11 @@ void main(){
     curtain.classList.add('open');
     document.body.classList.remove('locked');
     document.getElementById('hero').classList.add('show');
+    // 进入主页后再开拖尾（避免加载页 cursor:none 点不到 Enter）
+    if (dots.length) {
+      document.body.classList.add('has-trail');
+      trail.classList.add('on');
+    }
     setTimeout(() => curtain.remove(), cssMs('--dur-l') + 80);
     started = true;
     if (!REDUCED) { running = true; requestAnimationFrame(loop); }
@@ -933,8 +946,8 @@ void main(){
     const mid = tr.top + tr.height * 0.35;
     theme.classList.toggle('on', mid < innerHeight * 0.55 && tr.bottom > innerHeight * 0.2);
 
-    // trail
-    if (dots.length) {
+    // trail（仅 Enter 后）
+    if (dots.length && document.body.classList.contains('has-trail')) {
       let px = mx, py = my;
       dots.forEach((d, i) => {
         const l = i === 0 ? 1 : KNOB.TRAIL_LERP;
