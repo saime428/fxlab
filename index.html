@@ -3,253 +3,354 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="fxlab: 炫酷可抄的网页动效实验室。40+ 零依赖 pattern · live 预览 · Agent skill · Featured 8。">
+<meta name="description" content="fxlab:网页动效 pattern 画廊。一行一条,点开零依赖 demo。">
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)">
 <title>fxlab — 网页效果画廊</title>
 <style>
+  /* 色板和列表照 claude.dev(2026-10)。字体用系统无衬线 + 等宽,不引用他们的字体文件。
+     开场机制见 patterns/loading/typed-title-handoff */
   * { margin: 0; box-sizing: border-box; }
-  :root { --bg: #101014; --panel: #1b1b22; --line: #2b2b35; --dim: #77778a; --fg: #ecebf2; --accent: #8b7cf6; }
-  body { font-family: -apple-system, "PingFang SC", sans-serif; background: var(--bg); color: var(--fg); }
-  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 4vw; }
-  /* 狗粮:canvas 氛围背景(patterns/3d-webgl/canvas-ambient-bg),透明度压低不抢卡片 */
-  #bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .55; }
-  header { padding: 14vh 0 8vh; }
-  h1 { font-size: clamp(2.4rem, 7vw, 4.5rem); font-weight: 800; }
-  h1 em { color: var(--accent); font-style: normal; }
-  .sub { color: var(--dim); margin-top: 1rem; max-width: 40em; line-height: 1.7; }
-  .sub a { color: var(--accent); }
-  /* 狗粮:split-text 行遮罩入场(patterns/text/split-text-reveal)。纯 CSS 自动播放:不依赖 rAF/JS,后台标签也跑,JS 关闭时降级为直接显示 */
-  .reveal { overflow: hidden; }
-  .reveal > span { display: inline-block; animation: rise .9s .05s cubic-bezier(.22,1,.36,1) both; }
-  .reveal-fade { animation: fadeUp .8s .3s ease-out both; }
-  @keyframes rise { from { transform: translateY(115%); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } }
-  /* 卡片网格 */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; padding-bottom: 10vh; }
-  .card { display: block; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--panel); color: inherit; text-decoration: none; transition: border-color .25s, transform .25s, opacity .6s; opacity: 0; /* 狗粮:scroll-reveal 入场,仅 opacity 避开 hover transform 冲突 */ }
-  .card.in { opacity: 1; }
-  .card:hover, .card:focus-visible { border-color: var(--accent); transform: translateY(-3px); outline: none; }
-  /* 预览:桌面视口渲染,整体缩小(避免挤扁的移动端形态) */
-  .view { aspect-ratio: 16/10; overflow: hidden; position: relative; background: var(--bg); }
-  .view iframe { width: 250%; height: 250%; transform: scale(.4); transform-origin: 0 0; border: 0; pointer-events: none; /* 只读:滚动/hover 都不进 iframe */ }
-  .meta { padding: .9rem 1.1rem; display: flex; align-items: baseline; gap: .6rem; }
-  .meta b { font-size: 1.02rem; }
-  .meta .cat { color: var(--dim); font-size: .82rem; }
-  .meta .lv { margin-left: auto; color: var(--accent); font-size: .82rem; letter-spacing: .1em; white-space: nowrap; }
-  .hintbar { color: var(--dim); font-size: .9rem; padding-bottom: 2rem; }
-  /* 筛选条 */
-  .filters { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); padding: .9rem 0 1rem; margin-bottom: 1.4rem; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
-  .filters .sep { color: var(--line); margin: 0 .3rem; }
-  .chip { background: none; border: 1px solid var(--line); color: var(--dim); padding: .35em 1em; border-radius: 2em; font: inherit; font-size: .85rem; cursor: pointer; transition: color .2s, border-color .2s; }
-  .chip:hover, .chip:focus-visible { border-color: var(--accent); color: var(--fg); outline: none; }
-  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #14101f; }
-  .card[hidden] { display: none; }
-  .card.featured { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
-  .badge-featured {
-    position: absolute; top: 10px; left: 10px; z-index: 2;
-    font-size: .72rem; letter-spacing: .06em; font-weight: 700;
-    padding: .28em .7em; border-radius: 999px;
-    background: var(--accent); color: #14101f;
-    pointer-events: none;
+  :root {
+    color-scheme: dark;
+    --bg: #141413; --ink: #faf9f5; --ink-2: #b0aea5; --ink-3: #87867f; --ink-4: #5e5d59;
+    --accent: #d97757; --line-soft: #faf9f517; --hover-row: #faf9f50b;
+    --sans: "Segoe UI", "PingFang SC", "Helvetica Neue", sans-serif;
+    --mono: "Cascadia Mono", "Sarasa Mono SC", ui-monospace, Consolas, monospace;
+    --ease: cubic-bezier(.19, 1, .22, 1);
+    --gutter: 2rem;
   }
-  .cta-row { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
-  .cta {
-    display: inline-flex; align-items: center; gap: .4em;
-    padding: .55em 1.1em; border-radius: 999px; font-size: .92rem; font-weight: 600;
-    text-decoration: none; border: 1px solid var(--line); color: var(--fg);
-    transition: border-color .2s, background .2s, color .2s;
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --bg: #faf9f5; --ink: #141413; --ink-2: #4c4b45; --ink-3: #7b7a72; --ink-4: #a8a69d;
+      --accent: #c15f3c; --line-soft: #1414131c; --hover-row: #1414130d;
+    }
   }
-  .cta:hover, .cta:focus-visible { border-color: var(--accent); outline: none; }
-  .cta.primary { background: var(--accent); border-color: var(--accent); color: #14101f; }
-  /* 兜底与 footer */
-  .fallback { border: 1px solid var(--line); border-radius: 16px; padding: 3rem; text-align: center; color: var(--dim); }
-  .fallback a { color: var(--accent); }
-  footer { border-top: 1px solid var(--line); padding: 3rem 0 5rem; color: var(--dim); line-height: 2; }
-  footer a { color: var(--accent); text-decoration: none; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); }
+  a { color: inherit; }
+  .nav {
+    position: sticky; top: 0; z-index: 6; display: flex; justify-content: flex-end;
+    gap: 1.35rem; padding: 22px var(--gutter) 0; background: var(--bg);
+  }
+  .nav a {
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .04em;
+    color: var(--ink-2); text-decoration: none;
+  }
+  .nav a.on, .nav a:hover, .nav a:focus-visible { color: var(--ink); }
+  .nav a:focus-visible { outline: none; text-decoration: underline; text-underline-offset: 4px; }
+  .nav .k { color: var(--ink-3); margin-right: .35rem; }
+  .wrap { padding: 0 var(--gutter) 12vh; }
+  .below {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 1.5rem; align-items: start; margin-top: 4rem;
+  }
+  .hero { grid-column: 1 / 5; position: sticky; top: 5.5rem; }
+  .list-col { grid-column: 5 / 13; min-width: 0; }
+  .wm {
+    font-family: var(--mono); font-weight: 400; font-size: 1.75rem;
+    line-height: 1.1; white-space: nowrap; letter-spacing: 0;
+  }
+  h1 { anchor-name: --wm; }
+  .sub { color: var(--ink-2); margin-top: 1rem; padding-right: 1.5rem; line-height: 1.6; text-wrap: balance; }
+  .sub a { color: var(--ink); }
+  .list-top {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem;
+    border-bottom: 1px solid var(--line-soft); padding-bottom: 12px;
+  }
+  .tabs { display: flex; flex-wrap: wrap; gap: .45rem 0; align-items: baseline; min-width: 0; }
+  .tab {
+    background: none; border: 0; padding: 0; margin: 0 1.05rem 0 0; cursor: pointer;
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
+  }
+  .tab[aria-pressed="true"], .tab:hover, .tab:focus-visible { color: var(--ink); }
+  .tab:focus-visible { outline: none; text-decoration: underline; text-underline-offset: 4px; }
+  .search { font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; display: flex; align-items: baseline; flex: none; }
+  .s-toggle { background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink-2); font: inherit; letter-spacing: inherit; white-space: nowrap; }
+  .s-toggle .k { color: var(--ink-3); margin-right: .35rem; }
+  .s-toggle:hover, .s-toggle:focus-visible, .search.open .s-toggle { color: var(--ink); }
+  .s-toggle:focus-visible { outline: none; text-decoration: underline; text-underline-offset: 4px; }
+  .search input {
+    width: 0; opacity: 0; padding: 0; border: 0; outline: none; background: transparent;
+    color: var(--ink); font-family: var(--sans); font-size: .875rem;
+    transition: width .38s var(--ease), opacity .25s ease;
+  }
+  .search.open input { width: 180px; opacity: 1; margin-left: .8rem; }
+  .search input::placeholder { color: var(--ink-4); }
+  .post {
+    display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: center;
+    gap: 0 12px; padding: 16px 0; border-bottom: 1px solid var(--line-soft);
+    text-decoration: none; color: inherit; animation: row-in .5s var(--ease) both;
+  }
+  .post:hover, .post:focus-visible { background: var(--hover-row); outline: none; }
+  .post[hidden] { display: none; }
+  .p-when { grid-column: 1 / 3; display: flex; align-items: center; gap: 16px; min-width: 0; }
+  .p-body { grid-column: 3 / 8; min-width: 0; padding-right: 1rem; }
+  .p-time { grid-column: 8 / 9; text-align: right; font-family: var(--mono); color: var(--ink-3); font-size: .875rem; }
+  .p-cat { font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; color: var(--ink-3); }
+  .p-title { font-weight: 400; font-size: 18px; line-height: 1.5; text-wrap: balance; }
+  .p-mech { display: none; }
+  .tile { width: 32px; height: 32px; display: grid; place-items: center; flex: none; color: var(--ink-3); }
+  .mark { width: 22px; height: 22px; display: block; fill: currentColor; }
+  .feat { align-items: center; padding-top: 18px; padding-bottom: 18px; }
+  .feat .tile { width: 96px; height: 96px; background: var(--accent); color: var(--bg); }
+  .feat .mark { width: 56px; height: 56px; }
+  .feat .p-title { font-weight: 500; font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem); line-height: 1.25; }
+  .feat .p-mech { display: block; color: var(--ink-2); margin-top: .45rem; line-height: 1.55; }
+  .count, .empty, footer { font-family: var(--mono); font-size: .75rem; letter-spacing: .03em; color: var(--ink-3); }
+  .count { margin-top: 1.25rem; }
+  .empty { margin-top: 1.5rem; }
+  footer { margin-top: 4rem; line-height: 1.9; }
+  footer a { color: var(--ink-2); text-decoration: none; }
+  footer a:hover, footer a:focus-visible { color: var(--ink); }
+  .fallback { color: var(--ink-2); line-height: 1.7; padding: 2rem 0; }
+  .fallback a { color: var(--ink); }
+  #veil { position: fixed; inset: 0; z-index: 20; background: var(--bg); opacity: 0; pointer-events: none; }
+  #ghost {
+    position: fixed; z-index: 21; visibility: hidden; margin: 0;
+    position-anchor: --wm; top: anchor(top); left: anchor(left); position-visibility: always;
+  }
+  html.no-anchor #ghost { top: 0; left: 0; }
+  #preTxt { position: relative; display: inline-block; overflow-x: clip; }
+  #preTxt:after { content: ""; position: absolute; inset: -.25em 0; background: var(--bg); }
+  .caret { position: absolute; left: 0; top: .12em; width: .52em; height: .86em; background: var(--ink); opacity: 0; }
+  html.intro:not(.intro-on) h1 { opacity: 0; }
+  html.intro #veil { opacity: 1; pointer-events: auto; }
+  html.intro-on h1 { animation: hold-out var(--pre-done) step-end; }
+  html.intro-on #veil { animation: veil-out var(--veil-ms) ease var(--pre-done) both; }
+  html.intro-on #ghost { animation: pre-hold var(--pre-gone) step-end; }
+  html.intro-on #preTxt:after { animation: pre-cover var(--pre-typed) step-end forwards; }
+  html.intro-on .caret {
+    animation: pre-blink var(--pre-typed) step-end forwards, pre-caret var(--pre-typed) step-end forwards;
+  }
+  html.intro-lock { overflow: hidden; }
+  html.reveal-hold * { animation-play-state: paused !important; }
+  @keyframes hold-out { from, to { opacity: 0; } }
+  @keyframes pre-hold { from, to { visibility: visible; } }
+  @keyframes veil-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes row-in { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes pre-blink { 0%, 42% { opacity: 1; } 50%, 92% { opacity: 0; } to { opacity: 0; } }
   @media (prefers-reduced-motion: reduce) {
-    .card { transition: none; opacity: 1; }
-    .reveal > span, .reveal-fade { animation: none; }
+    #veil, #ghost { display: none !important; }
+    h1, .post, .search input { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
+  @media (max-width: 900px) {
+    .below { display: block; margin-top: 2.5rem; }
+    .hero { position: static; margin-bottom: 2.5rem; }
+    .post { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; }
+    .p-when { grid-column: 1; grid-row: 1; align-self: center; }
+    .p-body { grid-column: 2; grid-row: 1; }
+    .p-time { grid-column: 3; grid-row: 1; text-align: right; align-self: center; }
+    .feat .tile { width: 64px; height: 64px; }
+    .feat .mark { width: 36px; height: 36px; }
+    .search.open input { width: 120px; }
   }
 </style>
+<script>
+/* 开场门:24h 内不再播。?intro=1 强制播,?intro=0 跳过。决定放在 head,避免先闪终态 */
+(() => {
+  const KEY = 'fxlab-typed-intro';
+  const ONCE_H = 24;
+  const q = new URLSearchParams(location.search).get('intro');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || q === '0') return;
+  let recent = false;
+  try { recent = Date.now() - (+localStorage.getItem(KEY) || 0) < ONCE_H * 36e5; }
+  catch (e) { recent = false; }
+  if (recent && q !== '1') return;
+  document.documentElement.classList.add('intro');
+  if (q !== '1') {
+    try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+  }
+  if (document.visibilityState === 'hidden') document.documentElement.classList.add('reveal-hold');
+})();
+</script>
 </head>
 <body>
-  <canvas id="bg" aria-hidden="true"></canvas>
+  <div id="veil"></div>
+  <div id="ghost" class="wm" aria-hidden="true"><span id="preTxt">fxlab</span><i class="caret"></i></div>
+  <nav class="nav">
+    <a class="on" href="./" aria-current="page"><span class="k">[H]</span>HOME</a>
+    <a href="showcase/"><span class="k">[P]</span>SHOW</a>
+    <a href="https://github.com/saime428/fxlab/blob/main/INDEX.md"><span class="k">[I]</span>INDEX</a>
+    <a href="https://github.com/saime428/fxlab"><span class="k">[G]</span>GITHUB</a>
+  </nav>
   <div class="wrap">
-    <header>
-      <h1 class="reveal"><span>fx<em>lab</em></span></h1>
-      <p class="sub reveal-fade">炫酷可抄 · 零依赖 demo · AI 会选型。预览是活的；点卡片全屏试玩。<a href="https://github.com/saime428/fxlab">GitHub ↗</a></p>
-      <p class="cta-row reveal-fade">
-        <a class="cta primary" href="showcase/">样板间 Showcase</a>
-        <a class="cta" href="https://github.com/saime428/fxlab#给-agent-用">安装 Agent skill</a>
-        <a class="cta" href="https://github.com/saime428/fxlab#镇馆-8-式先看这些">镇馆 8 式</a>
-      </p>
-    </header>
-    <div class="filters" id="filters" role="group" aria-label="筛选"></div>
-    <p class="hintbar" id="count"></p>
-    <div class="grid" id="grid"></div>
+    <div class="below">
+      <header class="hero">
+        <h1 class="wm" id="wm">fxlab</h1>
+        <p class="sub">获奖站的动效,收成一行一行的 pattern。点开就是零依赖 demo。整页参考在 <a href="showcase/">样板间</a>。</p>
+      </header>
+      <div class="list-col">
+        <div class="list-top" id="filters" role="group" aria-label="筛选"></div>
+        <div id="list"></div>
+        <p class="empty" id="empty" hidden>没有匹配的 pattern</p>
+        <p class="count" id="count"></p>
+      </div>
+    </div>
     <footer>
-      开源: <a href="https://github.com/saime428/fxlab">github.com/saime428/fxlab</a> ·
-      样板间: <a href="showcase/">showcase/</a> ·
-      选型给 AI 读: <a href="https://github.com/saime428/fxlab/blob/main/INDEX.md">INDEX.md</a> ·
-      贡献: <a href="https://github.com/saime428/fxlab/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> · MIT
+      <a href="https://github.com/saime428/fxlab/tree/main/cases">cases/</a> ·
+      <a href="showcase/">showcase/</a> ·
+      <a href="https://github.com/saime428/fxlab/blob/main/INDEX.md">INDEX.md</a> ·
+      <a href="https://github.com/saime428/fxlab/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> · MIT
     </footer>
   </div>
 <script>
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-// hero 入场已改为纯 CSS 自动播放动画(见 .reveal),无需 JS 触发
-
-// —— 狗粮:canvas 氛围背景(canvas-ambient-bg 机制,互质正弦漂移) ——
-(() => {
-  const cv = document.getElementById('bg'), ctx = cv.getContext('2d');
-  let w, h;
-  const resize = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
-    w = cv.width = innerWidth * dpr; h = cv.height = innerHeight * dpr;
-    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
-  };
-  resize(); addEventListener('resize', () => { resize(); if (REDUCED) draw(9); });
-  const blobs = [
-    { fx: .28, fy: .30, r: .55, sx: .00023, sy: .00017, p: 0,   ax: .16, ay: .10, color: 'rgba(139,124,246,.5)' },
-    { fx: .74, fy: .45, r: .5,  sx: .00019, sy: .00029, p: 2.1, ax: .14, ay: .14, color: 'rgba(71,216,255,.28)' },
-    { fx: .5,  fy: .8,  r: .6,  sx: .00013, sy: .00021, p: 4.4, ax: .18, ay: .09, color: 'rgba(255,124,92,.22)' },
-  ];
-  function draw(t) {
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#101014'; ctx.fillRect(0, 0, w, h);
-    ctx.globalCompositeOperation = 'lighter';
-    blobs.forEach(b => {
-      const x = (b.fx + Math.sin(t * b.sx + b.p) * b.ax) * w;
-      const y = (b.fy + Math.cos(t * b.sy + b.p) * b.ay) * h;
-      const g = ctx.createRadialGradient(x, y, 0, x, y, b.r * Math.max(w, h));
-      g.addColorStop(0, b.color); g.addColorStop(1, 'transparent');
-      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
-    });
+const root = document.documentElement;
+/* ===== 与 typed-title-handoff 同一组旋钮 =====
+   TYPE_MS 1568 / HOLD_MS 240 / VEIL_MS 400。画廊 ONCE_H = 24,写在 head。 */
+const TYPE_MS = 1568, HOLD_MS = 240, VEIL_MS = 400;
+const WORD = document.getElementById('wm').textContent.trim();
+(function installType() {
+  const n = [...WORD].length;
+  let cover = '0%{transform:translateX(0)}', caret = '0%{transform:translate(0,.12em)}';
+  for (let i = 1; i <= n; i++) {
+    const p = (i / n * 100).toFixed(2);
+    cover += `${p}%{transform:translateX(${i}ch)}`;
+    caret += `${p}%{transform:translate(${i}ch,.12em)}`;
   }
-  draw(0);                                                  // 先同步画一帧,rAF 未起也有画面
-  if (REDUCED) return;
-  let running = true;
-  document.addEventListener('visibilitychange', () => { running = !document.hidden; if (running) requestAnimationFrame(loop); });
-  function loop(t) { draw(t); if (running) requestAnimationFrame(loop); }
-  requestAnimationFrame(loop);
+  const kf = document.createElement('style');
+  kf.textContent = `@keyframes pre-cover{${cover}}@keyframes pre-caret{${caret}}`;
+  document.head.appendChild(kf);
+  root.style.setProperty('--pre-typed', TYPE_MS + 'ms');
+  root.style.setProperty('--pre-done', (TYPE_MS + HOLD_MS) + 'ms');
+  root.style.setProperty('--pre-gone', (TYPE_MS + HOLD_MS + VEIL_MS) + 'ms');
+  root.style.setProperty('--veil-ms', VEIL_MS + 'ms');
 })();
+const anchorOK = !!(window.CSS && CSS.supports('anchor-name:--a'));
+if (!anchorOK) root.classList.add('no-anchor');
+const ghost = document.getElementById('ghost'), preTxt = document.getElementById('preTxt'), live = document.getElementById('wm');
+function place() {
+  if (anchorOK) return;
+  const W = live.getBoundingClientRect(), T = preTxt.getBoundingClientRect(), P = ghost.getBoundingClientRect();
+  ghost.style.left = (P.left + W.left - T.left) + 'px';
+  ghost.style.top = (P.top + W.top - T.top) + 'px';
+}
+function armIntro() {
+  if (REDUCED || !root.classList.contains('intro')) { window.__introEndsAt = 0; return; }
+  if (document.visibilityState === 'hidden') {
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) requestAnimationFrame(armIntro);
+    }, { once: true });
+    return;
+  }
+  root.classList.remove('reveal-hold');
+  scrollTo(0, 0);
+  place();
+  root.classList.add('intro-on', 'intro-lock');
+  window.__introEndsAt = performance.now() + TYPE_MS + HOLD_MS;
+  setTimeout(() => {
+    document.getElementById('veil').style.pointerEvents = 'none';
+    root.classList.remove('intro-lock');
+  }, TYPE_MS + HOLD_MS);
+}
+armIntro();
+addEventListener('resize', place);
+
+const MARK = '<svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="8" width="7" height="7"/><rect x="12" y="2" width="7" height="7"/><rect x="23" y="11" width="7" height="7"/><rect x="10" y="18" width="10" height="10"/></svg>';
+const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 (async () => {
-  const grid = document.getElementById('grid'), count = document.getElementById('count');
+  const list = document.getElementById('list'), count = document.getElementById('count'), empty = document.getElementById('empty');
   const fail = () => {
-    grid.innerHTML = '<div class="fallback">索引加载失败(本地 file:// 打开属预期)。<br><a href="https://github.com/saime428/fxlab#pattern-索引">去 GitHub 看列表 ↗</a></div>';
+    list.innerHTML = '<div class="fallback">索引加载失败(本地 file:// 打开属预期)。<br><a href="https://github.com/saime428/fxlab#pattern-索引">去 GitHub 看列表 ↗</a></div>';
   };
   try {
     const md = await (await fetch('INDEX.md')).text();
-    // 按表头名定位列,不按索引——INDEX.md 调整列序不至于崩
     const lines = md.split('\n');
     const head = lines.findIndex(l => l.includes('| Pattern |'));
     if (head < 0) return fail();
     const cols = lines[head].split('|').map(s => s.trim());
     const col = name => cols.indexOf(name);
     const [cPat, cName, cLv, cMech] = [col('Pattern'), col('名称'), col('难度'), col('一句话机制')];
-    const FEATURED = new Set([
-      'scroll-driven-shader','image-displacement','particle-transition','shader-wipe',
-      'split-text-reveal','horizontal-gallery','view-transitions','drag-spring'
-    ]);
     const items = [];
     for (let i = head + 2; i < lines.length && lines[i].trim().startsWith('|'); i++) {
       const c = lines[i].split('|').map(s => s.trim());
       const link = /\[([^\]]+)\]\(([^)]+)\)/.exec(c[cPat] || '');
       if (!link) continue;
-      items.push({ path: link[2], id: link[1], name: c[cName], lv: c[cLv], mech: c[cMech], cat: link[1].split('/')[0] });
+      items.push({ path: link[2], id: link[1].split('/')[1], name: c[cName], lv: c[cLv], mech: c[cMech], cat: link[1].split('/')[0] });
     }
     if (!items.length) return fail();
-    grid.innerHTML = items.map(p => {
-      const fid = p.id.split('/')[1];
-      const isF = FEATURED.has(fid);
-      return `
-      <a class="card${isF ? ' featured' : ''}" href="${p.path}demo.html" target="_blank" rel="noopener" title="${p.mech}"
-         data-cat="${p.cat}" data-lv="${p.lv}" data-id="${fid}" data-featured="${isF ? '1' : '0'}">
-        <div class="view">${isF ? '<span class="badge-featured">FEATURED</span>' : ''}<iframe src="${p.path}demo.html" loading="lazy" title="${p.name} 预览" tabindex="-1"></iframe></div>
-        <div class="meta"><b>${p.name}</b><span class="cat">${p.cat}</span><span class="lv">${p.lv}</span></div>
+    const remain = () => Math.max(0, (window.__introEndsAt || 0) - performance.now());
+    list.innerHTML = items.map((p, i) => {
+      const delay = REDUCED ? '0ms' : (remain() + Math.min(i, 8) * 70) + 'ms';
+      return `<a class="post" href="${esc(p.path)}demo.html" title="${esc(p.mech)}" style="animation-delay:${delay}"
+         data-cat="${esc(p.cat)}" data-lv="${esc(p.lv)}" data-id="${esc(p.id)}"
+         data-hay="${esc((p.name + ' ' + p.mech + ' ' + p.cat + ' ' + p.id).toLowerCase())}">
+        <span class="p-when"><span class="tile">${MARK}</span><span class="p-cat">${esc(p.cat)}</span></span>
+        <span class="p-body"><span class="p-title">${esc(p.name)}</span><span class="p-mech">${esc(p.mech)}</span></span>
+        <span class="p-time">${esc(p.lv)}</span>
       </a>`;
     }).join('');
 
-    // —— 切片2:筛选 + URL 状态 ——
-    // 套餐表解析(短名 → 卡片 data-id)
     const setHead = lines.findIndex(l => l.includes('| 场景 |'));
     const sets = [];
     for (let i = setHead + 2; setHead > 0 && i < lines.length && lines[i].trim().startsWith('|'); i++) {
       const c = lines[i].split('|').map(s => s.trim());
-      sets.push({ label: (c[1] || '').split('/')[0].trim(), ids: (c[2] || '').split('+').map(s => s.trim()) });
+      sets.push({ label: (c[1] || '').split('/')[0].trim(), ids: (c[2] || '').split('+').map(s => s.trim()).filter(Boolean) });
     }
+    const FEATURED = new Set(['scroll-driven-shader', 'image-displacement', 'particle-transition', 'shader-wipe', 'split-text-reveal', 'horizontal-gallery', 'view-transitions', 'drag-spring']);
     const cats = [...new Set(items.map(p => p.cat))];
-    const state = { cat: '', level: '', set: '', featured: '' };            // set 与 cat/level 互斥
+    const state = { cat: '', level: '', set: '', featured: '', q: '' };
     const bar = document.getElementById('filters');
-    const chip = (label, key, val) => `<button class="chip" data-key="${key}" data-val="${val}" aria-pressed="false">${label}</button>`;
-    bar.innerHTML = chip('全部', '', '') + chip('镇馆 8', 'featured', '1')
-      + cats.map(c => chip(c, 'cat', c)).join('')
-      + '<span class="sep">|</span>' + ['★','★★','★★★'].map((s, i) => chip(s, 'level', i + 1)).join('')
-      + '<span class="sep">|</span>' + sets.map((s, i) => chip('套餐·' + s.label, 'set', i + 1)).join('');
+    const tab = (label, key, val) => `<button class="tab" type="button" data-key="${esc(key)}" data-val="${esc(val)}" aria-pressed="false">${esc(label)}</button>`;
+    bar.innerHTML = `<div class="tabs">${tab('ALL', '', '')}${tab('镇馆 8', 'featured', '1')}${cats.map(c => tab(c, 'cat', c)).join('')}${['★', '★★', '★★★'].map((s, i) => tab(s, 'level', String(i + 1))).join('')}${sets.map((s, i) => tab(s.label, 'set', String(i + 1))).join('')}</div>
+      <div class="search"><button class="s-toggle" type="button"><span class="k">[S]</span>SEARCH</button><input id="q" aria-label="搜索 pattern" placeholder="名称或机制"></div>`;
+
     function apply() {
-      const cards = [...grid.querySelectorAll('.card')];
-      const setIds = state.set ? sets[state.set - 1].ids : null;
-      let shown = 0;
-      cards.forEach(el => {                                   // 只切显隐,不重建 iframe
-        const ok = setIds ? setIds.includes(el.dataset.id)
-          : (!state.cat || el.dataset.cat === state.cat)
-            && (!state.level || el.dataset.lv.length === +state.level)
-            && (!state.featured || el.dataset.featured === '1');
-        el.hidden = !ok; if (ok) shown++;
+      const posts = [...list.querySelectorAll('.post')];
+      const setIds = state.set && sets[state.set - 1] ? sets[state.set - 1].ids : null;
+      const q = state.q.toLowerCase();
+      let shown = 0, first = null;
+      posts.forEach(el => {
+        const ok = (setIds ? setIds.includes(el.dataset.id)
+          : (!state.cat || el.dataset.cat === state.cat) && (!state.level || el.dataset.lv.length === +state.level))
+          && (!state.featured || FEATURED.has(el.dataset.id))
+          && (!q || (el.dataset.hay || '').includes(q));
+        el.hidden = !ok;
+        el.classList.remove('feat');
+        if (ok) { shown++; if (!first) first = el; }
       });
-      count.textContent = `${shown} / ${items.length} 个 pattern · 预览只读,点卡片全屏试玩`;
-      bar.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed',
+      if (first) first.classList.add('feat');
+      empty.hidden = shown !== 0;
+      count.textContent = `${shown} / ${items.length}  ·  S 搜索,再点一次取消筛选`;
+      bar.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-pressed',
         b.dataset.key === '' ? String(!state.cat && !state.level && !state.set && !state.featured) : String(state[b.dataset.key] == b.dataset.val)));
-      const q = new URLSearchParams(Object.entries(state).filter(([, v]) => v));
-      history.replaceState(null, '', q.size ? '?' + q : location.pathname);
+      const params = new URLSearchParams(Object.entries(state).filter(([, v]) => v));
+      const intro = new URLSearchParams(location.search).get('intro');
+      if (intro) params.set('intro', intro);
+      history.replaceState(null, '', params.size ? '?' + params : location.pathname);
     }
     bar.addEventListener('click', e => {
-      const b = e.target.closest('.chip'); if (!b) return;
+      const s = e.target.closest('.s-toggle');
+      if (s) { bar.querySelector('.search').classList.add('open'); bar.querySelector('#q').focus(); return; }
+      const b = e.target.closest('.tab'); if (!b) return;
       const { key, val } = b.dataset;
       if (!key) Object.assign(state, { cat: '', level: '', set: '', featured: '' });
       else if (key === 'set') Object.assign(state, { cat: '', level: '', featured: '', set: state.set == val ? '' : val });
       else if (key === 'featured') Object.assign(state, { cat: '', level: '', set: '', featured: state.featured == val ? '' : val });
-      else { state.set = ''; state.featured = ''; state[key] = state[key] == val ? '' : val; }   // 再点一次取消
+      else { state.set = ''; state.featured = ''; state[key] = state[key] == val ? '' : val; }
       apply();
     });
-    const q = new URLSearchParams(location.search);           // 回放 URL 状态
-    ['cat', 'level', 'set', 'featured'].forEach(k => state[k] = q.get(k) || '');
+    bar.addEventListener('input', e => {
+      if (e.target.id !== 'q') return;
+      state.q = e.target.value.trim();
+      apply();
+    });
+    addEventListener('keydown', e => {
+      if (e.key !== 's' && e.key !== 'S') return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      e.preventDefault();
+      bar.querySelector('.search').classList.add('open');
+      bar.querySelector('#q').focus();
+    });
+    const params = new URLSearchParams(location.search);
+    ['cat', 'level', 'set', 'featured', 'q'].forEach(k => state[k] = params.get(k) || '');
+    if (state.q) { bar.querySelector('.search').classList.add('open'); bar.querySelector('#q').value = state.q; }
     apply();
-
-    // —— 狗粮:卡片 scroll-reveal 入场(patterns/scroll/scroll-reveal 机制) ——
-    const cardEls = [...grid.querySelectorAll('.card')];
-    if (REDUCED || !('IntersectionObserver' in window)) cardEls.forEach(c => c.classList.add('in'));  // 无 IO/降级:直接显示,不留隐形卡
-    else {
-      const revIO = new IntersectionObserver(es => es.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); revIO.unobserve(e.target); }
-      }), { rootMargin: '0px 0px -8% 0px' });
-      cardEls.forEach(c => revIO.observe(c));
-    }
-
-    // —— 切片3:自动演示引擎(滚动型 demo 在只读预览里缓慢往复滚动) ——
-    if (!REDUCED) {
-      const anim = [];                                        // { win, max, phase }
-      const vis = new WeakSet();
-      const io = new IntersectionObserver(es => es.forEach(e =>
-        e.isIntersecting ? vis.add(e.target) : vis.delete(e.target)), { rootMargin: '50px' });
-      grid.addEventListener('load', e => {                    // iframe load 不冒泡,capture 接
-        const f = e.target; if (f.tagName !== 'IFRAME') return;
-        try {
-          const doc = f.contentDocument, root = doc.scrollingElement || doc.documentElement;
-          const snap = [doc.documentElement, doc.body].some(el => getComputedStyle(el).scrollSnapType !== 'none');
-          const max = root.scrollHeight - f.clientHeight;
-          if (snap || max < f.clientHeight * .5) return;      // snap 卡和单屏 demo:保持静态
-          anim.push({ card: f.closest('.card'), win: f.contentWindow, max, phase: anim.length * 1.7 });
-          io.observe(f.closest('.card'));
-        } catch (_) { /* 探测失败即静态,不致命 */ }
-      }, true);
-      (function loop(t) {
-        anim.forEach(a => {
-          if (!vis.has(a.card) || a.card.hidden) return;      // 只滚可见卡
-          a.win.scrollTo(0, (0.5 - 0.5 * Math.cos(t / 7000 * Math.PI + a.phase)) * a.max);
-        });
-        requestAnimationFrame(loop);
-      })(0);
-    }
   } catch (e) { fail(); }
 })();
 </script>

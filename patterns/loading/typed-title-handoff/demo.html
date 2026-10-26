@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typed Title Handoff — fxlab</title>
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  :root {
+    color-scheme: dark;
+    --bg: #141413; --ink: #faf9f5; --ink-2: #b0aea5; --ink-3: #87867f;
+    --line-soft: #faf9f517; --hover: #faf9f50b;
+    --sans: "Segoe UI", "PingFang SC", "Helvetica Neue", sans-serif;
+    --mono: "Cascadia Mono", ui-monospace, Consolas, monospace;
+    --ease: cubic-bezier(.19, 1, .22, 1);
+    --gutter: 2rem;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      color-scheme: light;
+      --bg: #faf9f5; --ink: #141413; --ink-2: #4c4b45; --ink-3: #7b7a72;
+      --line-soft: #1414131c; --hover: #1414130d;
+    }
+  }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 12vh var(--gutter) 8vh; }
+  .wm {
+    font-family: var(--mono); font-weight: 400; font-size: 1.75rem;
+    line-height: 1.1; white-space: nowrap; letter-spacing: 0;
+  }
+  h1 { anchor-name: --live; }
+  .sub { color: var(--ink-2); max-width: 36em; margin-top: 1rem; line-height: 1.6; text-wrap: balance; }
+  #replay {
+    margin-top: 1.4rem; background: none; border: 0; padding: 0; cursor: pointer;
+    font-family: var(--mono); font-size: .75rem; letter-spacing: .04em; color: var(--ink-2);
+  }
+  #replay:hover, #replay:focus-visible { color: var(--ink); }
+  #replay:focus-visible { outline: none; text-decoration: underline; text-underline-offset: 4px; }
+  .list { margin-top: 3rem; border-top: 1px solid var(--line-soft); }
+  .post {
+    display: grid; grid-template-columns: 7rem minmax(0, 1fr) auto; gap: 1rem;
+    align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--line-soft);
+    text-decoration: none; color: inherit;
+  }
+  .post:hover, .post:focus-visible { background: var(--hover); outline: none; }
+  .meta, .time { font-family: var(--mono); font-size: .875rem; color: var(--ink-3); }
+  .t { font-weight: 400; font-size: 1.125rem; line-height: 1.5; text-wrap: balance; }
+  #veil { position: fixed; inset: 0; background: var(--bg); z-index: 20; opacity: 0; pointer-events: none; }
+  #ghost {
+    position: fixed; z-index: 21; visibility: hidden; margin: 0;
+    position-anchor: --live; top: anchor(top); left: anchor(left);
+    position-visibility: always;
+  }
+  html.no-anchor #ghost { top: 0; left: 0; }
+  #preTxt { position: relative; display: inline-block; overflow-x: clip; }
+  #preTxt:after {
+    content: ""; position: absolute; inset: -.25em 0; background: var(--bg);
+  }
+  .caret {
+    position: absolute; left: 0; top: .12em; width: .52em; height: .86em;
+    background: var(--ink); opacity: 0;
+  }
+  html.intro:not(.intro-on) h1,
+  html.intro:not(.intro-on) .sub,
+  html.intro:not(.intro-on) #replay,
+  html.intro:not(.intro-on) .post { opacity: 0; }
+  html.intro #veil { opacity: 1; pointer-events: auto; }
+  html.intro-on h1 { animation: hold-out var(--pre-done) step-end; }
+  html.intro-on .sub,
+  html.intro-on #replay,
+  html.intro-on .post {
+    animation: row-in .5s var(--ease) both;
+    animation-delay: calc(var(--pre-done) + var(--i, 0) * 70ms);
+  }
+  html.intro-on #veil { animation: veil-out var(--veil-ms) ease var(--pre-done) both; }
+  html.intro-on #ghost { animation: pre-hold var(--pre-gone) step-end; }
+  html.intro-on #preTxt:after { animation: pre-cover var(--pre-typed) step-end forwards; }
+  html.intro-on .caret {
+    animation: pre-blink var(--pre-typed) step-end forwards, pre-caret var(--pre-typed) step-end forwards;
+  }
+  html.intro-lock { overflow: hidden; }
+  html.reveal-hold * { animation-play-state: paused !important; }
+  @keyframes hold-out { from, to { opacity: 0; } }
+  @keyframes pre-hold { from, to { visibility: visible; } }
+  @keyframes veil-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes row-in { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes pre-blink { 0%, 42% { opacity: 1; } 50%, 92% { opacity: 0; } to { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    #veil, #ghost { display: none !important; }
+    h1, .sub, #replay, .post { opacity: 1 !important; animation: none !important; transform: none !important; }
+  }
+  @media (max-width: 640px) {
+    .post { grid-template-columns: minmax(0, 1fr) auto; }
+    .meta { grid-column: 1 / -1; }
+  }
+</style>
+<script>
+/* 开播决定放在 head:首屏绘制前就盖住,避免先闪出终态再倒带 */
+(() => {
+  const q = new URLSearchParams(location.search).get('intro');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || q === '0') return;
+  document.documentElement.classList.add('intro');
+  if (document.visibilityState === 'hidden') document.documentElement.classList.add('reveal-hold');
+})();
+</script>
+</head>
+<body>
+  <div id="veil"></div>
+  <div id="ghost" class="wm" aria-hidden="true"><span id="preTxt"></span><i class="caret"></i></div>
+  <div class="wrap">
+    <h1 class="wm" id="live">fxlab</h1>
+    <p class="sub">标题先按字揭开,再落到这一行。遮罩和底是同一个颜色,所以揭开的时候版心已经在下面。</p>
+    <button type="button" id="replay">[R] 再播一次</button>
+    <div class="list">
+      <a class="post" href="#live" style="--i:1"><span class="meta">LOADING</span><span class="t">打字的是遮罩,不是逐个插入的节点</span><span class="time">01</span></a>
+      <a class="post" href="#live" style="--i:2"><span class="meta">ANCHOR</span><span class="t">浮动行锚在真标题上,揭开时不跳</span><span class="time">02</span></a>
+      <a class="post" href="#live" style="--i:3"><span class="meta">ONCE</span><span class="t">真站用 localStorage 每天只播一次</span><span class="time">03</span></a>
+      <a class="post" href="#live" style="--i:4"><span class="meta">QUIET</span><span class="t">列表只错开 70ms,不再加第二条记忆点</span><span class="time">04</span></a>
+    </div>
+  </div>
+<script>
+  const live = document.getElementById('live');
+  const ghost = document.getElementById('ghost');
+  const preTxt = document.getElementById('preTxt');
+  const veil = document.getElementById('veil');
+  const root = document.documentElement;
+  /* ===== KNOB =====
+     TYPE_MS  打完标题的时长。800 以下像闪烁,2200 以上像在等
+     HOLD_MS  打完到揭开页面的停顿
+     VEIL_MS  同色遮罩淡出
+     ONCE_H   多少小时内不再播。0 = 每次都播(本 demo);真站用 24 */
+  const TYPE_MS = 1568;
+  const HOLD_MS = 240;
+  const VEIL_MS = 400;
+  const ONCE_H = 0;
+  const WORD = live.textContent.trim();
+  preTxt.textContent = WORD;
+
+  const n = [...WORD].length;
+  let cover = '0%{transform:translateX(0)}';
+  let caret = '0%{transform:translate(0,.12em)}';
+  for (let i = 1; i <= n; i++) {
+    const p = (i / n * 100).toFixed(2);
+    cover += `${p}%{transform:translateX(${i}ch)}`;
+    caret += `${p}%{transform:translate(${i}ch,.12em)}`;
+  }
+  const kf = document.createElement('style');
+  kf.textContent = `@keyframes pre-cover{${cover}}@keyframes pre-caret{${caret}}`;
+  document.head.appendChild(kf);
+
+  root.style.setProperty('--pre-typed', TYPE_MS + 'ms');
+  root.style.setProperty('--pre-done', (TYPE_MS + HOLD_MS) + 'ms');
+  root.style.setProperty('--pre-gone', (TYPE_MS + HOLD_MS + VEIL_MS) + 'ms');
+  root.style.setProperty('--veil-ms', VEIL_MS + 'ms');
+
+  const anchorOK = !!(window.CSS && CSS.supports('anchor-name:--a'));
+  if (!anchorOK) root.classList.add('no-anchor');
+  function place() {
+    if (anchorOK) return;
+    const W = live.getBoundingClientRect();
+    const T = preTxt.getBoundingClientRect();
+    const P = ghost.getBoundingClientRect();
+    ghost.style.left = (P.left + W.left - T.left) + 'px';
+    ghost.style.top = (P.top + W.top - T.top) + 'px';
+  }
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let lockTimer = 0;
+  function arm() {
+    if (reduced) return;
+    root.classList.remove('intro-on');
+    veil.style.pointerEvents = '';
+    void root.offsetWidth;
+    scrollTo(0, 0);
+    place();
+    root.classList.add('intro', 'intro-on', 'intro-lock');
+    clearTimeout(lockTimer);
+    lockTimer = setTimeout(() => {
+      veil.style.pointerEvents = 'none';
+      root.classList.remove('intro-lock');
+    }, TYPE_MS + HOLD_MS);
+  }
+
+  function start() {
+    if (reduced || !root.classList.contains('intro')) return;
+    if (ONCE_H > 0 && new URLSearchParams(location.search).get('intro') !== '1') {
+      let recent = false;
+      try {
+        recent = Date.now() - (+localStorage.getItem('typed-title-handoff') || 0) < ONCE_H * 36e5;
+      } catch (e) { /* 读不到存储就照常播 */ }
+      if (recent) { root.classList.remove('intro', 'reveal-hold'); return; }
+      try { localStorage.setItem('typed-title-handoff', String(Date.now())); }
+      catch (e) { /* 隐私模式没有存储就每次都播 */ }
+    }
+    if (document.visibilityState === 'hidden') {
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) requestAnimationFrame(start);
+      }, { once: true });
+      return;
+    }
+    root.classList.remove('reveal-hold');
+    arm();
+  }
+  start();
+  addEventListener('resize', place);
+  document.getElementById('replay').addEventListener('click', () => {
+    root.classList.add('intro');
+    arm();
+  });
+</script>
+<p style="position:fixed;left:0;right:0;bottom:0;z-index:5;margin:0;padding:.3rem .75rem;text-align:center;font:11px/1.4 ui-monospace,monospace;letter-spacing:.04em;color:#fff;mix-blend-mode:difference;pointer-events:none">demo 的配色排版是占位 —— 抄机制,不抄样式(库规范铁律 6)</p>
+</body>
+</html>

@@ -142,6 +142,7 @@ Agent 会读：
 | [氛围音开关](patterns/loading/ambient-sound-toggle/) | 体验层 | ★★ | [demo](https://saime428.github.io/fxlab/patterns/loading/ambient-sound-toggle/demo.html) |
 | [Stagger 网格波纹](patterns/text/stagger-grid/) | 编排 | ★ | [demo](https://saime428.github.io/fxlab/patterns/text/stagger-grid/demo.html) |
 | [加载序章 Entry Preloader](patterns/loading/entry-preloader/) | 加载动画 | ★★ | [demo](https://saime428.github.io/fxlab/patterns/loading/entry-preloader/demo.html) |
+| [打字标题交接 Typed Title Handoff](patterns/loading/typed-title-handoff/) | 加载动画 | ★★ | [demo](https://saime428.github.io/fxlab/patterns/loading/typed-title-handoff/demo.html) |
 | [逐行/逐字拆分入场 Split Text](patterns/text/split-text-reveal/) | 文字动效 | ★ | [demo](https://saime428.github.io/fxlab/patterns/text/split-text-reveal/demo.html) |
 | [滚动响应字幕 Scroll Marquee](patterns/text/scroll-marquee/) | 文字动效 | ★ | [demo](https://saime428.github.io/fxlab/patterns/text/scroll-marquee/demo.html) |
 | [数字滚动 Count Up](patterns/text/count-up/) | 文字动效 | ★ | [demo](https://saime428.github.io/fxlab/patterns/text/count-up/demo.html) |

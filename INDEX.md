@@ -35,6 +35,7 @@
 | [layout/sticky-stack](patterns/layout/sticky-stack/) | 粘性堆叠 | ★ | 每卡 sticky top:0,后者压前者 | 功能列表、服务介绍、案例翻牌 |
 | [layout/comment-heading](patterns/layout/comment-heading/) | 注释风标题 | ★ | CSS counter + ::before 注释前缀 | 开发者/极客气质的章节标题 |
 | [loading/entry-preloader](patterns/loading/entry-preloader/) | 加载序章 | ★★ | 资源预载 + 进度 + Enter 门 | 重资产站开场,兼做声音手势解锁 |
+| [loading/typed-title-handoff](patterns/loading/typed-title-handoff/) | 打字标题交接 | ★★ | 同色遮罩按字步进揭开标题,再锚到真 h1 | 编辑/文档站的安静开场,每天一次 |
 | [loading/ambient-sound-toggle](patterns/loading/ambient-sound-toggle/) | 氛围音开关 | ★★ | 手势解锁 AudioContext + 全局开关 | 体验型站的氛围音 |
 | [3d-webgl/canvas-ambient-bg](patterns/3d-webgl/canvas-ambient-bg/) | Canvas 氛围背景 | ★★ | 渐变圆斑 + lighter 叠加 + 正弦漂移 | 任何站的氛围背景层,高级感地板价 |
 | [layout/blend-invert](patterns/layout/blend-invert/) | 覆盖层自动反色 | ★ | mix-blend-mode:difference,白色层自动反相 | 固定 header/logo 压在明暗不定的内容上,零 JS |
@@ -70,6 +71,7 @@
 | 产品发布 / 营销长页 | section-narrative + theme-shift + sticky-stack + parallax-cards + count-up | 滚动叙事;Shopify Editions 是参照 |
 | 电商 / 图片画廊 | image-swap + image-displacement + horizontal-gallery + parallax-cards | 图片即内容,动效只加在图上 |
 | 3D / 体验型 | scroll-driven-shader + entry-preloader + ambient-sound-toggle + canvas-ambient-bg + shader-wipe | 重开场重氛围;Robin/Igloo 是参照 |
+| 编辑 / 文档 / 工具站 | typed-title-handoff + comment-heading + scroll-reveal + count-up | 安静;开场一次,之后靠排版。claude.dev 是参照 |
 
 ## 使用铁律(从库规范继承,不可省)
 
