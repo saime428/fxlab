@@ -81,6 +81,15 @@
     display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); align-items: center;
     gap: 0 12px; padding: 16px 0; border-bottom: 1px solid var(--line-soft);
     text-decoration: none; color: inherit; animation: row-in .5s var(--ease) both;
+    transition: opacity .25s;
+  }
+  /* 悬停一行时,其余行落到 .35。触屏没有 hover,第一次点只选中 */
+  @media (hover: hover) {
+    #list:hover .post:not(:hover):not(:focus-visible) { opacity: .35; }
+  }
+  #list:has(.post:focus-visible) .post:not(:focus-visible):not(:hover) { opacity: .35; }
+  @media (hover: none) {
+    #list:has(.post.tap) .post:not(.tap) { opacity: .35; }
   }
   .post:hover, .post:focus-visible { background: var(--hover-row); outline: none; }
   .post[hidden] { display: none; }
@@ -132,7 +141,8 @@
   @keyframes pre-blink { 0%, 42% { opacity: 1; } 50%, 92% { opacity: 0; } to { opacity: 0; } }
   @media (prefers-reduced-motion: reduce) {
     #veil, #ghost { display: none !important; }
-    h1, .post, .search input { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+    h1, .post, .search input { animation: none !important; transition: none !important; transform: none !important; }
+    h1, .search input { opacity: 1 !important; }
   }
   @media (max-width: 900px) {
     .below { display: block; margin-top: 2.5rem; }
@@ -313,6 +323,7 @@ const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
         if (ok) { shown++; if (!first) first = el; }
       });
       if (first) first.classList.add('feat');
+      posts.forEach(el => { if (el.hidden) el.classList.remove('tap'); });
       empty.hidden = shown !== 0;
       count.textContent = `${shown} / ${items.length}  ·  S 搜索,再点一次取消筛选`;
       bar.querySelectorAll('.tab').forEach(b => b.setAttribute('aria-pressed',
@@ -322,6 +333,14 @@ const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
       if (intro) params.set('intro', intro);
       history.replaceState(null, '', params.size ? '?' + params : location.pathname);
     }
+    list.addEventListener('click', e => {
+      if (matchMedia('(hover: hover)').matches) return;
+      const post = e.target.closest('.post');
+      if (!post || post.hidden || post.classList.contains('tap')) return;
+      e.preventDefault();
+      list.querySelectorAll('.post.tap').forEach(el => el.classList.remove('tap'));
+      post.classList.add('tap');
+    });
     bar.addEventListener('click', e => {
       const s = e.target.closest('.s-toggle');
       if (s) { bar.querySelector('.search').classList.add('open'); bar.querySelector('#q').focus(); return; }
